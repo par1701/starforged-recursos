@@ -31,7 +31,7 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--paper);color:var(-
 
 /* Step nav */
 .step-nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px;background:var(--paper2);border:1px solid var(--border);border-radius:var(--rad);padding:9px 11px;}
-.step-pill{font-family:'Cinzel',serif;font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;cursor:pointer;color:var(--muted);transition:all .15s;white-space:nowrap;}
+.step-pill{font-family:'Cinzel',serif;font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;cursor:pointer;color:var(--muted);transition:all .15s;}
 .step-pill.active{background:var(--gold);color:var(--ink);border-color:var(--gold);}
 .step-pill.done{background:var(--green-l);color:var(--green);border-color:var(--green);}
 .step-pill:hover:not(.active){background:var(--paper3);}
@@ -61,7 +61,7 @@ textarea.field-input{resize:vertical;min-height:70px;}
 @media(max-width:520px){.field-row{grid-template-columns:1fr;}}
 
 /* Dice button */
-.dice-btn{margin-top:5px;padding:5px 11px;border:1px solid var(--border);border-radius:20px;background:transparent;font-family:'Cinzel',serif;font-size:10px;color:var(--muted);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px;}
+.dice-btn{margin-top:5px;padding:5px 11px;border:1px solid var(--border);border-radius:20px;background:transparent;font-family:'Cinzel',serif;font-size:10px;color:var(--muted);cursor:pointer;transition:all .12s;}
 .dice-btn:hover{border-color:var(--gold);color:var(--gold);}
 .dice-result{margin-top:5px;font-size:12px;font-style:italic;color:var(--gold);min-height:16px;}
 
@@ -74,9 +74,11 @@ textarea.field-input{resize:vertical;min-height:70px;}
 /* Recursos */
 .recurso-cat-title{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--gold);margin-bottom:7px;letter-spacing:.05em;text-transform:uppercase;}
 .recurso-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;margin-bottom:14px;}
-.recurso-btn{padding:7px 11px;border:1.5px solid var(--border);border-radius:var(--rad);background:var(--paper);cursor:pointer;font-family:'Cinzel',serif;font-size:11px;color:var(--ink2);text-align:left;transition:all .15s;line-height:1.3;}
+.recurso-btn{padding:7px 11px;border:1.5px solid var(--border);border-radius:var(--rad);background:var(--paper);cursor:pointer;font-family:'Cinzel',serif;font-size:11px;color:var(--ink2);text-align:left;transition:all .12s;}
 .recurso-btn:hover{border-color:var(--gold);color:var(--ink);}
 .recurso-btn.picked{border-color:var(--gold);background:var(--gold-bg);color:var(--ink);font-weight:600;}
+.recurso-btn.disabled{opacity:.45;cursor:not-allowed;}
+.recurso-btn.disabled:hover{border-color:var(--border);color:var(--ink2);}
 .recursos-count{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:9px;}
 .paths-selected{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;min-height:26px;}
 .path-tag{background:var(--gold);color:var(--ink);font-family:'Cinzel',serif;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;display:flex;align-items:center;gap:5px;}
@@ -100,7 +102,7 @@ textarea.field-input{resize:vertical;min-height:70px;}
 
 /* Rank buttons */
 .rank-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px;}
-.rank-btn{padding:6px 14px;border:1.5px solid var(--border);border-radius:20px;background:transparent;font-family:'Cinzel',serif;font-size:11px;color:var(--muted);cursor:pointer;transition:all .15s;}
+.rank-btn{padding:6px 14px;border:1.5px solid var(--border);border-radius:20px;background:transparent;font-family:'Cinzel',serif;font-size:11px;color:var(--muted);cursor:pointer;transition:all .12s;}
 .rank-btn:hover{border-color:var(--gold);}
 .rank-btn.sel{border-color:var(--gold);background:var(--gold);color:var(--ink);font-weight:600;}
 
@@ -110,7 +112,7 @@ textarea.field-input{resize:vertical;min-height:70px;}
 .meter-box{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:11px 12px;text-align:center;}
 .meter-name{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.04em;}
 .meter-track{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;}
-.m-pip{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);background:var(--paper2);cursor:pointer;transition:all .12s;font-size:9px;display:flex;align-items:center;justify-content:center;color:var(--muted);}
+.m-pip{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);background:var(--paper2);cursor:pointer;transition:all .12s;font-size:9px;display:flex;align-items:center;justify-content:center;}
 .m-pip:hover{border-color:var(--gold);}
 .m-pip.filled{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:600;}
 
@@ -118,7 +120,7 @@ textarea.field-input{resize:vertical;min-height:70px;}
 .mom-box{background:#fff;border:1.5px solid var(--gold);border-radius:var(--rad);padding:12px 14px;}
 .mom-title{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--gold);margin-bottom:8px;letter-spacing:.04em;}
 .mom-track{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:9px;align-items:center;}
-.mp{width:20px;height:20px;border-radius:3px;border:1px solid var(--border);background:var(--paper2);cursor:pointer;font-size:8px;font-family:'Cinzel',serif;display:flex;align-items:center;justify-content:center;color:transparent;transition:all .12s;}
+.mp{width:20px;height:20px;border-radius:3px;border:1px solid var(--border);background:var(--paper2);cursor:pointer;font-size:8px;font-family:'Cinzel',serif;display:flex;align-items:center;justify-content:center;}
 .mp:hover{border-color:var(--gold);}
 .mp.pos{background:var(--green-l);border-color:var(--green);color:var(--green);}
 .mp.neg{background:var(--rust-l);border-color:var(--rust);color:var(--rust);}
@@ -296,7 +298,7 @@ textarea.field-input{resize:vertical;min-height:70px;}
     <div class="info-box">Este voto ya fue jurado en el pasado de tu personaje. No hagas el movimiento <em>Jura un Voto</em>; simplemente escríbelo. Rango recomendado: Épico o Extremo.</div>
     <div class="field-group">
       <span class="field-label">Mi voto de trasfondo</span>
-      <textarea class="field-input" id="bgvow" placeholder='Ej: "Juro destruir el clan de saqueadores Talon de Hierro antes de morir." / "Juro descubrir un medio para preservar la conciencia más allá de la muerte."'></textarea>
+      <textarea class="field-input" id="bgvow" placeholder='Ej: "Juro destruir el clan de saqueadores Talon de Hierro antes de morir." / "Juro descubrir un medio para preservar la conciencia más allá de la carne."'></textarea>
     </div>
     <div class="field-group">
       <span class="field-label">Rango del voto</span>
@@ -350,7 +352,7 @@ textarea.field-input{resize:vertical;min-height:70px;}
       <h2>Recurso final</h2>
       <p>Elige <strong>un</strong> recurso adicional de cualquier categoría: módulo de nave, vehículo de apoyo, compañero o camino.</p>
     </div>
-    <div class="info-box"><b>Módulos</b>: mejoras para tu nave (Enfermería, Taller, IA Supervisora…). <b>Vehículos de apoyo</b>: naves secundarias (Lanzadera, Rover…). <b>Compañeros</b>: criaturas o robots aliados. <b>Caminos</b>: especializaciones adicionales.</div>
+    <div class="info-box"><b>Módulos</b>: mejoras para tu nave (Enfermería, Taller, IA Supervisora…). <b>Vehículos de apoyo</b>: naves secundarias (Lanzadera, Rover…). <b>Compañeros</b>: aliados animales, bots o simbiontes. <b>Caminos</b>: una tercera especialización opcional distinta de las dos ya elegidas.</div>
     <div id="final-recurso-area"></div>
   </div>
 
@@ -453,7 +455,10 @@ textarea.field-input{resize:vertical;min-height:70px;}
     <div class="ok-box"><b>Kit de espacial básico</b> (siempre disponible, no hace falta anotar): traje de entorno sellado · linternas · kit de herramientas · kit médico · comunicador personal.</div>
     <div class="field-group">
       <span class="field-label">Equipo y objetos personales especiales</span>
-      <textarea class="field-input" style="min-height:90px;" id="gear" placeholder="Ej:&#10;Pistola de plasma heredada de mi mentor.&#10;Datapad con acceso a archivos militares encriptados.&#10;Fragmento de hierro negro tallado con el emblema de mi clan.&#10;Kit de modificaciones de armaduras de mi madre rigger."></textarea>
+      <textarea class="field-input" style="min-height:90px;" id="gear" placeholder="Ej:
+Pistola de plasma heredada de mi mentor.
+Datapad con acceso a archivos militares encriptados.
+Filtro respirador modificado."></textarea>
     </div>
     <div class="field-group">
       <span class="field-label">¿Sobre qué objeto juras tus votos de hierro?</span>
@@ -512,29 +517,25 @@ textarea.field-input{resize:vertical;min-height:70px;}
 </div>
 
 <script>
-// ── Datos ─────────────────────────────────────────────────────────────────
-const PATHS=['As','Acorazado','Alquimista','Arquero','Artillero','Aumentado','Banderizo','Biólogo','Maestro de espadas','Cazarrecompensas','Luchador','Carroñero','Cinético','Comerciante','Mensajero','Demolicionista','Detective','Devoto','Diplomático','Empatizador','Eenterezaado','Explorador','Fugitivo','Pistolero','Sanador','Infiltrador','Cazahistorias','Llameante','Mercenario','Naturalista','Navegante','Proscrito','Pícaro','Vidente','Sombra','Cazador de monstruos','Francotirador','Tecnólogo','Vestigio','Veterano','Nacido en el vacío','Bucleador'];
+const PATHS=['As','Acorazado','Alquimista','Arquero','Artillero','Aumentado','Banderizo','Biólogo','Maestro de espadas','Cazarrecompensas','Luchador','Carroñero','Cinético','Comerciante','Mensajero','Detective','Devoto','Diplomático','Empatizador','Explorador','Fugitivo','Caza-historias','Infiltrador','Mecánico','Mercenario','Nacido-en-el-vacío','Naturalista','Pistolero','Pícaro','Proscrito','Sanador','Sombra','Tecnólogo','Veterano','Vidente','Vestigio'];
 PATHS.sort();
-const MODULES=['Armería','Bahía de ingeniería','Bodega ampliada','Cámara segura','Centro de inteligencia','Enfermería','Hangar de módulos','IA Supervisora','Laboratorio de investigación','Simulador de combate','Taller tecnológico'];
+const MODULES=['Armería','Bahía de ingeniería','Bodega ampliada','Cámara segura','Centro de inteligencia','Enfermería','Hangar de módulos','IA Supervisora','Laboratorio de investigación','Módulo de fabricación','Módulo de sigilo','Paquete de sensores','Sala de rituales','Taller'];
 const SVEH=['Aeronave','Deslizador','Esquife ligero','Nave infiltradora','Nave incineradora','Rover de exploración','Lanzadera'];
 const COMPANIONS=['Banshee','Bot de combate','Bot de exploración','Bot de protocolo','Bot de utilidad','Dron compañero','Gatopálido','Cuernoroca','Sprite','Simbionte','Deslizador del Vacío'];
-const ORIGINS=['Adquirida a cambio de una preciada reliquia familiar','Construida con desechos reutilizados','Reclamada como botín de guerra','Descubierta a la deriva y remendada','Obtenida a cambio de una promesa o voto','Encontrada abandonada en perfectas condiciones','Concedida por una organización o comunidad','Heredada de un familiar o mentor','Comprada a un precio sospechosamente barato','Robada a un famoso criminal u organización criminal','Tomada al huir de un ataque o desastre','Ganada en una apuesta'];
-const QUIRKS=['La sala de máquinas está chamuscada con antiguas marcas de quemaduras','El exterior está manchado de óxido y mugre','Una música tenue y fantasmal a veces resuena por los pasillos','El generador de gravedad es notoriamente caprichoso','El casco está fusionado con crecimientos orgánicos','El casco traquetea y cruje en vuelo atmosférico','Los espacios interiores están abarrotados de cables y conductos expuestos','Parece indefensa, pero paneles exteriores se abren para revelar armas','Los registros de navegación contienen coordenadas de lugares que no existen o no deberían existir','Una antigua mancha de sangre en la esclusa de aire reaparece aunque se pinte encima','Otrora hermosa, ahora lleva las cicatrices de una batalla devastadora','Un casco parcheado cubre una brecha catastrófica reciente','Los rótulos y las etiquetas de control están en un idioma poco común','Paneles de cubierta extraíbles dan acceso a almacenamiento oculto','El tren de aterrizaje se despliega como patas de araña desgarbadas','La nave está impulsada por un antiguo dispositivo precursor','Alguien llenó el casco de grafiti durante una escala reciente','En el corredor principal hay extraños símbolos garabateados en la cubierta y mamparos','Las cosas tienden a desaparecer sin ninguna razón lógica','Los temporizadores y relojes siempre van un poco desajustados'];
-const BACKSTORIES=['Abandonaste a los tuyos tras descubrir una verdad inquietante','Te guía una visión o profecía','Te persiguen acciones o fracasos pasados','Huyes de un pasado criminal','Eres el único superviviente de un ataque o calamidad','Escapaste de una situación abusiva o injusta','No tienes ningún recuerdo de tu vida anterior','Rechazaste un deber o destino','Fuiste desterrado de tu antiguo hogar','Se te negó un derecho de nacimiento','Siempre has tenido que valerte por ti mismo','Te enviaron en una misión prolongada','Te llevó o atrajo alguien','Tus ambiciones superaron tus humildes orígenes','Tu entereza errante te llevó muy lejos'];
-const bgTable=[{lo:1,hi:7,t:'Abandonaste a los tuyos'},{lo:8,hi:13,t:'Te guía una visión o profecía'},{lo:14,hi:20,t:'Te persiguen acciones o fracasos pasados'},{lo:21,hi:27,t:'Huyes de un pasado criminal'},{lo:28,hi:34,t:'Eres el único superviviente de un ataque o calamidad'},{lo:35,hi:40,t:'Escapaste de una situación abusiva o injusta'},{lo:41,hi:46,t:'No tienes ningún recuerdo de tu vida anterior'},{lo:47,hi:53,t:'Rechazaste un deber o destino'},{lo:54,hi:60,t:'Fuiste desterrado de tu antiguo hogar'},{lo:61,hi:67,t:'Se te negó un derecho de nacimiento'},{lo:68,hi:74,t:'Siempre has tenido que valerte por ti mismo'},{lo:75,hi:81,t:'Te enviaron en una misión prolongada'},{lo:82,hi:87,t:'Te llevó o atrajo alguien'},{lo:88,hi:94,t:'Tus ambiciones superaron tus humildes orígenes'},{lo:95,hi:100,t:'Tu entereza errante te llevó muy lejos'}];
+const ORIGINS=['Adquirida a cambio de una preciada reliquia familiar','Construida con desechos reutilizados','Reclamada como botín de guerra','Descubierta a la deriva y remendada','Obtenida a cambio de una deuda peligrosa','Robada a una facción poderosa','Heredada de alguien que desapareció','Ganada en una apuesta imposible'];
+const QUIRKS=['La sala de máquinas está chamuscada con antiguas marcas de quemaduras','El exterior está manchado de óxido y mugre','Una música tenue y fantasmal a veces resuena por los pasillos','Los mamparos están cubiertos de inscripciones extrañas','Tiene compartimentos secretos mal disimulados','El sistema de iluminación falla en momentos inoportunos','Su IA responde con silencios inquietantes','Hay una grieta reparada mil veces junto a la compuerta'];
+const bgTable=[{lo:1,hi:5,t:'Médico de campo de batalla — Sanador + Veterano'},{lo:6,hi:10,t:'Delegado — Banderizo + Diplomático'},{lo:11,hi:15,t:'Exobiólogo — Caza-historias + Naturalista'},{lo:16,hi:20,t:'Comerciante lejano — Navegante + Comerciante'},{lo:21,hi:25,t:'Cazador de fugitivos — Acorazado + Cazarrecompensas'},{lo:26,hi:30,t:'Hacker — Infiltrador + Tecnólogo'},{lo:31,hi:35,t:'Piloto audaz — As + Navegante'},{lo:36,hi:40,t:'Explorador interestelar — Explorador + Nacido-en-el-vacío'},{lo:41,hi:45,t:'Cazador de monstruos — Artillero + Cazador de monstruos'},{lo:46,hi:50,t:'Ocultista — Proscrito + Sombra'},{lo:51,hi:55,t:'Agente — Infiltrador + Maestro de espadas'},{lo:56,hi:60,t:'Forajido — Fugitivo + Pistolero'},{lo:61,hi:65,t:'Detective privado — Luchador + Detective'},{lo:66,hi:70,t:'Profeta — Devoto + Vidente'},{lo:71,hi:75,t:'Psiónico — Cinético + Vestigio'},{lo:76,hi:80,t:'Contrabandista — Mensajero + Pícaro'},{lo:81,hi:85,t:'Enterezaualista — Enterezado + Empatizador'},{lo:86,hi:90,t:'Ingeniero de nave — Mecánico + Tecnólogo'},{lo:91,hi:95,t:'Supersoldado — Aumentado + Mercenario'},{lo:96,hi:100,t:'Saqueador de tumbas — Carroñero + Pícaro'}];
 
-// ── State ─────────────────────────────────────────────────────────────────
 let step=0;
 const pickedPaths=new Set();
 let finalRecurso=null;
 const stats={Filo:null,Corazón:null,Hierro:null,Sombra:null,Mente:null};
-const STAT_DEFS=[{n:'Filo',d:'Agilidad, velocidad, combate a distancia'},{n:'Corazón',d:'Valor, voluntad, empatía, sociabilidad'},{n:'Hierro',d:'Fuerza física, resistencia, combate cuerpo a cuerpo'},{n:'Sombra',d:'Sigilo, engaño, astucia'},{n:'Mente',d:'Conocimiento, pericia, observación'}];
+const STAT_DEFS=[{n:'Filo',d:'Agilidad, velocidad, combate a distancia'},{n:'Corazón',d:'Valor, voluntad, empatía, sociabilidad'},{n:'Hierro',d:'Fuerza física, resistencia, combate cuerpo a cuerpo'},{n:'Sombra',d:'Sigilo, engaño, subterfugio'},{n:'Mente',d:'Conocimiento, pericia, observación'}];
 const TOTAL_STEPS=11;
 let shipInt=5;
 let mom=2;
 const meterVals={health:5,entereza:5,supply:5};
 
-// ── Nav ───────────────────────────────────────────────────────────────────
 const STEP_LABELS=['Caminos','Trasfondo','Voto','Nave','Recurso','Stats','Medidores','Apariencia','Nombre','Equipo','Revisión'];
 
 function buildNav(){
@@ -557,11 +558,12 @@ function refresh(){
   window.scrollTo(0,0);
 }
 
-// ── Paths ─────────────────────────────────────────────────────────────────
 function buildPaths(){
-  document.getElementById('paths-grid').innerHTML=PATHS.map(p=>
-    `<button class="recurso-btn${pickedPaths.has(p)?' picked':''}" onclick="togPath('${p.replace(/'/g,"\\'")}')>${p}</button>`
-  ).join('');
+  document.getElementById('paths-grid').innerHTML=PATHS.map(p=>{
+    const selected=pickedPaths.has(p);
+    const disabled=!selected && pickedPaths.size>=2;
+    return `<button class="recurso-btn${selected?' picked':''}${disabled?' disabled':''}" onclick="togPath('${p.replace(/'/g,"\\'")}')" ${disabled?'disabled':''}>${p}</button>`;
+  }).join('');
   const n=pickedPaths.size;
   document.getElementById('paths-count').textContent=`${n} / 2 caminos elegidos${n===2?' ✓':''}`;
   document.getElementById('paths-selected').innerHTML=[...pickedPaths].map(p=>
@@ -572,28 +574,30 @@ function togPath(p){
   if(pickedPaths.has(p)){pickedPaths.delete(p);}
   else if(pickedPaths.size<2){pickedPaths.add(p);}
   buildPaths();
+  if(step===4) buildFinalRecurso();
 }
 
-// ── Final recurso ───────────────────────────────────────────────────────────
 function buildFinalRecurso(){
+  const pathOptions=PATHS.filter(p=>!pickedPaths.has(p));
   const cats=[
-    {t:'Caminos adicionales',items:PATHS},
+    {t:'Caminos adicionales',items:pathOptions},
     {t:'Módulos de nave',items:MODULES},
     {t:'Vehículos de apoyo',items:SVEH},
     {t:'Compañeros',items:COMPANIONS},
   ];
   document.getElementById('final-recurso-area').innerHTML=cats.map(c=>
-    `<div style="margin-bottom:12px;"><div class="recurso-cat-title">${c.t}</div>
-    <div class="recurso-grid">${c.items.map(a=>
-      `<button class="recurso-btn${finalRecurso===a?' picked':''}" onclick="setFA('${a.replace(/'/g,"\\'")}')">
-        ${finalRecurso===a?'✓ ':''}${a}
-      </button>`
-    ).join('')}</div></div>`
+    `<div style="margin-bottom:12px;"><div class="recurso-cat-title">${c.t}</div>`+
+    (c.items.length
+      ? `<div class="recurso-grid">${c.items.map(a=>
+          `<button class="recurso-btn${finalRecurso===a?' picked':''}" onclick="setFA('${a.replace(/'/g,"\\'")}')">${finalRecurso===a?'✓ ':''}${a}</button>`
+        ).join('')}</div>`
+      : `<div class="recursos-count">No hay caminos adicionales disponibles mientras no hayas elegido tus dos caminos iniciales.</div>`
+    )+
+    `</div>`
   ).join('');
 }
 function setFA(a){finalRecurso=a;buildFinalRecurso();}
 
-// ── Stats ─────────────────────────────────────────────────────────────────
 const VALS=[3,2,2,1,1];
 function buildStats(){
   document.getElementById('stats-grid').innerHTML=STAT_DEFS.map(s=>{
@@ -620,7 +624,6 @@ function buildStats(){
 }
 function assignStat(n,v){stats[n]=v?parseInt(v):null;buildStats();}
 
-// ── Ship integrity ────────────────────────────────────────────────────────
 function buildShipInt(){
   const t=document.getElementById('ship-int-track');if(!t)return;
   t.innerHTML=Array.from({length:5},(_,i)=>
@@ -629,7 +632,6 @@ function buildShipInt(){
 }
 function setShipInt(v){shipInt=v;buildShipInt();}
 
-// ── Meters ────────────────────────────────────────────────────────────────
 function buildMeters(){
   const defs=[{id:'health',n:'SALUD',max:5},{id:'entereza',n:'ENTEREZA',max:5},{id:'supply',n:'SUMINISTROS',max:5}];
   document.getElementById('meters-grid').innerHTML=defs.map(m=>
@@ -642,7 +644,6 @@ function buildMeters(){
 }
 function setMeter(id,v){meterVals[id]=v;buildMeters();}
 
-// ── Impulso ──────────────────────────────────────────────────────────────
 function buildMom(){
   const t=document.getElementById('mom-track');if(!t)return;
   t.innerHTML=Array.from({length:17},(_,i)=>{
@@ -657,16 +658,13 @@ function buildMom(){
 }
 function setMom(v){mom=Math.max(-6,Math.min(10,v));buildMom();}
 
-// ── Rank ──────────────────────────────────────────────────────────────────
 function setRank(group,btn){
   document.querySelectorAll(`[data-rank="${group}"]`).forEach(b=>b.classList.remove('sel'));
   btn.classList.add('sel');
 }
 
-// ── Impacts ───────────────────────────────────────────────────────────────
 function togImp(el){el.classList.toggle('on');}
 
-// ── Oracles ───────────────────────────────────────────────────────────────
 function rollBackstory(){
   const r=Math.ceil(Math.random()*100);
   const table=[{lo:1,hi:7,t:'Abandonaste a los tuyos tras descubrir una verdad inquietante'},{lo:8,hi:13,t:'Te guía una visión o profecía'},{lo:14,hi:20,t:'Te persiguen acciones o fracasos pasados'},{lo:21,hi:27,t:'Huyes de un pasado criminal'},{lo:28,hi:34,t:'Eres el único superviviente de un ataque o calamidad'},{lo:35,hi:40,t:'Escapaste de una situación abusiva o injusta'},{lo:41,hi:46,t:'No tienes ningún recuerdo de tu vida anterior'},{lo:47,hi:53,t:'Rechazaste un deber o destino'},{lo:54,hi:60,t:'Fuiste desterrado de tu antiguo hogar'},{lo:61,hi:67,t:'Se te negó un derecho de nacimiento'},{lo:68,hi:74,t:'Siempre has tenido que valerte por ti mismo'},{lo:75,hi:81,t:'Te enviaron en una misión prolongada'},{lo:82,hi:87,t:'Te llevó o atrajo alguien'},{lo:88,hi:94,t:'Tus ambiciones superaron tus humildes orígenes'},{lo:95,hi:100,t:'Tu entereza errante te llevó muy lejos'}];
@@ -680,7 +678,7 @@ function rollShipOrigin(){
 }
 function rollShipQuirk(){
   const r=Math.ceil(Math.random()*100);
-  const idx=Math.min(Math.floor((r-1)/5),QUIRKS.length-1);
+  const idx=Math.min(Math.floor((r-1)/Math.ceil(100/QUIRKS.length)),QUIRKS.length-1);
   document.getElementById('quirk-roll').textContent=`d100 = ${r} → ${QUIRKS[idx]}`;
 }
 function rollRef(tbl,outId){
@@ -689,7 +687,6 @@ function rollRef(tbl,outId){
   document.getElementById(outId).textContent=`d100 = ${r} → ${res?res.t:''}`;
 }
 
-// ── Summary ───────────────────────────────────────────────────────────────
 function buildSummary(){
   const get=id=>(document.getElementById(id)||{}).value||'';
   const rows=[
@@ -725,7 +722,6 @@ function buildSummary(){
     statsHtml+metersHtml;
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────
 buildPaths();
 buildStats();
 buildShipInt();
