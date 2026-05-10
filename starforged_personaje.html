@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starforged — Crea tu personaje</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1a14;--ink2:#3d3a2e;--muted:#7a7060;
+  --gold:#b8882a;--gold-l:#e8d48e;--gold-bg:#fffbf0;
+  --rust:#8c3a1a;--rust-l:#f5e0d5;
+  --paper:#f7f4ec;--paper2:#ede9dc;--paper3:#e2ddd0;
+  --border:#c8c0a8;
+  --green:#3b5e2a;--green-l:#dff0d0;
+  --blue:#1a3c6e;--blue-l:#d5e4f5;
+  --rad:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.65;}
+
+/* Header */
+.site-header{background:var(--ink);color:var(--gold-l);padding:24px 28px 20px;text-align:center;border-bottom:3px solid var(--gold);position:relative;overflow:hidden;}
+.site-header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(184,136,42,.04) 20px,rgba(184,136,42,.04) 40px);}
+.site-header h1{font-family:'Cinzel',serif;font-size:clamp(17px,3vw,28px);font-weight:700;letter-spacing:.06em;line-height:1.2;position:relative;}
+.site-header .sub{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.1em;text-transform:uppercase;position:relative;}
+.ornament{color:var(--gold);}
+
+/* Layout */
+.container{max-width:860px;margin:0 auto;padding:18px 16px 70px;}
+
+/* Step nav */
+.step-nav{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px;background:var(--paper2);border:1px solid var(--border);border-radius:var(--rad);padding:9px 11px;}
+.step-pill{font-family:'Cinzel',serif;font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;cursor:pointer;color:var(--muted);transition:all .15s;}
+.step-pill.active{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.step-pill.done{background:var(--green-l);color:var(--green);border-color:var(--green);}
+.step-pill:hover:not(.active){background:var(--paper3);}
+
+/* Step panels */
+.step-panel{display:none;}
+.step-panel.active{display:block;}
+
+/* Section header */
+.section-header{margin-bottom:14px;}
+.step-badge{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+.section-header h2{font-family:'Cinzel',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.section-header p{font-size:14px;color:var(--ink2);}
+
+/* Info / warn boxes */
+.info-box{background:var(--blue-l);border-left:4px solid var(--blue);padding:9px 13px;border-radius:0 var(--rad) var(--rad) 0;font-size:13px;color:var(--blue);line-height:1.55;margin-bottom:13px;}
+.warn-box{background:var(--rust-l);border-left:4px solid var(--rust);padding:9px 13px;border-radius:0 var(--rad) var(--rad) 0;font-size:13px;color:var(--rust);line-height:1.55;margin-bottom:13px;}
+.ok-box{background:var(--green-l);border-left:4px solid var(--green);padding:9px 13px;border-radius:0 var(--rad) var(--rad) 0;font-size:13px;color:var(--green);line-height:1.55;margin-bottom:13px;}
+
+/* Fields */
+.field-group{margin-bottom:15px;}
+.field-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;display:block;}
+.field-input{width:100%;padding:8px 11px;border:1.5px solid var(--border);border-radius:var(--rad);font-family:'Crimson Pro',serif;font-size:15px;color:var(--ink);background:var(--paper);transition:border-color .15s;}
+.field-input:focus{outline:none;border-color:var(--gold);}
+textarea.field-input{resize:vertical;min-height:70px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:520px){.field-row{grid-template-columns:1fr;}}
+
+/* Dice button */
+.dice-btn{margin-top:5px;padding:5px 11px;border:1px solid var(--border);border-radius:20px;background:transparent;font-family:'Cinzel',serif;font-size:10px;color:var(--muted);cursor:pointer;transition:all .12s;}
+.dice-btn:hover{border-color:var(--gold);color:var(--gold);}
+.dice-result{margin-top:5px;font-size:12px;font-style:italic;color:var(--gold);min-height:16px;}
+
+/* Oracle table */
+.oracle-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:7px;}
+.oracle-table td{padding:4px 7px;border:1px solid var(--paper3);}
+.oracle-table td:first-child{color:var(--muted);white-space:nowrap;width:58px;}
+.oracle-table tr:nth-child(even) td{background:var(--paper2);}
+
+/* Recursos */
+.recurso-cat-title{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--gold);margin-bottom:7px;letter-spacing:.05em;text-transform:uppercase;}
+.recurso-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;margin-bottom:14px;}
+.recurso-btn{padding:7px 11px;border:1.5px solid var(--border);border-radius:var(--rad);background:var(--paper);cursor:pointer;font-family:'Cinzel',serif;font-size:11px;color:var(--ink2);text-align:left;transition:all .12s;}
+.recurso-btn:hover{border-color:var(--gold);color:var(--ink);}
+.recurso-btn.picked{border-color:var(--gold);background:var(--gold-bg);color:var(--ink);font-weight:600;}
+.recurso-btn.disabled{opacity:.45;cursor:not-allowed;}
+.recurso-btn.disabled:hover{border-color:var(--border);color:var(--ink2);}
+.recursos-count{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:9px;}
+.paths-selected{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;min-height:26px;}
+.path-tag{background:var(--gold);color:var(--ink);font-family:'Cinzel',serif;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;display:flex;align-items:center;gap:5px;}
+.path-tag .rm{cursor:pointer;opacity:.7;font-size:12px;line-height:1;}
+.path-tag .rm:hover{opacity:1;}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:10px;}
+@media(max-width:480px){.stats-grid{grid-template-columns:repeat(3,1fr);}}
+.stat-box{background:#fff;border:1.5px solid var(--border);border-radius:var(--rad);padding:9px 6px 7px;text-align:center;}
+.stat-box.assigned{border-color:var(--gold);background:var(--gold-bg);}
+.stat-name{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.03em;margin-bottom:3px;}
+.stat-box.assigned .stat-name{color:var(--gold);}
+.stat-val{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--ink2);line-height:1;}
+.stat-box.assigned .stat-val{color:var(--gold);}
+.stat-desc{font-size:9.5px;color:var(--muted);margin-top:2px;line-height:1.3;}
+.stat-select{width:100%;margin-top:5px;padding:3px 4px;border:1px solid var(--border);border-radius:var(--rad);font-family:'Cinzel',serif;font-size:10px;background:var(--paper);color:var(--ink);cursor:pointer;}
+.stat-select:focus{outline:none;border-color:var(--gold);}
+.stats-status{font-size:12px;color:var(--muted);font-style:italic;margin-top:3px;}
+.stats-status.ok{color:var(--green);}
+
+/* Rank buttons */
+.rank-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px;}
+.rank-btn{padding:6px 14px;border:1.5px solid var(--border);border-radius:20px;background:transparent;font-family:'Cinzel',serif;font-size:11px;color:var(--muted);cursor:pointer;transition:all .12s;}
+.rank-btn:hover{border-color:var(--gold);}
+.rank-btn.sel{border-color:var(--gold);background:var(--gold);color:var(--ink);font-weight:600;}
+
+/* Meters */
+.meters-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px;}
+@media(max-width:460px){.meters-grid{grid-template-columns:1fr;}}
+.meter-box{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:11px 12px;text-align:center;}
+.meter-name{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.04em;}
+.meter-track{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;}
+.m-pip{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);background:var(--paper2);cursor:pointer;transition:all .12s;font-size:9px;display:flex;align-items:center;justify-content:center;}
+.m-pip:hover{border-color:var(--gold);}
+.m-pip.filled{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:600;}
+
+/* Impulso */
+.mom-box{background:#fff;border:1.5px solid var(--gold);border-radius:var(--rad);padding:12px 14px;}
+.mom-title{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--gold);margin-bottom:8px;letter-spacing:.04em;}
+.mom-track{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:9px;align-items:center;}
+.mp{width:20px;height:20px;border-radius:3px;border:1px solid var(--border);background:var(--paper2);cursor:pointer;font-size:8px;font-family:'Cinzel',serif;display:flex;align-items:center;justify-content:center;}
+.mp:hover{border-color:var(--gold);}
+.mp.pos{background:var(--green-l);border-color:var(--green);color:var(--green);}
+.mp.neg{background:var(--rust-l);border-color:var(--rust);color:var(--rust);}
+.mp.zero{border-color:var(--ink2);}
+.mom-vals{display:flex;gap:14px;}
+.mv{display:flex;flex-direction:column;align-items:center;}
+.mv .mvl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+.mv .mvv{font-family:'Cinzel',serif;font-size:17px;font-weight:700;color:var(--gold);}
+
+/* Impacts */
+.impacts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+@media(max-width:460px){.impacts-grid{grid-template-columns:1fr;}}
+.imp-cat-title{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;}
+.imp-item{display:flex;align-items:center;gap:8px;padding:4px 0;}
+.imp-check{width:15px;height:15px;border:1.5px solid var(--border);border-radius:3px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .12s;}
+.imp-check.on{background:var(--rust);border-color:var(--rust);}
+.imp-check.on::after{content:'✓';color:#fff;font-size:9px;}
+.imp-name{font-size:14px;color:var(--ink2);}
+
+/* Summary */
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:500px){.summary-grid{grid-template-columns:1fr;}}
+.summ-card{background:#fff;border:1px solid var(--border);border-radius:var(--rad);padding:11px 13px;}
+.summ-title{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;}
+.summ-val{font-size:14px;color:var(--ink);line-height:1.5;}
+.summ-empty{font-size:13px;color:var(--muted);font-style:italic;}
+.summ-stat-row{display:flex;justify-content:space-between;font-size:13px;padding:2px 0;border-bottom:1px solid var(--paper3);}
+.summ-stat-row:last-child{border-bottom:none;}
+.summ-stat-name{color:var(--muted);}
+.summ-stat-val{font-family:'Cinzel',serif;font-weight:600;color:var(--gold);}
+
+/* Toolbar */
+.toolbar{position:fixed;bottom:0;left:0;right:0;background:var(--ink);border-top:2px solid var(--gold);padding:10px 18px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;z-index:100;}
+.toolbar-info{flex:1;min-width:80px;}
+.t-title{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-l);font-weight:600;}
+.t-sub{font-size:10px;color:var(--muted);}
+.btn{padding:8px 16px;font-family:'Cinzel',serif;font-size:11px;font-weight:600;border-radius:var(--rad);cursor:pointer;border:none;transition:all .15s;white-space:nowrap;}
+.btn-nav{background:var(--paper2);color:var(--ink);border:1px solid var(--border);}
+.btn-nav:hover{background:var(--paper);}
+.btn-nav:disabled{opacity:.35;cursor:not-allowed;}
+.btn-print{background:var(--gold);color:var(--ink);}
+.btn-print:hover{background:var(--gold-l);}
+.toolbar-spacer{height:60px;}
+
+/* Print */
+@media print{
+  @page{size:A4;margin:13mm 13mm 15mm;}
+  body{background:#fff!important;font-size:9.5pt;}
+  .site-header{background:#111!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .toolbar,.step-nav{display:none!important;}
+  .container{padding:0;}
+  .step-panel{display:block!important;}
+  .print-header{display:block!important;}
+  .section-header h2{border-bottom:1px solid #b8882a;padding-bottom:3px;margin-bottom:8px;}
+  .recurso-btn{display:none!important;}
+  .recurso-btn.picked{display:block!important;border-color:#b8882a!important;background:#fffbf0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .rank-btn{display:none!important;}
+  .rank-btn.sel{display:inline-block!important;background:#b8882a!important;color:#1c1a14!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .stat-box.assigned{border-color:#b8882a!important;background:#fffbf0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .m-pip.filled,.mp.pos,.mp.neg{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .m-pip.filled{background:#b8882a!important;border-color:#b8882a!important;}
+  .mp.pos{background:#dff0d0!important;}
+  .mp.neg{background:#fde8e8!important;}
+  .imp-check.on{background:#8c3a1a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .mom-box{border-color:#b8882a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .info-box,.warn-box,.ok-box{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .path-tag{background:#b8882a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .path-tag .rm{display:none;}
+  .toolbar-spacer{display:none;}
+  .dice-btn,.dice-result{display:none!important;}
+}
+.print-header{display:none;text-align:center;padding:4px 0 12px;border-bottom:2px solid #b8882a;margin-bottom:12px;}
+.print-header h1{font-family:'Cinzel',serif;font-size:17pt;color:#1c1a14;}
+.print-header p{font-size:8pt;color:#7a7060;margin-top:2px;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1><span class="ornament">⚔</span> Starforged <span class="ornament">⚔</span><br>Crea tu personaje</h1>
+  <p class="sub">Capítulo 2 · Ejercicio 2 de 4 · 11 pasos</p>
+</header>
+
+<div class="container">
+  <div class="print-header">
+    <h1>Starforged — Ficha de personaje</h1>
+    <p>Ironsworn: Starforged (2025) · Shawn Tomkin · Traducción al español</p>
+  </div>
+
+  <div class="step-nav" id="step-nav"></div>
+
+  <!-- PASO 1: Caminos -->
+  <div class="step-panel active" id="p0">
+    <div class="section-header">
+      <div class="step-badge">Paso 1 de 11</div>
+      <h2>Elige dos caminos</h2>
+      <p>Selecciona dos recursos de tipo camino que representen la especialidad y el trasfondo principal de tu personaje.</p>
+    </div>
+    <div class="info-box">Si juegas con otros jugadores, no repitáis recursos. Ten en cuenta las Verdades elegidas: algunos caminos solo encajan en ciertos entornos.</div>
+    <div class="recursos-count" id="paths-count">0 / 2 caminos elegidos</div>
+    <div class="paths-selected" id="paths-selected"></div>
+    <div class="recurso-cat-title">Caminos disponibles</div>
+    <div class="recurso-grid" id="paths-grid"></div>
+    <div class="field-group" style="margin-top:10px;">
+      <span class="field-label">Trasfondos sugeridos (tira d100 o elige)</span>
+      <button class="dice-btn" onclick="rollRef(bgTable,'bg-roll')">🎲 Tirar d100</button>
+      <div class="dice-result" id="bg-roll"></div>
+      <table class="oracle-table" style="margin-top:8px;">
+        <tr><td>1–5</td><td><b>Médico de campo de batalla</b> — Sanador + Veterano</td></tr>
+        <tr><td>6–10</td><td><b>Delegado</b> — Banderizo + Diplomático</td></tr>
+        <tr><td>11–15</td><td><b>Exobiólogo</b> — Caza-historias + Naturalista</td></tr>
+        <tr><td>16–20</td><td><b>Comerciante lejano</b> — Navegante + Comerciante</td></tr>
+        <tr><td>21–25</td><td><b>Cazador de fugitivos</b> — Acorazado + Cazarrecompensas</td></tr>
+        <tr><td>26–30</td><td><b>Hacker</b> — Infiltrador + Tecnólogo</td></tr>
+        <tr><td>31–35</td><td><b>Piloto audaz</b> — As + Navegante</td></tr>
+        <tr><td>36–40</td><td><b>Explorador interestelar</b> — Explorador + Nacido-en-el-vacío</td></tr>
+        <tr><td>41–45</td><td><b>Cazador de monstruos</b> — Artillero + Cazador de monstruos</td></tr>
+        <tr><td>46–50</td><td><b>Ocultista</b> — Proscrito + Sombra</td></tr>
+        <tr><td>51–55</td><td><b>Agente</b> — Infiltrador + Maestro de espadas</td></tr>
+        <tr><td>56–60</td><td><b>Forajido</b> — Fugitivo + Pistolero</td></tr>
+        <tr><td>61–65</td><td><b>Detective privado</b> — Luchador + Detective</td></tr>
+        <tr><td>66–70</td><td><b>Profeta</b> — Devoto + Vidente</td></tr>
+        <tr><td>71–75</td><td><b>Psiónico</b> — Cinético + Vestigio</td></tr>
+        <tr><td>76–80</td><td><b>Contrabandista</b> — Mensajero + Pícaro</td></tr>
+        <tr><td>81–85</td><td><b>Eenterezaualista</b> — Eenterezaado + Empatizador</td></tr>
+        <tr><td>86–90</td><td><b>Ingeniero de nave</b> — Mecánico + Tecnólogo</td></tr>
+        <tr><td>91–95</td><td><b>Supersoldado</b> — Aumentado + Mercenario</td></tr>
+        <tr><td>96–100</td><td><b>Saqueador de tumbas</b> — Carroñero + Pícaro</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- PASO 2: Trasfondo -->
+  <div class="step-panel" id="p1">
+    <div class="section-header">
+      <div class="step-badge">Paso 2 de 11</div>
+      <h2>Crea tu trasfondo</h2>
+      <p>Visualiza qué sucedió para separarte de tu antiguo hogar y relaciones. Mantenlo simple.</p>
+    </div>
+    <div class="field-group">
+      <span class="field-label">Mi trasfondo</span>
+      <textarea class="field-input" id="backstory" placeholder="¿Qué te separó de tu antiguo hogar? ¿Qué te trajo al Forge? Puede ser breve y vago; lo descubrirás jugando."></textarea>
+    </div>
+    <div class="field-group">
+      <span class="field-label">¿Necesitas inspiración?</span>
+      <button class="dice-btn" onclick="rollBackstory()">🎲 Tirar d100</button>
+      <div class="dice-result" id="backstory-roll"></div>
+      <table class="oracle-table" style="margin-top:8px;">
+        <tr><td>1–7</td><td>Abandonaste a los tuyos tras descubrir una verdad inquietante</td></tr>
+        <tr><td>8–13</td><td>Te guía una visión o profecía</td></tr>
+        <tr><td>14–20</td><td>Te persiguen acciones o fracasos pasados</td></tr>
+        <tr><td>21–27</td><td>Huyes de un pasado criminal</td></tr>
+        <tr><td>28–34</td><td>Eres el único superviviente de un ataque o calamidad</td></tr>
+        <tr><td>35–40</td><td>Escapaste de una situación abusiva o injusta</td></tr>
+        <tr><td>41–46</td><td>No tienes ningún recuerdo de tu vida anterior</td></tr>
+        <tr><td>47–53</td><td>Rechazaste un deber o destino</td></tr>
+        <tr><td>54–60</td><td>Fuiste desterrado de tu antiguo hogar</td></tr>
+        <tr><td>61–67</td><td>Se te negó un derecho de nacimiento</td></tr>
+        <tr><td>68–74</td><td>Siempre has tenido que valerte por ti mismo</td></tr>
+        <tr><td>75–81</td><td>Te enviaron en una misión prolongada</td></tr>
+        <tr><td>82–87</td><td>Te llevó o atrajo alguien</td></tr>
+        <tr><td>88–94</td><td>Tus ambiciones superaron tus humildes orígenes</td></tr>
+        <tr><td>95–100</td><td>Tu entereza errante te llevó muy lejos</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- PASO 3: Voto de trasfondo -->
+  <div class="step-panel" id="p2">
+    <div class="section-header">
+      <div class="step-badge">Paso 3 de 11</div>
+      <h2>Voto de trasfondo</h2>
+      <p>Un voto épico que representa tu motivación principal o tu objetivo último. Es el arco de toda la campaña.</p>
+    </div>
+    <div class="info-box">Este voto ya fue jurado en el pasado de tu personaje. No hagas el movimiento <em>Jura un Voto</em>; simplemente escríbelo. Rango recomendado: Épico o Extremo.</div>
+    <div class="field-group">
+      <span class="field-label">Mi voto de trasfondo</span>
+      <textarea class="field-input" id="bgvow" placeholder='Ej: "Juro destruir el clan de saqueadores Talon de Hierro antes de morir." / "Juro descubrir un medio para preservar la conciencia más allá de la carne."'></textarea>
+    </div>
+    <div class="field-group">
+      <span class="field-label">Rango del voto</span>
+      <div class="rank-row">
+        <button class="rank-btn" data-rank="bgvow" onclick="setRank('bgvow',this)">Extremo</button>
+        <button class="rank-btn sel" data-rank="bgvow" onclick="setRank('bgvow',this)">Épico</button>
+      </div>
+    </div>
+    <div class="warn-box">Si no se te ocurre nada ahora, déjalo en blanco. Puedes añadirlo cuando algo surja durante el juego.</div>
+  </div>
+
+  <!-- PASO 4: Nave -->
+  <div class="step-panel" id="p3">
+    <div class="section-header">
+      <div class="step-badge">Paso 4 de 11</div>
+      <h2>Nave estelar</h2>
+      <p>Tu nave es un personaje en sí misma. Dales nombre, historia y una peculiaridad que la haga memorable.</p>
+    </div>
+    <div class="field-row">
+      <div class="field-group">
+        <span class="field-label">Nombre de la nave</span>
+        <input class="field-input" id="ship-name" type="text" placeholder="Ej: Cuchilla del Vacío, La Perseverante, Yerma...">
+      </div>
+      <div class="field-group">
+        <span class="field-label">Cómo la obtuve</span>
+        <input class="field-input" id="ship-origin" type="text" placeholder="Heredada, robada, ganada en una apuesta...">
+        <button class="dice-btn" onclick="rollShipOrigin()">🎲 Tirar d100</button>
+        <div class="dice-result" id="origin-roll"></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <span class="field-label">Peculiaridad de la nave</span>
+      <input class="field-input" id="ship-quirk" type="text" placeholder="Ej: Música fantasmal en los pasillos, placas con idioma desconocido...">
+      <button class="dice-btn" onclick="rollShipQuirk()">🎲 Tirar d100</button>
+      <div class="dice-result" id="quirk-roll"></div>
+    </div>
+    <div class="field-group">
+      <span class="field-label">Descripción libre</span>
+      <textarea class="field-input" id="ship-desc" placeholder="¿Qué aspecto tiene? ¿Qué la hace única? ¿Qué historia carga?"></textarea>
+    </div>
+    <div class="field-group">
+      <span class="field-label">Integridad de la nave (empieza en 5 / máx 5)</span>
+      <div style="display:flex;gap:5px;margin-top:4px;" id="ship-int-track"></div>
+    </div>
+  </div>
+
+  <!-- PASO 5: Recurso final -->
+  <div class="step-panel" id="p4">
+    <div class="section-header">
+      <div class="step-badge">Paso 5 de 11</div>
+      <h2>Recurso final</h2>
+      <p>Elige <strong>un</strong> recurso adicional de cualquier categoría: módulo de nave, vehículo de apoyo, compañero o camino.</p>
+    </div>
+    <div class="info-box"><b>Módulos</b>: mejoras para tu nave (Enfermería, Taller, IA Supervisora…). <b>Vehículos de apoyo</b>: naves secundarias (Lanzadera, Rover…). <b>Compañeros</b>: aliados animales, bots o simbiontes. <b>Caminos</b>: una tercera especialización opcional distinta de las dos ya elegidas.</div>
+    <div id="final-recurso-area"></div>
+  </div>
+
+  <!-- PASO 6: Stats -->
+  <div class="step-panel" id="p5">
+    <div class="section-header">
+      <div class="step-badge">Paso 6 de 11</div>
+      <h2>Distribuye tus stats</h2>
+      <p>Asigna estos valores entre tus cinco stats en cualquier orden: <strong>3 · 2 · 2 · 1 · 1</strong>.</p>
+    </div>
+    <div class="info-box">El stat a 3 define tu especialidad principal. Mira tus recursos elegidos: un Infiltrador se beneficia de Sombra; un Diplomático, de Corazón; un Médico, de Mente o Hierro.</div>
+    <div class="stats-grid" id="stats-grid"></div>
+    <div class="stats-status" id="stats-status">Asigna 3, 2, 2, 1, 1 entre los cinco stats.</div>
+  </div>
+
+  <!-- PASO 7: Medidores -->
+  <div class="step-panel" id="p6">
+    <div class="section-header">
+      <div class="step-badge">Paso 7 de 11</div>
+      <h2>Medidores de condición y impulso</h2>
+      <p>Todos empiezan a su valor máximo. Los ajustarás durante el juego al recibir daño, estrés o costes.</p>
+    </div>
+    <div class="meters-grid" id="meters-grid"></div>
+    <div class="mom-box">
+      <div class="mom-title">IMPULSO &nbsp;(−6 a +10 · Empieza en +2)</div>
+      <div class="mom-track" id="mom-track"></div>
+      <div class="mom-vals">
+        <div class="mv"><span class="mvl">Actual</span><span class="mvv" id="mom-cur">+2</span></div>
+        <div class="mv"><span class="mvl">Máximo</span><span class="mvv" id="mom-max">+10</span></div>
+        <div class="mv"><span class="mvl">Reinicio</span><span class="mvv" id="mom-rst">+2</span></div>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:11px;">El máximo de Impulso baja en 1 por cada impacto activo. El reinicio también baja con impactos.</div>
+  </div>
+
+  <!-- PASO 8: Visualiza -->
+  <div class="step-panel" id="p7">
+    <div class="section-header">
+      <div class="step-badge">Paso 8 de 11</div>
+      <h2>Visualiza tu personaje</h2>
+      <p>Define uno o dos rasgos para cada aspecto. No necesitas mucho detalle; lo descubrirás jugando.</p>
+    </div>
+    <div class="field-row">
+      <div class="field-group">
+        <span class="field-label">Aspecto físico (Look)</span>
+        <textarea class="field-input" id="look" placeholder="Ej: Cubierto de tatuajes; pierna mecánica decorada con arte; ojos claros curtidos por el sol espacial."></textarea>
+      </div>
+      <div class="field-group">
+        <span class="field-label">Cómo actúa (Act)</span>
+        <textarea class="field-input" id="act" placeholder="Ej: Prefiere las máquinas a las personas; habla poco pero observa todo; tiene un código de honor férreo."></textarea>
+      </div>
+    </div>
+    <div class="field-group">
+      <span class="field-label">Qué lleva puesto / equipo característico (Wear)</span>
+      <input class="field-input" id="wear" type="text" placeholder="Ej: Monos sucios y gafas de seguridad; pistola de plasma heirloom; bufanda de la vieja colonia.">
+    </div>
+  </div>
+
+  <!-- PASO 9: Nombre -->
+  <div class="step-panel" id="p8">
+    <div class="section-header">
+      <div class="step-badge">Paso 9 de 11</div>
+      <h2>Nombre y datos de identidad</h2>
+      <p>Los espaciales suelen ser más conocidos por su indicativo que por su nombre real.</p>
+    </div>
+    <div class="field-row">
+      <div class="field-group">
+        <span class="field-label">Nombre completo</span>
+        <input class="field-input" id="charname" type="text" placeholder="Nombre de pila y apellido">
+      </div>
+      <div class="field-group">
+        <span class="field-label">Indicativo</span>
+        <input class="field-input" id="indicativo" type="text" placeholder="El apodo por el que te conocen en el Forge">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-group">
+        <span class="field-label">Pronombres</span>
+        <input class="field-input" id="pronouns" type="text" placeholder="él/el, ella/ella, elle/elle...">
+      </div>
+      <div class="field-group">
+        <span class="field-label">Región de inicio</span>
+        <select class="field-input" id="region">
+          <option value="">— Elige —</option>
+          <option>Terminus</option>
+          <option>Tierras Lejanas</option>
+          <option>Expansión</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASO 10: Equipo -->
+  <div class="step-panel" id="p9">
+    <div class="section-header">
+      <div class="step-badge">Paso 10 de 11</div>
+      <h2>Equípate</h2>
+      <p>Anota el equipo y artículos personales especiales (4–5 ítems máximo).</p>
+    </div>
+    <div class="ok-box"><b>Kit de espacial básico</b> (siempre disponible, no hace falta anotar): traje de entorno sellado · linternas · kit de herramientas · kit médico · comunicador personal.</div>
+    <div class="field-group">
+      <span class="field-label">Equipo y objetos personales especiales</span>
+      <textarea class="field-input" style="min-height:90px;" id="gear" placeholder="Ej:
+Pistola de plasma heredada de mi mentor.
+Datapad con acceso a archivos militares encriptados.
+Filtro respirador modificado."></textarea>
+    </div>
+    <div class="field-group">
+      <span class="field-label">¿Sobre qué objeto juras tus votos de hierro?</span>
+      <input class="field-input" id="iron-obj" type="text" placeholder="Ej: El fragmento de casco de la nave del Éxodo de mi abuela.">
+    </div>
+  </div>
+
+  <!-- PASO 11: Revisión -->
+  <div class="step-panel" id="p10">
+    <div class="section-header">
+      <div class="step-badge">Paso 11 de 11</div>
+      <h2>Revisión e impactos</h2>
+      <p>Todos los impactos empiezan sin marcar. Revisa tu ficha y expórtala cuando estés listo.</p>
+    </div>
+    <div class="impacts-grid">
+      <div>
+        <div class="imp-cat-title">Desgracias (temporales)</div>
+        <div class="imp-item"><div class="imp-check" id="i-wounded" onclick="togImp(this)"></div><span class="imp-name">Herido</span></div>
+        <div class="imp-item"><div class="imp-check" id="i-shaken" onclick="togImp(this)"></div><span class="imp-name">Sacudido</span></div>
+        <div class="imp-item"><div class="imp-check" id="i-unprepared" onclick="togImp(this)"></div><span class="imp-name">Sin preparación</span></div>
+      </div>
+      <div>
+        <div class="imp-cat-title">Cargas (temporales)</div>
+        <div class="imp-item"><div class="imp-check" id="i-doomed" onclick="togImp(this)"></div><span class="imp-name">Condenado</span></div>
+        <div class="imp-item"><div class="imp-check" id="i-tormented" onclick="togImp(this)"></div><span class="imp-name">Atormentado</span></div>
+        <div class="imp-item"><div class="imp-check" id="i-indebted" onclick="togImp(this)"></div><span class="imp-name">Endeudado</span></div>
+      </div>
+      <div>
+        <div class="imp-cat-title">Efectos duraderos (permanentes)</div>
+        <div class="imp-item"><div class="imp-check" id="i-harmed" onclick="togImp(this)"></div><span class="imp-name">Herido permanentemente</span></div>
+        <div class="imp-item"><div class="imp-check" id="i-traumatized" onclick="togImp(this)"></div><span class="imp-name">Traumatizado</span></div>
+      </div>
+      <div>
+        <div class="imp-cat-title">Estado de la nave</div>
+        <div class="imp-item"><div class="imp-check" id="i-battered" onclick="togImp(this)"></div><span class="imp-name">Dañada (Battered)</span></div>
+        <div class="imp-item"><div class="imp-check" id="i-cursed" onclick="togImp(this)"></div><span class="imp-name">Maldita (Cursed)</span></div>
+      </div>
+    </div>
+    <div style="margin-top:18px;">
+      <div class="step-badge" style="margin-bottom:8px;">Resumen del personaje</div>
+      <div class="summary-grid" id="summary-grid"></div>
+    </div>
+  </div>
+
+  <div class="toolbar-spacer"></div>
+</div>
+
+<div class="toolbar">
+  <div class="toolbar-info">
+    <div class="t-title">Starforged — Personaje</div>
+    <div class="t-sub" id="tb-step">Paso 1 de 11</div>
+  </div>
+  <button class="btn btn-nav" id="btn-prev" onclick="go(-1)" disabled>← Anterior</button>
+  <button class="btn btn-nav" id="btn-next" onclick="go(1)">Siguiente →</button>
+  <button class="btn btn-print" onclick="exportarPDF()">⬇ Exportar PDF</button>
+</div>
+
+<script>
+// ── PDF Export via ventana de impresión ──────────────────────────────────────
+function exportarPDF() {
+  // Recoger todos los datos del estado
+  const g = id => (document.getElementById(id)||{}).value || '';
+  const d = {
+    nombre:     g('charname'),
+    indicativo: g('indicativo'),
+    pronombres: g('pronouns'),
+    region:     (document.getElementById('region')||{}).value || '',
+    look:       g('look'),
+    act:        g('act'),
+    wear:       g('wear'),
+    backstory:  g('backstory'),
+    bgvow:      g('bgvow'),
+    bgvowRank:  (document.querySelector('[data-rank="bgvow"].sel')||{}).textContent || 'Épico',
+    shipName:   g('ship-name'),
+    shipOrigin: g('ship-origin'),
+    shipQuirk:  g('ship-quirk'),
+    shipDesc:   g('ship-desc'),
+    gear:       g('gear'),
+    ironObj:    g('iron-obj'),
+    caminos:    [...pickedPaths],
+    finalRec:   finalRecurso || '',
+    stats:      {...stats},
+    salud:      meterVals.health,
+    entereza:   meterVals.entereza,
+    supply:     meterVals.supply,
+    impulso:    mom,
+    shipInt:    shipInt,
+    impacts: {
+      wounded:     document.getElementById('i-wounded')?.classList.contains('on'),
+      shaken:      document.getElementById('i-shaken')?.classList.contains('on'),
+      unprepared:  document.getElementById('i-unprepared')?.classList.contains('on'),
+      doomed:      document.getElementById('i-doomed')?.classList.contains('on'),
+      tormented:   document.getElementById('i-tormented')?.classList.contains('on'),
+      indebted:    document.getElementById('i-indebted')?.classList.contains('on'),
+      harmed:      document.getElementById('i-harmed')?.classList.contains('on'),
+      traumatized: document.getElementById('i-traumatized')?.classList.contains('on'),
+      battered:    document.getElementById('i-battered')?.classList.contains('on'),
+      cursed:      document.getElementById('i-cursed')?.classList.contains('on'),
+    }
+  };
+
+  // Helpers HTML
+  const imp = (key, label) => `
+    <div class="imp-item${d.impacts[key]?' checked':''}">
+      <div class="imp-dot${d.impacts[key]?' imp-dot-on':''}"></div>
+      <span>${label}</span>
+    </div>`;
+
+  const statVal = sn => d.stats[sn] !== null ? d.stats[sn] : '—';
+
+  const momTrack = () => {
+    const vals = ['+10','+9','+8','+7','+6','+5','+4','+3','+2','+1','0','-1','-2','-3','-4','-5','-6'];
+    return vals.map(v => {
+      const n = parseInt(v);
+      const on = (n >= 0 && n <= d.impulso) || (n < 0 && n >= d.impulso);
+      return `<div class="mom-cell${on?' mom-on':''}">${v}</div>`;
+    }).join('');
+  };
+
+  const meterRow = (label, val, max=5) => {
+    const pips = Array.from({length:max},(_,i)=>
+      `<span class="pip${i<val?' pip-on':''}">${i+1}</span>`).join('');
+    return `<div class="meter-row"><span class="meter-label">${label}</span><span class="meter-pips">${pips}</span></div>`;
+  };
+
+  const n_imp = Object.values(d.impacts).filter(Boolean).length;
+  const momMax = Math.max(0, 10 - n_imp);
+  const momRst = n_imp === 0 ? '+2' : n_imp === 1 ? '+1' : '0';
+
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Starforged — ${d.nombre || 'Personaje'}</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
+@page { size: A4; margin: 12mm 14mm 14mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #1c1a14; background: white; }
+
+/* Layout principal */
+.sheet { width: 100%; }
+.top-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin-bottom: 3mm; }
+.field-group { background: #d8d8d8; padding: 2mm 3mm; border-radius: 2px; }
+.field-label { font-size: 5.5pt; font-weight: bold; color: #666; text-transform: uppercase; letter-spacing: 0.04em; display: block; margin-bottom: 1mm; }
+.field-value { font-size: 9pt; color: #1c1a14; min-height: 5mm; }
+
+/* Fila central: impulso | stats | medidores */
+.main-row { display: grid; grid-template-columns: 38mm auto 34mm; gap: 0; margin-bottom: 2mm; }
+
+/* IMPULSO */
+.impulso-col { display: flex; flex-direction: column; }
+.col-header { background: #1a1a14; color: white; text-align: center; font-size: 6pt; font-weight: bold; font-family: 'Cinzel', serif; padding: 2mm; letter-spacing: 0.05em; }
+.mom-track { flex: 1; display: flex; flex-direction: column; border: 0.3pt solid #aaa; }
+.mom-cell { flex: 1; text-align: center; font-size: 6.5pt; font-weight: bold; color: #888; display: flex; align-items: center; justify-content: center; border-bottom: 0.3pt solid #ddd; min-height: 4.5mm; }
+.mom-cell:nth-child(odd) { background: #eee; }
+.mom-cell.mom-on { color: #b8882a; font-weight: 900; }
+.mom-foot { display: grid; grid-template-columns: 1fr; }
+.mom-foot-row { display: flex; }
+.mom-foot-label { background: #1a1a14; color: white; font-size: 5pt; font-weight: bold; text-align: center; padding: 1.5mm 0; flex: 1; font-family: 'Cinzel', serif; }
+.mom-foot-val { background: white; border: 0.6pt solid #aaa; font-size: 7pt; font-weight: bold; text-align: center; padding: 1.5mm 0; min-width: 10mm; }
+
+/* STATS + LEGADOS */
+.center-col { display: flex; flex-direction: column; border-left: 0; }
+.stats-row { display: grid; grid-template-columns: repeat(5, 1fr); }
+.stat-box { border: 1.5pt solid #1a1a14; text-align: center; padding: 1.5mm 1mm; background: white; }
+.stat-box.has-val { background: #b8882a; color: white; }
+.stat-name { font-size: 5.5pt; font-weight: bold; text-transform: uppercase; letter-spacing: 0.02em; display: block; }
+.stat-val { font-size: 16pt; font-weight: bold; line-height: 1.1; display: block; }
+.stat-box:not(.has-val) .stat-val { color: #666; }
+.stats-hdr { background: #1a1a14; color: white; text-align: center; font-size: 5.5pt; font-weight: bold; font-family: 'Cinzel', serif; padding: 1.5mm; letter-spacing: 0.08em; }
+
+/* MEDIDORES */
+.meters-col { display: flex; flex-direction: column; gap: 2mm; padding-left: 2mm; }
+.meter-block { flex: 1; }
+.meter-block-label { background: #1a1a14; color: white; text-align: center; font-size: 5.5pt; font-weight: bold; font-family: 'Cinzel', serif; padding: 1.5mm; letter-spacing: 0.05em; }
+.meter-pips-col { display: flex; flex-direction: column; border: 0.3pt solid #aaa; }
+.meter-pip-row { text-align: center; font-size: 6.5pt; font-weight: bold; padding: 1mm 0; border-bottom: 0.3pt solid #ddd; color: #888; }
+.meter-pip-row.pip-on { color: #b8882a; }
+.meter-pip-row:nth-child(odd) { background: #eee; }
+
+/* LEGADOS */
+.section-hdr { text-align: center; font-size: 6.5pt; font-weight: bold; font-family: 'Cinzel', serif; letter-spacing: 0.06em; margin: 2mm 0 1mm; color: #1a1a14; }
+.track-row { margin-bottom: 2mm; }
+.track-label { font-size: 5.5pt; font-weight: bold; text-transform: uppercase; font-family: Arial, Helvetica, sans-serif; margin-bottom: 0.5mm; }
+.track-boxes { display: flex; gap: 0; height: 7mm; }
+.track-box { flex: 1; border: 1.2pt solid #1a1a14; background: white; position: relative; }
+.track-box::after { content: ''; position: absolute; bottom: 1.5pt; left: 50%; transform: translateX(-50%); width: 35%; height: 26%; border: 0.4pt solid #aaa; background: white; }
+
+/* VOTO DE TRASFONDO */
+.vow-text { background: #d8d8d8; padding: 1.5mm 2mm; font-size: 8pt; min-height: 6mm; margin-bottom: 1mm; border-radius: 2px; }
+
+/* IMPACTOS */
+.impacts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1mm; margin-bottom: 2mm; }
+.imp-cat { }
+.imp-cat-title { background: #1a1a14; color: white; font-size: 4.8pt; font-weight: bold; font-family: Arial, Helvetica, sans-serif; text-align: center; padding: 1.5mm 1mm; letter-spacing: 0.04em; }
+.imp-item { font-size: 6.5pt; font-family: Arial, Helvetica, sans-serif; padding: 1mm 1.5mm; display: flex; align-items: center; gap: 1.5mm; line-height: 1.2; }
+.imp-dot { width: 5pt; height: 5pt; border-radius: 50%; border: 0.8pt solid #999; background: white; flex-shrink: 0; }
+.imp-dot-on { background: #8c3a1a; border-color: #8c3a1a; }
+.imp-item.checked { font-weight: bold; }
+.mom-rule { font-size: 4.5pt; color: #888; text-align: center; margin-top: 1mm; }
+
+/* PÁGINA 2 */
+.page2 { page-break-before: always; }
+.p2-hdr { background: #1a1a14; color: white; text-align: center; font-family: 'Cinzel', serif; font-size: 10pt; font-weight: bold; letter-spacing: 0.08em; padding: 3mm; margin-bottom: 4mm; }
+.p2-section { margin-bottom: 4mm; }
+.p2-label { font-size: 5.5pt; font-weight: bold; color: #b8882a; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1mm; font-family: 'Cinzel', serif; }
+.p2-value { background: #d8d8d8; padding: 2mm 3mm; min-height: 7mm; font-size: 9pt; border-radius: 2px; }
+.p2-value.tall { min-height: 14mm; }
+.p2-value.taller { min-height: 18mm; }
+.p2-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.p2-grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; margin-bottom: 4mm; }
+.stat-summary { background: #b8882a; color: white; text-align: center; padding: 2mm; border-radius: 2px; }
+.stat-summary.empty { background: #d8d8d8; color: #888; }
+.stat-sn { font-size: 5pt; font-weight: bold; text-transform: uppercase; font-family: 'Cinzel', serif; }
+.stat-sv { font-size: 18pt; font-weight: bold; line-height: 1.1; }
+.meters-summary { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2mm; margin-bottom: 4mm; }
+.meter-summ { background: #d8d8d8; text-align: center; padding: 2mm; border-radius: 2px; }
+.meter-summ-l { font-size: 5pt; font-weight: bold; color: #666; text-transform: uppercase; }
+.meter-summ-v { font-size: 14pt; font-weight: bold; color: #b8882a; line-height: 1.2; }
+.footer { font-size: 5pt; color: #888; text-align: center; margin-top: 6mm; }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1: FICHA -->
+<div class="sheet">
+
+  <!-- Header -->
+  <div class="top-header">
+    <div>
+      <div class="field-group" style="margin-bottom:2mm">
+        <span class="field-label">Nombre</span>
+        <div class="field-value">${d.nombre || '&nbsp;'}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm">
+        <div class="field-group">
+          <span class="field-label">Pronombres</span>
+          <div class="field-value">${d.pronombres || '&nbsp;'}</div>
+        </div>
+        <div class="field-group">
+          <span class="field-label">Indicativo</span>
+          <div class="field-value">${d.indicativo || '&nbsp;'}</div>
+        </div>
+      </div>
+    </div>
+    <div class="field-group">
+      <span class="field-label">Características</span>
+      <div class="field-value" style="font-size:8pt">${[d.look,d.act,d.wear].filter(Boolean).join('<br>') || '&nbsp;'}</div>
+    </div>
+  </div>
+
+  <!-- Fila principal -->
+  <div class="main-row">
+
+    <!-- IMPULSO -->
+    <div class="impulso-col">
+      <div class="col-header">IMPULSO</div>
+      <div class="mom-track">${momTrack()}</div>
+      <div class="mom-foot">
+        <div class="mom-foot-row">
+          <div class="mom-foot-label">MÁX</div>
+          <div class="mom-foot-val">+${momMax}</div>
+        </div>
+        <div class="mom-foot-row">
+          <div class="mom-foot-label">REINICIO</div>
+          <div class="mom-foot-val">${momRst}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTRO: stats + legados + voto + impactos -->
+    <div class="center-col" style="padding:0 2mm">
+
+      <!-- Stats -->
+      <div class="stats-hdr">— STATS —</div>
+      <div class="stats-row">
+        ${['Filo','Corazón','Hierro','Sombra','Mente'].map(sn => {
+          const v = d.stats[sn];
+          return `<div class="stat-box${v!==null?' has-val':''}">
+            <span class="stat-name">${sn.toUpperCase()}</span>
+            <span class="stat-val">${v!==null?v:'—'}</span>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <!-- Legados -->
+      <div class="section-hdr">— LEGADOS —</div>
+      ${['BÚSQUEDAS','VÍNCULOS','DESCUBRIMIENTOS'].map(tn => `
+        <div class="track-row">
+          <div class="track-label">${tn} <span style="float:right;font-size:5pt;font-family:Arial,sans-serif">○ 10</span></div>
+          <div class="track-boxes">${Array(10).fill('<div class="track-box"></div>').join('')}</div>
+        </div>`).join('')}
+
+      <!-- Voto de trasfondo -->
+      <div class="section-hdr">— VOTO DE TRASFONDO —</div>
+      <div class="vow-text">${d.bgvow || '&nbsp;'}</div>
+      <div class="track-boxes" style="height:6mm;margin-bottom:2mm">
+        ${Array(10).fill('<div class="track-box"></div>').join('')}
+      </div>
+
+      <!-- Impactos -->
+      <div class="section-hdr">— IMPACTOS —</div>
+      <div class="impacts-grid">
+        <div class="imp-cat">
+          <div class="imp-cat-title">DESGRACIAS</div>
+          ${imp('wounded','HERIDO/A')}${imp('shaken','SACUDIDO/A')}${imp('unprepared','SIN PREP.')}
+        </div>
+        <div class="imp-cat">
+          <div class="imp-cat-title">EFECTOS DURADEROS</div>
+          ${imp('harmed','MUTILADO/A')}${imp('traumatized','CORROMPIDO/A')}
+        </div>
+        <div class="imp-cat">
+          <div class="imp-cat-title">CARGAS</div>
+          ${imp('doomed','CONDENADO/A')}${imp('tormented','ATORMENTADO/A')}${imp('indebted','ENDEUDADO/A')}
+        </div>
+        <div class="imp-cat">
+          <div class="imp-cat-title">VEHÍCULO ACTUAL</div>
+          ${imp('battered','DAÑADO/A')}${imp('cursed','MALDITO/A')}
+        </div>
+      </div>
+      <div class="mom-rule">
+        IMPULSO MÁX: EMPIEZA EN +10 / REDUCE EN 1 POR CADA IMPACTO<br>
+        REINICIO: 0 IMPACTOS=+2 / 1 IMPACTO=+1 / 2 O MÁS=0
+      </div>
+
+    </div><!-- /center-col -->
+
+    <!-- MEDIDORES -->
+    <div class="meters-col">
+      ${['SALUD','ENTEREZA','SUMINST.'].map((lbl,mi)=>{
+        const val=[d.salud,d.entereza,d.supply][mi];
+        return `<div class="meter-block">
+          <div class="meter-block-label">${lbl}</div>
+          <div class="meter-pips-col">
+            ${[5,4,3,2,1,0].map(v=>`<div class="meter-pip-row${v<=val?' pip-on':''}">${v}</div>`).join('')}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+
+  </div><!-- /main-row -->
+
+</div><!-- /sheet -->
+
+<!-- PÁGINA 2: DATOS DEL PERSONAJE -->
+<div class="page2">
+  <div class="p2-hdr">STARFORGED — DATOS DEL PERSONAJE</div>
+
+  <div class="p2-grid2">
+    <div>
+      <div class="p2-section">
+        <div class="p2-label">Nombre</div>
+        <div class="p2-value">${d.nombre||'—'}</div>
+      </div>
+      <div class="p2-section">
+        <div class="p2-label">Indicativo (callsign)</div>
+        <div class="p2-value">${d.indicativo||'—'}</div>
+      </div>
+      <div class="p2-section">
+        <div class="p2-label">Pronombres</div>
+        <div class="p2-value">${d.pronombres||'—'}</div>
+      </div>
+      <div class="p2-section">
+        <div class="p2-label">Región de inicio</div>
+        <div class="p2-value">${d.region||'—'}</div>
+      </div>
+    </div>
+    <div>
+      <div class="p2-section">
+        <div class="p2-label">Caminos elegidos</div>
+        <div class="p2-value">${d.caminos.join('  ·  ')||'—'}</div>
+      </div>
+      <div class="p2-section">
+        <div class="p2-label">Recurso final</div>
+        <div class="p2-value">${d.finalRec||'—'}</div>
+      </div>
+      <div class="p2-section">
+        <div class="p2-label">Nave estelar</div>
+        <div class="p2-value">${d.shipName||'—'}</div>
+      </div>
+      <div class="p2-section">
+        <div class="p2-label">Origen de la nave</div>
+        <div class="p2-value" style="font-size:8pt">${[d.shipOrigin,d.shipQuirk].filter(Boolean).join(' · ')||'—'}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p2-section">
+    <div class="p2-label">Trasfondo</div>
+    <div class="p2-value tall">${d.backstory||'—'}</div>
+  </div>
+
+  <div class="p2-section">
+    <div class="p2-label">Voto de trasfondo (${d.bgvowRank})</div>
+    <div class="p2-value">${d.bgvow||'—'}</div>
+  </div>
+
+  <div class="p2-section">
+    <div class="p2-label">Aspecto físico</div>
+    <div class="p2-value">${d.look||'—'}</div>
+  </div>
+  <div class="p2-section">
+    <div class="p2-label">Forma de actuar</div>
+    <div class="p2-value">${d.act||'—'}</div>
+  </div>
+  <div class="p2-section">
+    <div class="p2-label">Apariencia / equipo característico</div>
+    <div class="p2-value">${d.wear||'—'}</div>
+  </div>
+
+  <div class="p2-section">
+    <div class="p2-label">Equipo y objetos especiales</div>
+    <div class="p2-value taller">${(d.gear||'—').replace(/\n/g,'<br>')}</div>
+  </div>
+
+  <div class="p2-section">
+    <div class="p2-label">Objeto para jurar votos de hierro</div>
+    <div class="p2-value">${d.ironObj||'—'}</div>
+  </div>
+
+  <!-- Stats -->
+  <div class="p2-label" style="margin-bottom:2mm">Stats</div>
+  <div class="p2-grid4" style="grid-template-columns:repeat(5,1fr)">
+    ${['Filo','Corazón','Hierro','Sombra','Mente'].map(sn=>{
+      const v=d.stats[sn];
+      return `<div class="${v!==null?'stat-summary':'stat-summary empty'}">
+        <div class="stat-sn">${sn.toUpperCase()}</div>
+        <div class="stat-sv">${v!==null?v:'—'}</div>
+      </div>`;
+    }).join('')}
+  </div>
+
+  <!-- Medidores -->
+  <div class="p2-label" style="margin-bottom:2mm">Medidores</div>
+  <div class="meters-summary">
+    ${[['SALUD',d.salud+'/5'],['ENTEREZA',d.entereza+'/5'],['SUMINST.',d.supply+'/5'],
+       ['IMPULSO',(d.impulso>=0?'+':'')+d.impulso],['INT.NAVE',d.shipInt+'/5']].map(([l,v])=>
+      `<div class="meter-summ"><div class="meter-summ-l">${l}</div><div class="meter-summ-v">${v}</div></div>`
+    ).join('')}
+  </div>
+
+  <div class="footer">Ironsworn: Starforged (2025) · Shawn Tomkin · Traducción al español</div>
+</div>
+
+</body>
+</html>`;
+
+  // Abrir en ventana nueva y disparar impresión
+  const win = window.open('', '_blank', 'width=900,height=700');
+  win.document.write(html);
+  win.document.close();
+  win.addEventListener('load', () => {
+    setTimeout(() => { win.focus(); win.print(); }, 400);
+  });
+}
+</script>
+<script>
+// ── Lógica del generador ──────────────────────────────────────────────────
+const PATHS=['As','Acorazado','Alquimista','Arquero','Artillero','Aumentado','Banderizo','Biólogo','Maestro de espadas','Cazarrecompensas','Luchador','Carroñero','Cinético','Comerciante','Mensajero','Detective','Devoto','Diplomático','Empatizador','Explorador','Fugitivo','Caza-historias','Infiltrador','Mecánico','Mercenario','Nacido-en-el-vacío','Naturalista','Pistolero','Pícaro','Proscrito','Sanador','Sombra','Tecnólogo','Veterano','Vidente','Vestigio'];
+PATHS.sort();
+const MODULES=['Armería','Bahía de ingeniería','Bodega ampliada','Cámara segura','Centro de inteligencia','Enfermería','Hangar de módulos','IA Supervisora','Laboratorio de investigación','Módulo de fabricación','Módulo de sigilo','Paquete de sensores','Sala de rituales','Taller'];
+const SVEH=['Aeronave','Deslizador','Esquife ligero','Nave infiltradora','Nave incineradora','Rover de exploración','Lanzadera'];
+const COMPANIONS=['Banshee','Bot de combate','Bot de exploración','Bot de protocolo','Bot de utilidad','Dron compañero','Gatopálido','Cuernoroca','Sprite','Simbionte','Deslizador del Vacío'];
+const ORIGINS=['Adquirida a cambio de una preciada reliquia familiar','Construida con desechos reutilizados','Reclamada como botín de guerra','Descubierta a la deriva y remendada','Obtenida a cambio de una deuda peligrosa','Robada a una facción poderosa','Heredada de alguien que desapareció','Ganada en una apuesta imposible'];
+const QUIRKS=['La sala de máquinas está chamuscada con antiguas marcas de quemaduras','El exterior está manchado de óxido y mugre','Una música tenue y fantasmal a veces resuena por los pasillos','Los mamparos están cubiertos de inscripciones extrañas','Tiene compartimentos secretos mal disimulados','El sistema de iluminación falla en momentos inoportunos','Su IA responde con silencios inquietantes','Hay una grieta reparada mil veces junto a la compuerta'];
+const bgTable=[{lo:1,hi:5,t:'Médico de campo de batalla — Sanador + Veterano'},{lo:6,hi:10,t:'Delegado — Banderizo + Diplomático'},{lo:11,hi:15,t:'Exobiólogo — Caza-historias + Naturalista'},{lo:16,hi:20,t:'Comerciante lejano — Navegante + Comerciante'},{lo:21,hi:25,t:'Cazador de fugitivos — Acorazado + Cazarrecompensas'},{lo:26,hi:30,t:'Hacker — Infiltrador + Tecnólogo'},{lo:31,hi:35,t:'Piloto audaz — As + Navegante'},{lo:36,hi:40,t:'Explorador interestelar — Explorador + Nacido-en-el-vacío'},{lo:41,hi:45,t:'Cazador de monstruos — Artillero + Cazador de monstruos'},{lo:46,hi:50,t:'Ocultista — Proscrito + Sombra'},{lo:51,hi:55,t:'Agente — Infiltrador + Maestro de espadas'},{lo:56,hi:60,t:'Forajido — Fugitivo + Pistolero'},{lo:61,hi:65,t:'Detective privado — Luchador + Detective'},{lo:66,hi:70,t:'Profeta — Devoto + Vidente'},{lo:71,hi:75,t:'Psiónico — Cinético + Vestigio'},{lo:76,hi:80,t:'Contrabandista — Mensajero + Pícaro'},{lo:81,hi:85,t:'Enterezaualista — Enterezado + Empatizador'},{lo:86,hi:90,t:'Ingeniero de nave — Mecánico + Tecnólogo'},{lo:91,hi:95,t:'Supersoldado — Aumentado + Mercenario'},{lo:96,hi:100,t:'Saqueador de tumbas — Carroñero + Pícaro'}];
+
+let step=0;
+const pickedPaths=new Set();
+let finalRecurso=null;
+const stats={Filo:null,Corazón:null,Hierro:null,Sombra:null,Mente:null};
+const STAT_DEFS=[{n:'Filo',d:'Agilidad, velocidad, combate a distancia'},{n:'Corazón',d:'Valor, voluntad, empatía, sociabilidad'},{n:'Hierro',d:'Fuerza física, resistencia, combate cuerpo a cuerpo'},{n:'Sombra',d:'Sigilo, engaño, subterfugio'},{n:'Mente',d:'Conocimiento, pericia, observación'}];
+const TOTAL_STEPS=11;
+let shipInt=5;
+let mom=2;
+const meterVals={health:5,entereza:5,supply:5};
+
+const STEP_LABELS=['Caminos','Trasfondo','Voto','Nave','Recurso','Stats','Medidores','Apariencia','Nombre','Equipo','Revisión'];
+
+function buildNav(){
+  document.getElementById('step-nav').innerHTML=STEP_LABELS.map((l,i)=>
+    `<button class="step-pill${i===step?' active':i<step?' done':''}" onclick="jump(${i})">${i+1}. ${l}</button>`
+  ).join('');
+  document.getElementById('tb-step').textContent=`Paso ${step+1} de ${TOTAL_STEPS}`;
+  document.getElementById('btn-prev').disabled=(step===0);
+  document.getElementById('btn-next').textContent=step===TOTAL_STEPS-1?'✓ Hecho':'Siguiente →';
+}
+
+function jump(n){step=n;refresh();}
+function go(d){step=Math.max(0,Math.min(TOTAL_STEPS-1,step+d));refresh();}
+
+function refresh(){
+  document.querySelectorAll('.step-panel').forEach((p,i)=>p.classList.toggle('active',i===step));
+  buildNav();
+  if(step===4) buildFinalRecurso();
+  if(step===10) buildSummary();
+  window.scrollTo(0,0);
+}
+
+function buildPaths(){
+  document.getElementById('paths-grid').innerHTML=PATHS.map(p=>{
+    const selected=pickedPaths.has(p);
+    const disabled=!selected && pickedPaths.size>=2;
+    return `<button class="recurso-btn${selected?' picked':''}${disabled?' disabled':''}" onclick="togPath('${p.replace(/'/g,"\\'")}')" ${disabled?'disabled':''}>${p}</button>`;
+  }).join('');
+  const n=pickedPaths.size;
+  document.getElementById('paths-count').textContent=`${n} / 2 caminos elegidos${n===2?' ✓':''}`;
+  document.getElementById('paths-selected').innerHTML=[...pickedPaths].map(p=>
+    `<div class="path-tag">${p}<span class="rm" onclick="togPath('${p.replace(/'/g,"\\'")}')">✕</span></div>`
+  ).join('');
+}
+function togPath(p){
+  if(pickedPaths.has(p)){pickedPaths.delete(p);}
+  else if(pickedPaths.size<2){pickedPaths.add(p);}
+  buildPaths();
+  if(step===4) buildFinalRecurso();
+}
+
+function buildFinalRecurso(){
+  const pathOptions=PATHS.filter(p=>!pickedPaths.has(p));
+  const cats=[
+    {t:'Caminos adicionales',items:pathOptions},
+    {t:'Módulos de nave',items:MODULES},
+    {t:'Vehículos de apoyo',items:SVEH},
+    {t:'Compañeros',items:COMPANIONS},
+  ];
+  document.getElementById('final-recurso-area').innerHTML=cats.map(c=>
+    `<div style="margin-bottom:12px;"><div class="recurso-cat-title">${c.t}</div>`+
+    (c.items.length
+      ? `<div class="recurso-grid">${c.items.map(a=>
+          `<button class="recurso-btn${finalRecurso===a?' picked':''}" onclick="setFA('${a.replace(/'/g,"\\'")}')">${finalRecurso===a?'✓ ':''}${a}</button>`
+        ).join('')}</div>`
+      : `<div class="recursos-count">No hay caminos adicionales disponibles mientras no hayas elegido tus dos caminos iniciales.</div>`
+    )+
+    `</div>`
+  ).join('');
+}
+function setFA(a){finalRecurso=a;buildFinalRecurso();}
+
+const VALS=[3,2,2,1,1];
+function buildStats(){
+  document.getElementById('stats-grid').innerHTML=STAT_DEFS.map(s=>{
+    const v=stats[s.n];
+    return `<div class="stat-box${v!==null?' assigned':''}">
+      <div class="stat-name">${s.n}</div>
+      <div class="stat-val">${v!==null?v:'—'}</div>
+      <div class="stat-desc">${s.d}</div>
+      <select class="stat-select" onchange="assignStat('${s.n}',this.value)">
+        <option value="">—</option>
+        ${VALS.map(x=>`<option value="${x}"${v===x?' selected':''}>${x}</option>`).join('')}
+      </select>
+    </div>`;
+  }).join('');
+  const assigned=Object.values(stats).filter(v=>v!==null);
+  const counts={}; VALS.forEach(v=>counts[v]=(counts[v]||0)+1);
+  const used={}; assigned.forEach(v=>used[v]=(used[v]||0)+1);
+  const valid=assigned.length===5&&VALS.every(v=>counts[v]===(used[v]||0));
+  const el=document.getElementById('stats-status');
+  el.textContent=valid?'✓ Stats distribuidos correctamente':
+    assigned.length===5?'⚠ Distribución inválida (usa exactamente 3, 2, 2, 1, 1)':
+    `${assigned.length}/5 stats asignados — Distribuye: 3, 2, 2, 1, 1`;
+  el.className='stats-status'+(valid?' ok':'');
+}
+function assignStat(n,v){stats[n]=v?parseInt(v):null;buildStats();}
+
+function buildShipInt(){
+  const t=document.getElementById('ship-int-track');if(!t)return;
+  t.innerHTML=Array.from({length:5},(_,i)=>
+    `<div class="m-pip${i<shipInt?' filled':''}" onclick="setShipInt(${i+1})">${i+1}</div>`
+  ).join('');
+}
+function setShipInt(v){shipInt=v;buildShipInt();}
+
+function buildMeters(){
+  const defs=[{id:'health',n:'SALUD',max:5},{id:'entereza',n:'ENTEREZA',max:5},{id:'supply',n:'SUMINISTROS',max:5}];
+  document.getElementById('meters-grid').innerHTML=defs.map(m=>
+    `<div class="meter-box"><div class="meter-name">${m.n}</div>
+    <div class="meter-track">${Array.from({length:m.max},(_,i)=>
+      `<div class="m-pip${i<meterVals[m.id]?' filled':''}" onclick="setMeter('${m.id}',${i+1})">${i+1}</div>`
+    ).join('')}</div></div>`
+  ).join('');
+  buildMom();
+}
+function setMeter(id,v){meterVals[id]=v;buildMeters();}
+
+function buildMom(){
+  const t=document.getElementById('mom-track');if(!t)return;
+  t.innerHTML=Array.from({length:17},(_,i)=>{
+    const val=i-6;
+    let cls='mp';
+    if(val===0)cls+=' zero';
+    else if(val>0&&val<=mom)cls+=' pos';
+    else if(val<0&&val>=mom)cls+=' neg';
+    return `<div class="${cls}" onclick="setMom(${val})" title="${val>=0?'+':''}${val}">${val>=0?'+':''}${val}</div>`;
+  }).join('');
+  document.getElementById('mom-cur').textContent=(mom>=0?'+':'')+mom;
+}
+function setMom(v){mom=Math.max(-6,Math.min(10,v));buildMom();}
+
+function setRank(group,btn){
+  document.querySelectorAll(`[data-rank="${group}"]`).forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+function togImp(el){el.classList.toggle('on');}
+
+function rollBackstory(){
+  const r=Math.ceil(Math.random()*100);
+  const table=[{lo:1,hi:7,t:'Abandonaste a los tuyos tras descubrir una verdad inquietante'},{lo:8,hi:13,t:'Te guía una visión o profecía'},{lo:14,hi:20,t:'Te persiguen acciones o fracasos pasados'},{lo:21,hi:27,t:'Huyes de un pasado criminal'},{lo:28,hi:34,t:'Eres el único superviviente de un ataque o calamidad'},{lo:35,hi:40,t:'Escapaste de una situación abusiva o injusta'},{lo:41,hi:46,t:'No tienes ningún recuerdo de tu vida anterior'},{lo:47,hi:53,t:'Rechazaste un deber o destino'},{lo:54,hi:60,t:'Fuiste desterrado de tu antiguo hogar'},{lo:61,hi:67,t:'Se te negó un derecho de nacimiento'},{lo:68,hi:74,t:'Siempre has tenido que valerte por ti mismo'},{lo:75,hi:81,t:'Te enviaron en una misión prolongada'},{lo:82,hi:87,t:'Te llevó o atrajo alguien'},{lo:88,hi:94,t:'Tus ambiciones superaron tus humildes orígenes'},{lo:95,hi:100,t:'Tu entereza errante te llevó muy lejos'}];
+  const res=table.find(x=>r>=x.lo&&r<=x.hi);
+  document.getElementById('backstory-roll').textContent=`d100 = ${r} → ${res?res.t:''}`;
+}
+function rollShipOrigin(){
+  const r=Math.ceil(Math.random()*100);
+  const idx=Math.min(Math.floor((r-1)/Math.ceil(100/ORIGINS.length)),ORIGINS.length-1);
+  document.getElementById('origin-roll').textContent=`d100 = ${r} → ${ORIGINS[idx]}`;
+}
+function rollShipQuirk(){
+  const r=Math.ceil(Math.random()*100);
+  const idx=Math.min(Math.floor((r-1)/Math.ceil(100/QUIRKS.length)),QUIRKS.length-1);
+  document.getElementById('quirk-roll').textContent=`d100 = ${r} → ${QUIRKS[idx]}`;
+}
+function rollRef(tbl,outId){
+  const r=Math.ceil(Math.random()*100);
+  const res=tbl.find(x=>r>=x.lo&&r<=x.hi);
+  document.getElementById(outId).textContent=`d100 = ${r} → ${res?res.t:''}`;
+}
+
+function buildSummary(){
+  const get=id=>(document.getElementById(id)||{}).value||'';
+  const rows=[
+    {t:'Nombre',v:get('charname')||'—'},
+    {t:'Indicativo',v:get('indicativo')||'—'},
+    {t:'Pronombres',v:get('pronouns')||'—'},
+    {t:'Región',v:(document.getElementById('region')||{}).value||'—'},
+    {t:'Caminos elegidos',v:pickedPaths.size?[...pickedPaths].join(', '):'—'},
+    {t:'Recurso final',v:finalRecurso||'—'},
+    {t:'Trasfondo',v:get('backstory')||'—'},
+    {t:'Voto de trasfondo',v:get('bgvow')||'—'},
+    {t:'Nave',v:get('ship-name')||'—'},
+    {t:'Origen de la nave',v:get('ship-origin')||'—'},
+    {t:'Peculiaridad de la nave',v:get('ship-quirk')||'—'},
+    {t:'Aspecto físico',v:get('look')||'—'},
+    {t:'Forma de actuar',v:get('act')||'—'},
+    {t:'Lleva puesto',v:get('wear')||'—'},
+    {t:'Equipo especial',v:get('gear')||'—'},
+    {t:'Objeto del voto',v:get('iron-obj')||'—'},
+  ];
+  const statsHtml=`<div class="summ-card"><div class="summ-title">Stats</div>${
+    STAT_DEFS.map(s=>`<div class="summ-stat-row"><span class="summ-stat-name">${s.n}</span><span class="summ-stat-val">${stats[s.n]!==null?stats[s.n]:'—'}</span></div>`).join('')
+  }</div>`;
+  const metersHtml=`<div class="summ-card"><div class="summ-title">Medidores</div>
+    <div class="summ-stat-row"><span class="summ-stat-name">Salud</span><span class="summ-stat-val">${meterVals.health}/5</span></div>
+    <div class="summ-stat-row"><span class="summ-stat-name">Entereza</span><span class="summ-stat-val">${meterVals.entereza}/5</span></div>
+    <div class="summ-stat-row"><span class="summ-stat-name">Suministros</span><span class="summ-stat-val">${meterVals.supply}/5</span></div>
+    <div class="summ-stat-row"><span class="summ-stat-name">Impulso</span><span class="summ-stat-val">${mom>=0?'+':''}${mom}</span></div>
+    <div class="summ-stat-row"><span class="summ-stat-name">Integridad nave</span><span class="summ-stat-val">${shipInt}/5</span></div>
+  </div>`;
+  document.getElementById('summary-grid').innerHTML=
+    rows.map(r=>`<div class="summ-card"><div class="summ-title">${r.t}</div><div class="summ-val">${r.v}</div></div>`).join('')+
+    statsHtml+metersHtml;
+}
+
+buildPaths();
+buildStats();
+buildShipInt();
+buildMeters();
+buildNav();
+</script>
+</body>
+</html>
