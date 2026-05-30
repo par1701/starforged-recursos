@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 4: Megaestructuras — Ancient Wonders ES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0d14;--bg2:#0f1420;--bg3:#141926;--border:#2a3050;
+  --gold:#d4a857;--gold2:#b8902a;--gold-dim:rgba(212,168,87,0.15);
+  --text:#c8cfe0;--text-dim:#7a8399;--tag-aw:#c47a3a;
+  --mono:'JetBrains Mono',monospace;--serif:'Cormorant Garamond',serif;
+  --nav-w:280px;--radius:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--serif);font-size:1.05rem;display:flex;min-height:100vh;}
+nav{width:var(--nav-w);min-width:var(--nav-w);background:var(--bg2);border-right:1px solid var(--border);height:100vh;position:sticky;top:0;overflow-y:auto;display:flex;flex-direction:column;padding-bottom:2rem;}
+.nav-brand{padding:1.5rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
+.nav-brand h1{font-size:1.1rem;color:var(--gold);letter-spacing:.05em;text-transform:uppercase;}
+.nav-brand p{font-size:.75rem;color:var(--text-dim);margin-top:.2rem;font-family:var(--mono);}
+.nav-group{margin-top:.5rem;}
+.nav-group-title{padding:.5rem 1.2rem .25rem;font-size:.65rem;font-family:var(--mono);color:var(--tag-aw);text-transform:uppercase;letter-spacing:.12em;}
+.nav-group a{display:block;padding:.35rem 1.2rem .35rem 1.5rem;font-size:.85rem;color:var(--text-dim);text-decoration:none;transition:color .15s,background .15s;border-left:2px solid transparent;line-height:1.3;}
+.nav-group a:hover{color:var(--gold);background:var(--gold-dim);border-left-color:var(--gold);}
+main{flex:1;max-width:900px;padding:2rem 2.5rem;}
+.page-header{border-bottom:2px solid var(--gold);padding-bottom:1rem;margin-bottom:2.5rem;}
+.page-header h1{font-size:2.2rem;color:var(--gold);font-weight:400;}
+.page-header p{color:var(--text-dim);font-family:var(--mono);font-size:.75rem;margin-top:.4rem;}
+.section-header{margin:3rem 0 1.5rem;border-bottom:1px solid var(--border);padding-bottom:.6rem;}
+.section-header h2{font-size:1.7rem;color:var(--gold);font-weight:400;}
+.section-header .tag{display:inline-block;background:var(--tag-aw);color:#fff;font-family:var(--mono);font-size:.6rem;padding:.1rem .45rem;border-radius:3px;margin-left:.6rem;vertical-align:middle;text-transform:uppercase;letter-spacing:.08em;}
+.subsection{margin:1.8rem 0 1rem;}
+.subsection h3{font-size:1.2rem;color:var(--gold);font-weight:600;margin-bottom:.5rem;}
+.subsection h4{font-size:.8rem;color:#9ab0d0;font-weight:600;margin:1rem 0 .4rem;text-transform:uppercase;letter-spacing:.06em;font-family:var(--mono);}
+.oracle-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.5rem;overflow:hidden;}
+.oracle-card-header{background:var(--bg3);padding:.7rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);gap:.5rem;}
+.oracle-card-header h4{font-family:var(--mono);font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;}
+.roll-btn{background:var(--gold-dim);border:1px solid var(--gold2);color:var(--gold);font-family:var(--mono);font-size:.7rem;padding:.3rem .75rem;border-radius:4px;cursor:pointer;transition:background .15s;white-space:nowrap;flex-shrink:0;}
+.roll-btn:hover{background:rgba(212,168,87,0.28);}
+.roll-result{display:none;background:rgba(212,168,87,0.12);border-top:1px solid var(--border);padding:.6rem 1rem;font-family:var(--mono);font-size:.82rem;color:var(--gold);}
+.roll-result.visible{display:block;}
+table.oracle{width:100%;border-collapse:collapse;font-size:.88rem;}
+table.oracle th{background:var(--bg3);color:var(--text-dim);font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;padding:.4rem .7rem;text-align:left;border-bottom:1px solid var(--border);}
+table.oracle td{padding:.4rem .7rem;border-bottom:1px solid rgba(42,48,80,.5);line-height:1.35;vertical-align:top;}
+table.oracle tr:last-child td{border-bottom:none;}
+table.oracle tr:nth-child(even) td{background:rgba(15,20,32,.5);}
+table.oracle td:first-child{font-family:var(--mono);font-size:.75rem;color:var(--text-dim);white-space:nowrap;width:70px;}
+table.oracle .highlight td{background:rgba(212,168,87,0.1)!important;}
+table.status{width:100%;border-collapse:collapse;font-size:.88rem;}
+table.status th{background:var(--bg3);color:var(--text-dim);font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;padding:.4rem .7rem;text-align:left;border-bottom:1px solid var(--border);}
+table.status td{padding:.5rem .7rem;border-bottom:1px solid rgba(42,48,80,.5);line-height:1.45;vertical-align:top;}
+table.status tr:last-child td{border-bottom:none;}
+table.status td:first-child{font-family:var(--mono);font-size:.75rem;color:var(--text-dim);white-space:nowrap;width:55px;}
+table.status td:nth-child(2){font-family:var(--mono);font-size:.78rem;color:var(--gold);width:150px;}
+table.status .highlight td{background:rgba(212,168,87,0.1)!important;}
+.quest{background:rgba(196,122,58,.08);border-left:3px solid var(--tag-aw);border-radius:0 var(--radius) var(--radius) 0;padding:.9rem 1.1rem;margin:1.2rem 0;font-size:.9rem;line-height:1.5;color:var(--text);}
+.quest strong{display:block;color:var(--tag-aw);font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;}
+.discovery{background:rgba(42,48,80,.4);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1.1rem;margin:1.2rem 0;font-size:.9rem;line-height:1.5;}
+.discovery strong{display:block;color:#9ab0d0;font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;}
+.prose{line-height:1.6;color:var(--text);margin-bottom:1rem;font-size:.95rem;}
+.prose em{color:var(--gold);font-style:italic;}
+.type-badge{display:inline-block;background:rgba(42,48,80,.8);border:1px solid var(--border);border-radius:4px;font-family:var(--mono);font-size:.68rem;color:#9ab0d0;padding:.15rem .5rem;margin-bottom:.6rem;}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.8rem 0;}
+.info-card{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:.8rem;}
+.info-card-label{font-family:var(--mono);font-size:.65rem;color:var(--tag-aw);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem;}
+.info-card-text{font-size:.88rem;line-height:1.4;}
+.req-box{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:.9rem 1rem;margin:.6rem 0;font-size:.9rem;line-height:1.5;}
+@media(max-width:1000px){nav{display:none;}main{max-width:100%;padding:1.2rem;}}
+@media print{nav{display:none;}main{padding:0;}.roll-btn{display:none;}}
+</style>
+</head>
+<body>
+<style id="sf-topbar-style">
+#sf-topbar{position:fixed;top:0;left:0;right:0;height:40px;background:#080b10;border-bottom:1px solid #1a2030;z-index:9999;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+#sf-topbar::-webkit-scrollbar{height:2px;}
+#sf-topbar::-webkit-scrollbar-thumb{background:#2a3148;}
+.sf-back{padding:0 14px;color:#5a6480;text-decoration:none;height:40px;display:flex;align-items:center;gap:5px;flex-shrink:0;transition:color .15s;border-right:1px solid #1a2030;}
+.sf-back:hover{color:#d4a857;}
+.sf-book{display:flex;align-items:center;height:40px;flex-shrink:0;}
+.sf-book-label{padding:0 10px;height:40px;display:flex;align-items:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;flex-shrink:0;}
+.sf-book-label a{color:inherit;text-decoration:none;transition:opacity .15s;}
+.sf-book-label a:hover{opacity:.75;}
+.sf-active .sf-book-label{border-bottom:2px solid currentColor;}
+.sf-links{display:flex;align-items:center;padding-right:6px;}
+.sf-links a{padding:0 9px;height:40px;display:flex;align-items:center;color:#5a6480;text-decoration:none;font-size:11px;transition:color .15s;}
+.sf-links a:hover{color:#c8cfe0;}
+.sf-links a.sf-cur{color:#c8cfe0;background:rgba(255,255,255,.04);}
+.sf-dot{color:#1a2030;padding:0 1px;font-size:10px;}
+.sf-vsep{width:1px;background:#1a2030;height:22px;margin:0 2px;flex-shrink:0;}
+body{padding-top:40px!important;}
+@media print{#sf-topbar{display:none!important;}body{padding-top:0!important;}}
+</style>
+<style id="sf-nav-fix">
+nav{top:40px!important;height:calc(100vh - 40px)!important;}
+</style>
+<div id="sf-topbar">
+<a class="sf-back" href="index.html">&#8592; Índice</a>
+<div class="sf-book"><a class="sf-book-label" href="oraculos_core_es.html" style="color:#d4a857">Core</a></div>
+<div class="sf-vsep"></div>
+<div class="sf-book sf-active"><span class="sf-book-label" style="color:#7eb8a4">Ancient Wonders</span><div class="sf-links"><a href="ancient_wonders_cap4_es.html" class="sf-cur">Megaestructuras</a><span class="sf-dot">·</span><a href="ancient_wonders_es.html" class="">Oráculos</a><span class="sf-dot">·</span><a href="megaciudades_moradores_es.html" class="">Megaciudades</a></div></div>
+<div class="sf-vsep"></div>
+<div class="sf-book"><a class="sf-book-label" href="starsmith_campana_core_es.html" style="color:#9b7ec8">Starsmith</a></div>
+</div>
+<nav>
+  <div class="nav-brand">
+    <h1>Ancient Wonders ES</h1>
+    <p>Cap. 4 · Megaestructuras Alienígenas</p>
+  </div>
+  
+<div class="nav-group">
+  <div class="nav-group-title">Reglas Generales</div>
+  <a href="#maravillas">Maravillas Arquitectónicas</a>
+  <a href="#gigatransportadores">Gigatransportadores</a>
+  <a href="#reglas-mega">Clase &amp; Estado</a>
+  <a href="#explorar">Explorar Megaestructuras</a>
+  <a href="#no-identificada">No Identificada</a>
+</div>
+<div class="nav-group">
+  <div class="nav-group-title">Megaestructuras A–D</div>
+  <a href="#procesador-asteroides">Procesador de Asteroides</a>
+  <a href="#cosechadora-atmosfera">Cosechadora de Atmósfera</a>
+  <a href="#contenedores-agujero-negro">Contenedores de Agujero Negro</a>
+  <a href="#cerebros-celestiales">Cerebros Celestiales</a>
+  <a href="#discos-celestiales">Discos Celestiales</a>
+  <a href="#cosechadoras-celestiales">Cosechadoras Celestiales</a>
+  <a href="#armas-celestiales">Armas Celestiales</a>
+  <a href="#manipuladores-nucleo">Manipuladores de Núcleo</a>
+  <a href="#habitats-cilindricos">Hábitats Cilíndricos</a>
+  <a href="#objeto-dyson">Objeto Dyson</a>
+</div>
+<div class="nav-group">
+  <div class="nav-group-title">Megaestructuras E–R</div>
+  <a href="#array-ecopoiesis">Array de Ecopoiesis</a>
+  <a href="#ecosfera">Ecosfera</a>
+  <a href="#ecumenopolis">Ecumenópolis</a>
+  <a href="#gigafundiciones">Gigafundiciones</a>
+  <a href="#mundo-kintsugi">Mundo Kintsugi</a>
+  <a href="#especulorefractor-lunar">Especulorefractor Lunar</a>
+  <a href="#jardin-nezzarine">Jardín Nezzarine</a>
+  <a href="#defensas-planetarias">Defensas Planetarias</a>
+  <a href="#planetonave">Planetonave</a>
+  <a href="#mundo-cantera">Mundo Cantera</a>
+  <a href="#mundos-anillo">Mundos Anillo</a>
+</div>
+<div class="nav-group">
+  <div class="nav-group-title">Megaestructuras S–W</div>
+  <a href="#cinturon-centinela">Cinturón Centinela</a>
+  <a href="#array-vigilancia">Array de Vigilancia</a>
+  <a href="#astilleros">Astilleros</a>
+  <a href="#motor-estelar">Motor Estelar</a>
+  <a href="#manipuladores-estelares">Manipuladores Estelares</a>
+  <a href="#centro-terraformacion">Centro de Terraformación</a>
+  <a href="#terradevorador">Terradevorador</a>
+  <a href="#puerta-gusano">Puerta de Gusano</a>
+</div>
+
+</nav>
+<main>
+  <div class="page-header">
+    <h1>Cap. 4: Megaestructuras Alienígenas</h1>
+    <p>Ancient Wonders · Ironsworn: Starforged · Traducción al español</p>
+  </div>
+  <section id="maravillas"><div class="section-header"><h2>Maravillas Arquitectónicas <span class="tag">Ancient Wonders</span></h2></div><p class="prose">Toda civilización tiene necesidades que satisfacer para garantizar su supervivencia y longevidad: residenciales, científicas, industriales y muchas otras. Las megaestructuras son una de las formas más extremas posibles de cubrirlas.</p><p class="prose">Las megaestructuras son construcciones artificiales de gran tamaño —una sola estructura colosal o múltiples partes que trabajan en conjunto. Pueden adoptar innumerables formas: desde torres descomunales o anillos enormes hasta esferas que encapsulan estrellas o discos de escala galáctica. Son los lugares más oscuros y peligrosos de toda la galaxia para la exploración, y fuentes inagotables de aventura y tensión narrativa.</p>
+<div class="card-grid">
+  <div class="info-card"><div class="info-card-label">Sus Constructores</div><div class="info-card-text">Los precursores llevan ausentes de la galaxia un período indefinidamente largo. Su desaparición, el propósito de sus obras y la naturaleza de sus experimentos permanecen envueltos en misterio.</div></div>
+  <div class="info-card"><div class="info-card-label">Sus Custodios</div><div class="info-card-text">Constructos precursores —llamados <em>custodios</em>— siguen manteniendo estas maravillas. Gracias a sus esfuerzos, la mayoría conserva cierta operatividad pese al tiempo transcurrido.</div></div>
+  <div class="info-card"><div class="info-card-label">Sus Defensas</div><div class="info-card-text">Los custodios son sumamente territoriales en el interior. Cruzar su umbral despierta una custodia que no conoce la piedad.</div></div>
+  <div class="info-card"><div class="info-card-label">Sus Mecanismos</div><div class="info-card-text">Solo podemos inferir su propósito a partir de sus efectos sobre el entorno. Su tecnología sigue desconcertándonos.</div></div>
+</div>
+
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Escala Tecnológica de los Precursores</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-escala-tech')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-escala-tech">
+    <thead><tr><th>d100</th><th>Tipo</th><th>Megaestructuras disponibles</th></tr></thead>
+    <tbody><tr><td>01–33</td><td>Tipo 1</td><td>Solo megaestructuras de Tipo 1.</td></tr><tr><td>34–67</td><td>Tipo 2</td><td>Megaestructuras de Tipo 1 y 2.</td></tr><tr><td>68–100</td><td>Tipo 3</td><td>Megaestructuras de Tipo 1, 2 y 3.</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Prevalencia de Megaestructuras</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-prevalencia')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-prevalencia">
+    <thead><tr><th>d100</th><th>Resultado</th><th>Regla</th></tr></thead>
+    <tbody><tr><td>01–33</td><td>Raras</td><td>Al explorar un sector o sistema, pregunta al Oráculo (improbable) si hay una megaestructura.</td></tr><tr><td>34–67</td><td>Infrecuentes</td><td>Al explorar un sector o sistema, pregunta al Oráculo (50/50) si hay una megaestructura.</td></tr><tr><td>68–100</td><td>Frecuentes</td><td>Al explorar un sector o sistema, pregunta al Oráculo (probable) si hay una megaestructura.</td></tr></tbody>
+  </table>
+</div></section><section id="gigatransportadores"><div class="section-header"><h2>Gigatransportadores <span class="tag">Ancient Wonders</span></h2></div><p class="prose">Los gigatransportadores son las megaestructuras más comunes de las civilizaciones precursoras. Servían para mover carga, vehículos y personas entre la superficie y la órbita de un planeta, negando la necesidad de diseñar vehículos capaces tanto de vuelo atmosférico como espacial.</p>
+
+<div class="discovery">
+  <strong>Nivel Tecnológico e Importancia</strong>
+  Comparados con otras megaestructuras, los gigatransportadores podrían considerarse soluciones de bajo nivel tecnológico u obsoletas: ofrecen un vistazo a etapas anteriores del desarrollo tecnológico precursor. Con el avance de su ciencia, probablemente los abandonaron.
+  Su importancia va más allá del mero transporte: pueden contener vehículos, objetos, bienes y terminales de datos con información sobre el planeta asociado o la megaestructura mayor en la que residen. También pueden ser una vía de escape de un planeta u otra megaestructura si las cosas se tuercen.
+  Los mundos que albergan un gigatransportador pero no una megaestructura pueden indicar que son sede de megaciudades u otras bóvedas precursoras de gran importancia.
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Clase de Gigatransportador</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-giga-clase')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-giga-clase">
+    <thead><tr><th>d100</th><th>Tipo</th><th>Origen → Destino</th></tr></thead>
+    <tbody><tr><td>01–25</td><td>Bucle de Lanzamiento</td><td>Órbita → Órbita</td></tr><tr><td>26–50</td><td>Catapulta de Masa</td><td>Superficie → Órbita o espacio profundo</td></tr><tr><td>51–75</td><td>Anzuelo Espacial</td><td>Superficie → Órbita o espacio profundo</td></tr><tr><td>76–100</td><td>Ascensor Espacial</td><td>Órbita o superficie → Superficie u órbita</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Tamaño del Vehículo</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-giga-tamanio')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-giga-tamanio">
+    <thead><tr><th>d100</th><th>Tamaño</th></tr></thead>
+    <tbody><tr><td>01–70</td><td>Grande (tamaño vehículo)</td></tr><tr><td>71–95</td><td>Enorme (tamaño ballena)</td></tr><tr><td>96–100</td><td>Titánico (tamaño colina)</td></tr></tbody>
+  </table>
+</div>
+
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Niveles del Vehículo</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-giga-niveles')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-giga-niveles">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>01–33</td><td>Plataformas de un solo nivel</td></tr>
+      <tr><td>34–67</td><td>Plataformas de dos niveles</td></tr>
+      <tr><td>68–100</td><td>Plataformas de múltiples niveles</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Forma de la Plataforma</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-giga-forma-plat')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-giga-forma-plat">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>01–33</td><td>Plataforma individual</td></tr>
+      <tr><td>34–67</td><td>Plataforma compartimentada</td></tr>
+      <tr><td>68–100</td><td>Múltiples plataformas individuales</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Núcleo de la Plataforma</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-giga-nucleo')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-giga-nucleo">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>01–50</td><td>Hueco</td></tr>
+      <tr><td>51–100</td><td>Sólido</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Duración del Trayecto</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-giga-duracion')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-giga-duracion">
+    <thead><tr><th>Bucle</th><th>Catapulta</th><th>Anzuelo</th><th>Ascensor</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>—</td><td>01–05</td><td>01–10</td><td>—</td><td>Pocos minutos</td></tr><tr><td>—</td><td>06–15</td><td>11–30</td><td>—</td><td>Varios minutos</td></tr><tr><td>—</td><td>16–30</td><td>31–60</td><td>—</td><td>Media hora</td></tr><tr><td>—</td><td>31–50</td><td>61–85</td><td>—</td><td>Una hora</td></tr><tr><td>01–10</td><td>51–70</td><td>86–100</td><td>—</td><td>Un par de horas</td></tr><tr><td>11–25</td><td>71–90</td><td>—</td><td>01–05</td><td>Unas pocas horas</td></tr><tr><td>26–50</td><td>91–100</td><td>—</td><td>06–25</td><td>Varias horas</td></tr><tr><td>51–100</td><td>—</td><td>—</td><td>26–100</td><td>Muchas horas o días</td></tr></tbody>
+  </table>
+</div></section><section id="reglas-mega"><div class="section-header"><h2>Clase y Estado de Megaestructura </h2></div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Clase de Megaestructura</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-mega-clase')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-mega-clase">
+    <thead><tr><th>Tipo 1</th><th>Tipo 2</th><th>Tipo 3</th><th>Megaestructura</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>01–10</td><td>01–10</td><td>Megaestructura No Identificada</td></tr><tr><td>11–16</td><td>11–13</td><td>11–12</td><td>Procesador de Asteroides</td></tr><tr><td>17–23</td><td>14–16</td><td>13–14</td><td>Cosechadora de Atmósfera</td></tr><tr><td>24–29</td><td>17–19</td><td>15–16</td><td>Nodo de Defensa</td></tr><tr><td>30–35</td><td>20–22</td><td>17–18</td><td>Array de Ecopoiesis</td></tr><tr><td>36–43</td><td>23–27</td><td>19–21</td><td>Ecumenópolis</td></tr><tr><td>44–49</td><td>28–30</td><td>22–23</td><td>Astillero Ecuatorial</td></tr><tr><td>50–55</td><td>31–33</td><td>24–25</td><td>Motor Ferrotérmico</td></tr><tr><td>56–61</td><td>34–36</td><td>26–27</td><td>Estabilizador Geotérmico</td></tr><tr><td>62–70</td><td>37–42</td><td>28–31</td><td>Cilindro McKendree</td></tr><tr><td>71–76</td><td>43–45</td><td>32–33</td><td>Jardín Nezzarine</td></tr><tr><td>77–83</td><td>46–48</td><td>34–35</td><td>Mundo Cantera</td></tr><tr><td>84–85</td><td>49–50</td><td>36–37</td><td>Cinturón Centinela</td></tr><tr><td>86–93</td><td>51–55</td><td>38–40</td><td>Toro de Stanford</td></tr><tr><td>94–100</td><td>56–58</td><td>41–42</td><td>Terradevorador</td></tr><tr><td>—</td><td>59–61</td><td>43–44</td><td>Aegisfera</td></tr><tr><td>—</td><td>62–66</td><td>45–46</td><td>Anillo Bishop</td></tr><tr><td>—</td><td>67–69</td><td>47–48</td><td>Ensamblador Behemoth</td></tr><tr><td>—</td><td>70–73</td><td>49–50</td><td>Discomundo</td></tr><tr><td>—</td><td>74–76</td><td>51–52</td><td>Ecosfera</td></tr><tr><td>—</td><td>77–82</td><td>53–56</td><td>Clúster de Hábitats</td></tr><tr><td>—</td><td>83–85</td><td>57–58</td><td>Cerebro Júpiter</td></tr><tr><td>—</td><td>86–88</td><td>59–60</td><td>Mundo Kintsugi</td></tr><tr><td>—</td><td>89–91</td><td>61–62</td><td>Especulorefractor Lunar</td></tr><tr><td>—</td><td>92–94</td><td>63–64</td><td>Planetonave</td></tr><tr><td>—</td><td>95–97</td><td>65–66</td><td>Array de Vigilancia</td></tr><tr><td>—</td><td>98–100</td><td>67–68</td><td>Centro de Terraformación</td></tr><tr><td>—</td><td>—</td><td>69–70</td><td>Macrocolector de Acreción</td></tr><tr><td>—</td><td>—</td><td>71–72</td><td>Disco Alderson</td></tr><tr><td>—</td><td>—</td><td>73–74</td><td>Objeto Dyson</td></tr><tr><td>—</td><td>—</td><td>75–76</td><td>Supresor de Fusión</td></tr><tr><td>—</td><td>—</td><td>77–78</td><td>Helio-Obliterador</td></tr><tr><td>—</td><td>—</td><td>79–80</td><td>Astillero Hiperestructural</td></tr><tr><td>—</td><td>—</td><td>81–82</td><td>Silo Kugelblitz</td></tr><tr><td>—</td><td>—</td><td>83–84</td><td>Cerebro Matrioshka</td></tr><tr><td>—</td><td>—</td><td>85–86</td><td>Array Nicoll-Dyson</td></tr><tr><td>—</td><td>—</td><td>87–88</td><td>Esfera Penrose</td></tr><tr><td>—</td><td>—</td><td>89–90</td><td>Levantador Estelar</td></tr><tr><td>—</td><td>—</td><td>91–92</td><td>Compresor Estelar</td></tr><tr><td>—</td><td>—</td><td>93–94</td><td>Motor Estelar</td></tr><tr><td>—</td><td>—</td><td>95–96</td><td>Hiperfundición Estelar</td></tr><tr><td>—</td><td>—</td><td>97–98</td><td>Mundo Anillo Estelar</td></tr><tr><td>—</td><td>—</td><td>99–100</td><td>Forja de Sistema</td></tr></tbody>
+  </table>
+</div>
+<div class="discovery">
+  <strong>Nota sobre Ensamblajes</strong>
+  Algunas de estas maravillas están compuestas por muchas estructuras individuales. En esos casos, puedes tirar en esta tabla para determinar el estado de cualquier ensamblaje individual en lugar del conjunto de la megaestructura. Además, puedes Preguntar al Oráculo para determinar si la megaestructura o el ensamblaje están visiblemente dañados. Si es así, puedes interpretar el resultado del estado como consecuencia del daño.
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estado de la Megaestructura</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-mega-estado')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="status" id="tbl-mega-estado">
+    <thead><tr><th>d100</th><th>Estado</th><th>Resumen</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>Parcialmente construida</td><td>Nunca alcanzó la finalización y jamás fue operativa.</td></tr><tr><td>11–40</td><td>Operativa</td><td>Parece estar cumpliendo su propósito original según lo previsto.</td></tr><tr><td>41–55</td><td>No funcional / fuera de línea</td><td>Permanece intacta pero ha dejado de funcionar o está desconectada.</td></tr><tr><td>56–95</td><td>Disfuncional</td><td>No funciona según su propósito original.</td></tr><tr><td>96–100</td><td>Destruida</td><td>Ha quedado reducida a escombros.</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Primera Impresión Exterior de la Megaestructura</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-exterior-look')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-exterior-look">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>01–05</td><td>Defensas automáticas</td></tr><tr><td>06–11</td><td>Acceso bloqueado</td></tr><tr><td>12–17</td><td>Exterior comprometido</td></tr><tr><td>18–23</td><td>Baluarte contra asaltos</td></tr><tr><td>24–28</td><td>Arcos y chispas eléctricas</td></tr><tr><td>29–33</td><td>Encapsulada en campo de energía</td></tr><tr><td>34–38</td><td>Núcleo o conducto de energía</td></tr><tr><td>39–44</td><td>Entrada o muelle expuesto</td></tr><tr><td>45–50</td><td>Gravedad fluctuante</td></tr><tr><td>51–56</td><td>Radiación fugante</td></tr><tr><td>57–61</td><td>Múltiples estructuras adjuntas</td></tr><tr><td>62–67</td><td>Sin punto de entrada aparente</td></tr><tr><td>68–72</td><td>Objeto en órbita</td></tr><tr><td>73–78</td><td>Campo electromagnético potente</td></tr><tr><td>79–84</td><td>Señal o mensaje</td></tr><tr><td>85–89</td><td>Cantidad significativa de escombros</td></tr><tr><td>90–95</td><td>Pozo gravitacional intenso</td></tr><tr><td>96–100</td><td>Descriptor + Foco</td></tr></tbody>
+  </table>
+</div></section><section id="explorar"><div class="section-header"><h2>Explorar Megaestructuras </h2></div><p class="prose">Al emprender una expedición al interior de una megaestructura, determina primero si estás penetrando realmente en su interior. La regla general es diferenciar entre una superficie habitable y un interior no diseñado para ser habitable. Algunas maravillas tienen superficies habitables (mundos anillo, ecumenópolis, discos celestiales); otras no (esferas Dyson, cerebros celestiales).</p><p class="prose">Para explorar el interior, trátala como un <em>derelicto</em>; elige un <em>tema</em> que mejor encaje; también es fundamentalmente una <em>bóveda precursora</em>. Consulta las tablas de Arrays de Oráculos de Megaestructuras más abajo.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Primera Impresión Interior de la Megaestructura</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-interior-look')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-interior-look">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>01–03</td><td>Pasajes o corredores de conexión</td></tr><tr><td>04–06</td><td>El entorno reacciona a tu presencia</td></tr><tr><td>07–09</td><td>Pods o contenedores de carga inmensa</td></tr><tr><td>10–12</td><td>Señales de saqueo o rebusca</td></tr><tr><td>13–15</td><td>Vibraciones ondulantes penetrantes</td></tr><tr><td>16–18</td><td>Interferencias electromagnéticas</td></tr><tr><td>19–22</td><td>Zumbido o vibración persistente</td></tr><tr><td>23–26</td><td>Ecos de maquinaria lejana</td></tr><tr><td>27–29</td><td>Residuos tóxicos o atmósfera venenosa</td></tr><tr><td>30–32</td><td>Marcas ornamentadas o símbolos</td></tr><tr><td>33–35</td><td>Señales de formas de vida invasoras</td></tr><tr><td>36–39</td><td>Arcos y chispas eléctricas</td></tr><tr><td>40–42</td><td>Charcos de líquidos sintéticos</td></tr><tr><td>43–45</td><td>Infraestructura desmoronada</td></tr><tr><td>46–48</td><td>La tecnología equipada falla</td></tr><tr><td>49–52</td><td>Ruidos mecánicos intensos</td></tr><tr><td>53–56</td><td>Vapor o niebla penetrante</td></tr><tr><td>57–60</td><td>Gases o vapores fugantes</td></tr><tr><td>61–63</td><td>Frío o calor extremo</td></tr><tr><td>64–66</td><td>Iluminado o luminoso</td></tr><tr><td>67–70</td><td>Contaminación que obstruye la visión</td></tr><tr><td>71–73</td><td>Puntos calientes radiactivos</td></tr><tr><td>74–76</td><td>Estructuras reflectantes</td></tr><tr><td>77–79</td><td>Superficies conductoras</td></tr><tr><td>80–83</td><td>Densa neblina o humo</td></tr><tr><td>84–86</td><td>Superficies magnéticas</td></tr><tr><td>87–89</td><td>Interfaces crípticas</td></tr><tr><td>90–92</td><td>Constructos activos</td></tr><tr><td>93–95</td><td>Olor intenso</td></tr><tr><td>96–100</td><td>Descriptor + Foco</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Gravedad de la Megaestructura</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-mega-grav')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-mega-grav">
+    <thead><tr><th>d100</th><th>Resultado</th><th>Descripción</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>Débil</td><td>La gravedad reducida permite una gran libertad de movimiento.</td></tr><tr><td>11–35</td><td>Baja</td><td>La gravedad reducida permite una maniobrabilidad significativa.</td></tr><tr><td>36–85</td><td>Ideal</td><td>Niveles para los que los humanos evolucionaron.</td></tr><tr><td>86–100</td><td>Alta</td><td>Los humanos solo pueden sobrevivir breve tiempo sin ayudas mecánicas.</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Amenaza Acechante</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-amenaza')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-amenaza">
+    <thead><tr><th>d100</th><th>Amenaza</th><th>Al avanzar el reloj…</th><th>Al llenarse el reloj…</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>Acondicionamiento ambiental</td><td>Protocolos ambientales; reacciones corporales menores</td><td>¡Tu cuerpo sufre una afección grave!</td></tr><tr><td>11–20</td><td>Depredador perseguidor</td><td>Vislumbres de la criatura; restos de asaltos anteriores</td><td>¡La criatura ataca!</td></tr><tr><td>21–25</td><td>Inundación peligrosa</td><td>Corrientes crecientes; zonas sumergidas</td><td>¡El camino queda bajo el agua!</td></tr><tr><td>26–30</td><td>Estructura deteriorada</td><td>Crujidos lejanos; derrumbes distantes</td><td>¡El interior se desploma sobre ti!</td></tr><tr><td>31–45</td><td>Sistemas defensivos</td><td>Alarmas activas; pasajes sellados</td><td>¡Se activan las defensas automáticas!</td></tr><tr><td>46–50</td><td>Sobrecarga energética</td><td>Arcos eléctricos; zumbido creciente</td><td>¡Los sistemas eléctricos explotan!</td></tr><tr><td>51–70</td><td>Custodios en patrulla</td><td>Señales de actividad reciente; sonidos mecánicos</td><td>¡Una fuerza de custodios ataca!</td></tr><tr><td>71–85</td><td>Interior desconcertante</td><td>Distribución laberíntica; la confusión se apodera</td><td>¡La ansiedad o el pánico toman el control!</td></tr><tr><td>86–90</td><td>Incendio furioso</td><td>Calor intenso; nubes de humo espeso</td><td>¡El fuego causa destrucción!</td></tr><tr><td>91–95</td><td>Exploradores rivales</td><td>Señales de actividad reciente; voces que resuenan</td><td>¡Tus rivales hacen su jugada!</td></tr><tr><td>96–100</td><td>Caminos cambiantes</td><td>El entorno cambia; rutas se abren y cierran</td><td>¡Te pierdes!</td></tr></tbody>
+  </table>
+</div>
+
+<div class="subsection"><h3>Tablas Malditas</h3>
+<p class="prose">Las siguientes tablas se usan en lugar de las estándar cuando la megaestructura está afectada por una maldición.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Primera Impresión Exterior — Maldita</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cursed-exterior')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-cursed-exterior">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>01–10</td><td>Zonas de oscuridad antinatural y perturbadora</td></tr>
+      <tr><td>11–20</td><td>Infestación biológica</td></tr>
+      <tr><td>21–30</td><td>Cadáveres desecados o putrefactos</td></tr>
+      <tr><td>31–40</td><td>Estructuras mutadas o deformadas</td></tr>
+      <tr><td>41–50</td><td>Pulsos electromagnéticos potentes</td></tr>
+      <tr><td>51–60</td><td>Marcada por enormes desgarros o impactos</td></tr>
+      <tr><td>61–70</td><td>Cementerios de naves</td></tr>
+      <tr><td>71–80</td><td>Distorsiones temporales o de la realidad</td></tr>
+      <tr><td>81–90</td><td>Aura de colores intensamente vibrantes</td></tr>
+      <tr><td>91–100</td><td>Ondas gravitacionales vibrantes</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Primera Impresión Interior — Maldita</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cursed-interior')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-cursed-interior">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>01–07</td><td>Inquietante sensación de ser observado</td></tr>
+      <tr><td>08–14</td><td>Vislumbres de sombras en movimiento</td></tr>
+      <tr><td>15–21</td><td>Silencio o quietud abrumadores</td></tr>
+      <tr><td>22–26</td><td>Estructuras mutadas o deformadas</td></tr>
+      <tr><td>27–34</td><td>Sonidos ominosos e irrastreables</td></tr>
+      <tr><td>35–40</td><td>Superficies pegajosas y viscosas</td></tr>
+      <tr><td>41–46</td><td>Distorsiones temporales o de la realidad</td></tr>
+      <tr><td>47–53</td><td>Masas repugnantes de secreciones</td></tr>
+      <tr><td>54–60</td><td>Envuelto en niebla o bruma</td></tr>
+      <tr><td>61–67</td><td>Oscuridad impenetrable</td></tr>
+      <tr><td>68–74</td><td>Iluminación perturbadora</td></tr>
+      <tr><td>75–80</td><td>Lecturas peligrosas</td></tr>
+      <tr><td>81–87</td><td>Gravedad anormal</td></tr>
+      <tr><td>88–94</td><td>Niebla nociva</td></tr>
+      <tr><td>95–100</td><td>IA vigilante</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Amenaza Acechante — Maldita</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cursed-amenaza')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-cursed-amenaza">
+    <thead><tr><th>d100</th><th>Amenaza</th><th>Al avanzar el reloj…</th><th>Al llenarse el reloj…</th></tr></thead>
+    <tbody>
+      <tr><td>01–40</td><td>Constructor dominante</td><td>Sonidos de activación; presencia creciente de custodios</td><td>¡Aparece un constructo dominante!</td></tr>
+      <tr><td>41–45</td><td>Sectarios corrompidos</td><td>Ideogramas de mal agüero; objetos o restos rituales</td><td>¡Los sectarios hacen su jugada!</td></tr>
+      <tr><td>46–65</td><td>Aberración devastadora</td><td>Efectos secundarios menores; ligeros efectos anómalos</td><td>¡Se forma una poderosa aberración!</td></tr>
+      <tr><td>66–75</td><td>Criatura imponente</td><td>Marcas territoriales; señales o sonidos de una bestia</td><td>¡La criatura ataca!</td></tr>
+      <tr><td>76–85</td><td>Infestación orgánica</td><td>Crujidos y chillidos; nidos horripilantes</td><td>¡Una vil bandada de formas de vida ataca!</td></tr>
+      <tr><td>86–100</td><td>Entidades errantes</td><td>Ruidos espectrales; vislumbres de formas fantasmales</td><td>¡Las entidades atacan!</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="subsection"><h3>Rangos de Nivel</h3>
+<p class="prose">A medida que te adentras más profundamente en una megaestructura, el lugar se vuelve más opresivo y peligroso. El rango de nivel indica el ritmo al que marcas progreso en el registro de progreso menor.</p>
+<div class="oracle-card" style="overflow:auto;">
+  <div class="oracle-card-header"><h4>Rangos de Nivel por Escala de Megaestructura</h4></div>
+  <table class="oracle" style="min-width:500px;">
+    <thead><tr><th>Nivel</th><th>Subplanetaria</th><th>Planetaria</th><th>Estelar</th></tr></thead>
+    <tbody>
+      <tr><td>I</td><td>Problemático</td><td>Problemático</td><td>Problemático</td></tr>
+      <tr><td>II</td><td>Problemático</td><td>Problemático</td><td>Peligroso</td></tr>
+      <tr><td>III</td><td>Problemático</td><td>Problemático</td><td>Peligroso</td></tr>
+      <tr><td>IV</td><td>Problemático</td><td>Peligroso</td><td>Peligroso</td></tr>
+      <tr><td>V</td><td>Problemático</td><td>Peligroso</td><td>Formidable</td></tr>
+      <tr><td>VI</td><td>Problemático</td><td>Peligroso</td><td>Formidable</td></tr>
+      <tr><td>VII ✦ Sancta</td><td>Problemático</td><td>Peligroso</td><td>Formidable</td></tr>
+      <tr><td>VIII ✦ Sancta</td><td>Peligroso</td><td>Formidable</td><td>Formidable</td></tr>
+      <tr><td>IX ✦ Sancta</td><td>Peligroso</td><td>Formidable</td><td>Formidable</td></tr>
+      <tr><td>X ✦ Sancta</td><td>Formidable</td><td>Formidable</td><td>Formidable</td></tr>
+    </tbody>
+  </table>
+</div>
+<p class="prose" style="margin-top:.5rem;">Alcanzas el <em>sancta</em> cuando llegas al nivel 7 del registro de progreso mayor, o cuando el oráculo de Rasgo de Bóveda indica "Transición al sancta".</p>
+</div>
+
+<div class="subsection"><h3>Rango de Encuentros</h3>
+<div class="oracle-card" style="overflow:auto;">
+  <div class="oracle-card-header"><h4>Rango de Encuentros por Rango de Nivel</h4></div>
+  <table class="oracle" style="min-width:400px;">
+    <thead><tr><th>Riesgo del Encuentro</th><th>Nivel Problemático</th><th>Nivel Peligroso</th><th>Nivel Formidable</th></tr></thead>
+    <tbody>
+      <tr><td>Bajo</td><td>Encuentro Problemático</td><td>Encuentro Peligroso</td><td>Encuentro Formidable</td></tr>
+      <tr><td>Medio</td><td>Encuentro Peligroso</td><td>Encuentro Formidable</td><td>Encuentro Extremo</td></tr>
+      <tr><td>Alto</td><td>Encuentro Formidable</td><td>Encuentro Extremo</td><td>Encuentro Épico</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<div class="subsection"><h3>Zonas de Derelicto (Megaestructura)</h3>
+<p class="prose">Al ser instruido para tirar por la zona de derelicto de una megaestructura, usa esta tabla como extensión de la tabla de Zonas de Derelicto del Manual de Referencia (p.82).</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Zona de Derelicto de la Megaestructura</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-zona-derelicto')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-zona-derelicto">
+    <thead><tr><th>d100</th><th>Zona</th></tr></thead>
+    <tbody>
+      <tr><td>—</td><td>&gt;Acceso</td></tr>
+      <tr><td>—</td><td>&gt;Comunidad</td></tr>
+      <tr><td>01–35</td><td>&gt;Ingeniería</td></tr>
+      <tr><td>36–40</td><td>&gt;Residencial</td></tr>
+      <tr><td>41–45</td><td>&gt;Médico</td></tr>
+      <tr><td>46–65</td><td>&gt;Operaciones</td></tr>
+      <tr><td>66–90</td><td>&gt;Producción</td></tr>
+      <tr><td>91–100</td><td>&gt;Investigación</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="subsection"><h3>Arrays de Oráculos de Megaestructuras</h3>
+<div class="card-grid" style="grid-template-columns:1fr 1fr 1fr;">
+  <div class="info-card"><div class="info-card-label">Explorar</div><div class="info-card-text">
+    1 → Rasgo del Tema (GR, p.100)<br>
+    2–4 → Rasgo del Derelicto (GR, p.82)<br>
+    5–6 → Rasgo de la Bóveda (GR, p.92)
+  </div></div>
+  <div class="info-card"><div class="info-card-label">Problemas</div><div class="info-card-text">
+    1 → Paga el Precio (GR, p.25)<br>
+    2 → Peligro del Tema (GR, p.100)<br>
+    3 → Peligro del Derelicto (GR, p.82)<br>
+    4 → Peligro de la Bóveda (GR, p.92)<br>
+    5 → Amenaza Acechante<br>
+    6 → Complicación (GR, p.110)
+  </div></div>
+  <div class="info-card"><div class="info-card-label">Oportunidades</div><div class="info-card-text">
+    1–2 → Oportunidad del Tema (GR, p.100)<br>
+    3–4 → Oportunidad del Derelicto (GR, p.82)<br>
+    5–6 → Oportunidad de la Bóveda (GR, p.92)
+  </div></div>
+</div></div></section><section id="no-identificada"><div class="section-header"><h2>Megaestructura No Identificada <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Tipo 1, 2 o 3</div><p class="prose">Muchas megaestructuras permanecen envueltas en misterio. Descubrir el propósito de una significa potencialmente obtener un mayor conocimiento de las civilizaciones precursoras y entender por qué las facciones actuales podrían combatir por controlar ese poder alienígena.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Escala de la Megaestructura No Identificada</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-noident-escala')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-noident-escala">
+    <thead><tr><th>Tipo 1</th><th>Tipo 2</th><th>Tipo 3</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>01–60</td><td>01–10</td><td>—</td><td>Subplanetaria</td></tr><tr><td>61–100</td><td>11–100</td><td>—</td><td>Planetaria</td></tr><tr><td>—</td><td>—</td><td>01–80</td><td>Estelar</td></tr><tr><td>—</td><td>—</td><td>81–100</td><td>De sistema</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Tipo de Megaestructura No Identificada</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-noident-tipo')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-noident-tipo">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>01–75</td><td>Unidad única</td></tr>
+      <tr><td>76–100</td><td>Compuesta de varias unidades</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Forma de la Megaestructura</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-noident-forma')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-noident-forma">
+    <thead><tr><th>d100</th><th>Forma</th></tr></thead>
+    <tbody><tr><td>01–15</td><td>Práctica o funcional</td></tr><tr><td>16–20</td><td>Geométrica (forma compleja)</td></tr><tr><td>21–25</td><td>Geométrica (cubo)</td></tr><tr><td>26–30</td><td>Geométrica (obelisco)</td></tr><tr><td>31–35</td><td>Geométrica (pirámide)</td></tr><tr><td>36–40</td><td>Geométrica (anillo o toro)</td></tr><tr><td>41–45</td><td>Geométrica (esfera)</td></tr><tr><td>46–55</td><td>Orgánica o curva</td></tr><tr><td>56–60</td><td>Plataforma o disco</td></tr><tr><td>61–65</td><td>Agujas o torres</td></tr><tr><td>66–68</td><td>Abovedada</td></tr><tr><td>69–73</td><td>Con picos</td></tr><tr><td>74–76</td><td>Escultural o efigie</td></tr><tr><td>77–79</td><td>Amorfa</td></tr><tr><td>80–85</td><td>Transformándose</td></tr><tr><td>86–100</td><td>Tirar dos veces</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Propósito de la Megaestructura</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-noident-proposito')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-noident-proposito">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>01–07</td><td>Archivo de conocimiento inestimable</td></tr><tr><td>08–14</td><td>Canal hacia poderes místicos</td></tr><tr><td>15–21</td><td>Contenedor de un ser que desafía la realidad</td></tr><tr><td>22–28</td><td>Almacén de armas</td></tr><tr><td>29–35</td><td>Prisión de seres o individuos</td></tr><tr><td>36–42</td><td>Enterramiento de los muertos</td></tr><tr><td>43–49</td><td>Manipulación del espacio-tiempo</td></tr><tr><td>50–56</td><td>Preservación de una inteligencia ancestral</td></tr><tr><td>57–63</td><td>Protección de tecnología o artefactos preciosos</td></tr><tr><td>64–70</td><td>Control remoto de otros seres</td></tr><tr><td>71–77</td><td>Salvaguarda de reliquias o tesoros</td></tr><tr><td>78–84</td><td>Estudio de realidades desconocidas</td></tr><tr><td>85–95</td><td>Acción + Tema</td></tr><tr><td>96–100</td><td>Tirar dos veces</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Material de la Megaestructura</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-noident-material')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-noident-material">
+    <thead><tr><th>d100</th><th>Material</th></tr></thead>
+    <tbody>
+      <tr><td>01–40</td><td>&gt;Tipo de Metal</td></tr>
+      <tr><td>41–65</td><td>&gt;Tipo de Cerámica</td></tr>
+      <tr><td>66–75</td><td>&gt;Tipo de Cristal</td></tr>
+      <tr><td>76–80</td><td>&gt;Materia Orgánica Animal</td></tr>
+      <tr><td>81–85</td><td>Tipo vegetal</td></tr>
+      <tr><td>86–87</td><td>Energía</td></tr>
+      <tr><td>88–90</td><td>Líquido</td></tr>
+      <tr><td>91–100</td><td>Tirar dos veces</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card" style="overflow:auto;">
+  <div class="oracle-card-header">
+    <h4>Tipo de Cerámica</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-noident-ceramica')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-noident-ceramica" style="min-width:480px;">
+    <thead><tr><th>d100</th><th>No preciosa (01–50)</th><th>Semipreciosa (51–85)</th><th>Preciosa (86–100)</th></tr></thead>
+    <tbody>
+      <tr><td>01–07</td><td>Porcelana de bizcocho</td><td>Biovidrio</td><td>Vidrio balístico</td></tr>
+      <tr><td>08–14</td><td>Porcelana de bizcocho</td><td>Vidrio borosilicato</td><td>Vidrio balístico</td></tr>
+      <tr><td>15–21</td><td>Clínker o cemento</td><td>Loza crema</td><td>Arcilla negra</td></tr>
+      <tr><td>22–28</td><td>Clínker o cemento</td><td>Esmaltado</td><td>Arcilla negra</td></tr>
+      <tr><td>29–35</td><td>Terracota</td><td>Terracota vidriada</td><td>Porcelana de hueso</td></tr>
+      <tr><td>36–42</td><td>Terracota</td><td>Porcelana dura</td><td>Porcelana de hueso</td></tr>
+      <tr><td>43–49</td><td>Vidrio flotado</td><td>Vidrio lacado</td><td>Faïence</td></tr>
+      <tr><td>50–56</td><td>Vidrio flotado</td><td>Vidrio laminado</td><td>Faïence</td></tr>
+      <tr><td>57–64</td><td>Raku</td><td>Gres porcelánico</td><td>Vitrocerámica</td></tr>
+      <tr><td>65–71</td><td>Raku</td><td>Raku ahumado</td><td>Vitrocerámica</td></tr>
+      <tr><td>72–78</td><td>Vidrio soda-cal</td><td>Porcelana blanda</td><td>Cerámica con lustre</td></tr>
+      <tr><td>79–85</td><td>Vidrio soda-cal</td><td>Vidrio templado</td><td>Mayólica</td></tr>
+      <tr><td>76–92</td><td>Gres</td><td>Clínker blanco</td><td>Obvara</td></tr>
+      <tr><td>93–100</td><td>Gres</td><td>Loza amarilla</td><td>Obvara</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="quest"><strong>Misión del Oráculo</strong>Han comenzado a circular rumores sobre el descubrimiento de un nuevo tipo de megaestructura. Un >Gremio, advirtiendo que su sector está infestado de una >Criatura, encarga a exploradores localizar el lugar, aprender su propósito y regresar con ese conocimiento. Muchos han aceptado la tarea, pero solo el primero en regresar será recompensado. ¿Por qué este gremio tiene interés en esa información? ¿Cómo planeas ser el primer explorador en regresar?</div></section><section id="procesador-asteroides"><div class="section-header"><h2>Procesador de Asteroides <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">Los procesadores de asteroides navegan por cinturones y campos de asteroides, identifican los cuerpos más ricos en recursos, despliegan flotas de plataformas cosechadoras y transforman los materiales extraídos en materiales utilizables. Aventurarse cerca puede ser sumamente arriesgado: circulan relatos de exploradores que fueron cosechados por la propia estructura.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Tipo de Campo de Asteroides</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-proc-campo')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-proc-campo">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>01–50</td><td>Asteroides minerales</td></tr><tr><td>51–80</td><td>Asteroides helados</td></tr><tr><td>81–100</td><td>Asteroides cristalinos</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Escala de las Plataformas Cosechadoras</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-proc-plat')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-proc-plat">
+    <thead><tr><th>d100</th><th>Escala</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>Enorme (tamaño ballena)</td></tr><tr><td>11–30</td><td>Titánica (tamaño colina)</td></tr><tr><td>31–100</td><td>Colosal (tamaño montaña)</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong<div class="discovery">
+  <strong>Métodos de Cosecha</strong>
+  Mientras que muchos procesadores y plataformas están equipados con una variada gama de herramientas —flotas de constructos mineros, potentes láseres y haces gravitacionales—, otros emplean métodos menos refinados que desgarran, vuelan en pedazos o engullen asteroides enteros. Aunque el proceso varía de una estructura a otra, los resultados son igualmente eficaces.
+</div>
+>Un >Asentamiento se muestra cada vez más preocupado por un procesador de asteroides cercano que no solo despoja el sistema de los recursos de los que depende, sino que también ha destruido una >Nave Estelar de gran valor para su pueblo, además de >Acción + Tema. Desean evitar más calamidades. ¿Cómo planeas ayudarles? ¿Qué obstáculos prevés?</div></section><section id="cosechadora-atmosfera"><div class="section-header"><h2>Cosechadora de Atmósfera <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">Estas megaestructuras se ciernen entre las nubes de los gigantes gaseosos, extrayendo gases a una velocidad increíble. Si se les da suficiente tiempo, se cree que podrían agotar por completo la atmósfera de un mundo.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estado de la Cosechadora de Atmósfera</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cosech-estado')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="status" id="tbl-cosech-estado">
+    <thead><tr><th>d100</th><th>Estado</th><th>Efecto</th></tr></thead>
+    <tbody><tr><td>01–15</td><td>Parcialmente construida</td><td>El esqueleto flota entre las nubes, a la espera de completarse. El planeta anfitrión es un mundo joviano.</td></tr><tr><td>16–50</td><td>Operativa</td><td>Una enorme columna de gases es claramente visible en el mundo joviano anfitrión. La columna se agita violentamente mientras es absorbida.</td></tr><tr><td>51–85</td><td>No funcional / fuera de línea</td><td>Pregunta al Oráculo (50/50) si ha vaciado por completo la atmósfera. Si sí: solo queda el núcleo sólido, sin atmósfera ni fenómenos meteorológicos. Si no: está inquietantemente inmóvil entre las nubes.</td></tr><tr><td>86–95</td><td>Disfuncional</td><td>Extrae gases tan rápido que ha generado una supertormenta gigantesca con la megaestructura en su epicentro. El mundo tiene esta característica permanente.</td></tr><tr><td>96–100</td><td>Destruida</td><td>Los restos flotan silenciosos, ocultos entre las nubes. El planeta es un mundo joviano.</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Una >Facción recluta a un explorador para buscar a un equipo de >Rol de Personaje enviado a la cosechadora. El equipo enmudecio poco después de anunciar su llegada. Aunque la facción describe la misión como rutinaria, su urgencia sugiere que el equipo puede haber descubierto algo inesperado. ¿Qué esperaba lograr realmente la facción? ¿Por qué el equipo no ha respondido?</div></section><section id="contenedores-agujero-negro"><div class="section-header"><h2>Contenedores de Agujero Negro <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructuras Tipo 3</div><p class="prose">El descubrimiento de los primeros contenedores de agujero negro conmocionó a la comunidad científica: los precursores no solo podían aprovechar el potencial destructivo de un agujero negro, sino también crear uno.</p><div class="subsection"><h3>Silo Kugelblitz</h3><p class="prose">Actúa como una batería en el sentido más inconvencional: su agujero negro central se formó a partir de energía pura (no materia), permitiendo almacenar una cantidad casi infinita de energía en su horizonte de sucesos.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Anomalía del Silo Kugelblitz</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-kugel-anom')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-kugel-anom">
+    <thead><tr><th>d100</th><th>Efecto Anómalo</th></tr></thead>
+    <tbody><tr><td>01–20</td><td>Ondas gravitacionales destructivas</td></tr><tr><td>21–50</td><td>Pulsos electromagnéticos</td></tr><tr><td>51–70</td><td>Entidades errantes</td></tr><tr><td>71–80</td><td>Distorsiones espacio-temporales</td></tr><tr><td>81–100</td><td>Deformaciones antinaturales</td></tr></tbody>
+  </table>
+</div></div><div class="subsection"><h3>Esfera Penrose</h3><p class="prose">La esfera Penrose puede suministrar energía suficiente para sobrevivir a la muerte de todas las estrellas. La única salvedad: es simultáneamente la mayor bomba jamás concebida. Su detonación destruiría todo en un sistema solar.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estado de la Bomba Penrose</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-penrose-estado')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="status" id="tbl-penrose-estado">
+    <thead><tr><th>d100</th><th>Estado</th><th>Resumen</th></tr></thead>
+    <tbody><tr><td>01–15</td><td>Inactiva</td><td>El mecanismo de la bomba está fuera de línea.</td></tr><tr><td>16–50</td><td>Operativa (estable)</td><td>Puede ser activada u operada por cualquiera que entienda su mecanismo.</td></tr><tr><td>51–85</td><td>Operativa (inestable)</td><td>Funciona pero podría detonar inesperadamente.</td></tr><tr><td>86–95</td><td>Dañada</td><td>Tiene un fallo estructural.</td></tr><tr><td>99–100</td><td>Explosión inminente</td><td>La explosión es inevitable. Establece un reloj de tensión de 10 segmentos.</td></tr></tbody>
+  </table>
+</div></div><div class="quest"><strong>Misión del Oráculo</strong>Tras el descubrimiento de un contenedor de agujero negro, múltiples >Facciones han enviado colonos para establecer >Asentamientos. Las tensiones han escalado porque sus razones para migrar difieren, llevando a cada comunidad a >Acción + Tema. ¿Por qué cada facción desea colonizar el sector? ¿Cómo evitarás que las tensiones escalen?</div></section><section id="cerebros-celestiales"><div class="section-header"><h2>Cerebros Celestiales <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Cerebro Júpiter — Tipo 2 &nbsp;·&nbsp; Cerebro Matrioshka — Tipo 3</div><p class="prose">Los cerebros celestiales son máquinas procesadoras de datos de un tamaño extraordinario. Los <em>cerebros Matrioshka</em> envuelven por completo una estrella; los <em>cerebros Júpiter</em> son tan grandes como planetas. Algunos especulan que podían simular universos enteros o preservar la consciencia de las civilizaciones precursoras.</p>
+
+<div class="subsection"><h3>Hacer Preguntas al Cerebro</h3>
+<p class="prose">Las siguientes consideraciones guían los límites narrativos al hacer preguntas a un cerebro:</p>
+<div class="card-grid">
+  <div class="info-card"><div class="info-card-label">1. Alcance local (Júpiter)</div><div class="info-card-text">Los cerebros Júpiter tienen menos capacidad computacional disponible que los Matrioshka. Solo pueden responder preguntas relativas al sector o sistema solar en el que existen. Su perspectiva es local: profunda pero estrecha.</div></div>
+  <div class="info-card"><div class="info-card-label">2. Respuestas precisas</div><div class="info-card-text">Un ordenador siempre dará respuestas correctas y sin errores. Sin embargo, si el cerebro está dañado, disfuncional o solo parcialmente construido, estas respuestas pueden descubrirse como no del todo precisas más adelante en la campaña. Esta incertidumbre puede servir como gancho narrativo.</div></div>
+  <div class="info-card"><div class="info-card-label">3. Respuestas crípticas</div><div class="info-card-text">Algunas respuestas pueden no tener sentido inmediato dado lo que sabes en ese momento. Toma nota de la información descubierta e impleméntala en la narrativa en el momento adecuado. Las respuestas crípticas pueden presagiar revelaciones futuras.</div></div>
+  <div class="info-card"><div class="info-card-label">4. Disposición limitada</div><div class="info-card-text">La disposición del ordenador a responder es limitada. Tras la primera pregunta, pregunta al Oráculo (50/50) si responde a las siguientes. Si no, puede que el cerebro sea consciente y su voluntad le impida contestar, o que algún componente necesite recargarse. ¿Qué harás para determinar la causa?</div></div>
+</div>
+<p class="prose" style="margin-top:.6rem;"><strong>Formatos de Pregunta:</strong> Quién → &gt;Personaje / &gt;Facción &nbsp;·&nbsp; Qué → &gt;Acción + Tema / &gt;Descriptor + Foco &nbsp;·&nbsp; Dónde → &gt;Región + Nombre de Sector &nbsp;·&nbsp; Cuándo → &gt;Cuándo &nbsp;·&nbsp; Cómo/Por qué → &gt;Acción + Tema / &gt;Acción + Foco</p>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Nivel de Consciencia del Cerebro</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cerebro-consciencia')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-cerebro-consciencia">
+    <thead><tr><th>Matrioshka</th><th>Júpiter</th><th>Consciencia</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>01–20</td><td>No consciente</td></tr><tr><td>11–65</td><td>21–70</td><td>Autoconsciente</td></tr><tr><td>66–100</td><td>71–100</td><td>Verdaderamente consciente</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Región (respuesta del cerebro)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cerebro-region')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-cerebro-region">
+    <thead><tr><th>d100</th><th>Región</th><th>Descripción</th></tr></thead>
+    <tbody><tr><td>01–55</td><td>Terminus</td><td>Territorios interiores, mayormente poblados</td></tr><tr><td>56–90</td><td>Fronteras</td><td>Territorios exteriores, mayormente sin cartografiar</td></tr><tr><td>91–100</td><td>Expansión</td><td>Territorios inexplorados</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Cuándo (respuesta del cerebro)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cerebro-cuando')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-cerebro-cuando">
+    <thead><tr><th>Continuidad Det.</th><th>Continuidad Indet.</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>01–08</td><td>01–02</td><td>Nunca</td></tr><tr><td>09–20</td><td>03–07</td><td>Pasado lejano</td></tr><tr><td>21–34</td><td>08–14</td><td>Hace años</td></tr><tr><td>35–50</td><td>15–22</td><td>Hace meses</td></tr><tr><td>51–66</td><td>23–32</td><td>Hace semanas</td></tr><tr><td>67–80</td><td>33–47</td><td>Hace días</td></tr><tr><td>81–92</td><td>48–50</td><td>Hace horas</td></tr><tr><td>93–100</td><td>51–52</td><td>Ahora mismo</td></tr><tr><td>—</td><td>53–55</td><td>En unas horas</td></tr><tr><td>—</td><td>56–70</td><td>En unos días</td></tr><tr><td>—</td><td>71–80</td><td>En unas semanas</td></tr><tr><td>—</td><td>81–88</td><td>En unos meses</td></tr><tr><td>—</td><td>89–95</td><td>En unos años</td></tr><tr><td>—</td><td>96–100</td><td>En un futuro lejano</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Gracias a un reciente estudio xenoarqueológico de un >Descriptor + Foco, los estudiosos han averiguado que el hallazgo era parte integral de un Cerebro Júpiter en un sistema solar distante. Tras este descubrimiento, una peligrosa >Facción declarada recientemente rebelde busca apoderarse del fragmento. ¿Qué espera lograr? ¿Cómo impedirás que sus ambiciones remodelen el equilibrio de los astros?</div></section><section id="discos-celestiales"><div class="section-header"><h2>Discos Celestiales <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Discomundo — Tipo 1 &nbsp;·&nbsp; Disco Alderson — Tipo 3</div><p class="prose">Enormes platillos de varios kilómetros de grosor diseñados para simular entornos naturales. Los <em>discomundos</em> son de escala planetaria; los <em>discos Alderson</em> cubren la totalidad de un sistema solar y son la mayor megaestructura jamás descubierta por la humanidad.</p><p class="prose">El disco Alderson se construye con cinco anillos de seis segmentos (treinta secciones). Al viajar a un segmento por primera vez, tira >Clase Planetaria, rerolleando: Mundo Químico, Cristalino, de Forja, Joviano, Metálico, Kárstico, Fragmentado y Anclado por Mareas.</p><div class="quest"><strong>Misión del Oráculo</strong
+<div class="discovery">
+  <strong>Discomundo — Ciclo Diurno</strong>
+  Pregunta al Oráculo (probabilidad pequeña) si el discomundo tiene un ciclo diurno.
+  <ul style="margin:.4rem 0 0 1rem;font-size:.88rem;line-height:1.6;">
+    <li><strong>Si sí:</strong> El discomundo está rodeado por enormes motores que lo rotan periódicamente, permitiendo que ambas caras reciban luz de la estrella.</li>
+    <li><strong>Si no:</strong> El discomundo gira alrededor de la estrella en una posición horizontal fija, lo que hace que su superficie exista en un crepúsculo perpetuo.</li>
+  </ul>
+</div>
+
+
+<div class="discovery">
+  <strong>Disco Alderson — Ciclo Diurno</strong>
+  Pregunta al Oráculo si el disco Alderson tiene un ciclo diurno.
+  <ul style="margin:.4rem 0 0 1rem;font-size:.88rem;line-height:1.6;">
+    <li><strong>Si sí:</strong> El objeto estelar utiliza motores estelares (p.154) que se desplazan hacia arriba y hacia abajo en el centro del disco Alderson, creando el día y la noche.</li>
+    <li><strong>Si no:</strong> El objeto estelar permanece en una posición fija, lo que hace que la superficie del disco exista en un crepúsculo perpetuo.</li>
+  </ul>
+</div>
+<div class="discovery">
+  <strong>Bordes y Atmósfera del Disco Alderson</strong>
+  En los bordes interior y exterior de todos los discos Alderson se alzan paredes de cientos de kilómetros de altura, cuyo propósito presumible es contener la atmósfera del disco.
+  Pregunta al Oráculo (50/50) si las secciones del disco Alderson están sólidamente separadas entre sí por sus bordes interiores:
+  <ul style="margin:.4rem 0 0 1rem;font-size:.88rem;line-height:1.6;">
+    <li><strong>Si sí:</strong> Inmensas paredes segregan las atmósferas. Determina cada una tirando en el oráculo de Atmósfera de la clase planetaria del segmento (rerolleando el resultado "Ninguna / tenue").</li>
+    <li><strong>Si no:</strong> Los entornos de los segmentos transicionan de forma natural entre sí. Usa el oráculo de Atmósfera del Mundo Vital y mantén ese resultado en todos los segmentos de la megaestructura.</li>
+  </ul>
+  <strong style="display:block;margin-top:.5rem;">Fuerza Gravitacional del Disco Alderson:</strong> Debido a la severa atracción gravitacional de la megaestructura, cualquier objeto sin capacidad de propulsión propia será atraído rápidamente hacia el disco y potencialmente destruido.
+</div>
+>Una pequeña coalición de >Facciones ha solicitado a un explorador experimentado recopilar datos sobre un disco, pero todos los intentos previos han sido frustrados por un >Grupo Marginal previamente desconocido cuyos métodos se vuelven cada vez más agresivos. ¿Por qué el grupo impide la recopilación de información? ¿Cómo planeas investigar una superficie tan vasta donde el secretismo y el peligro se entrelazan?</div></section><section id="cosechadoras-celestiales"><div class="section-header"><h2>Cosechadoras Celestiales <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructuras Tipo 3</div><p class="prose">Estructuras capaces de extraer recursos de objetos estelares. Existen dos tipos: los <em>levantadores estelares</em>, que cosechan estrellas, y los <em>macrocolectores de acreción</em>, que recogen energía y recursos de agujeros negros.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Peligro Estelar del Levantador Estelar</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-levant-peligro')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-levant-peligro">
+    <thead><tr><th>d100</th><th>Peligro</th></tr></thead>
+    <tbody><tr><td>01–20</td><td>Destellos de luz cegadores</td></tr><tr><td>21–40</td><td>Llamaradas solares gigantescas</td></tr><tr><td>41–60</td><td>Potentes ondas gravitacionales</td></tr><tr><td>61–75</td><td>Tormentas de energía turbulentas</td></tr><tr><td>76–85</td><td>Lluvia de meteoritos sobrecalentados</td></tr><tr><td>86–95</td><td>Haces de radiación ionizante</td></tr><tr><td>96–100</td><td>Gritos antinaturales</td></tr></tbody>
+  </table>
+</div><p class="prose">Al estar en un sector con un levantador estelar operativo o disfuncional, establece un reloj de tensión de 10 segmentos. Al llenarse, el levantador ha extraído suficiente masa estelar como para crear un peligro temporal de escala sistémica.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Propiedades Exóticas de Materiales (Macrocolector de Acreción)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-acrecion-elem')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-acrecion-elem">
+    <thead><tr><th>d100</th><th>Propiedad</th></tr></thead>
+    <tbody><tr><td>01–05</td><td>Biológico</td></tr><tr><td>06–10</td><td>Sangrante</td></tr><tr><td>11–15</td><td>Contaminado</td></tr><tr><td>16–20</td><td>Parpadeante</td></tr><tr><td>21–25</td><td>Cargante</td></tr><tr><td>26–30</td><td>Emisivo</td></tr><tr><td>31–35</td><td>Ligero como una pluma</td></tr><tr><td>36–40</td><td>Ígneo</td></tr><tr><td>41–45</td><td>Fortalecido</td></tr><tr><td>46–50</td><td>Frágil</td></tr><tr><td>51–55</td><td>Gélido</td></tr><tr><td>56–60</td><td>Vivo</td></tr><tr><td>61–65</td><td>Exuberante</td></tr><tr><td>66–70</td><td>Moviéndose</td></tr><tr><td>71–75</td><td>Cambiante</td></tr><tr><td>76–80</td><td>Envuelto en niebla</td></tr><tr><td>81–85</td><td>Tormentoso</td></tr><tr><td>86–90</td><td>Estratificado</td></tr><tr><td>91–95</td><td>Translúcido</td></tr><tr><td>96–100</td><td>Inestable</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Tras el descubrimiento de una cosechadora celestial destruida, una >Facción busca exploradores para entrar en la megaestructura en busca de >Descriptor + Foco. Urgen cautela y premura: los restos se aproximan al objeto estelar del sistema, y la facción sospecha que una poderosa >Anomalía (entidad) reside allí. ¿Qué te envía a encontrar la facción? ¿Qué les llevó a creer que había una entidad a bordo?</div></section><section id="armas-celestiales"><div class="section-header"><h2>Armas Celestiales <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructuras Tipo 3</div><p class="prose">Redes gigantescas de anillos bañados en calor y luz que rodean estrechamente su estrella anfitriona: armas construidas para devastar planetas o sistemas solares enteros con un solo disparo. Existen dos tipos: los <em>arrays Nicoll-Dyson</em> (anillos Dyson independientes) y los <em>helio-obliteradores</em> (anillos que forman una esfera incompleta).</p><div class="discovery">
+  <strong>El Mayor Crimen</strong>
+  En general, se entiende que desplegar una de estas armas contra seres humanos constituiría el crimen más atroz jamás cometido. Estas estructuras han inspirado tal asombro y terror en quienes las contemplan que resulta aterrador imaginar qué tipo de enemigo habría justificado su construcción.
+</div>
+<p class="prose">El <strong>array Nicoll-Dyson</strong> puede erradicar cualquier objetivo de escala planetaria. El <strong>helio-obliterador</strong> puede aniquilar cualquier objetivo de escala estelar. Al activarse, conjura una tormenta abrasadora de energía en cuyo núcleo se forma un agujero de gusano que abre un camino directo hacia el objetivo elegido: el rayo surca el agujero de gusano e impacta instantáneamente. Cuando se dirige hacia una estrella, provoca una supernova. En su estela, el espacio queda retorcido y cicatrizado, con tormentas de radiación que pueden asolar el sistema durante milenios.</p><div class="quest"><strong>Misión del Oráculo</strong>Tras el descubrimiento de un arma celestial, las tensiones entre dos >Dominios en guerra fría se han intensificado. Cada uno declara que no tiene interés en usar la megaestructura para >Acción + Tema. Se ha descubierto que un cisma dentro de uno de los dominios ha dado lugar a un nuevo >Grupo Marginal que te contacta específicamente. ¿Qué causó el cisma? ¿Por qué el grupo se puso en contacto contigo?</div></section><section id="manipuladores-nucleo"><div class="section-header"><h2>Manipuladores de Núcleo <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructuras Tipo 1</div><p class="prose">Alterar el núcleo de un planeta es normalmente un proceso que lleva milenios. Los precursores podían hacerlo sin tanto tiempo. Existen dos tipos: los <em>motores ferrotérmicos</em> (calientan el núcleo) y los <em>estabilizadores geotérmicos</em> (equilibran el núcleo y preservan su estabilidad).</p><div class="subsection"><h3>Motor Ferrotérmico</h3><p class="prose">Sin núcleo activo no hay campo magnético, y los vientos solares bombardean la superficie hasta arrastrar la atmósfera. Los motores ferrotérmicos permitieron a los precursores reactivar corazones moribundos.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estado del Motor Ferrotérmico</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-ferro-estado')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="status" id="tbl-ferro-estado">
+    <thead><tr><th>d100</th><th>Estado</th><th>Efecto</th></tr></thead>
+    <tbody><tr><td>01–15</td><td>Parcialmente construido</td><td>Mundo rocoso (sin atmósfera, bioma: yermo). Sin campo magnético; superficie altamente irradiada.</td></tr><tr><td>16–50</td><td>Operativo</td><td>Al tirar >Planeta, rerollea Anómalo, Forja, Joviano, Rocoso y Fragmentado. El mundo debe tener al menos atmósfera tenue.</td></tr><tr><td>51–85</td><td>No funcional / fuera de línea</td><td>Como operativo. El núcleo empieza a enfriarse; campo magnético reducido; el mundo está levemente irradiado.</td></tr><tr><td>86–95</td><td>Disfuncional</td><td>Como fuera de línea, pero agujeros en el campo magnético generan zonas altamente irradiadas y terremotos potentes.</td></tr><tr><td>96–100</td><td>Destruido</td><td>Mundo rocoso (sin atmósfera, bioma: yermo). Campo magnético disipado; radiación solar directa.</td></tr></tbody>
+  </table>
+</div></div><div class="subsection"><h3>Estabilizador Geotérmico</h3>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estado del Estabilizador Geotérmico</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-geot-estado')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="status" id="tbl-geot-estado">
+    <thead><tr><th>d100</th><th>Estado</th><th>Efecto</th></tr></thead>
+    <tbody><tr><td>01–15</td><td>Parcialmente construido</td><td>El planeta es un mundo de forja (bioma único: volcánico).</td></tr><tr><td>16–50</td><td>Operativo</td><td>Al tirar >Planeta, rerollea Anómalo, Forja, Joviano y Fragmentado. Sin volcanes, terremotos ni perturbaciones magnéticas.</td></tr><tr><td>51–85</td><td>No funcional / fuera de línea</td><td>El planeta es un mundo de forja. Activar el estabilizador cesa toda actividad volcánica y terremotos rápidamente.</td></tr><tr><td>86–95</td><td>Disfuncional</td><td>Como fuera de línea, más: campo magnético errático, erupciones volcánicas potentes, terremotos catastróficos.</td></tr><tr><td>96–100</td><td>Destruido</td><td>El núcleo queda desestabilizado violentamente. El planeta es un mundo fragmentado.</td></tr></tbody>
+  </table>
+</div></div><div class="quest"><strong>Misión del Oráculo</strong>Una >Facción informa de que el sector está siendo aterrorizado por una especie invasora de >Criatura y ha determinado que sus nidos se encuentran en un >Planeta con un estabilizador geotérmico operativo. Solicitan ayuda para destruir la megaestructura. ¿Cómo intentarás destruirla? ¿Cuáles serían las posibles consecuencias?</div></section><section id="habitats-cilindricos"><div class="section-header"><h2>Hábitats Cilíndricos <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Cilindro McKendree — Tipo 1 &nbsp;·&nbsp; Clúster de Hábitats — Tipo 2 o 3</div><p class="prose">Los hábitats cilíndricos son estaciones colosales construidas para albergar a grandes cantidades de habitantes, y el tipo más común de residencia espacial precursora. Se presentan como <em>cilindros McKendree</em> (solos, orbitando mundos o en espacio profundo) y como <em>cilindros O'Neill</em> agrupados en arrays geométricos llamados <em>clústeres de hábitats</em>.</p>
+
+
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Ciclo Diurno del Cilindro McKendree</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-mckendree-diurno')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-mckendree-diurno">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>01–75</td><td>Ventanas que abarcan toda la estructura</td></tr>
+      <tr><td>76–95</td><td>Luces integradas en la superficie interior</td></tr>
+      <tr><td>96–100</td><td>Luces suspendidas en el eje central</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="discovery">
+  <strong>Cilindro O'Neill y Nudillos (Knuckles)</strong>
+  Los <em>cilindros O'Neill</em> son versiones reducidas de los cilindros McKendree, modestos en tamaño y enfocados en las necesidades residenciales. Por ello son mucho más fáciles de conquistar para la humanidad. Nunca se encuentran solos: siempre están agrupados formando <em>clústeres de hábitats</em>.
+  Los extremos de los cilindros se unen a otros mediante articulaciones llamadas <em>nudillos</em>. Dado que los nudillos no rotan, son zonas de gravedad cero y permiten el transporte entre estaciones sin necesidad de naves espaciales.
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Forma del Array del Clúster de Hábitats</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cluster-forma')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-cluster-forma">
+    <thead><tr><th>d100</th><th>Forma</th><th>Descripción</th></tr></thead>
+    <tbody><tr><td>01–30</td><td>Nudillera</td><td>Estrella de seis puntas compuesta por seis cilindros</td></tr><tr><td>31–60</td><td>Pirámide</td><td>Tetraedro compuesto por seis cilindros</td></tr><tr><td>61–85</td><td>Cubo</td><td>Hexaedro compuesto por doce cilindros</td></tr><tr><td>86–95</td><td>Mundo Escalera</td><td>Anillo en forma de escalera compuesto por cientos de cilindros</td></tr><tr><td>96–98</td><td>Esfera</td><td>Poliedro geodésico compuesto por miles de cilindros</td></tr><tr><td>99–100</td><td>Topolópolis</td><td>Anillo en bucle o nudo toroidal compuesto por infinidad de cilindros</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Cantidad de Arrays en el Clúster</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cluster-cant')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-cluster-cant">
+    <thead><tr><th>d100</th><th>Cantidad</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>Uno</td></tr><tr><td>11–25</td><td>Dos</td></tr><tr><td>26–55</td><td>Tres</td></tr><tr><td>56–80</td><td>Cuatro</td></tr><tr><td>81–95</td><td>Cinco</td></tr><tr><td>96–100</td><td>Seis</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Un >Asentamiento que reside en un clúster de hábitats conquistado ha solicitado ayuda para superar una plaga de >Anomalía que infecta uno de los cilindros; una plaga que creen se originó en >Descriptor + Foco. El tiempo es fundamental. ¿Cómo evitarás la catástrofe? ¿Cómo se asentó esta comunidad aquí en primer lugar?</div></section><section id="objeto-dyson"><div class="section-header"><h2>Objeto Dyson <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 3</div><p class="prose">Los objetos Dyson fueron construidos para aprovechar la energía de su estrella anfitriona: el <em>enjambre Dyson</em> (millones de colectores individuales), el <em>anillo Dyson</em> (uno o varios anillos que encirclan la estrella lentamente; su enorme tamaño y rotación pueden causar eclipses prolongados y frecuentes en los mundos situados más allá de su alcance) y la <em>esfera Dyson</em> (barrera casi total que absorbe la energía completa de la estrella). La presencia de un objeto Dyson implica que hay al menos otra megaestructura en el sector que usa su energía.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Variante del Objeto Dyson</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-dyson-variante')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-dyson-variante">
+    <thead><tr><th>d100</th><th>Variante</th></tr></thead>
+    <tbody><tr><td>01–50</td><td>Enjambre Dyson</td></tr><tr><td>51–80</td><td>Anillo Dyson</td></tr><tr><td>81–100</td><td>Esfera Dyson</td></tr></tbody>
+  </table>
+</div>
+<div class="discovery">
+  <strong>Dyson Shell — Cuando se Descubre</strong>
+  Al usar la tabla de Clase Planetaria Basada en Mapa de Calor (p.26), consulta la columna <em>Frígido</em> para las órbitas planetarias entre la esfera Dyson y el borde del sistema solar: estos mundos tienen la característica adicional de encontrarse en oscuridad perpetua. Los mundos dentro de la esfera no albergan asentamientos.
+</div>
+<div class="quest"><strong>Misión del Oráculo</strong>El >Asentamiento en el que te alojas está a punto de quedarse sin fuentes de energía viables. La gente ha descubierto un satélite ancestral a la deriva con una celda de energía precursora y ha deducido que el >Objeto Estelar del sistema debe estar rodeado por un enjambre Dyson. Han solicitado tu ayuda para obtener estas fuentes de energía. ¿Cuántas celdas necesita el asentamiento? ¿Cómo planeas obtenerlas y transportarlas de vuelta con seguridad?</div></section><section id="array-ecopoiesis"><div class="section-header"><h2>Array de Ecopoiesis <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">Estas estructuras colosales transforman atmósferas y biosféras planetarias: absorben gases perjudiciales y emiten una mezcla de biomoléculas y gases esenciales para fomentar la vida, alterando dramáticamente las condiciones atmosféricas.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estado del Array de Ecopoiesis</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-ecop-estado')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="status" id="tbl-ecop-estado">
+    <thead><tr><th>d100</th><th>Estado</th><th>Efecto</th></tr></thead>
+    <tbody><tr><td>01–15</td><td>Parcialmente construido</td><td>Al tirar >Planeta, rerollea Anómalo, Forja, Joviano y Fragmentado.</td></tr><tr><td>16–50</td><td>Operativo</td><td>Al tirar >Planeta, rerollea también Contaminado. Además tira Atmósfera Alterada y Vida Alterada como efecto directo del array.</td></tr><tr><td>51–85</td><td>No funcional / fuera de línea</td><td>Al tirar >Planeta, rerollea Anómalo, Forja, Joviano y Fragmentado. Activarlo mejorará la atmósfera pero reducirá la vida a escasa o extinta.</td></tr><tr><td>86–95</td><td>Disfuncional</td><td>Como operativo, pero el mundo está azotado por fenómenos meteorológicos extremos y potentes.</td></tr><tr><td>96–100</td><td>Destruido</td><td>Todos los gases fueron liberados simultáneamente: planeta de forja (atmósfera corrosiva, vida extinta, bioma: invernadero) con fenómenos meteorológicos extremos.</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Atmósfera Alterada</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-ecop-atm')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-ecop-atm">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>—</td><td>Ninguna / tenue</td></tr><tr><td>01–20</td><td>Tóxica</td></tr><tr><td>21–30</td><td>Corrosiva</td></tr><tr><td>31–65</td><td>Marginal</td></tr><tr><td>66–90</td><td>Respirable</td></tr><tr><td>91–100</td><td>Ideal</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Vida Alterada</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-ecop-vida')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-ecop-vida">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>—</td><td>Ninguna</td></tr><tr><td>—</td><td>Extinta</td></tr><tr><td>—</td><td>Escasa</td></tr><tr><td>01–20</td><td>Diversa</td></tr><tr><td>21–70</td><td>Abundante</td></tr><tr><td>71–100</td><td>Desbordante</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong><div class="discovery">
+  <strong>Modificaciones del Mundo</strong>
+  Cuando se añaden al array de ecopoiesis operativo grandes cantidades de compuestos, moléculas o sustancias específicas, el planeta puede verse afectado de diversas maneras. Ejemplos:
+  <ul style="margin:.4rem 0 0 1rem;font-size:.88rem;line-height:1.6;">
+    <li>Gases respirables introducidos en la atmósfera: modifica el resultado del oráculo de Atmósfera o Atmósfera Alterada de forma apropiada.</li>
+    <li>Virus nebulizados propagados por toda la superficie para erradicar la vida indígena hostil: modifica el resultado de Vida o Vida Alterada.</li>
+    <li>Partículas de hierro dispersadas en toda la atmósfera: el mundo tiene perturbaciones magnéticas perpetuas.</li>
+  </ul>
+</div>
+Una >Facción pide a exploradores que ayuden a su >Asentamiento, ubicado en un planeta con un array de ecopoiesis desconectado. Necesitan >Acción + Tema, posible solo reactivando la megaestructura. La facción insiste en que es esencial para su supervivencia, pero los rumores sugieren motivos más amplios. ¿Qué objetivo persigue realmente la facción?</div></section><section id="ecosfera"><div class="section-header"><h2>Ecosfera <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">Los exploradores que han entrado en estas megaestructuras hablan de recorrer varios kilómetros a través de una carcasa artificial para encontrar un vasto entorno natural en su interior, repleto de flora y fauna. Se teoriza que su propósito original fue el de una instalación de investigación donde estudiar la vida en todas sus formas.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Entorno Interior de la Ecosfera</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-ecosfera-ent')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-ecosfera-ent">
+    <thead><tr><th>Starforged</th><th>Ancient Wonders</th><th>Entorno</th></tr></thead>
+    <tbody><tr><td>—</td><td>01–08</td><td>Mundo Químico</td></tr><tr><td>—</td><td>09–15</td><td>Mundo Cristalino</td></tr><tr><td>01–13</td><td>16–23</td><td>Mundo Desértico</td></tr><tr><td>14–26</td><td>24–31</td><td>Mundo de Forja</td></tr><tr><td>27–39</td><td>32–40</td><td>Mundo Helado</td></tr><tr><td>40–52</td><td>41–49</td><td>Mundo Selvático</td></tr><tr><td>—</td><td>50–61</td><td>Mundo Viviente</td></tr><tr><td>—</td><td>62–68</td><td>Mundo Metálico</td></tr><tr><td>53–65</td><td>69–77</td><td>Mundo Oceánico</td></tr><tr><td>66–78</td><td>78–85</td><td>Mundo Rocoso</td></tr><tr><td>79–91</td><td>86–94</td><td>Mundo Contaminado</td></tr><tr><td>92–100</td><td>95–100</td><td>Mundo Vital</td></tr></tbody>
+  </table>
+</div>
+
+
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Atmósfera de la Ecosfera</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-ecosfera-atm')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-ecosfera-atm">
+    <thead><tr><th>d100</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>—</td><td>Ninguna / tenue</td></tr>
+      <tr><td>01–35</td><td>Tóxica</td></tr>
+      <tr><td>36–55</td><td>Corrosiva</td></tr>
+      <tr><td>56–70</td><td>Marginal</td></tr>
+      <tr><td>71–90</td><td>Respirable</td></tr>
+      <tr><td>91–100</td><td>Ideal</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card" style="overflow:auto;">
+  <div class="oracle-card-header">
+    <h4>Vida en la Ecosfera (por Estado de la Megaestructura)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-ecosfera-vida')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-ecosfera-vida" style="min-width:560px;">
+    <thead><tr><th>Operativa</th><th>Disfuncional</th><th>No funcional</th><th>Dañada</th><th>Destruida</th><th>Parcial</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>01–85</td><td>Ninguna</td></tr>
+      <tr><td>01–02</td><td>01–10</td><td>01–43</td><td>01–15</td><td>01–85</td><td>86–95</td><td>Extinta</td></tr>
+      <tr><td>03–07</td><td>11–25</td><td>44–73</td><td>16–35</td><td>86–95</td><td>96–100</td><td>Escasa</td></tr>
+      <tr><td>08–17</td><td>26–60</td><td>74–88</td><td>36–70</td><td>96–100</td><td>—</td><td>Diversa</td></tr>
+      <tr><td>18–37</td><td>61–85</td><td>89–98</td><td>71–90</td><td>—</td><td>—</td><td>Abundante</td></tr>
+      <tr><td>38–100</td><td>86–100</td><td>99–100</td><td>91–100</td><td>—</td><td>—</td><td>Desbordante</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Investigación Precursora en la Ecosfera</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-ecosfera-inv')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-ecosfera-inv">
+    <thead><tr><th>d100</th><th>Objeto de Investigación</th></tr></thead>
+    <tbody><tr><td>01–06</td><td>Evolución acelerada o regresiva</td></tr><tr><td>07–12</td><td>Optimización o diversificación agrícola</td></tr><tr><td>13–18</td><td>Medicina aplicada o ingeniería genética</td></tr><tr><td>19–24</td><td>Biomecánica o biotecnología</td></tr><tr><td>25–30</td><td>Comunicación con o entre formas de vida</td></tr><tr><td>31–36</td><td>Consciencia o sintiencia</td></tr><tr><td>37–42</td><td>Conservación o preservación de formas de vida</td></tr><tr><td>43–48</td><td>Domesticación de criaturas</td></tr><tr><td>49–54</td><td>Epidemiología o virología</td></tr><tr><td>55–60</td><td>Adaptación o estancamiento evolutivo</td></tr><tr><td>61–66</td><td>Interacciones de formas de vida con el entorno</td></tr><tr><td>67–72</td><td>Bioarmas ofensivas o defensivas</td></tr><tr><td>73–78</td><td>Colonización planetaria o terraformación</td></tr><tr><td>79–84</td><td>Dinámicas sociales o comportamiento en manada</td></tr><tr><td>85–90</td><td>Evolución o aumento de la inteligencia de formas de vida</td></tr><tr><td>91–95</td><td>Acción + Tema</td></tr><tr><td>96–100</td><td>Tirar dos veces</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Una >Facción ha estado intentando >Acción + Tema y te encarga que entres en una >Ecosfera cercana para localizar y traer un >Descriptor + Foco. Creen que es vital para sus esfuerzos. Sin embargo, los rumores sugieren que el objeto puede tener un significado más allá del propósito declarado. ¿Qué otros motivos ocultos podrían tener?</div></section><section id="ecumenopolis"><div class="section-header"><h2>Ecumenópolis <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">También conocidas como <em>mundos casco</em>, son megaciudades que crecieron hasta abarcar la mayor parte o la totalidad de su cuerpo planetario, cubriendo su superficie con una vasta red de estructuras construidas a lo largo de muchas capas segmentadas. Dada su escala, presumiblemente albergaban miles de millones, potencialmente billones, de habitantes.</p>
+
+<p class="prose" style="font-size:.85rem;color:var(--text-dim);margin-bottom:.3rem;">Como alternativa a esta tabla, puedes usar los oráculos de <em>Primera Impresión Exterior de Megaciudad</em> (p.172) y <em>Primera Impresión Interior de Megaciudad</em> (p.169) del Capítulo 5.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Característica de Superficie de la Ecumenópolis</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-ecumen-sup')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-ecumen-sup">
+    <thead><tr><th>d100</th><th>Característica</th></tr></thead>
+    <tbody><tr><td>01–04</td><td>Inundaciones catastróficas</td></tr><tr><td>05–08</td><td>Trincheras cavernosas</td></tr><tr><td>09–12</td><td>Estructuras derrumbadas</td></tr><tr><td>13–16</td><td>Infraestructura desmoronada</td></tr><tr><td>17–20</td><td>Monumentos en ruinas</td></tr><tr><td>21–24</td><td>Segmentación marcada</td></tr><tr><td>25–28</td><td>Patrones meteorológicos erráticos</td></tr><tr><td>29–32</td><td>Estructura que atraviesa la exosfera</td></tr><tr><td>33–36</td><td>Estratificación expansiva</td></tr><tr><td>37–40</td><td>Temperaturas fluctuantes</td></tr><tr><td>41–44</td><td>Terremotos inquietantes</td></tr><tr><td>45–48</td><td>Naves estrelladas inmensas</td></tr><tr><td>49–52</td><td>Catacumbas laberínticas</td></tr><tr><td>53–56</td><td>Fosas comunes</td></tr><tr><td>57–60</td><td>Ecos misteriosos</td></tr><tr><td>61–64</td><td>Reconquista natural</td></tr><tr><td>65–68</td><td>Contaminación que obstruye la visión</td></tr><tr><td>69–72</td><td>Vibraciones ondulantes penetrantes</td></tr><tr><td>73–76</td><td>Puntos calientes radiactivos</td></tr><tr><td>77–80</td><td>Puertos espaciales sembrados de escombros</td></tr><tr><td>81–84</td><td>Campos de batalla marcados</td></tr><tr><td>85–88</td><td>Instalaciones subterráneas</td></tr><tr><td>89–92</td><td>Vastos proyectos de embellecimiento</td></tr><tr><td>93–100</td><td>Monumentos erosionados</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Una >Nave Estelar en órbita de una ecumenópolis establece contacto y solicita tu ayuda para encontrar a un grupo de exploradores desaparecidos. Fueron vistos por última vez descendiendo a la infraciudad, y horas después enviaron un informe fragmentado afirmando que habían descubierto >Descriptor + Foco antes de que su señal se cortara. ¿Qué descubrieron en esas profundidades sombrías? ¿Qué destino los silenció?</div></section><section id="gigafundiciones"><div class="section-header"><h2>Gigafundiciones <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructuras Tipo 3</div><p class="prose">Existen dos tipos: las <em>hiperfundiciones estelares</em> (rodean estrellas enteras, con flotas de custodios transportando materiales) y las <em>forjas de sistema</em> (múltiples anillos concéntricos que cubren todo el sistema, produciendo paneles y piezas de escala megaestructural para construir otras megaestructuras).</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Producto Desconocido (Hiperfundición Estelar)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-hiperfund-desc')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-hiperfund-desc">
+    <thead><tr><th>d100</th><th>Tipo de Producto</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>Agrícola</td></tr><tr><td>11–20</td><td>Consumible</td></tr><tr><td>21–30</td><td>De construcción</td></tr><tr><td>31–40</td><td>De lujo</td></tr><tr><td>41–50</td><td>Médico</td></tr><tr><td>51–60</td><td>Militar</td></tr><tr><td>61–70</td><td>Religioso</td></tr><tr><td>71–80</td><td>Herramienta</td></tr><tr><td>81–90</td><td>Vehículo</td></tr><tr><td>91–100</td><td>Descriptor + Foco</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Producto Conocido (Hiperfundición Estelar)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-hiperfund-conoc')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-hiperfund-conoc">
+    <thead><tr><th>d100</th><th>Producto</th></tr></thead>
+    <tbody>
+      <tr><td>01–03</td><td>Obra de arte</td></tr>
+      <tr><td>04–07</td><td>Ropa</td></tr>
+      <tr><td>08–11</td><td>Material de construcción</td></tr>
+      <tr><td>12–14</td><td>Fármacos</td></tr>
+      <tr><td>15–19</td><td>Alimentos</td></tr>
+      <tr><td>20–24</td><td>Gema no preciosa</td></tr>
+      <tr><td>25–28</td><td>Gema semipreciosa</td></tr>
+      <tr><td>29–31</td><td>Gema preciosa</td></tr>
+      <tr><td>32–33</td><td>Gema exótica</td></tr>
+      <tr><td>34–37</td><td>Artículo del hogar básico</td></tr>
+      <tr><td>38–40</td><td>Artículo del hogar complejo</td></tr>
+      <tr><td>41–44</td><td>Maquinaria industrial</td></tr>
+      <tr><td>45–49</td><td>Pieza industrial</td></tr>
+      <tr><td>50–54</td><td>Lingote férreo</td></tr>
+      <tr><td>55–58</td><td>Lingote no férreo</td></tr>
+      <tr><td>59–61</td><td>Lingote precioso</td></tr>
+      <tr><td>62–63</td><td>Lingote exótico</td></tr>
+      <tr><td>64–66</td><td>Joyería</td></tr>
+      <tr><td>67–70</td><td>Licor</td></tr>
+      <tr><td>71–74</td><td>Suministro médico</td></tr>
+      <tr><td>75–77</td><td>Armas ligeras</td></tr>
+      <tr><td>78–81</td><td>Herramienta básica</td></tr>
+      <tr><td>82–84</td><td>Herramienta industrial</td></tr>
+      <tr><td>85–86</td><td>Herramienta médica</td></tr>
+      <tr><td>87–88</td><td>Vehículo aéreo</td></tr>
+      <tr><td>89–90</td><td>Vehículo acuático</td></tr>
+      <tr><td>91–92</td><td>Vehículo terrestre</td></tr>
+      <tr><td>93–95</td><td>Vehículo espacial</td></tr>
+      <tr><td>96–100</td><td>Descriptor + Foco</td></tr>
+    </tbody>
+  </table>
+</div>
+<p class="prose">La <em>forja de sistema</em>: al alcanzar su sancta operativa o disfuncional, puedes dirigir todos sus esfuerzos a restaurar hasta tres megaestructuras fuera del sector. Establece un reloj de campaña por cada megaestructura a restaurar.</p>
+<div class="oracle-card" style="overflow:auto;">
+  <div class="oracle-card-header"><h4>Segmentos del Reloj de Campaña (Forja de Sistema)</h4></div>
+  <table class="oracle" style="min-width:420px;">
+    <thead><tr><th>Forja Disfuncional</th><th>Forja Operativa</th><th>Segmentos</th></tr></thead>
+    <tbody>
+      <tr><td>—</td><td>Megaestructura a restaurar: parcialmente construida</td><td>4 segmentos</td></tr>
+      <tr><td>Restaurar: parcialmente construida</td><td>Restaurar: disfuncional</td><td>6 segmentos</td></tr>
+      <tr><td>Restaurar: disfuncional</td><td>Restaurar: destruida</td><td>8 segmentos</td></tr>
+      <tr><td>Restaurar: destruida</td><td>—</td><td>10 segmentos</td></tr>
+    </tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Un >Asentamiento ha intentado reactivar por su cuenta una gigafundición fuera de línea, pero su >Facción se niega a ayudar. La comunidad busca exploradores intrépidos, convencidos de que restaurar la instalación les permitirá completar su >Proyecto de Asentamiento. ¿Qué riesgos u oportunidades yacen dormidos en sus silenciosas naves? ¿Cómo podría su reactivación remodelar el equilibrio de poder?</div></section><section id="mundo-kintsugi"><div class="section-header"><h2>Mundo Kintsugi <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 2</div><p class="prose">Con el nombre del arte ancestral de reparar cerámica rota con laca y metales preciosos, este planeta ha sido reconstituido minuciosamente. Su corteza fragmentada está unida por vastas estructuras y bandas de material resplandeciente. El entorno ha sido transformado para albergar el arte y los monumentos de una civilización extinta.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estilo Paisajístico del Mundo Kintsugi</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-kintsugi-estilo')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-kintsugi-estilo">
+    <thead><tr><th>d100</th><th>Estilo</th><th>Descripción</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>Rupestre</td><td>Representaciones figurativas en ocre o rojo</td></tr><tr><td>11–20</td><td>Cubismo</td><td>Fragmentación por ángulos y líneas marcadas</td></tr><tr><td>21–30</td><td>Arte Fractal</td><td>Precisión matemática y patrones</td></tr><tr><td>31–40</td><td>Hiperrealismo</td><td>Énfasis en destacar los detalles</td></tr><tr><td>41–50</td><td>Art Nouveau</td><td>Abstracciones en formas sinuosas y fluidas</td></tr><tr><td>51–60</td><td>Arte Óptico</td><td>Subvirtiendo las expectativas del espectador</td></tr><tr><td>61–70</td><td>Puntillismo</td><td>Pequeños puntos o esferas en patrones</td></tr><tr><td>71–80</td><td>Suprematismo</td><td>Los fundamentos de la geometría</td></tr><tr><td>81–90</td><td>Surrealismo</td><td>Representaciones inquietantes, oníricas o ilógicas</td></tr><tr><td>91–100</td><td>Ukiyo-e</td><td>Representaciones planas en tres dimensiones</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Característica de Superficie del Mundo Kintsugi</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-kintsugi-sup')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-kintsugi-sup">
+    <thead><tr><th>d100</th><th>Característica</th></tr></thead>
+    <tbody><tr><td>01–04</td><td>Formaciones talladas</td></tr><tr><td>05–08</td><td>Formas geométricas colosales</td></tr><tr><td>09–13</td><td>Mesetas y altiplanicies grabadas</td></tr><tr><td>14–18</td><td>Esculturas cinceladas</td></tr><tr><td>19–22</td><td>Lluvia exótica</td></tr><tr><td>23–26</td><td>Jardines o arboledas flotantes</td></tr><tr><td>27–30</td><td>Anomalías gravitacionales</td></tr><tr><td>31–34</td><td>Niebla o bruma alucinógena</td></tr><tr><td>35–38</td><td>Valles o acantilados tallados</td></tr><tr><td>39–43</td><td>Monolitos inscritos</td></tr><tr><td>44–47</td><td>Auroras caleidoscópicas</td></tr><tr><td>48–51</td><td>Ríos o lagos no newtonianos</td></tr><tr><td>52–55</td><td>Nubes pareidólicas</td></tr><tr><td>56–60</td><td>Llanuras estampadas</td></tr><tr><td>61–64</td><td>Formas de vida preservadas o encapsuladas</td></tr><tr><td>65–68</td><td>Cielos reflectantes</td></tr><tr><td>69–72</td><td>Terremotos rítmicos</td></tr><tr><td>73–76</td><td>Montañas esculpidas</td></tr><tr><td>77–80</td><td>Vientos cantores</td></tr><tr><td>81–84</td><td>Mar u océano suspendido</td></tr><tr><td>85–88</td><td>Regiones temporalmente cambiantes</td></tr><tr><td>89–92</td><td>Bosques teselados</td></tr><tr><td>93–96</td><td>Mares u océanos transparentes</td></tr><tr><td>97–100</td><td>Visiones del pasado</td></tr></tbody>
+  </table>
+</div><div class="quest<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Propósito del Arte (Mundo Kintsugi)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-kintsugi-proposito')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-kintsugi-proposito">
+    <thead><tr><th>d100</th><th>Propósito</th></tr></thead>
+    <tbody>
+      <tr><td>01–05</td><td>Celebrar</td></tr><tr><td>06–10</td><td>Desafiar</td></tr>
+      <tr><td>11–15</td><td>Conmemorar</td></tr><tr><td>16–20</td><td>Contemplar</td></tr>
+      <tr><td>21–25</td><td>Criticar</td></tr><tr><td>26–30</td><td>Perturbar</td></tr>
+      <tr><td>31–35</td><td>Documentar</td></tr><tr><td>36–40</td><td>Embellece</td></tr>
+      <tr><td>41–45</td><td>Involucrar</td></tr><tr><td>46–50</td><td>Entretener</td></tr>
+      <tr><td>51–55</td><td>Experimentar</td></tr><tr><td>56–60</td><td>Explicar</td></tr>
+      <tr><td>61–65</td><td>Inspirar</td></tr><tr><td>66–70</td><td>Provocar</td></tr>
+      <tr><td>71–75</td><td>Cuestionar</td></tr><tr><td>76–80</td><td>Reflexionar</td></tr>
+      <tr><td>81–85</td><td>Satirizar</td></tr><tr><td>86–90</td><td>Simbolizar</td></tr>
+      <tr><td>91–95</td><td>Transformar</td></tr><tr><td>96–100</td><td>Venerar</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Sujeto del Arte (Mundo Kintsugi)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-kintsugi-sujeto')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-kintsugi-sujeto">
+    <thead><tr><th>d100</th><th>Sujeto</th></tr></thead>
+    <tbody>
+      <tr><td>01–05</td><td>Habilidad</td></tr><tr><td>06–10</td><td>Concepto</td></tr>
+      <tr><td>11–15</td><td>Conflicto</td></tr><tr><td>16–20</td><td>Oficio</td></tr>
+      <tr><td>21–25</td><td>Deseo</td></tr><tr><td>26–30</td><td>Deidad</td></tr>
+      <tr><td>31–35</td><td>Emoción</td></tr><tr><td>36–40</td><td>Entorno</td></tr>
+      <tr><td>41–45</td><td>Evento</td></tr><tr><td>46–50</td><td>Experiencia</td></tr>
+      <tr><td>51–55</td><td>Facción</td></tr><tr><td>56–60</td><td>Fe</td></tr>
+      <tr><td>61–65</td><td>Sentimiento</td></tr><tr><td>66–70</td><td>Idea</td></tr>
+      <tr><td>71–75</td><td>Individuo</td></tr><tr><td>76–80</td><td>Lugar</td></tr>
+      <tr><td>81–85</td><td>Misterio</td></tr><tr><td>86–90</td><td>Objeto</td></tr>
+      <tr><td>91–95</td><td>Habilidad</td></tr><tr><td>96–100</td><td>Especie</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Asentamientos (Mundo Kintsugi)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-kintsugi-asentamientos')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-kintsugi-asentamientos">
+    <thead><tr><th>Terminus</th><th>Fronteras</th><th>Expansión</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>01–50</td><td>01–80</td><td>01–93</td><td>Ninguno</td></tr>
+      <tr><td>51–70</td><td>81–90</td><td>94–98</td><td>Orbital</td></tr>
+      <tr><td>71–85</td><td>91–95</td><td>99–100</td><td>En superficie</td></tr>
+      <tr><td>86–95</td><td>96–98</td><td>—</td><td>Múltiple</td></tr>
+      <tr><td>98–100</td><td>100</td><td>—</td><td>Múltiple en conflicto</td></tr>
+    </tbody>
+  </table>
+</div>
+"><strong>Misión del Oráculo</strong>Una >Facción ha establecido un asentamiento en la superficie de un mundo kintsugi para estudiar su arte y monumentos, creyendo que contienen la clave para entender cómo >Acción + Tema. Sin embargo, otra >Facción se ha movilizado en su contra, creyendo que ese conocimiento puede ser inadvertidamente desastroso para la humanidad. ¿Qué conocimiento contiene el mundo? ¿Qué lo hace potencialmente peligroso?</div></section><section id="especulorefractor-lunar"><div class="section-header"><h2>Especulorefractor Lunar <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">Vastas megaestructuras orbitales, a menudo confundidas con estrellas por su brillantez. Se cree que antes eran lunas yermas recubiertas con matrices de espejos que capturan y redirigen la luz estelar para calentar el planeta anfitrión, generando auroras brillantes.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estado del Especulorefractor Lunar</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-especulo-estado')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="status" id="tbl-especulo-estado">
+    <thead><tr><th>d100</th><th>Estado</th><th>Efecto</th></tr></thead>
+    <tbody><tr><td>01–15</td><td>Parcialmente construido</td><td>No hay suficientes partes para redirigir la luz. El planeta anfitrión es un mundo helado.</td></tr><tr><td>16–50</td><td>Operativo</td><td>Al tirar >Planeta, usa la tabla de Clase Planetaria Alterada más abajo. El mundo tiene auroras como característica adicional.</td></tr><tr><td>51–85</td><td>No funcional / fuera de línea</td><td>No refracta suficiente luz para calentar su planeta (mundo helado). Hacerlo funcional derretirá rápidamente el planeta en un mundo oceánico (bioma: océano habitable).</td></tr><tr><td>86–95</td><td>Disfuncional</td><td>Como fuera de línea, pero: 01–33 ilumina el lado oscuro (luz perpetua); 34–67 refracta luz adicional hacia el lado diurno (temperaturas extremas); 68–100 bloquea la luz del mundo (oscuridad perpetua, mundo helado).</td></tr><tr><td>96–100</td><td>Destruida</td><td>Sus restos y los de la luna que lo formaba orbitan en torno a un mundo helado rodeado de campos de escombros.</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Clase Planetaria Alterada (Especulorefractor Operativo)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-especulo-planeta')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-especulo-planeta">
+    <thead><tr><th>d100</th><th>Clase Planetaria</th></tr></thead>
+    <tbody><tr><td>01–13</td><td>Mundo Desértico</td></tr><tr><td>14–30</td><td>Mundo Selvático</td></tr><tr><td>31–50</td><td>Mundo Oceánico</td></tr><tr><td>51–60</td><td>Mundo Rocoso</td></tr><tr><td>61–75</td><td>Mundo Contaminado</td></tr><tr><td>76–100</td><td>Mundo Vital</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Una >Facción solicita ayuda para descubrir una bóveda bajo la superficie de un mundo helado, sospechando que contiene >Descriptor + Foco que resolverá >Acción + Tema en su mundo natal. No pueden penetrar el hielo, pero creen que reactivando el especulorefractor lunar podrán derretirlo. ¿Qué necesitas hacer para reactivar la megaestructura? ¿Cómo navegarás hacia la bóveda una vez derretido el hielo?</div></section><section id="jardin-nezzarine"><div class="section-header"><h2>Jardín Nezzarine <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">Encapsulado en una carcasa transparente y rodeado por vastas matrices solares y reflectores, un ambiente denso oculta el mundo encerrado. Fue en su día un mundo joviano terraformado como proyecto agrícola precursor. Ahora es una naturaleza salvaje indomable, repleta de megaflora y megafauna.</p>
+
+<p class="prose">Una vez dentro del mundo encapsulado, si estás explorando la <em>atmósfera del planeta</em>, trátalo como un mundo joviano. Si estás explorando la <em>superficie del planeta</em>, trátalo como un mundo selvático (monobioma: megaflora, con la característica adicional y perpetua de estar envuelto en una niebla envolvente). Cualquier intento humano de asentarse en un jardín Nezzarine ha resultado infructuoso.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Atmósfera del Jardín Nezzarine</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-nezz-atm')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-nezz-atm">
+    <thead><tr><th>d100</th><th>Atmósfera</th></tr></thead>
+    <tbody><tr><td>—</td><td>Ninguna / tenue</td></tr><tr><td>01–40</td><td>Tóxica</td></tr><tr><td>41–45</td><td>Corrosiva</td></tr><tr><td>46–70</td><td>Marginal</td></tr><tr><td>71–90</td><td>Respirable</td></tr><tr><td>91–100</td><td>Ideal</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Vida en el Jardín Nezzarine</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-nezz-vida')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-nezz-vida">
+    <thead><tr><th>d100</th><th>Vida</th></tr></thead>
+    <tbody><tr><td>—</td><td>Ninguna</td></tr><tr><td>01–30</td><td>Extinta</td></tr><tr><td>31–75</td><td>Escasa</td></tr><tr><td>76–95</td><td>Diversa</td></tr><tr><td>96–100</td><td>Abundante</td></tr><tr><td>—</td><td>Desbordante</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Escala de Criaturas en el Jardín Nezzarine</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-nezz-escala')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-nezz-escala">
+    <thead><tr><th>d100</th><th>Escala</th></tr></thead>
+    <tbody><tr><td>01–05</td><td>Mediana (tamaño persona)</td></tr><tr><td>06–15</td><td>Grande (tamaño vehículo)</td></tr><tr><td>16–55</td><td>Enorme (tamaño ballena)</td></tr><tr><td>56–85</td><td>Titánica (tamaño colina)</td></tr><tr><td>86–100</td><td>Colosal (tamaño montaña)</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Un >Asentamiento que reclama el jardín como propio ha solicitado ayuda para tratar con un grupo hostil de exploradores pertenecientes a otra >Facción que han intentado interferir con sus >Proyectos de Asentamiento. Los exploradores rivales fueron vistos entrando en la carcasa con la intención de viajar más hacia la superficie. ¿Cuáles son las verdaderas intenciones de los grupos? ¿Hasta qué profundidad tendrás que ir?</div></section><section id="defensas-planetarias"><div class="section-header"><h2>Defensas Planetarias <span class="tag">Ancient Wonders</span></h2></div><p class="prose">Los precursores tenían dos tipos de defensas planetarias: el <em>nodo de defensa</em> (numerosos emplazamientos ofensivos alrededor de un mundo) y la <em>aegisfera</em> (campos de fuerza que lo cubren).</p><div class="subsection"><h3>Nodo de Defensa — Tipo 1</h3>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Forma del Nodo de Defensa</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-nodo-forma')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-nodo-forma">
+    <thead><tr><th>d100</th><th>Forma</th></tr></thead>
+    <tbody><tr><td>01–50</td><td>Emplazamientos en tierra</td></tr><tr><td>51–85</td><td>Instalaciones orbitales</td></tr><tr><td>86–100</td><td>Anillos que rodean el mundo</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Lugar Defendido por el Nodo</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-nodo-lugar')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-nodo-lugar">
+    <thead><tr><th>d100</th><th>Lugar</th></tr></thead>
+    <tbody><tr><td>01–25</td><td>Planeta (sede de megaciudad o bóveda en tierra)</td></tr><tr><td>26–50</td><td>Ecumenópolis</td></tr><tr><td>51–75</td><td>Mundo Kintsugi</td></tr><tr><td>76–100</td><td>Mundo Cantera</td></tr></tbody>
+  </table>
+</div></div><div class="subsection"><h3>Aegisfera — Tipo 2</h3><p class="prose">La expresión más sofisticada de una medida defensiva: esferas megaestructurales que orbitan un mundo y proyectan una vasta barrera que impide que cualquier objeto cruce su límite. Una característica de esta megaestructura es la ausencia de un centro de operaciones.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Lugar Protegido por la Aegisfera</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-aegis-lugar')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-aegis-lugar">
+    <thead><tr><th>d100</th><th>Lugar</th></tr></thead>
+    <tbody><tr><td>01–33</td><td>Planeta</td></tr><tr><td>34–67</td><td>Ecumenópolis</td></tr><tr><td>68–100</td><td>Mundo Kintsugi</td></tr></tbody>
+  </table>
+</div></div><div class="quest"><strong>Misión del Oráculo</strong>Tras llegar inicialmente al planeta sin incidentes, un >Asentamiento que transportaba a un grupo de >Rol de Personaje en busca de >Descriptor + Foco ha quedado atrapado en la superficie de la megaestructura tras su súbita reactivación. El escudo los sella dentro, cortando las comunicaciones y las rutas de escape. ¿Cuál era la verdadera razón de su expedición inicial? ¿Quién —o qué— causó la reactivación?</div></section><section id="planetonave"><div class="section-header"><h2>Planetonave <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 3</div><p class="prose">Naves estelares colosales que se camuflan como mundos naturales. Nada puede ser más aterrador que una colonia humana que descubre que su mundo natal es, en realidad, una nave estelar alienígena: la verdad se revela cuando la megaestructura despierta y comienza su viaje hacia el vacío.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Forma de la Planetonave</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-planeto-forma')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-planeto-forma">
+    <thead><tr><th>d100</th><th>Forma</th><th>Descripción</th></tr></thead>
+    <tbody><tr><td>01–75</td><td>Planeta</td><td>Un mundo modificado para poseer las capacidades de una nave estelar. Tira >Planeta para determinar sus características.</td></tr><tr><td>76–100</td><td>Nave</td><td>Una nave estelar tan grande como un mundo entero. Tira >Forma para imaginar su naturaleza alienígena.</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Tipo de Planetonave</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-planeto-tipo')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-planeto-tipo">
+    <thead><tr><th>d100</th><th>Tipo</th></tr></thead>
+    <tbody><tr><td>01–11</td><td>Agrícola</td></tr><tr><td>12–16</td><td>Cultural</td></tr><tr><td>17–33</td><td>Industrial</td></tr><tr><td>34–50</td><td>Militar</td></tr><tr><td>51–67</td><td>Minero</td></tr><tr><td>68–78</td><td>Residencial</td></tr><tr><td>79–83</td><td>Terraformación</td></tr><tr><td>84–100</td><td>Transporte</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Tras la súbita aparición de una planetonave en su territorio, una >Facción ha declarado su intención de establecer un asentamiento en su superficie para llevar a cabo un >Proyecto de Asentamiento. Han convocado a exploradores con el encargo de >Acción + Tema para sentar las bases de sus ambiciones. ¿Qué intenta lograr realmente la facción? ¿Cómo planeas cumplir el objetivo que te han encomendado?</div></section><section id="mundo-cantera"><div class="section-header"><h2>Mundo Cantera <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">Apenas quedan evidencias de cómo era originalmente la superficie de estos mundos. Parece que fueron considerados aptos para un único destino: el consumo. Los requisitos de recursos de cualquier gran civilización acabarían superando la capacidad de sus mundos natales; la conclusión lógica es desmontar y procesar por completo aquellos mundos especialmente ricos en recursos.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Característica de Superficie del Mundo Cantera</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-cantera-sup')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-cantera-sup">
+    <thead><tr><th>d100</th><th>Característica</th></tr></thead>
+    <tbody><tr><td>01–08</td><td>Equipamiento colosal</td></tr><tr><td>09–12</td><td>Fractura continental</td></tr><tr><td>13–16</td><td>Neblina distorsionante</td></tr><tr><td>17–20</td><td>Cuencas oceánicas vaciadas</td></tr><tr><td>21–24</td><td>Cielos cargados de polvo</td></tr><tr><td>25–28</td><td>Enormes vertederos</td></tr><tr><td>29–32</td><td>Campos magnéticos erráticos</td></tr><tr><td>33–36</td><td>Venas de minerales al descubierto</td></tr><tr><td>37–40</td><td>Extensas zanjas excavadas</td></tr><tr><td>41–44</td><td>Montañas derribadas</td></tr><tr><td>45–48</td><td>Excavaciones inundadas</td></tr><tr><td>49–52</td><td>Perforaciones gigantescas</td></tr><tr><td>53–56</td><td>Corteza tremendamente excavada</td></tr><tr><td>57–60</td><td>Superficie cartografiada en cuadrícula</td></tr><tr><td>61–64</td><td>Moldes de fundición inmensos</td></tr><tr><td>65–68</td><td>Monolitos mecánicos masivos</td></tr><tr><td>69–72</td><td>Mesetas repletas de recursos</td></tr><tr><td>73–76</td><td>Charcos o lagos de metal fundido</td></tr><tr><td>77–80</td><td>Tormentas violentas</td></tr><tr><td>81–84</td><td>Lluvia de escoria o ceniza</td></tr><tr><td>85–88</td><td>Ríos de efluentes ácidos</td></tr><tr><td>89–92</td><td>Redes de túneles subterráneos</td></tr><tr><td>93–96</td><td>Vastas canteras escalonadas</td></tr><tr><td>97–100</td><td>Terremotos violentos</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Una >Facción ha solicitado ayuda urgente para rescatar a algunos de sus ciudadanos de un mundo cantera. Informan de que, tras el descubrimiento de un >Descriptor + Foco, los custodios cambiaron repentinamente de comportamiento —actuando con hiperagresividad y comenzando a >Acción + Tema. ¿Qué buscaban exactamente en las profundidades de la cantera? ¿Por qué los custodios se han vuelto más hostiles que nunca?</div></section>
+<div class="discovery">
+  <strong>Bioma Original</strong>
+  Al explorar la superficie de un mundo cantera, es posible encontrar trazas del mundo que fue antes de su consumo. Si descubres vestigios de su entorno original, tira &gt;Clase Planetaria para imaginar esas áreas (rerollea "Mundo Anómalo", "Mundo Joviano" y "Mundo Fragmentado").
+</div>
+<section id="mundos-anillo"><div class="section-header"><h2>Mundos Anillo <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Toro de Stanford — Tipo 1 &nbsp;·&nbsp; Anillo Bishop — Tipo 2 &nbsp;·&nbsp; Mundo Anillo Estelar — Tipo 3</div><p class="prose">Hábitats circulares artificiales que van desde estaciones orbitales hasta envolver estrellas enteras. El <em>toro de Stanford</em> es un hábitat rotatorio de menor escala; el <em>anillo Bishop</em> tiene escala planetaria; el <em>mundo anillo estelar</em> es suficientemente grande para rodear un objeto estelar.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Cantidad de Toros de Stanford</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-toro-cant')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-toro-cant">
+    <thead><tr><th>d100</th><th>Cantidad</th></tr></thead>
+    <tbody><tr><td>01–50</td><td>Uno</td></tr><tr><td>26–80</td><td>Dos</td></tr><tr><td>81–95</td><td>Tres</td></tr><tr><td>96–100</td><td>Cuatro</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Método de Anclaje del Anillo Bishop</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-bishop-anclaje')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-bishop-anclaje">
+    <thead><tr><th>d100</th><th>Método</th></tr></thead>
+    <tbody><tr><td>01–40</td><td>Columnas colosales</td></tr><tr><td>41–70</td><td>Innumerables cables de tensión</td></tr><tr><td>71–85</td><td>Propulsores enormes</td></tr><tr><td>86–95</td><td>Haces de energía potentes</td></tr><tr><td>96–100</td><td>Equilibrio gravitacional</td></tr></tbody>
+  </table>
+</div>
+<div class="discovery">
+  <strong>Hoopworld</strong>
+  Al descubrir un anillo Bishop, pregunta al Oráculo (probabilidad pequeña) si se trata de un <em>hoopworld</em>. Estos son variantes de forma toroidal con dos ejes de rotación: uno principal que gira toda la megaestructura y uno secundario que rota la superficie habitable para crear gravedad mediante la fuerza centrífuga.
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Número de Segmentos del Mundo Anillo Estelar</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-anillo-segm')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-anillo-segm">
+    <thead><tr><th>d100</th><th>Segmentos</th></tr></thead>
+    <tbody><tr><td>01–05</td><td>1</td></tr><tr><td>06–15</td><td>6</td></tr><tr><td>16–30</td><td>16</td></tr><tr><td>31–50</td><td>31</td></tr><tr><td>51–75</td><td>51</td></tr><tr><td>76–100</td><td>76+</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Un explorador del >Asentamiento en el que resides ha llegado con noticias de un >Toro de Stanford a la deriva cuya trayectoria pronto provocará una colisión con el hogar de esta comunidad. Varios proponen el éxodo, pero los supervisores que te encargan la misión afirman que es posible viajar al mundo anillo, encontrar el >Descriptor + Foco y desviarlo o destruirlo. ¿Quién te acompañará en esta expedición? ¿Qué esperas encontrar en este mundo perdido?</div></section><section id="cinturon-centinela"><div class="section-header"><h2>Cinturón Centinela <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">Consiste en muchas construcciones individuales levantadas sobre y dentro de un cinturón de asteroides que funcionan como mecanismos de defensa automatizados: abren fuego sin contemplaciones contra cualquiera que se atreva a cruzar sus fronteras. Los sistemas solares con un cinturón centinela parecen albergar una mayor prevalencia de construcciones precursoras.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Cantidad de Emplazamientos del Cinturón Centinela</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-centinela-empl')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-centinela-empl">
+    <thead><tr><th>d100</th><th>Cantidad</th></tr></thead>
+    <tbody><tr><td>01–30</td><td>Varios</td></tr><tr><td>31–65</td><td>Muchos</td></tr><tr><td>66–85</td><td>Numerosos</td></tr><tr><td>86–100</td><td>Abundantes</td></tr></tbody>
+  </table>
+
+
+<div class="discovery">
+  <strong>Asentamientos Humanos</strong>
+  La interferencia del cinturón con el tráfico hacia su interior ha hecho que cualquier intento de establecer asentamientos sea increíblemente difícil. No pueden encontrarse asentamientos humanos en su interior.
+</div>
+<div class="subsection"><h3>Territorio Precursor</h3>
+<p class="prose">Los sistemas solares donde se detecta la presencia de un cinturón centinela parecen albergar una mayor prevalencia de construcciones precursoras, indicando que eran áreas de particular importancia para sus civilizaciones.</p>
+</div>
+<div class="subsection"><h3>Megaestructura Estelar Central</h3>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Megaestructura Estelar en el Centro del Cinturón</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-centinela-estelar')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-centinela-estelar">
+    <thead><tr><th>d100</th><th>Megaestructura</th><th>Objeto Estelar</th></tr></thead>
+    <tbody>
+      <tr><td>01–10</td><td>Macrocolector de Acreción</td><td>Estrella</td></tr>
+      <tr><td>11–21</td><td>Objeto Dyson (si es Anillo o Esfera, se extiende hasta la 4ª órbita)</td><td>Estrella</td></tr>
+      <tr><td>22–31</td><td>Supresor de Fusión</td><td>Estrella</td></tr>
+      <tr><td>32–35</td><td>Helio-Obliterador</td><td>Estrella</td></tr>
+      <tr><td>36–43</td><td>Astillero Hiperestructural</td><td>—</td></tr>
+      <tr><td>44–53</td><td>Silo Kugelblitz</td><td>Agujero Negro</td></tr>
+      <tr><td>54–59</td><td>Cerebro Matrioshka</td><td>Estrella</td></tr>
+      <tr><td>60–63</td><td>Array Nicoll-Dyson</td><td>Estrella</td></tr>
+      <tr><td>64–67</td><td>Esfera Penrose</td><td>Agujero Negro</td></tr>
+      <tr><td>68–77</td><td>Levantador Estelar</td><td>Estrella</td></tr>
+      <tr><td>78–87</td><td>Compresor Estelar</td><td>Estrella</td></tr>
+      <tr><td>88–92</td><td>Motor Estelar</td><td>Estrella</td></tr>
+      <tr><td>93–100</td><td>Hiperfundición Estelar</td><td>Estrella</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="subsection"><h3>Megaestructura Planetaria Interna</h3>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Megaestructura Planetaria dentro del Cinturón</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-centinela-planetaria')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-centinela-planetaria">
+    <thead><tr><th>Tipo 1</th><th>Tipo 2 o 3</th><th>Megaestructura</th></tr></thead>
+    <tbody>
+      <tr><td>01–15</td><td>01–15</td><td>Bóveda Precursora (escala megaestructura)</td></tr>
+      <tr><td>16–26</td><td>16–22</td><td>Anillo Bishop</td></tr>
+      <tr><td>27–38</td><td>23–30</td><td>Discomundo</td></tr>
+      <tr><td>39–51</td><td>31–39</td><td>Ecumenópolis</td></tr>
+      <tr><td>52–61</td><td>40–45</td><td>Astillero Ecuatorial</td></tr>
+      <tr><td>62–72</td><td>46–52</td><td>Cilindro McKendree</td></tr>
+      <tr><td>73–80</td><td>53–56</td><td>Jardín Nezzarine</td></tr>
+      <tr><td>81–90</td><td>57–62</td><td>Mundo Cantera</td></tr>
+      <tr><td>91–100</td><td>63–68</td><td>Toro de Stanford</td></tr>
+      <tr><td>—</td><td>69–74</td><td>Ensamblador Behemoth</td></tr>
+      <tr><td>—</td><td>75–80</td><td>Ecosfera</td></tr>
+      <tr><td>—</td><td>81–87</td><td>Clúster de Hábitats</td></tr>
+      <tr><td>—</td><td>88–94</td><td>Mundo Kintsugi</td></tr>
+      <tr><td>—</td><td>95–100</td><td>Array de Vigilancia</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</div><div class="subsection"><h3>Cuando se Descubre</h3>
+<div class="discovery">
+  <strong>Basado en Sistema Solar:</strong>
+  <ol style="margin:.4rem 0 0 1.2rem;font-size:.88rem;line-height:1.7;">
+    <li>Marca el cinturón centinela en la 5ª órbita interplanetaria.</li>
+    <li>Si los precursores eran tipo 3, tira &gt;Megaestructura Estelar para identificar la megaestructura central del sistema.</li>
+    <li>Por cada órbita entre el cinturón y el objeto estelar, marca una &gt;Megaestructura Planetaria. No generes planetas salvo que una megaestructura lo indique.</li>
+  </ol>
+  <strong style="display:block;margin-top:.5rem;">Basado en Sector:</strong>
+  <ol style="margin:.4rem 0 0 1.2rem;font-size:.88rem;line-height:1.7;">
+    <li>Si los precursores eran tipo 3, tira &gt;Megaestructura Estelar y márcala en el centro del sector. Si no, marca solo un &gt;Objeto Estelar.</li>
+    <li>Marca campos de escombros alrededor del centro del sector. Deja un anillo de hexágonos en blanco entre el objeto estelar y el cinturón.</li>
+    <li>Tira &gt;Megaestructura Planetaria y márcala entre el cinturón centinela y el objeto estelar.</li>
+  </ol>
+</div>
+</div>
+<div class="quest"><strong>Misión del Oráculo</strong>Un >Rol de Personaje busca a un piloto que le ayude a cruzar un cinturón centinela para localizar una >Nave Estelar que se rumorea lleva >Descriptor + Foco. Dicen que la nave intentó cruzar la frontera del cinturón y, aunque no fue destruida, quedó averiada, a la deriva hacia el interior del sistema. ¿Por qué intentaba la nave cruzar el cinturón? ¿Qué intenta recuperar este individuo?</div></section><section id="array-vigilancia"><div class="section-header"><h2>Array de Vigilancia <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 2</div><p class="prose">Muy poco se conoce con certeza sobre esta megaestructura. Aunque visible a simple vista, frustra activamente cualquier intento de comprender su estructura o mecanismos: ordenadores fallan, sensores devuelven errores, cualquier cámara no logra percibirla. Sus exploradores hablan de un interior laberíntico donde cada pared porta dispositivos de escucha y terminales de datos, y voces incorpóreas que responden levemente a su presencia.</p>
+
+<div class="subsection"><h3>Usar el Array de Vigilancia</h3>
+<p class="prose">La megaestructura alberga vastas matrices de aparatos de monitorización y archivos de comunicaciones almacenadas de un tamaño inconcebible. Al explorar el sancta, puedes utilizar cualquiera de los dos. Las siguientes preguntas guían el proceso de interpretación de las comunicaciones interceptadas:</p>
+<div class="card-grid">
+  <div class="info-card"><div class="info-card-label">¿Era relevante?</div><div class="info-card-text">La megaestructura recopila y archiva una enorme cantidad de comunicaciones electrónicas. Pregunta al Oráculo (probabilidad pequeña) si la zona actual del sancta ofrece información relevante. Aumenta la probabilidad cuanto más tiempo pases usando sus sistemas. Cuando obtengas un "sí", realiza el movimiento <em>Reunir Información</em>.</div></div>
+  <div class="info-card"><div class="info-card-label">¿Quién participaba?</div><div class="info-card-text">Al definir a los participantes del mensaje, puedes usar los oráculos de Personaje apropiados del Manual de Referencia de Starforged.</div></div>
+  <div class="info-card"><div class="info-card-label">¿Cuál era su contenido?</div><div class="info-card-text">Puedes definir el contenido del mensaje usando cualquier combinación de oráculos: Quién (&gt;Personaje / &gt;Facción), Qué (&gt;Acción + Tema, &gt;Descriptor + Foco), Cuándo (&gt;Cuándo), Dónde (&gt;Región + Nombre de Sector), Cómo/Por qué (&gt;Acción + Tema / &gt;Acción + Foco).</div></div>
+</div>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>¿Cuándo ocurrió la comunicación interceptada?</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-vigilancia-cuando')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-vigilancia-cuando">
+    <thead><tr><th>d100</th><th>Antigüedad</th></tr></thead>
+    <tbody><tr><td>01–02</td><td>Pasado lejano</td></tr><tr><td>03–10</td><td>Hace años</td></tr><tr><td>11–30</td><td>Hace meses</td></tr><tr><td>31–55</td><td>Hace semanas</td></tr><tr><td>56–85</td><td>Hace días</td></tr><tr><td>86–100</td><td>Hace horas</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Forma de la comunicación interceptada</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-vigilancia-forma')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-vigilancia-forma">
+    <thead><tr><th>d100</th><th>Tipo</th></tr></thead>
+    <tbody><tr><td>01–25</td><td>Mensaje o documento de texto</td></tr><tr><td>26–50</td><td>Mensaje o registro de audio</td></tr><tr><td>51–75</td><td>Mensaje o registro de vídeo</td></tr><tr><td>76–100</td><td>Imagen o grabación</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong>Una >Facción ha descubierto que un grupo rival ha comenzado a >Acción + Tema para socavar su >Proyecto de Facción actual. La facción busca a un explorador experimentado para explorar un array de vigilancia cercano y obtener información que ayude a frustrar los esfuerzos del rival. ¿Cómo socavarán las acciones del rival el proyecto de la facción? ¿Qué información podrías obtener para evitarlo?</div></section><section id="astilleros"><div class="section-header"><h2>Astilleros <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Astillero Ecuatorial — Tipo 1 &nbsp;·&nbsp; Ensamblador Behemoth — Tipo 2 &nbsp;·&nbsp; Astillero Hiperestructural — Tipo 3</div><p class="prose">Los precursores necesitaban vastas cantidades de naves y constructos. Automatizados y capaces de producir un número increíble de unidades simultáneamente, estas megaestructuras en forma de anillo eran la solución. Los <em>astilleros ecuatoriales</em> encirclan mundos; los <em>astilleros hiperestructurales</em> encirclan estrellas; los <em>ensambladores behemoth</em> producen los mayores vehículos precursores.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Método de Anclaje del Astillero Ecuatorial</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-astillero-anclaje')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-astillero-anclaje">
+    <thead><tr><th>d100</th><th>Método</th></tr></thead>
+    <tbody><tr><td>01–30</td><td>Columnas colosales</td></tr><tr><td>31–55</td><td>Innumerables cables de tensión</td></tr><tr><td>56–75</td><td>Propulsores enormes</td></tr><tr><td>76–90</td><td>Haces de energía potentes</td></tr><tr><td>91–100</td><td>Equilibrio gravitacional</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Nave Anclada al Ensamblador Behemoth</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-behemoth-nave')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-behemoth-nave">
+    <thead><tr><th>d100</th><th>Nave Anclada</th></tr></thead>
+    <tbody><tr><td>01–10</td><td>Ninguna</td></tr><tr><td>21–40</td><td>Planeta</td></tr><tr><td>41–65</td><td>Planetonave</td></tr><tr><td>66–100</td><td>Bóveda precursora (escala: en tierra, nave)</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Densidad del Campo de Escombros del Astillero</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-astillero-escombros')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-astillero-escombros">
+    <thead><tr><th>d100</th><th>Densidad</th></tr></thead>
+    <tbody><tr><td>01–20</td><td>Ninguna</td></tr><tr><td>21–30</td><td>Dispersa</td></tr><tr><td>31–45</td><td>Dispersada</td></tr><tr><td>46–80</td><td>Agrupada</td></tr><tr><td>81–95</td><td>Densa</td></tr><tr><td>96–100</td><td>Inconmensurable</td></tr></tbody>
+  </table>
+</div><div class="quest"><strong>Misión del Oráculo</strong<div class="subsection"><h3>Escala de las Naves del Campo de Escombros</h3>
+<div class="oracle-card" style="overflow:auto;">
+  <div class="oracle-card-header">
+    <h4>Escala de las Naves (Campo de Escombros)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-astillero-naves')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-astillero-naves" style="min-width:380px;">
+    <thead><tr><th>Ecuatorial</th><th>Hiperestructural</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>01–60</td><td>—</td><td>Lugar típico de alcance limitado</td></tr>
+      <tr><td>61–100</td><td>01–60</td><td>Lugar grande y elaborado</td></tr>
+      <tr><td>—</td><td>61–100</td><td>Lugar vasto de complejidad inconcebible</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+>Tras su descubrimiento, una >Facción recluta a un explorador para entrar en un astillero hiperestructural y buscar >Descriptor + Foco, que creen será fundamental en su esfuerzo por >Acción + Tema. ¿Qué busca la facción que solo puede encontrarse dentro del astillero hiperestructural? ¿Otros grupos compiten por lograr el mismo objetivo?</div></section><section id="motor-estelar"><div class="section-header"><h2>Motor Estelar <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 3</div><p class="prose">Las amenazas a un sistema solar completo —supernovas, colisiones estelares, agujeros negros— dejarían a la humanidad sin más opción que abandonar sus mundos. Los motores estelares eran al menos una de las respuestas de los precursores: no abandonar el territorio, sino simplemente moverlo fuera de peligro.</p><p class="prose"><em>Propulsor Shkadov:</em> Una enorme parábola sobre el polo de la estrella refleja radiación solar alrededor de ella, generando empuje pasivo para propulsar todo el sistema solar a través del vacío.</p><p class="prose"><em>Propulsor Caplan:</em> Un enjambre Dyson orbital más un enorme propulsor bajo el polo de la estrella. Grandes haces de luz reenfocada calientan el polo y expulsan materia al viento solar; esos gases se usan para alimentar un reactor de fusión que genera el empuje del enorme motor.</p><div class="quest"><strong>Misión del Oráculo</strong>Dos >Facciones compiten por el control de un sistema solar con un motor estelar. Una declara públicamente que su razón es >Acción + Tema; la otra no ha declarado ningún motivo. Se rumorea que una está detrás de los recientes >Problemas de Asentamiento para ganar ventaja. ¿Por qué cada grupo desea controlar el motor estelar? ¿Cómo ayudarás a resolver la disputa?</div></section><section id="manipuladores-estelares"><div class="section-header"><h2>Manipuladores Estelares <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructuras Tipo 3</div><p class="prose">Los precursores dominaban la <em>astraformación</em>: manipular y alterar el comportamiento de las estrellas. Lo hacían con dos variantes: los <em>supresores de fusión</em> (enfrían las estrellas) y los <em>compresores estelares</em> (las calientan).</p>
+<div class="discovery">
+  <strong>Modificador del Mapa de Calor (Basado en Sistema Solar)</strong>
+  Cuando consultes la tabla de Mapa de Calor del Objeto Estelar (pág. 26) para definir el tipo de mundos que orbitan un <em>supresor de fusión</em>, <strong>disminuye en uno</strong> el nivel de temperatura de las órbitas planetarias (hasta un mínimo de "Frígido").
+  Cuando consultes la misma tabla para mundos que orbitan un <em>compresor estelar</em>, <strong>aumenta en uno</strong> el nivel de temperatura de las órbitas planetarias (hasta un máximo de "Abrasador").
+</div>
+<div class="subsection"><h3>Supresor de Fusión</h3><p class="prose">Emiten pulsos de energía desconocida que atenúan el brillo de la estrella y calman su superficie, ralentizando la fusión nuclear. Resultado: la estrella libera menos energía, su vida se alarga drásticamente y los mundos en órbita se enfrían.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Clase Planetaria (Supresor de Fusión, basado en sector)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-supresor-planeta')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-supresor-planeta">
+    <thead><tr><th>Starforged</th><th>Planets Exp.</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>01–05</td><td>01–05</td><td>Mundo Selvático</td></tr><tr><td>06–25</td><td>06–20</td><td>Mundo Oceánico</td></tr><tr><td>26–57</td><td>21–52</td><td>Mundo Helado</td></tr><tr><td>—</td><td>53–57</td><td>Mundo Químico</td></tr><tr><td>58–72</td><td>58–69</td><td>Mundo Joviano</td></tr><tr><td>73–84</td><td>70–77</td><td>Mundo Rocoso</td></tr><tr><td>85–94</td><td>78–83</td><td>Mundo Contaminado</td></tr><tr><td>—</td><td>84–87</td><td>Mundo Metálico</td></tr><tr><td>—</td><td>88–89</td><td>Mundo Cristalino</td></tr><tr><td>—</td><td>90–91</td><td>Mundo Anclado por Mareas</td></tr><tr><td>—</td><td>92–93</td><td>Mundo Kárstico</td></tr><tr><td>95–97</td><td>94–96</td><td>Mundo Sepulcral</td></tr><tr><td>98–100</td><td>97–98</td><td>Mundo Fragmentado</td></tr><tr><td>—</td><td>99</td><td>Mundo Viviente</td></tr><tr><td>—</td><td>100</td><td>Mundo Anómalo</td></tr></tbody>
+  </table>
+</div></div><div class="subsection"><h3>Compresor Estelar</h3><p class="prose">Ejercen tal fuerza gravitatoria sobre la estrella anfitriona que comprimen sus gases constituyentes, acelerando la tasa de fusión nuclear. Resultado: la estrella libera más energía de lo naturalmente posible, su vida útil se reduce drásticamente y los mundos en órbita se calientan.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Clase Planetaria (Compresor Estelar, basado en sector)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-compresor-planeta')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-compresor-planeta">
+    <thead><tr><th>Starforged</th><th>Planets Exp.</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>01–17</td><td>01–17</td><td>Mundo de Forja</td></tr><tr><td>18–47</td><td>18–47</td><td>Mundo Desértico</td></tr><tr><td>48–57</td><td>48–57</td><td>Mundo Selvático</td></tr><tr><td>58–72</td><td>58–69</td><td>Mundo Joviano</td></tr><tr><td>73–84</td><td>70–77</td><td>Mundo Rocoso</td></tr><tr><td>85–94</td><td>78–83</td><td>Mundo Contaminado</td></tr><tr><td>—</td><td>84–87</td><td>Mundo Metálico</td></tr><tr><td>—</td><td>88–89</td><td>Mundo Cristalino</td></tr><tr><td>—</td><td>90–91</td><td>Mundo Anclado por Mareas</td></tr><tr><td>—</td><td>92–93</td><td>Mundo Kárstico</td></tr><tr><td>95–97</td><td>94–96</td><td>Mundo Sepulcral</td></tr><tr><td>98–100</td><td>97–98</td><td>Mundo Fragmentado</td></tr><tr><td>—</td><td>99</td><td>Mundo Viviente</td></tr><tr><td>—</td><td>100</td><td>Mundo Anómalo</td></tr></tbody>
+  </table>
+</div></div><div class="quest"><strong>Misión del Oráculo</strong>La estrella de tu sistema natal ha comenzado recientemente a fallar. Una >Facción local recluta a un explorador para entrar en un supresor de fusión en otro sector. Creen que dentro de la megaestructura se encuentra >Descriptor + Foco que, una vez utilizado correctamente, devolverá tu estrella natal a su comportamiento habitual. ¿Qué ha causado que la estrella falle? ¿Por qué esta facción ha tomado la iniciativa de intervenir?</div></section><section id="centro-terraformacion"><div class="section-header"><h2>Centro de Terraformación <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 2</div><p class="prose">Esta enorme cúpula flotante recorre la superficie del planeta, alterando su naturaleza. Mediante una combinación de los aparatos de la megaestructura y legiones de custodios, estas instalaciones pueden alterar cualquier aspecto de un planeta hasta el punto de crear un mundo completamente diferente.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estado del Centro de Terraformación</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-terra-estado')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="status" id="tbl-terra-estado">
+    <thead><tr><th>d100</th><th>Estado</th><th>Efecto</th></tr></thead>
+    <tbody><tr><td>01–15</td><td>Parcialmente construido</td><td>Al tirar >Planeta, rerollea Anómalo, Joviano, Kárstico, Anclado por Mareas y Fragmentado.</td></tr><tr><td>16–50</td><td>Operativo</td><td>Al tirar >Planeta, usa el oráculo de Clase Planetaria Alterada. Al explorar el sancta, puedes intentar alterar rápidamente una pequeña región del mundo.</td></tr><tr><td>51–85</td><td>No funcional / fuera de línea</td><td>01–75: Como operativo, pero tira Clase Planetaria Alterada dos veces (el segundo es la clase original). 76–100: Como si estuviera parcialmente construido.</td></tr><tr><td>86–95</td><td>Disfuncional</td><td>Como operativo, pero tira Clase Planetaria Alterada dos veces (el segundo es la clase original). Además: terremotos potentes y violentos fenómenos meteorológicos.</td></tr><tr><td>96–100</td><td>Destruida</td><td>01–75: Como operativo, tira Clase Planetaria Alterada dos veces. 76–100: Rerollea Anómalo, Joviano y Fragmentado. El área circundante es una lúgubre zona de escombros.</td></tr></tbody>
+  </table>
+</div>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Clase Planetaria Alterada (Centro de Terraformación)</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-terra-planetaalt')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="oracle" id="tbl-terra-planetaalt">
+    <thead><tr><th>Starforged</th><th>Planets Exp.</th><th>Resultado</th></tr></thead>
+    <tbody><tr><td>—</td><td>01–10</td><td>Mundo Químico</td></tr><tr><td>—</td><td>11–12</td><td>Mundo Cristalino</td></tr><tr><td>01–13</td><td>13–22</td><td>Mundo Desértico</td></tr><tr><td>14–25</td><td>23–32</td><td>Mundo de Forja</td></tr><tr><td>26–37</td><td>33–42</td><td>Mundo Helado</td></tr><tr><td>38–50</td><td>43–52</td><td>Mundo Selvático</td></tr><tr><td>—</td><td>53–62</td><td>Mundo Viviente</td></tr><tr><td>—</td><td>63–64</td><td>Mundo Metálico</td></tr><tr><td>51–63</td><td>65–74</td><td>Mundo Oceánico</td></tr><tr><td>64–75</td><td>75–80</td><td>Mundo Rocoso</td></tr><tr><td>76–88</td><td>81–90</td><td>Mundo Contaminado</td></tr><tr><td>89–100</td><td>91–100</td><td>Mundo Vital</td></tr></tbody>
+  </table>
+</div><div class="discovery">
+  <strong>Cuando se Descubre</strong>
+  <strong>Basado en Sistema Solar:</strong> Tira &gt;Órbita Planetaria para determinar dónde se encuentra el centro de terraformación y márcalo allí, junto con el mundo que lo alberga. Reduce el número de planetas en uno (mínimo uno).<br>
+  <strong>Basado en Sector:</strong> Tira &gt;Coordenadas para determinar la ubicación y márcala junto con el mundo anfitrión.<br>
+  <strong>Transición a Otra Clase:</strong> Al explorar un mundo con más de una clase planetaria, puedes interpretar el resultado "Entrar en un nuevo bioma" como una transición al entorno de la siguiente clase planetaria. El estado de la megaestructura implica si la transición es gradual o abrupta.
+</div>
+<div class="quest"><strong>Misión del Oráculo</strong>Un >Asentamiento en un mundo con un centro de terraformación operativo ha estado experimentando >Problemas de Asentamiento después de que la comunidad procediera a >Acción + Tema, perturbando inadvertidamente el frágil equilibrio de su entorno. Los cultivos y el suministro de agua han empezado a fallar. Los líderes del asentamiento buscan urgentemente a un explorador para acceder a la megaestructura y usar sus sistemas para estabilizar el mundo. ¿Qué causó realmente este problema? ¿Qué medidas adicionales serían necesarias para resolverlo?</div></section><section id="terradevorador"><div class="section-header"><h2>Terradevorador <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 1</div><p class="prose">Una enorme pirámide invertida que bulle de energía y flota sobre un planeta fundido en órbita geoestacionaria. La energía se disipa periódicamente para estallar como un haz que desgarra y sobrecalienta el mundo inferior. Se cree que funciona como equipo minero extraordinariamente avanzado, aunque también se teoriza que puede usarse como arma.</p>
+<div class="oracle-card">
+  <div class="oracle-card-header">
+    <h4>Estado del Terradevorador</h4>
+    <button class="roll-btn" onclick="rollOracle(this,'tbl-terra-devo-estado')">&#9860; Tirar d100</button>
+  </div>
+  <div class="roll-result"></div>
+  <table class="status" id="tbl-terra-devo-estado">
+    <thead><tr><th>d100</th><th>Estado</th><th>Efecto</th></tr></thead>
+    <tbody><tr><td>01–15</td><td>Parcialmente construido</td><td>Al tirar >Planeta, rerollea Forja, Fragmentado y Joviano. El terradevorador parcialmente construido orbita el mundo en silencio, incapaz de cumplir su propósito.</td></tr><tr><td>16–50</td><td>Operativo</td><td>El planeta es un mundo de forja (bioma único: volcánico).</td></tr><tr><td>51–85</td><td>No funcional / fuera de línea</td><td>Al tirar >Planeta, rerollea Forja, Joviano y Fragmentado. Si está fuera de línea, reactivarlo transformará lentamente el planeta en un mundo de forja.</td></tr><tr><td>86–95</td><td>Disfuncional</td><td>01–33: Haz infracargado, solo afecta a un área aislada (rerollea Forja, Fragmentado, Joviano; zona afectada como mundo de forja). 34–67: Como lo anterior, pero el terradevorador ya no es geoestacionario y orbita el planeta. 68–100: Haz sobrecargado, ha destruido el planeta y dispara al espacio profundo; el planeta es un mundo fragmentado.</td></tr><tr><td>96–100</td><td>Destruido</td><td>Al tirar >Planeta, rerollea Forja, Joviano y Fragmentado. El terradevorador, o sus restos, orbitan el mundo en silencio.</td></tr></tbody>
+  </table>
+</div><div class="discovery"><strong>El Haz — Mecánica de Tensión</strong>Al explorar un planeta orbitado por un terradevorador funcional, establece un reloj de tensión de 10 segmentos. Al llenarse, el haz dispara brevemente impactando el planeta. Según la distancia: las temperaturas suben a niveles peligrosos; erupciones volcánicas y terremotos potentes agrietan el terreno.</div><div class="quest"><strong>Misión del Oráculo</strong>Una >Facción tiene la intención de colonizar un >Planeta orbitado por un terradevorador operativo a causa de >Descriptor + Foco, pero es demasiado peligroso hacerlo mientras la megaestructura funciona. Exploradores anteriores no han tenido éxito en desactivarla. ¿Por qué han fallado? ¿Cómo planeas superar este obstáculo?</div></section><section id="puerta-gusano"><div class="section-header"><h2>Puerta de Gusano <span class="tag">Ancient Wonders</span></h2></div><div class="type-badge">Megaestructura Tipo 2</div><p class="prose">El viaje espacial está bien al alcance de la humanidad, pero cada viaje carga con el peso del tiempo. Las puertas de gusano son la respuesta que se cree dieron los precursores a esta limitación: constructos que permiten saltar entre sistemas en instantes, reformando el viaje y el comercio a escala galáctica.</p>
+
+<div class="discovery">
+  <strong>Red de Puertas de Gusano</strong>
+  Si has determinado previamente que los precursores fueron civilizaciones de tipo 2 o 3 en la escala tecnológica, cualquier sector que contenga una megaestructura contendrá también una puerta de gusano. Esto representa la red interconectada que los precursores construyeron para facilitar el tránsito instantáneo entre sus instalaciones más importantes.
+</div>
+<div class="req-box">
+  <div style="font-family:var(--mono);font-size:.65rem;color:var(--tag-aw);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Requisitos para Viajar</div>
+  <div style="font-size:.9rem;line-height:1.55;">
+    <div style="margin-bottom:.4rem;"><strong style="color:var(--gold);">1.</strong> La puerta de gusano debe estar <em>operativa o disfuncional</em>.</div>
+    <div style="margin-bottom:.4rem;"><strong style="color:var(--gold);">2.</strong> Debes tener el <em>conocimiento apropiado</em> para activarla. Los suficientemente valientes pueden explorarla y, mediante el estudio, aprender el secreto de su uso.</div>
+    <div><strong style="color:var(--gold);">3.</strong> Debes conocer la <em>ubicación de otra puerta de gusano en línea</em> que sirva como destino.</div>
+  </div>
+</div>
+<div class="req-box">
+  <div style="font-family:var(--mono);font-size:.65rem;color:var(--tag-aw);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Consideraciones de Viaje</div>
+  <div style="font-size:.9rem;line-height:1.55;">
+    <div style="margin-bottom:.4rem;"><strong style="color:var(--gold);">Operativa:</strong> Viajas con éxito sin coste narrativo. En Starforged, puedes obtener un <em>éxito total</em> automático al <em>Fijar Rumbo</em> a través de la red.</div>
+    <div><strong style="color:var(--gold);">Disfuncional:</strong> Viajas con éxito pero enfrentas un coste en tu destino. En Starforged, puedes obtener un <em>éxito parcial</em> automático al <em>Fijar Rumbo</em>.</div>
+  </div>
+</div><div class="discovery">
+  <strong>Cuando se Descubre</strong>
+  Tira &gt;Coordenadas (p.19) para determinar dónde se encuentra la puerta de gusano y márcala allí.
+</div>
+<div class="quest"><strong>Misión del Oráculo</strong>Tras el estallido de combates entre dos >Facciones rivales, un >Asentamiento que consideras tu hogar se ha convertido en el epicentro y solicita ayuda al saber que una pequeña >Flota se aproxima. Aunque estás a muchos sectores de distancia, hay una puerta de gusano en línea cerca del asentamiento. Tras conocer la ubicación de otra puerta fuera de línea en tu sector actual, quizás puedas reactivarla y usarla para llegar a tiempo. ¿Cuál es el propósito de la flota? ¿Por qué este asentamiento se ha convertido en el epicentro del conflicto?</div></section>
+</main>
+<script>
+
+function rollOracle(btnEl, tableId) {
+  const tbl = document.getElementById(tableId);
+  if (!tbl) return;
+  const rows = tbl.querySelectorAll('tbody tr');
+  const roll = Math.floor(Math.random()*100)+1;
+  let result = null;
+  rows.forEach(r => r.classList.remove('highlight'));
+  for (const row of rows) {
+    const rangeCell = row.cells[0];
+    if (!rangeCell) continue;
+    const txt = rangeCell.textContent.trim().replace(/–/g,'-').replace(/—/g,'-');
+    let lo, hi;
+    if (txt.includes('-')) {
+      const parts = txt.split('-');
+      lo = parseInt(parts[0]); hi = parseInt(parts[1]);
+    } else if (txt === '—' || txt === '--' || txt === '') { continue; }
+    else { lo = hi = parseInt(txt); }
+    if (!isNaN(lo) && roll >= lo && roll <= hi) {
+      const cells = row.cells;
+      result = cells[cells.length-1]?.textContent?.trim();
+      row.classList.add('highlight');
+      row.scrollIntoView({behavior:'smooth',block:'nearest'});
+      break;
+    }
+  }
+  const card = btnEl.closest('.oracle-card');
+  const resEl = card ? card.querySelector('.roll-result') : null;
+  if (resEl) {
+    resEl.textContent = result ? 'd100: '+roll+' → '+result : 'd100: '+roll;
+    resEl.classList.add('visible');
+  }
+}
+
+</script>
+</body>
+</html>

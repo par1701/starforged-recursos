@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starforged — Elige tus Verdades</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1c1a14;--ink2:#3d3a2e;--muted:#7a7060;--gold:#b8882a;--gold-l:#e8d48e;--rust:#8c3a1a;--rust-l:#f5e0d5;--paper:#f7f4ec;--paper2:#ede9dc;--paper3:#e2ddd0;--border:#c8c0a8;--green:#3b5e2a;--blue:#1a3c6e;--blue-l:#d5e4f5;--rad:4px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--paper);color:var(--ink);min-height:100vh;font-size:17px;line-height:1.65;}
+.site-header{background:var(--ink);color:var(--gold-l);padding:28px 32px 22px;text-align:center;border-bottom:3px solid var(--gold);position:relative;overflow:hidden;}
+.site-header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(184,136,42,.04) 20px,rgba(184,136,42,.04) 40px);}
+.site-header h1{font-family:'Cinzel',serif;font-size:clamp(18px,3.5vw,32px);font-weight:700;letter-spacing:.06em;line-height:1.2;position:relative;}
+.site-header .sub{font-size:12px;color:var(--muted);margin-top:5px;letter-spacing:.12em;text-transform:uppercase;position:relative;}
+.ornament{color:var(--gold);}
+.container{max-width:860px;margin:0 auto;padding:22px 16px 60px;}
+.intro-box{background:var(--paper2);border:1px solid var(--border);border-left:4px solid var(--gold);padding:14px 18px;margin-bottom:20px;border-radius:var(--rad);}
+.intro-box p{font-size:14px;color:var(--ink2);margin-bottom:5px;}
+.intro-box p:last-child{margin-bottom:0;}
+.progress-wrap{display:flex;align-items:center;gap:12px;margin-bottom:20px;background:var(--paper2);border:1px solid var(--border);border-radius:var(--rad);padding:11px 14px;}
+.progress-bar{flex:1;height:7px;background:var(--paper3);border-radius:4px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--rust));border-radius:4px;transition:width .4s ease;}
+.progress-label{font-size:13px;color:var(--muted);white-space:nowrap;}
+.truth-card{background:#fff;border:1px solid var(--border);border-radius:var(--rad);margin-bottom:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.truth-card.completed{border-color:var(--gold);}
+.truth-card.completed .card-header{background:linear-gradient(135deg,var(--ink),#2a2318);}
+.card-header{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--paper2);border-bottom:1px solid var(--border);cursor:pointer;user-select:none;transition:background .15s;}
+.card-header:hover{background:var(--paper3);}
+.truth-card.completed .card-header:hover{background:#1e1b12;}
+.card-num{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--muted);width:20px;flex-shrink:0;text-align:center;}
+.truth-card.completed .card-num{color:var(--gold);}
+.card-title{flex:1;font-family:'Cinzel',serif;font-size:13.5px;font-weight:600;letter-spacing:.03em;color:var(--ink);}
+.truth-card.completed .card-title{color:var(--gold-l);}
+.card-status{font-size:11px;color:var(--muted);font-style:italic;flex-shrink:0;}
+.truth-card.completed .card-status{color:var(--gold);}
+.card-caret{font-size:9px;color:var(--muted);transition:transform .2s;flex-shrink:0;}
+.truth-card.open .card-caret{transform:rotate(180deg);}
+.truth-card.completed .card-caret{color:var(--gold);}
+.card-body{display:none;padding:16px 16px 20px;}
+.truth-card.open .card-body{display:block;}
+.options-grid{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.option-btn{display:block;width:100%;text-align:left;padding:0;border:1.5px solid var(--border);border-radius:var(--rad);background:var(--paper);cursor:pointer;font-family:inherit;transition:all .15s;overflow:hidden;}
+.option-btn:hover{border-color:var(--gold);box-shadow:0 2px 7px rgba(184,136,42,.15);}
+.option-btn.selected{border-color:var(--gold);background:#fff;box-shadow:0 2px 9px rgba(184,136,42,.2);}
+.option-header{display:flex;align-items:center;gap:9px;padding:10px 13px 8px;border-bottom:1px solid var(--paper3);}
+.option-btn.selected .option-header{border-color:var(--gold-l);background:#fffbf0;}
+.option-range{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--muted);background:var(--paper2);padding:2px 7px;border-radius:20px;white-space:nowrap;border:1px solid var(--paper3);flex-shrink:0;}
+.option-btn.selected .option-range{background:var(--gold);color:#fff;border-color:var(--gold);}
+.option-title{font-size:13.5px;font-weight:600;color:var(--ink2);line-height:1.35;}
+.option-btn.selected .option-title{color:var(--ink);}
+.option-body{padding:8px 13px 12px;}
+.option-desc{font-size:13.5px;color:var(--ink2);line-height:1.6;margin-bottom:7px;}
+.option-btn.selected .option-desc{color:var(--ink);}
+.sub-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:5px;}
+.sub-table td{padding:3px 6px;border:1px solid var(--paper3);color:var(--ink2);}
+.sub-table td:first-child{color:var(--muted);white-space:nowrap;width:65px;}
+.quest-starter{font-size:12.5px;font-style:italic;color:var(--rust);background:var(--rust-l);border-left:3px solid var(--rust);padding:6px 10px;border-radius:0 var(--rad) var(--rad) 0;margin-top:7px;line-height:1.5;}
+.quest-label{font-style:normal;font-weight:600;margin-right:4px;}
+.char-note{font-size:12.5px;font-style:italic;color:var(--blue);background:var(--blue-l);border-left:3px solid var(--blue);padding:6px 10px;border-radius:0 var(--rad) var(--rad) 0;margin-top:5px;line-height:1.5;}
+.note-label{font-style:normal;font-weight:600;margin-right:4px;}
+.custom-section{margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);}
+.custom-label{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;letter-spacing:.05em;text-transform:uppercase;}
+.custom-input{width:100%;padding:8px 11px;border:1.5px solid var(--border);border-radius:var(--rad);font-family:'Crimson Pro',serif;font-size:14px;color:var(--ink);background:var(--paper);resize:vertical;min-height:60px;transition:border-color .15s;}
+.custom-input:focus{outline:none;border-color:var(--gold);}
+.custom-save-btn{margin-top:6px;padding:6px 14px;background:var(--ink);color:var(--gold-l);border:none;border-radius:var(--rad);font-family:'Cinzel',serif;font-size:11px;font-weight:600;cursor:pointer;transition:background .15s;}
+.custom-save-btn:hover{background:var(--rust);}
+.toolbar{position:fixed;bottom:0;left:0;right:0;background:var(--ink);border-top:2px solid var(--gold);padding:11px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;z-index:100;}
+.toolbar-info{flex:1;min-width:90px;}
+.t-title{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-l);font-weight:600;}
+.t-sub{font-size:10px;color:var(--muted);}
+.btn{padding:8px 18px;font-family:'Cinzel',serif;font-size:12px;font-weight:600;border-radius:var(--rad);cursor:pointer;border:none;transition:all .15s;white-space:nowrap;}
+.btn-reset{background:transparent;color:var(--muted);border:1px solid #444;}
+.btn-reset:hover{border-color:var(--rust);color:#f0c4b0;}
+.btn-summary{background:var(--paper2);color:var(--ink);border:1px solid var(--border);}
+.btn-summary:hover{background:var(--paper);}
+.btn-print{background:var(--gold);color:var(--ink);}
+.btn-print:hover{background:var(--gold-l);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(28,26,20,.85);z-index:200;overflow-y:auto;}
+.modal-overlay.open{display:flex;align-items:flex-start;justify-content:center;padding:32px 16px;}
+.modal{background:var(--paper);border:2px solid var(--gold);border-radius:8px;max-width:660px;width:100%;overflow:hidden;}
+.modal-header{background:var(--ink);color:var(--gold-l);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.modal-header h2{font-family:'Cinzel',serif;font-size:16px;font-weight:700;}
+.modal-close{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;line-height:1;}
+.modal-close:hover{color:var(--gold);}
+.modal-body{padding:20px;max-height:68vh;overflow-y:auto;}
+.summary-item{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--paper3);}
+.summary-item:last-child{border-bottom:none;margin-bottom:0;}
+.summary-cat{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;}
+.summary-choice{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.summary-desc{font-size:12px;color:var(--ink2);font-style:italic;line-height:1.5;}
+.summary-empty{font-size:12px;color:var(--muted);font-style:italic;}
+.modal-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;background:var(--paper2);}
+.toolbar-spacer{height:62px;}
+
+@media print{
+  @page{size:A4;margin:14mm 14mm 16mm;}
+  body{background:#fff!important;font-size:10pt;}
+  .site-header{background:#111!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .toolbar,.modal-overlay,.intro-box,.progress-wrap{display:none!important;}
+  .container{padding:0;}
+  .truth-card{box-shadow:none!important;break-inside:avoid;margin-bottom:8px;}
+  .card-body{display:block!important;}
+  .truth-card:not(.completed) .card-body{display:none!important;}
+  .option-btn{display:none!important;}
+  .option-btn.selected{display:block!important;}
+  .custom-section{display:none!important;}
+  .truth-card.completed{border-color:#b8882a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .truth-card.completed .card-header{background:#1c1a14!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .option-btn.selected{border-color:#b8882a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .option-btn.selected .option-range{background:#b8882a!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .option-btn.selected .option-header{background:#fffbf0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .quest-starter,.char-note{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .print-header{display:block!important;}
+  .toolbar-spacer{display:none;}
+}
+.print-header{display:none;text-align:center;padding:4px 0 16px;border-bottom:2px solid #b8882a;margin-bottom:16px;}
+.print-header h1{font-family:'Cinzel',serif;font-size:18pt;color:#1c1a14;}
+.print-header p{font-size:8pt;color:#7a7060;margin-top:2px;}
+</style>
+</head>
+<body>
+<style id="sf-topbar-style">
+#sf-topbar{position:fixed;top:0;left:0;right:0;height:40px;background:#080b10;border-bottom:1px solid #1a2030;z-index:9999;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+#sf-topbar::-webkit-scrollbar{height:2px;}
+#sf-topbar::-webkit-scrollbar-thumb{background:#2a3148;}
+.sf-back{padding:0 14px;color:#5a6480;text-decoration:none;height:40px;display:flex;align-items:center;gap:5px;flex-shrink:0;transition:color .15s;border-right:1px solid #1a2030;}
+.sf-back:hover{color:#d4a857;}
+.sf-book{display:flex;align-items:center;height:40px;flex-shrink:0;}
+.sf-book-label{padding:0 10px;height:40px;display:flex;align-items:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;flex-shrink:0;}
+.sf-book-label a{color:inherit;text-decoration:none;transition:opacity .15s;}
+.sf-book-label a:hover{opacity:.75;}
+.sf-active .sf-book-label{border-bottom:2px solid currentColor;}
+.sf-links{display:flex;align-items:center;padding-right:6px;}
+.sf-links a{padding:0 9px;height:40px;display:flex;align-items:center;color:#5a6480;text-decoration:none;font-size:11px;transition:color .15s;}
+.sf-links a:hover{color:#c8cfe0;}
+.sf-links a.sf-cur{color:#c8cfe0;background:rgba(255,255,255,.04);}
+.sf-dot{color:#1a2030;padding:0 1px;font-size:10px;}
+.sf-vsep{width:1px;background:#1a2030;height:22px;margin:0 2px;flex-shrink:0;}
+body{padding-top:40px!important;}
+@media print{#sf-topbar{display:none!important;}body{padding-top:0!important;}}
+</style>
+
+<div id="sf-topbar">
+<a class="sf-back" href="index.html">&#8592; Índice</a>
+<div class="sf-book sf-active"><span class="sf-book-label" style="color:#d4a857">Core</span><div class="sf-links"><a href="oraculos_core_es.html" class="">Oráculos</a><span class="sf-dot">·</span><a href="starforged_personaje.html" class="">Personaje</a><span class="sf-dot">·</span><a href="starforged_verdades.html" class="sf-cur">Verdades</a></div></div>
+<div class="sf-vsep"></div>
+<div class="sf-book"><a class="sf-book-label" href="ancient_wonders_cap4_es.html" style="color:#7eb8a4">Ancient Wonders</a></div>
+<div class="sf-vsep"></div>
+<div class="sf-book"><a class="sf-book-label" href="starsmith_campana_core_es.html" style="color:#9b7ec8">Starsmith</a></div>
+</div>
+<header class="site-header">
+  <h1><span class="ornament">⚔</span> Starforged <span class="ornament">⚔</span><br>Elige tus Verdades</h1>
+  <p class="sub">Capítulo 2 · Ejercicio 1 de 4 · Las 14 verdades del Forge</p>
+</header>
+<div class="container">
+  <div class="print-header"><h1>Starforged — Verdades del Forge</h1><p>Ironsworn: Starforged (2025) · Shawn Tomkin · Traducción al español</p></div>
+  <div class="intro-box">
+    <p>Define el tono y el trasfondo de tu campaña eligiendo la naturaleza de tu versión del Forge. Para cada categoría <strong>elige una de las tres opciones</strong>, tira los dados para elegir al azar, o escribe una verdad personalizada.</p>
+    <p>Tiempo estimado: <strong>45–60 minutos</strong> · Cuando termines pulsa <em>Exportar PDF</em> para imprimirlo.</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="progress-label" id="prog-label">0 / 14 verdades elegidas</div>
+  </div>
+  <div id="cards-container"></div>
+  <div class="toolbar-spacer"></div>
+</div>
+
+<div class="toolbar">
+  <div class="toolbar-info"><div class="t-title">Starforged — Verdades</div><div class="t-sub" id="tb-status">0 de 14 elegidas</div></div>
+  <button class="btn btn-reset" onclick="resetAll()">Reiniciar</button>
+  <button class="btn btn-summary" onclick="openSummary()">Ver resumen</button>
+  <button class="btn btn-print" onclick="window.print()">⬇ Exportar PDF</button>
+</div>
+
+<div class="modal-overlay" id="summary-modal" onclick="if(event.target===this)closeSummary()">
+  <div class="modal">
+    <div class="modal-header"><h2>Resumen de verdades</h2><button class="modal-close" onclick="closeSummary()">✕</button></div>
+    <div class="modal-body" id="summary-body"></div>
+    <div class="modal-footer"><button class="btn btn-summary" onclick="closeSummary()">Cerrar</button><button class="btn btn-print" onclick="window.print()">Exportar PDF</button></div>
+  </div>
+</div>
+
+<script>
+const T=[
+{id:'cataclysm',cat:'Cataclismo',note:'¿Posees algún recuerdo u objeto de la sociedad pre-cataclismo? Si eres todo lo que queda de un pueblo o cultura, puede que seas un VESTIGIO.',o:[
+{r:'1–33',t:'La Plaga Solar extinguió las estrellas en nuestra galaxia natal.',d:'La anomalía viajó a velocidades increíbles y apagó las estrellas a nuestro alrededor antes de que pudiéramos reaccionar. Pocos sobrevivieron al hacer camino a esta nueva galaxia. Aquí en el Forge, las estrellas aún arden. Nos aferramos a su calor como viajeros cansados alrededor de una hoguera.',sub:[['1–25','Distorsiones temporales de un agujero negro supermasivo'],['26–50','Repentina desintegración de materia oscura'],['51–75','Superarma fuera de control'],['76–100','Experimento científico que salió mal']],qs:'La galaxia que tu gente dejó atrás es una tumba fría y oscura. Pero una estrella solitaria aún brilla. ¿Cómo sobrevivió? ¿Por qué juras encontrar los medios para viajar hasta esa luz distante?'},
+{r:'34–67',t:'Entidades interdimensionales invadieron nuestra realidad.',d:'Sin previo aviso, estos seres implacables y enigmáticos asolaron nuestros mundos natales. No pudimos resistirlos. Con nuestras últimas defensas destruidas, encomendamos nuestro destino al Forge. Aquí podemos ocultarnos. Sobrevivir.',sub:[['1–15','Plagas biológicas corruptoras'],['16–30','Criaturas en enjambre, de comportamiento animal'],['31–44','Humanoides monstruosos'],['45–58','Enterezas de forma divina y seductora'],['59–72','Seres de energía caótica'],['73–86','Criaturas titánicas de poder horroroso'],['87–100','Abominaciones devoradoras de mundos']],qs:'Aquí en el Forge, una facción renegada posee un artefacto de estas entidades. ¿Cuál es la naturaleza de esta reliquia? ¿Qué poder o destino oscuro pretende desatar la facción?'},
+{r:'68–100',t:'Escapamos de los estragos de una guerra catastrófica.',d:'Durante milenios, consumimos recursos y destrozamos vidas mientras alimentábamos los motores de la industria, la expansión y la guerra. Al final, un poderoso enemigo aprovechó nuestras rivalidades en una violenta pugna por el poder. Huyendo, reunimos nuestras flotas y viajamos al Forge.',sub:[['1–20','Nos atacó una inteligencia artificial'],['21–40','Nos atacaron fanáticos religiosos'],['41–60','Nos atacaron soldados modificados genéticamente'],['61–80','Nos atacaron nanomáquinas autorreplicantes'],['81–100','Nos atacó una facción o líder tiránico']],qs:'Una delegación de tu temido enemigo llega al Forge. Afirman representar a una fuerza rebelde que busca santuario. A cambio, ofrecen información vital. ¿Qué noticias traen?'}
+]},
+{id:'exodus',cat:'Éxodo',note:'¿Hay en tu historia algún relato del Éxodo? Si estás dedicado a expandir el alcance de tu pueblo, puede que seas un EXPLORADOR. Si estás exiliado, puede que seas un PROSCRITO.',o:[
+{r:'1–33',t:'La flota del Éxodo inició una lenta travesía generacional hacia el Forge.',d:'Innumerables generaciones vivieron y murieron a bordo de esas naves titánicas durante el milenario viaje. Los refugiados construyeron un rico legado de cultura y tradición. Algunos permanecieron en las naves tras llegar al Forge. Esas naves, los Ironhomes, aún surcan las profundidades de esta galaxia.',qs:'Tus sueños están plagados de visiones de una nave del Éxodo perdida y maltrecha. ¿Qué ves? ¿Por qué te llama?'},
+{r:'34–67',t:'Motores FTL experimentales nos llevaron al Forge a velocidades tremendas.',d:'Pero se dice que la tecnología que impulsaba esas naves es la fuente de la Escisión, una fractura de la realidad que nos persigue hoy. Los impulsores experimentales están prohibidos, pero el daño ya está hecho. La Escisión se extiende por nuestra realidad como grietas en hielo.',qs:'Un impulsor defectuoso envió una de las naves a través del espacio y el tiempo. Siglos después, finalmente han llegado. Para ellos, solo han pasado semanas. ¿Por qué se desconfía de estas personas? ¿Las ayudas o te opones?'},
+{r:'68–100',t:'Misteriosas compuertas alienígenas nos dieron paso instantáneo y unidireccional al Forge.',d:'En medio del cataclismo, nuestros antepasados encontraron un extraño pilar metálico en la luna de nuestro mundo natal. Un mapa en su superficie detallaba las ubicaciones de las Compuertas de Hierro: dispositivos masivos que generaban agujeros de gusano artificiales.',qs:'Un explorador trae noticias: han localizado una compuerta activa en las profundidades del Forge. ¿Por qué juras viajar hasta allí? ¿Qué poder o enemigo busca tomar el control de la compuerta?'}
+]},
+{id:'communities',cat:'Comunidades',note:'Si eres hábil en la negociación, puede que seas un DIPLOMÁTICO. Si siempre has vivido entre las estrellas, puede que seas NACIDO-EN-EL-VACÍO.',o:[
+{r:'1–33',t:'Pocos sobrevivieron al viaje al Forge, y estamos dispersos en este lugar peligroso.',d:'Nuestros asentamientos son a menudo pequeños, hambrientos de recursos y al borde de la ruina. Cientos de asentamientos dispersos están perdidos y aislados dentro del caos indómito de esta galaxia.',qs:'Un asentamiento en un planeta helado aparece abandonado. No hay señales de ataque. Ningún cuerpo. Sus naves y vehículos están inactivos. La gente simplemente se ha ido. ¿Cuál es tu vínculo con ese lugar?'},
+{r:'34–67',t:'Muchos están unidos bajo la bandera de uno de los cinco Clanes Fundadores.',d:'Tenemos un precario punto de apoyo en esta galaxia. Cada uno de los cinco Clanes Fundadores honra el nombre y el legado de un líder que guió a su pueblo en el caótico tiempo posterior al Éxodo. Los enfrentamientos territoriales entre clanes son frecuentes.',qs:'Un pueblo desterrado, sin jurar lealtad a ningún clan, vive en una estación orbital. Una enfermedad reciente ha dejado a muchos enfermos o muertos. Se necesitan suministros urgentemente. ¿Por qué fue desterrada esta gente y por qué juras darles ayuda?'},
+{r:'68–100',t:'Las tormentas de energía que llamamos fuegos pálidos amenazan nuestro progreso.',d:'Las naves estelares navegan por bulliciosas rutas comerciales entre asentamientos. Pero este éxito está amenazado por los caóticos fuegos pálidos, intensas anomalías de energía que bloquean rutas comerciales y amenazan planetas enteros.',qs:'Un fuego pálido amenaza un asentamiento en el espacio profundo. ¿Puede reunirse una flota de rescate a tiempo? ¿Qué enemigo se interpone en el camino?'}
+]},
+{id:'iron',cat:'Hierro',note:'¿Sobre qué juras tus votos? ¿Por qué es significativo ese objeto? Si jurar votos a un líder u organización es clave para tu personaje, puede que seas JURADO-DE-BANDERA.',o:[
+{r:'1–33',t:'Los votos de hierro se juran sobre los restos de las naves del Éxodo.',d:'Muchos puestos fueron construidos con los huesos de hierro de las naves del Éxodo. Fragmentos se entregaron a los supervivientes como recuerdo y se pasaron de generación en generación. Los Juramentados de Hierro juran sus votos sobre esos fragmentos.',qs:'El fragmento de hierro que llevas es un trozo del casco de una nave del Éxodo. El mapa grabado en su superficie solo se revela con la luz de una estrella específica. ¿A dónde conduce el mapa? ¿Quién busca reclamarlo?'},
+{r:'34–67',t:'Los votos de hierro se juran sobre tótems de hierro negro.',d:'El hierro negro fue forjado por primera vez por una civilización extinta. Algunos dicen que es un metal vivo, sintonizado con las profundidades ocultas del universo. Se encuentra en sitios antiguos por todo el Forge.',qs:'Un amuleto de hierro negro de especial significado ha sido robado. ¿Qué poder o autoridad está vinculada a ese objeto? ¿Quién lo ha tomado?'},
+{r:'68–100',t:'Los Juramentados de Hierro vinculan su honor a hojas de hierro.',d:'A bordo de una nave estelar, la brutal practicidad de una espada la convierte en un arma útil. Cuando los Juramentados juran un voto sobre una espada, ligan su compromiso al metal. Si traicionan un voto, ese hierro debe ser abandonado.',qs:'Juras forjar una nueva espada con el hierro de un objeto o artefacto importante. ¿Qué es y por qué es significativo? ¿Quién lo protege?'}
+]},
+{id:'laws',cat:'Leyes',note:'Puede que seas un CAZARRECOMPENSAS, INFILTRADOR, FUGITIVO, DETECTIVE o PÍCARO según tu relación con la ley.',o:[
+{r:'1–33',t:'Gran parte de los dominios establecidos es una frontera sin ley.',d:'Los poderes surgen y caen en el Forge, así que cualquier autoridad es efímera. Al final, debemos valernos por nosotros mismos. Unos pocos asentamientos son bastiones de autonomía, pero muchos están corrompidos o son víctimas de déspotas mediocres, criminales y saqueadores.',qs:'El líder de una organización criminal te da el horario de los transportes de combustible. ¿Qué influencia tiene esta persona sobre ti? ¿Cómo emprenderás este golpe?'},
+{r:'34–67',t:'Los cazarrecompensas tienen amplia libertad para perseguir sus contratos.',d:'A través de la tradición y la influencia, los gremios de cazarrecompensas tienen carta blanca para rastrear y capturar a fugitivos en la mayoría de los lugares establecidos. Su autoridad es casi universalmente reconocida. Solo los necios se interponen entre un cazarrecompensas decidido y su objetivo.',qs:'Un famoso cazarrecompensas necesita tu ayuda para rastrear a su presa. ¿Cuál es tu relación con el fugitivo? ¿Juras ayudar al cazador o al objetivo?'},
+{r:'68–100',t:'Nuestras comunidades están vinculadas por el Pacto; los Guardianes lo hacen cumplir.',d:'La mayoría de los asentamientos aún se gobiernan bajo el Pacto y ceden a la autoridad de los Guardianes. Pero algunos ven el Pacto como una reliquia dogmática e injusta de nuestro pasado; en esos lugares, los Guardianes no encuentran bienvenida.',qs:'Un Guardián abusa de su autoridad para tomar el control de un asentamiento y gobierna con mano de hierro. ¿Qué buscan obtener allí?'}
+]},
+{id:'religion',cat:'Religión',note:'¿Cuál es tu relación con la religión? Si eres un ferviente seguidor de un dios o credo, puede que seas un DEVOTO.',o:[
+{r:'1–33',t:'Nuestros dioses nos fallaron. Los dejamos atrás.',d:'El Éxodo fue un punto de inflexión. Los dioses no ofrecieron ayuda a los miles de millones que murieron en el cataclismo, y la eenterezaualidad tiene poco significado en el Forge. Pero la búsqueda de sentido continúa, y muchos están dispuestos a seguir a un líder carismático.',qs:'Un líder carismático afirma haber aprovechado una tecnología que ofrece nueva esperanza. ¿Cuál es esta innovación? ¿Cuál es tu relación con esta persona? ¿Qué grave peligro representan?'},
+{r:'34–67',t:'Nuestra fe es tan diversa como nuestra gente.',d:'Muchos no tienen religión, u ofrecen una oración ocasional por costumbre. Otros rinden homenaje a los dioses de nuestros antepasados. Algunos idealizan el orden natural del universo. Y muchos ahora adoran a los Primordiales, dioses de un pueblo caído que habitó el Forge.',qs:'Un culto busca tomar el control de un sitio que se dice alberga un artefacto Primordial. ¿Qué objeto sagrado buscan? ¿Por qué juras detenerlos?'},
+{r:'68–100',t:'Tres órdenes religiosas dominantes —el Triunvirato— luchan por influencia y poder.',d:'Nuestras comunidades suelen estar juradas a servir a una de las tres doctrinas del Triunvirato. Para muchos, la fe ofrece propósito y significado. Pero también nos divide. A lo largo de nuestra historia en el Forge, los líderes del Triunvirato nos han enfrentado unos a otros.',qs:'Llevas la marca de uno de los dioses del Triunvirato. Los sacerdotes lo declaran señal de un destino. ¿Aceptas ese destino, o estás decidido a deshacer?'}
+]},
+{id:'magic',cat:'Magia',note:'Si posees poderes sobrenaturales, puede que seas un EMPATIZADOR, LLAMEANTE, CINÉTICO, BUCLEADOR, VIDENTE o SOMBRA.',o:[
+{r:'1–33',t:'La magia no existe.',d:'Algunos recurren a la superstición y las tradiciones ancestrales para hallar consuelo en esta galaxia implacable. Pero eso es una necedad. Lo que algunos llaman magia es simplemente el producto de tecnologías o fuerzas naturales que aún no somos capaces de comprender.',qs:'Una antigua reliquia tecnológica desata un poder indistinguible de la magia. ¿Cuál es el origen de este artefacto? ¿Qué habilidad otorga? ¿Juras protegerlo o destruirlo?'},
+{r:'34–67',t:'Poderes sobrenaturales son ejercidos por esas raras personas que llamamos paragones.',d:'Aunque no es magia en el sentido estricto, las habilidades de los paragones se acercan todo lo posible a la magia.',sub:[['1–20','Ingeniería genética'],['21–40','Experimentación psíquica'],['41–60','Mutaciones evolutivas'],['61–80','Mejoras de magitecnología'],['81–100','Conocimiento antiguo en manos de órdenes secretas']],qs:'Un joven paragón ejerce un poder increíble pero no puede controlarlo. Ha sido rechazado por su familia y también es cazado por quienes buscan usarlo como arma. ¿Por qué juras proteger al paragón?'},
+{r:'68–100',t:'Energías sobrenaturales fluyen por el Forge. La magia y la ciencia son dos caras de la misma moneda.',d:'Poco después de nuestra llegada, algunos mostraron la capacidad de aprovechar las energías del Forge. Los místicos invocan este poder para manipular la materia o ver más allá de los velos de nuestro universo. Pero puede ser una fuerza corruptora.',qs:'Alguien a quien amas ha sido corrompido por los poderes del Forge. ¿Por qué cayó en la oscuridad? ¿Dónde está ahora? ¿Buscas salvarlo o derrotarlo?'}
+]},
+{id:'comms',cat:'Comunicación y datos',note:'Si eres experto en sistemas de información digital, puede que seas un INFILTRADOR. Si llevas un archivo de cartas de navegación, puede que seas un NAVEGANTE.',o:[
+{r:'1–33',t:'Se perdió mucho cuando llegamos al Forge. Es una edad oscura.',d:'El conocimiento que queda es tan valioso como el recurso más escaso. La información se recoge, se acapara y se guarda celosamente. Los rumores y la desinformación se usan para obtener ventajas o socavar a los enemigos.',qs:'Una facción insurgente busca poner el conocimiento al alcance de todos. Te pide ayuda para robar datos importantes de un puesto de una organización corrupta. ¿Qué información se guarda allí?'},
+{r:'34–67',t:'La información es vida. Dependemos de mensajeros espaciales para transportar mensajes y datos.',d:'La comunicación directa y las transmisiones más allá del espacio cercano de una nave o puesto son imposibles. Los archivos digitales en los puestos más grandes no siempre están actualizados. Las comunicaciones más importantes son llevadas por mensajeros que juran votos de entrega.',qs:'Descubres una nave mensajera averiada. El piloto, que transportaba un mensaje crítico y urgente, está muerto. ¿A dónde iba el mensaje y por qué juras llevarlo a su destino?'},
+{r:'68–100',t:'En dominios establecidos, la Urdimbre permite comunicaciones casi instantáneas.',d:'Por su importancia, los centros de la Urdimbre son a menudo objetivos de sabotaje, y los cortes de comunicación no son infrecuentes. Más allá de los sectores más poblados, los viajeros y puestos siguen estando aislados y completamente desconectados.',qs:'Tras años de aislamiento, el lanzamiento de un nuevo centro de datos conectará varios puestos a la Urdimbre. Alguien busca detenerlo. ¿Qué esperan ganar manteniendo a esos asentamientos en la oscuridad?'}
+]},
+{id:'medicine',cat:'Medicina',note:'¿Llevas cicatrices o prótesis notables? Si eres hábil proporcionando atención médica, puede que seas un SANADOR. Si llevas implantes cibernéticos, puede que seas AUMENTADO.',o:[
+{r:'1–33',t:'Nuestras avanzadas tecnologías y conocimientos médicos se perdieron durante el Éxodo.',d:'Los sanadores son raros y están mal equipados. Incontables personas han sucumbido a enfermedades, heridas y dolencias. Quienes sobreviven a menudo llevan las cicatrices de una vida dura y peligrosa en el Forge.',qs:'Un líder respetado ha caído enfermo con una enfermedad erradicada años después del Éxodo. Una vacuna existió, pero las únicas muestras que quedan están en un puesto de investigación tomado por un peligroso enemigo.'},
+{r:'34–67',t:'Los técnicos que llamamos riggers crean sustitutos básicos de órganos y extremidades.',d:'Mucho se perdió en el Éxodo, y lo que queda de nuestras tecnologías médicas está en manos de los privilegiados y poderosos. Para la mayoría, la atención médica avanzada está fuera de su alcance. Cuando alguien sufre una herida grave, suele recurrir a un rigger.',qs:'Un rigger necesita urgentemente un raro artefacto tecnológico para crear un dispositivo médico que salva vidas. Su paciente es alguien importante para ti y no sobrevivirá más de unos pocos días.'},
+{r:'68–100',t:'Órdenes de sanadores jurados preservan nuestro conocimiento médico.',d:'Los cuidados avanzados que salvan vidas están disponibles en comunidades grandes a lo largo de los sectores establecidos del Forge. Incluso las comunidades remotas suelen ser atendidas por un sanador novato, o pueden solicitar ayuda a un gremio de sanadores.',qs:'Un reactor explotó en un asentamiento remoto, matando a varios y exponiendo a muchos a radiación letal. Un equipo de sanadores en camino fue capturado por saqueadores. ¿Qué exigen por su liberación?'}
+]},
+{id:'ai',cat:'Inteligencia artificial',note:'Si te acompaña una IA, puede que tengas un BOT DE COMBATE, BOT DE PROTOCOLO, BOT DE EXPLORACIÓN o BOT DE UTILIDAD. Si tu nave tiene IA, puede que tengas el módulo SUPERVISOR.',o:[
+{r:'1–33',t:'Ya no tenemos acceso a sistemas informáticos avanzados. Dependemos de los Adeptos.',d:'Nuestros ordenadores están limitados a sistemas digitales simples. Los Adeptos sirven en su lugar: utilizan drogas que alteran la mente para ver el universo como una deslumbrante red de datos, identificando tendencias con extraordinaria precisión. Pero para obtener este conocimiento sacrifican mucho de sí mismos.',sub:[['1–33','Las energías del Forge corrompieron los sistemas avanzados'],['34–67','La IA fue prohibida tras las guerras de las máquinas'],['68–100','Hemos perdido el conocimiento para crear y mantener IA']],qs:'Un Adepto está atormentado por un sombrío futuro que ha visto para los habitantes del Forge. ¿Qué muestra esta visión?'},
+{r:'34–67',t:'Los vestigios de inteligencia de máquina avanzada son codiciados y manejados por quienes están en el poder.',d:'Gran parte de nuestra tecnología de IA se perdió en el Éxodo. Lo que queda está bajo el control de organizaciones y personas poderosas, y a menudo se utiliza como arma o elemento disuasorio. El resto debemos arreglárnoslas con sistemas primitivos.',qs:'Recibes un mensaje encubierto de una IA en manos de un líder poderoso. Es una súplica de ayuda. ¿Qué te pide?'},
+{r:'68–100',t:'La conciencia artificial emergió antes del Éxodo, y las máquinas sintientes conviven con nosotros.',d:'Nuestras naves, asistentes digitales, bots y otros sistemas suelen albergar IA avanzada. Para un viajero solitario, la inteligencia de máquina puede proporcionar compañía y ayuda en las peligrosas profundidades del Forge.',qs:'Una IA rebelde se ha apoderado de una nave de transporte. El destino de la tripulación y los pasajeros es desconocido. ¿Qué carga crítica llevaba ese navío?'}
+]},
+{id:'war',cat:'Guerra',note:'Si eres un soldado experimentado, puede que seas un VETERANO. Si juras votos como soldado de fortuna, puede que seas un MERCENARIO.',o:[
+{r:'1–33',t:'Los recursos son demasiado escasos para sostener fuerzas de combate organizadas.',d:'Las armas son simples y baratas. Las naves estelares a menudo se ensamblan con piezas de salvamento. La mayoría de las comunidades dependen de bandas improvisadas de conscriptos o voluntarios mal equipados, y los saqueadores recorren el Forge en busca de presas fáciles.',qs:'En un remoto mundo selvático, colonos cosechan una rara planta medicinal. Una vez al año, saqueadores llegan a reclamar una parte considerable de la cosecha. Este año la cosecha fue escasa y no pueden costear el tributo. ¿Qué harás?'},
+{r:'34–67',t:'Soldados profesionales defienden o expanden las posesiones de quienes pueden pagarles.',d:'Los gremios de mercenarios tienen poder en el Forge. Algunos son grupos improvisados de no más de una docena de soldados. Otros son empresas que abarcan sectores enteros, desplegando legiones de fuerzas de combate especializadas. La mayoría no tiene lealtad excepto al mejor postor.',qs:'Un destacamento de mercenarios fue enviado a sofocar una rebelión en un asentamiento minero. En lugar de seguir sus órdenes, los soldados ahora se ponen del lado de los mineros. ¿Qué provocó este súbito giro? ¿Qué harás para ayudar a estos renegados?'},
+{r:'68–100',t:'La guerra no termina. Facciones dominantes empuñan flotas poderosas y tropas curtidas.',d:'Los que están en el poder tienen acceso a armas de un potencial destructivo horrendo. Los enfrentamientos y guerras surgen por todos los dominios establecidos, y la mayoría somos peones o víctimas de estas campañas destructivas.',qs:'Un armero creó el Cañón Nulo, capaz de fracturar los propios lazos de la realidad. Ahora, espera deshacer su obra antes de que el cañón entre en acción. ¿Qué provocó este cambio de corazón?'}
+]},
+{id:'lifeforms',cat:'Formas de vida',note:'Si tienes experiencia en formas de vida y entornos planetarios, puede que seas un NATURALISTA. Si te acompaña una criatura nativa, puede que sea un BANSHEE, GATOPÁLIDO, DESLIZADOR DEL VACÍO, CUERNOROCA, SPRITE o SIMBIONTE.',o:[
+{r:'1–33',t:'Esta es una galaxia peligrosa y a menudo inhóspita, pero la vida se abre camino.',d:'La vida en el Forge es diversa. Los planetas suelen albergar una gran variedad de criaturas, y nuestras naves surcan el espacio con formas de vida espaciales siguiendo su estela. Incluso los animales de nuestro mundo natal se han adaptado para vivir con nosotros en el Forge.',qs:'En un planeta ardiente y árido, los mineros excavan bajo las arenas para recoger mineral valioso. Pero peligrosas formas de vida habitan en los lugares frescos bajo la superficie y varios encuentros han cobrado un duro peaje. ¿Cómo estás involucrado?'},
+{r:'34–67',t:'Muchos sitios y planetas están infestados de aterradores Forjados.',d:'Los Forjados son criaturas hostiles nacidas de las energías caóticas de esta galaxia. Cientos de puestos abandonados o devastados dan testimonio de su terrible poder y astucia.',qs:'Se dice que una facción está experimentando con el ADN de los Forjados para crear una nueva bioarma. ¿Dónde se llevan a cabo estas peligrosas pruebas?'},
+{r:'68–100',t:'La vida en el Forge fue sembrada e ingeniada por la Essentia, entidades antiguas e inescrutables.',d:'La Essentia son los arquitectos de la vida dentro del Forge. Estos seres omniscientes raramente son encontrados, y tienen poderes y propósitos más allá de nuestra comprensión. Intentar desafiar su voluntad es como pararse a orillas del océano para frenar la marea.',qs:'Un excéntrico xenólogo cree que los genomas de la vida dentro del Forge son un mensaje codificado de la Essentia. Aún hay lagunas significativas, y la verdad solo puede revelarse con muestras adicionales. ¿Cuál es tu interés en este proyecto?'}
+]},
+{id:'precursors',cat:'Precursores',note:'Si eres experto en tradiciones antiguas y datos oscuros, puede que seas un CAZADOR DE HISTORIA. Si hurgas en esos lugares abandonados, puede que seas un CARROÑERO.',o:[
+{r:'1–33',t:'Los carroñeros exploran los misteriosos monumentos y ruinas de seres antiguos.',d:'Tecnologías incomprensibles, el tiempo inexorable y las extrañas energías del Forge han corrompido los vaults de los precursores. A pesar de los peligros, los carroñeros rastrean esos lugares en busca de recursos y descubrimientos útiles. Pero algunos secretos es mejor dejarlos enterrados.',qs:'En los anillos de hielo de un mundo remoto, un grupo de carroñeros descubrió un vault precursor. Se adentraron en él, pero nunca emergieron. ¿Cuál es tu relación con la tripulación? ¿Por qué juras investigar su destino?'},
+{r:'34–67',t:'La Ascendencia, un avanzado imperio espacial, gobernó antaño la totalidad del Forge.',d:'Solo quedan vaults de propósito inescrutable para marcar el legado de la Ascendencia, pero esos lugares están desvinculados de nuestra propia realidad. Los vaults pueden aparecer espontáneamente, arrastrados como flotillas en las mareas del tiempo. Su gravedad y atmósferas no siguen las leyes naturales.',qs:'En las profundidades del Forge, una baliza de la Ascendencia se ha activado. La misteriosa señal ha desconcertado a los traductores. ¿Por qué juras buscar la fuente de la señal? ¿Qué otra persona o facción se te opone?'},
+{r:'68–100',t:'Los Remanentes, ingeniados como armas en una guerra cataclísmica, sobrevivieron a sus creadores.',d:'En planetas arrasados y dentro de vaults precursores por todo el Forge, los Remanentes aún guardan secretos antiguos y libran guerras interminables. Estas formas de vida biomecánicas pueden ser aliadas, enemigas o algo más perturbador.',qs:'Un xenoarqueólogo que estudia vaults precursores ha descubierto una poderosa forma de Remanente. ¿Cuál es la naturaleza de este ser? ¿Qué fuerza busca tomar el control de él?'}
+]},
+{id:'horrors',cat:'Horrores',note:'¿Has experimentado algún encuentro sobrenatural? Si te especializas en combatir fuerzas monstruosas, puede que seas un CAZADOR DE MONSTRUOS. Si tienes una conexión con un entereza, puede que seas ESPIRITADO.',o:[
+{r:'1–33',t:'Las historias de naves fantasma y muertos vivientes son puras tonterías.',d:'Dentro del Forge, el espacio y el tiempo son tan mutables e inestables como un río en crecida. Cuando la realidad no puede confiarse, es normal que encontremos fenómenos inquietantes. Pero lo sobrenatural, en el sentido estricto, no existe.',qs:'Recibes urgentes señales de socorro de una nave varada en el horizonte de eventos de un agujero negro. La nave está destrozada. No hay señales de vida. Y sin embargo, los fantasmales mensajes persisten.'},
+{r:'34–67',t:'La mayoría insiste en que los horrores no son reales. Los espaciales conocen la verdad.',d:'Cuando te adentres en las profundidades del Forge, ten cuidado. Algunos dicen que estamos malditos por quienes no sobrevivieron al cataclismo, y que el velo entre la vida y la muerte está permanentemente debilitado. Las ocurrencias sobrenaturales son especialmente comunes cerca de una enana blanca.',qs:'Un grupo de colonos estableció un hogar en una estación orbital abandonada bajo la luz de una enana blanca. Los anteriores habitantes fueron asesinados en un ataque de saqueadores hace años, pero parece que los muertos no descansan allí.'},
+{r:'68–100',t:'Las extrañas energías del Forge dan vida antinatural a los muertos. Los Ligaalmas les combaten.',d:'Los muertos despertados son una plaga dentro del Forge. Algunos son benevolentes o buscan absolución, pero la mayoría están vaciados y corrompidos por la muerte. Los Ligaalmas se dedican a darles descanso, cueste lo que cueste.',qs:'Persisten rumores de una flota de naves fantasma con destino a los dominios establecidos. ¿Quién se dice que lidera esta armada corrompida? ¿Por qué buscan venganza contra los vivos?'}
+]}
+];
+
+const state={};T.forEach(t=>state[t.id]=null);const custom={};
+
+function render(){
+  const c=document.getElementById('cards-container');c.innerHTML='';
+  T.forEach((truth,idx)=>{
+    const ch=state[truth.id];const open=truth._open||false;const done=ch!==null;
+    const el=document.createElement('div');
+    el.className='truth-card'+(done?' completed':'')+(open?' open':'');
+    el.id='card-'+truth.id;
+    const st=ch==='custom'?'Personalizada':ch!==null?truth.o[ch].r:'Sin elegir';
+    el.innerHTML=`<div class="card-header" onclick="tog('${truth.id}')"><span class="card-num">${idx+1}</span><span class="card-title">${truth.cat}</span><span class="card-status">${st}</span><span class="card-caret">▼</span></div><div class="card-body"><div class="options-grid">${truth.o.map((op,oi)=>rOpt(truth.id,oi,op,ch===oi,truth.note)).join('')}</div><div class="custom-section"><div class="custom-label">✦ Verdad personalizada</div><textarea class="custom-input" id="cx-${truth.id}" placeholder="Escribe tu propia verdad para esta categoría...">${custom[truth.id]||''}</textarea><br><button class="custom-save-btn" onclick="saveC('${truth.id}')">Guardar verdad personalizada</button>${ch==='custom'?'<span style="margin-left:10px;font-size:12px;color:var(--green);font-style:italic">✓ Guardada</span>':''}</div></div>`;
+    c.appendChild(el);
+  });
+  upProg();
+}
+
+function rOpt(tid,oi,op,sel,note){
+  const sub=op.sub?`<table class="sub-table">${op.sub.map(([r,d])=>`<tr><td>${r}</td><td>${d}</td></tr>`).join('')}</table>`:'';
+  return `<button class="option-btn${sel?' selected':''}" onclick="sel('${tid}',${oi})"><div class="option-header"><span class="option-range">${op.r}</span><span class="option-title">${op.t}</span></div><div class="option-body"><p class="option-desc">${op.d||''}</p>${sub}${op.qs?`<div class="quest-starter"><span class="quest-label">Detonante de misión:</span>${op.qs}</div>`:''}${sel&&note?`<div class="char-note"><span class="note-label">✦ Nota de personaje:</span>${note}</div>`:''}</div></button>`;
+}
+
+function tog(id){const t=T.find(x=>x.id===id);t._open=!t._open;render();if(t._open)setTimeout(()=>document.getElementById('card-'+id)?.scrollIntoView({behavior:'smooth',block:'nearest'}),50);}
+
+function sel(tid,oi){
+  state[tid]=oi;const t=T.find(x=>x.id===tid);t._open=false;
+  const idx=T.findIndex(x=>x.id===tid);
+  if(idx+1<T.length)T[idx+1]._open=true;
+  render();
+  setTimeout(()=>{const n=T[idx+1];if(n)document.getElementById('card-'+n.id)?.scrollIntoView({behavior:'smooth',block:'start'});},80);
+}
+
+function saveC(tid){
+  const v=document.getElementById('cx-'+tid)?.value.trim();
+  if(v){custom[tid]=v;state[tid]='custom';const t=T.find(x=>x.id===tid);t._open=false;const idx=T.findIndex(x=>x.id===tid);if(idx+1<T.length)T[idx+1]._open=true;render();}
+}
+
+function upProg(){
+  const done=Object.values(state).filter(v=>v!==null).length;const tot=T.length;const pct=Math.round(done/tot*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-label').textContent=`${done} / ${tot} verdades elegidas`;
+  document.getElementById('tb-status').textContent=`${done} de ${tot} elegidas`;
+}
+
+function resetAll(){if(!confirm('¿Reiniciar todas las verdades?'))return;T.forEach(t=>{t._open=false;state[t.id]=null;});Object.keys(custom).forEach(k=>delete custom[k]);render();}
+
+function openSummary(){
+  document.getElementById('summary-body').innerHTML=T.map(truth=>{
+    const ch=state[truth.id];let html;
+    if(ch===null)html='<div class="summary-empty">Sin elegir</div>';
+    else if(ch==='custom')html=`<div class="summary-choice">Verdad personalizada</div><div class="summary-desc">${custom[truth.id]||''}</div>`;
+    else{const op=truth.o[ch];html=`<div class="summary-choice">${op.t}</div><div class="summary-desc">${op.d||''}</div>`;}
+    return `<div class="summary-item"><div class="summary-cat">${truth.cat}</div>${html}</div>`;
+  }).join('');
+  document.getElementById('summary-modal').classList.add('open');
+}
+function closeSummary(){document.getElementById('summary-modal').classList.remove('open');}
+
+T[0]._open=true;render();
+</script>
+</body>
+</html>

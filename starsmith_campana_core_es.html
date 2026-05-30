@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starsmith: Oráculos Expandidos — Campaña y Núcleo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   TOKENS
+   ══════════════════════════════════════════ */
+:root {
+  --bg:       #07090f;
+  --bg2:      #0d1018;
+  --bg3:      #131620;
+  --bg4:      #191d2a;
+  --border:   #222840;
+  --border2:  #2e3555;
+  --steel:    #4a6fa5;
+  --steel2:   #6b93cc;
+  --amber:    #e8a832;
+  --amber2:   #c8881a;
+  --amber-dim:rgba(232,168,50,0.12);
+  --cyan:     #3ecfcf;
+  --cyan-dim: rgba(62,207,207,0.1);
+  --red:      #c04040;
+  --text:     #c9d2e8;
+  --text-dim: #6a7899;
+  --text-muted: #3d4a66;
+  --mono:     'JetBrains Mono', monospace;
+  --display:  'Bebas Neue', sans-serif;
+  --serif:    'Crimson Pro', serif;
+  --nav-w:    270px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  display: flex;
+  min-height: 100vh;
+  /* Starfield background */
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(74,111,165,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(62,207,207,0.05) 0%, transparent 50%);
+}
+
+/* ══════════════════════════════════════════
+   STARFIELD PARTICLES (CSS only)
+   ══════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 45%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 80%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 30%, rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 90%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(2px 2px at 25% 40%, rgba(62,207,207,0.3) 0%, transparent 100%),
+    radial-gradient(2px 2px at 75% 65%, rgba(232,168,50,0.2) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ══════════════════════════════════════════
+   NAV
+   ══════════════════════════════════════════ */
+nav {
+  width: var(--nav-w);
+  min-width: var(--nav-w);
+  background: rgba(13,16,24,0.97);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 0 0 2rem;
+  flex-shrink: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+nav::-webkit-scrollbar { width: 3px; }
+nav::-webkit-scrollbar-track { background: transparent; }
+nav::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.nav-brand {
+  padding: 1.2rem 1.1rem 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.nav-brand::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--steel), transparent);
+}
+.nav-brand .title {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+}
+.nav-brand .subtitle {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+.nav-group { margin-bottom: 0.2rem; }
+.nav-group-title {
+  font-family: var(--display);
+  font-size: 0.7rem;
+  color: var(--steel2);
+  letter-spacing: 0.14em;
+  padding: 0.7rem 1.1rem 0.25rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.3rem;
+}
+nav a {
+  display: block;
+  padding: 0.22rem 1.1rem 0.22rem 1.4rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  transition: color 0.15s, background 0.15s, border-left 0.15s;
+  border-left: 2px solid transparent;
+}
+nav a:hover {
+  color: var(--amber);
+  background: var(--amber-dim);
+  border-left-color: var(--amber2);
+}
+nav a.sub {
+  padding-left: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+nav a.sub:hover { color: var(--cyan); background: var(--cyan-dim); border-left-color: var(--cyan); }
+
+/* ══════════════════════════════════════════
+   MAIN
+   ══════════════════════════════════════════ */
+main {
+  flex: 1;
+  max-width: 960px;
+  padding: 2rem 2.5rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════
+   PAGE HEADER
+   ══════════════════════════════════════════ */
+.page-header {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  position: relative;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--amber2), var(--steel), transparent);
+}
+.page-header .kicker {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--steel2);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.page-header h1 {
+  font-family: var(--display);
+  font-size: 3rem;
+  color: var(--text);
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+.page-header h1 span { color: var(--amber); }
+.page-header .tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* ══════════════════════════════════════════
+   SECTIONS
+   ══════════════════════════════════════════ */
+section { margin-bottom: 3.5rem; scroll-margin-top: 1rem; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.section-header::before {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 3rem;
+  height: 2px;
+  background: var(--amber);
+}
+.section-header h2 {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+.section-badge {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--steel2);
+  border: 1px solid var(--steel);
+  padding: 0.1rem 0.45rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.section-badge.core { color: var(--cyan); border-color: var(--cyan); }
+
+.section-intro {
+  font-family: var(--serif);
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+  max-width: 680px;
+  line-height: 1.65;
+}
+.section-intro ul {
+  margin: 0.6rem 0 0 1.3rem;
+}
+.section-intro ul li { margin-bottom: 0.25rem; }
+.section-intro ul li strong { color: var(--amber); }
+
+/* ══════════════════════════════════════════
+   ORACLE GROUPS (tabs: 1-2 / 3-4 / 5-6)
+   ══════════════════════════════════════════ */
+.oracle-group {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0.8rem 0;
+}
+
+.oracle-tabs {
+  display: flex;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+.oracle-tab {
+  padding: 0.45rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+}
+.oracle-tab:hover { color: var(--amber); background: var(--amber-dim); }
+.oracle-tab.active { color: var(--amber); background: var(--amber-dim); border-bottom: 2px solid var(--amber); }
+
+.oracle-panel { display: none; }
+.oracle-panel.active { display: block; }
+
+.oracle-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  background: var(--bg4);
+  border-bottom: 1px solid var(--border);
+}
+.oracle-panel-title {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.roll-btn {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--bg);
+  background: var(--amber2);
+  border: none;
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.15s;
+  letter-spacing: 0.04em;
+}
+.roll-btn:hover { background: var(--amber); }
+.roll-result {
+  display: none;
+  padding: 0.45rem 0.8rem;
+  background: var(--amber-dim);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  color: var(--amber);
+}
+.roll-result.visible { display: block; }
+
+/* ══════════════════════════════════════════
+   TABLES
+   ══════════════════════════════════════════ */
+table { width: 100%; border-collapse: collapse; }
+
+/* Standard narrative tables (range + text) */
+table.oracle th {
+  background: var(--bg4);
+  color: var(--steel2);
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.7rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border2);
+}
+table.oracle td {
+  padding: 0.3rem 0.7rem;
+  border-bottom: 1px solid rgba(34,40,64,0.6);
+  vertical-align: top;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+table.oracle tbody tr:nth-child(even) td { background: rgba(19,22,32,0.5); }
+table.oracle tbody tr.highlighted td { background: var(--amber-dim) !important; }
+table.oracle td.range {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  width: 4.5rem;
+}
+
+/* Core word tables: 4 columns of num+word */
+table.word-grid {
+  font-size: 0.85rem;
+}
+table.word-grid td {
+  padding: 0.2rem 0.5rem;
+  border-bottom: 1px solid rgba(34,40,64,0.5);
+  vertical-align: top;
+}
+table.word-grid tbody tr:nth-child(even) td { background: rgba(19,22,32,0.4); }
+table.word-grid tbody tr.highlighted td { background: var(--cyan-dim) !important; }
+table.word-grid td.num {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  width: 1.6rem;
+  white-space: nowrap;
+}
+table.word-grid td.word {
+  color: var(--text);
+  width: 10rem;
+  padding-right: 1rem;
+}
+
+/* ══════════════════════════════════════════
+   DISCOVERY / INFO BLOCKS
+   ══════════════════════════════════════════ */
+.info-block {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--steel);
+  border-radius: 0 3px 3px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.8rem 0;
+  font-size: 0.9rem;
+}
+.info-block .label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--steel2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.info-block ul { margin-left: 1.2rem; }
+.info-block ul li { margin-bottom: 0.2rem; }
+.info-block ul li strong { color: var(--amber); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE / PRINT
+   ══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { display: none; }
+  main { padding: 1rem; }
+}
+@media print {
+  nav { display: none; }
+  body::before { display: none; }
+  section { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<style id="sf-topbar-style">
+#sf-topbar{position:fixed;top:0;left:0;right:0;height:40px;background:#080b10;border-bottom:1px solid #1a2030;z-index:9999;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+#sf-topbar::-webkit-scrollbar{height:2px;}
+#sf-topbar::-webkit-scrollbar-thumb{background:#2a3148;}
+.sf-back{padding:0 14px;color:#5a6480;text-decoration:none;height:40px;display:flex;align-items:center;gap:5px;flex-shrink:0;transition:color .15s;border-right:1px solid #1a2030;}
+.sf-back:hover{color:#d4a857;}
+.sf-book{display:flex;align-items:center;height:40px;flex-shrink:0;}
+.sf-book-label{padding:0 10px;height:40px;display:flex;align-items:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;flex-shrink:0;}
+.sf-book-label a{color:inherit;text-decoration:none;transition:opacity .15s;}
+.sf-book-label a:hover{opacity:.75;}
+.sf-active .sf-book-label{border-bottom:2px solid currentColor;}
+.sf-links{display:flex;align-items:center;padding-right:6px;}
+.sf-links a{padding:0 9px;height:40px;display:flex;align-items:center;color:#5a6480;text-decoration:none;font-size:11px;transition:color .15s;}
+.sf-links a:hover{color:#c8cfe0;}
+.sf-links a.sf-cur{color:#c8cfe0;background:rgba(255,255,255,.04);}
+.sf-dot{color:#1a2030;padding:0 1px;font-size:10px;}
+.sf-vsep{width:1px;background:#1a2030;height:22px;margin:0 2px;flex-shrink:0;}
+body{padding-top:40px!important;}
+@media print{#sf-topbar{display:none!important;}body{padding-top:0!important;}}
+</style>
+<style id="sf-nav-fix">
+nav{top:40px!important;height:calc(100vh - 40px)!important;}
+</style>
+<div id="sf-topbar">
+<a class="sf-back" href="index.html">&#8592; Índice</a>
+<div class="sf-book"><a class="sf-book-label" href="oraculos_core_es.html" style="color:#d4a857">Core</a></div>
+<div class="sf-vsep"></div>
+<div class="sf-book"><a class="sf-book-label" href="ancient_wonders_cap4_es.html" style="color:#7eb8a4">Ancient Wonders</a></div>
+<div class="sf-vsep"></div>
+<div class="sf-book sf-active"><span class="sf-book-label" style="color:#9b7ec8">Starsmith</span><div class="sf-links"><a href="starsmith_campana_core_es.html" class="sf-cur">Campaña & Núcleo</a><span class="sf-dot">·</span><a href="starsmith_espacio_es.html" class="">Espacio & Mundo</a><span class="sf-dot">·</span><a href="starsmith_personajes_es.html" class="">Personas & Lugares</a></div></div>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-brand">
+    <div class="title">Starsmith<br>Oráculos</div>
+    <div class="subtitle">Campaña &amp; Núcleo · ES</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Campaña</div>
+    <a href="#trasfondo">Historia de Trasfondo</a>
+    <a href="#historia-nave">Historia de la Nave</a>
+    <a href="#peculiaridad-nave">Peculiaridad de la Nave</a>
+    <a href="#problema-sector">Problema del Sector</a>
+    <a href="#incidente">Incidente Desencadenante</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Núcleo</div>
+    <a href="#accion">Acción</a>
+    <a href="#tema">Tema</a>
+    <a href="#descriptor">Descriptor</a>
+    <a href="#foco">Foco</a>
+  </div>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<main>
+
+<div class="page-header">
+  <div class="kicker">Starsmith: Oráculos Expandidos</div>
+  <h1>CAMPAÑA <span>&amp;</span> NÚCLEO</h1>
+  <div class="tagline">Oráculos de creación de personaje, nave y campaña · Tablas de Acción, Tema, Descriptor y Foco</div>
+</div>
+
+<!-- ══════════════════════════════════
+     CAMPAÑA — INTRO
+     ══════════════════════════════════ -->
+<section id="campana-intro">
+  <div class="section-header">
+    <h2>ORÁCULOS DE CAMPAÑA</h2>
+    <span class="section-badge">Campaña</span>
+  </div>
+  <div class="section-intro">
+    <p>Esta sección de oráculos está pensada para el inicio de tu campaña y te ayuda a configurar tu personaje. Aquí encontrarás:</p>
+    <ul>
+      <li><strong>Historia de Trasfondo</strong> — ¿Qué ocurrió en tu pasado que te puso en el camino de vagar entre las estrellas?</li>
+      <li><strong>Historia de la Nave</strong> — ¿Cómo conseguiste una nave propia?</li>
+      <li><strong>Peculiaridad de la Nave</strong> — ¿Cuál es una característica extraña y única de tu nave?</li>
+      <li><strong>Problema del Sector</strong> — En tu sector inicial, ¿qué problemas están ocurriendo que podrían darte un gancho para involucrarte?</li>
+      <li><strong>Incidente Desencadenante</strong> — ¿Qué evento específico está ocurriendo ahora mismo y necesitas atender? Es probable que sea tu primer voto.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     HISTORIA DE TRASFONDO
+     ══════════════════════════════════ -->
+<section id="trasfondo">
+  <div class="section-header">
+    <h2>HISTORIA DE TRASFONDO</h2>
+    <span class="section-badge">Campaña</span>
+  </div>
+  <div class="section-intro">¿Qué ocurrió en tu pasado que te puso en el camino de vagar entre las estrellas?</div>
+
+  <div class="oracle-group">
+    <div class="oracle-tabs">
+      <div class="oracle-tab active" onclick="switchTab(this,'tbl-sm1-backstory-1')">Tabla 1–2</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-backstory-2')">Tabla 3–4</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-backstory-3')">Tabla 5–6</div>
+    </div>
+
+    <!-- Panel 1-2 -->
+    <div class="oracle-panel active" id="panel-tbl-sm1-backstory-1">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Historia de Trasfondo 1–2</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-backstory-1')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-backstory-1">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–7</td><td>Abandonaste a los tuyos tras descubrir una verdad perturbadora</td></tr>
+          <tr><td class="range">8–13</td><td>Estás guiado por una visión o profecía</td></tr>
+          <tr><td class="range">14–20</td><td>Te persiguen las sombras de acciones o fracasos pasados</td></tr>
+          <tr><td class="range">21–27</td><td>Huyes de un pasado criminal</td></tr>
+          <tr><td class="range">28–34</td><td>Eres el único superviviente de un ataque o calamidad</td></tr>
+          <tr><td class="range">35–40</td><td>Escapaste de una situación abusiva o injusta</td></tr>
+          <tr><td class="range">41–46</td><td>No conservas ningún recuerdo de tu vida anterior</td></tr>
+          <tr><td class="range">47–53</td><td>Rechazaste un deber o destino</td></tr>
+          <tr><td class="range">54–60</td><td>Fuiste desterrado de tu hogar anterior</td></tr>
+          <tr><td class="range">61–67</td><td>Se te negó un derecho de nacimiento</td></tr>
+          <tr><td class="range">68–74</td><td>Llevas por tu cuenta tanto tiempo como puedes recordar</td></tr>
+          <tr><td class="range">75–81</td><td>Te enviaron en una misión prolongada</td></tr>
+          <tr><td class="range">82–87</td><td>Alguien te llevó o te atrajo con engaños</td></tr>
+          <tr><td class="range">88–94</td><td>Tus ambiciones superaron tus humildes orígenes</td></tr>
+          <tr><td class="range">95–100</td><td>Tu afán viajero te llevó muy lejos</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Panel 3-4 -->
+    <div class="oracle-panel" id="panel-tbl-sm1-backstory-2">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Historia de Trasfondo 3–4</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-backstory-2')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-backstory-2">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–7</td><td>Te atormenta una relación fallida</td></tr>
+          <tr><td class="range">8–13</td><td>Huiste de una deuda aplastante que llegó a su vencimiento</td></tr>
+          <tr><td class="range">14–20</td><td>Huiste de un derecho de nacimiento o una obligación familiar no deseada</td></tr>
+          <tr><td class="range">21–27</td><td>Posees un conocimiento inexplicable que va más allá de tu comprensión</td></tr>
+          <tr><td class="range">28–34</td><td>Defiendes con fervor una causa noble y filantrópica</td></tr>
+          <tr><td class="range">35–40</td><td>Abandonaste una corporación que te exigía ascender o marcharte</td></tr>
+          <tr><td class="range">41–46</td><td>Participaste en un ataque feroz y ahora buscas la expiación</td></tr>
+          <tr><td class="range">47–53</td><td>Buscas demostrar que eres digno de un deber o destino</td></tr>
+          <tr><td class="range">54–60</td><td>Deambulas sin rumbo tras perder a un fiel compañero</td></tr>
+          <tr><td class="range">61–67</td><td>Estuviste a la deriva en el espacio el tiempo suficiente para perderte a ti mismo</td></tr>
+          <tr><td class="range">68–74</td><td>Estabas en una misión de investigación a largo plazo cuando todo cambió</td></tr>
+          <tr><td class="range">75–81</td><td>Fuiste acusado falsamente de actividad criminal y huiste</td></tr>
+          <tr><td class="range">82–87</td><td>Trabajas para evitar que una visión o profecía se cumpla</td></tr>
+          <tr><td class="range">88–94</td><td>Tu hogar no sobrevivió a un desastre natural</td></tr>
+          <tr><td class="range">95–100</td><td>Los tuyos te abandonaron tras descubrir una verdad perturbadora</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Panel 5-6 -->
+    <div class="oracle-panel" id="panel-tbl-sm1-backstory-3">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Historia de Trasfondo 5–6</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-backstory-3')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-backstory-3">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–7</td><td>Abandonaste la riqueza que te convertía en un objetivo</td></tr>
+          <tr><td class="range">8–13</td><td>Estás guiado por una misión que te legaron los tuyos</td></tr>
+          <tr><td class="range">14–20</td><td>Posees un conocimiento que otros quieren borrar</td></tr>
+          <tr><td class="range">21–27</td><td>Acabas de recuperarte de una peligrosa adicción que aún te tienta</td></tr>
+          <tr><td class="range">28–34</td><td>Sabes que la verdad está ahí fuera</td></tr>
+          <tr><td class="range">35–40</td><td>Ofendiste a un benefactor o mecenas</td></tr>
+          <tr><td class="range">41–46</td><td>Participaste en un experimento poco ético o ilegal</td></tr>
+          <tr><td class="range">47–53</td><td>Desperdiciaste la seguridad de una vida normal</td></tr>
+          <tr><td class="range">54–60</td><td>Sobreviviste a un aterrizaje de emergencia en la Expansión, pero a un gran coste</td></tr>
+          <tr><td class="range">61–67</td><td>Fuiste engañado para llevar a cabo una acción turbia</td></tr>
+          <tr><td class="range">68–74</td><td>Quedaste en ridículo por un experimento tecnológico fallido</td></tr>
+          <tr><td class="range">75–81</td><td>Fuiste marginado por tus creencias</td></tr>
+          <tr><td class="range">82–87</td><td>Te vieron como un paria</td></tr>
+          <tr><td class="range">88–94</td><td>Tu búsqueda de conocimiento te llevó muy lejos</td></tr>
+          <tr><td class="range">95–100</td><td>Tus marcadores genéticos únicos te convierten en un objetivo para la investigación ilegal</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     HISTORIA DE LA NAVE
+     ══════════════════════════════════ -->
+<section id="historia-nave">
+  <div class="section-header">
+    <h2>HISTORIA DE LA NAVE</h2>
+    <span class="section-badge">Campaña</span>
+  </div>
+  <div class="section-intro">¿Cómo conseguiste una nave estelar propia?</div>
+
+  <div class="oracle-group">
+    <div class="oracle-tabs">
+      <div class="oracle-tab active" onclick="switchTab(this,'tbl-sm1-starship-hist-1')">Tabla 1–2</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-starship-hist-2')">Tabla 3–4</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-starship-hist-3')">Tabla 5–6</div>
+    </div>
+
+    <div class="oracle-panel active" id="panel-tbl-sm1-starship-hist-1">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Historia de la Nave 1–2</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-starship-hist-1')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-starship-hist-1">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–8</td><td>Adquirida a cambio de una preciada reliquia familiar</td></tr>
+          <tr><td class="range">9–17</td><td>Construida con chatarra reciclada</td></tr>
+          <tr><td class="range">18–25</td><td>Reclamada como botín de guerra</td></tr>
+          <tr><td class="range">26–34</td><td>Descubierta como derelicto y reconstruida a retazos</td></tr>
+          <tr><td class="range">35–42</td><td>Obtenida a cambio de una promesa o voto</td></tr>
+          <tr><td class="range">43–50</td><td>Encontrada abandonada en perfecto estado</td></tr>
+          <tr><td class="range">51–58</td><td>Concedida por una organización o comunidad</td></tr>
+          <tr><td class="range">59–67</td><td>Heredada de un familiar o mentor</td></tr>
+          <tr><td class="range">68–75</td><td>Comprada a un precio sospechosamente barato</td></tr>
+          <tr><td class="range">76–84</td><td>Robada a un notorio jefe criminal u organización delictiva</td></tr>
+          <tr><td class="range">85–92</td><td>Tomada al huir de un ataque o desastre</td></tr>
+          <tr><td class="range">93–100</td><td>Ganada en una apuesta</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-starship-hist-2">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Historia de la Nave 3–4</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-starship-hist-2')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-starship-hist-2">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–8</td><td>Abandonada como nave maldita que nadie más se atrevió a tomar</td></tr>
+          <tr><td class="range">9–17</td><td>Comprada en subasta procedente de una venta de herencia</td></tr>
+          <tr><td class="range">18–25</td><td>Reclamada como desecho corporativo tras actualizar su flota</td></tr>
+          <tr><td class="range">26–34</td><td>Regalada por un notorio jefe criminal a cambio de un favor pendiente de cobro</td></tr>
+          <tr><td class="range">35–42</td><td>Entregada como resolución de una promesa o voto</td></tr>
+          <tr><td class="range">43–50</td><td>Prototipo corporativo con fallos cedido gratuitamente</td></tr>
+          <tr><td class="range">51–58</td><td>Concedida por un benefactor desconocido</td></tr>
+          <tr><td class="range">59–67</td><td>Comprada a un precio sospechosamente caro</td></tr>
+          <tr><td class="range">68–75</td><td>Nave de las generaciones originales reconvertida</td></tr>
+          <tr><td class="range">76–84</td><td>Rescatada del montón de reciclaje y reparada</td></tr>
+          <tr><td class="range">85–92</td><td>Compra de segunda mano con daños de batalla mal reparados</td></tr>
+          <tr><td class="range">93–100</td><td>Ganada en una lotería</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-starship-hist-3">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Historia de la Nave 5–6</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-starship-hist-3')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-starship-hist-3">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–8</td><td>Comprada en subasta tras su embargo por las autoridades</td></tr>
+          <tr><td class="range">9–17</td><td>Construida a medida a lo largo de los años como proyecto de afición</td></tr>
+          <tr><td class="range">18–25</td><td>Nave de entrenamiento desechada y reconvertida</td></tr>
+          <tr><td class="range">26–34</td><td>Encontrada inacabada en dique seco orbital en un sector abandonado</td></tr>
+          <tr><td class="range">35–42</td><td>Entregada como anticipo por un trabajo pendiente de hacer</td></tr>
+          <tr><td class="range">43–50</td><td>Dada como garantía de una deuda que te deben</td></tr>
+          <tr><td class="range">51–58</td><td>Cedida como último deseo con condiciones adjuntas</td></tr>
+          <tr><td class="range">59–67</td><td>Beneficio de un cargo de liderazgo anterior</td></tr>
+          <tr><td class="range">68–75</td><td>Comprada a un capitán en desgracia forzado a retirarse</td></tr>
+          <tr><td class="range">76–84</td><td>Nave de museo reconvertida</td></tr>
+          <tr><td class="range">85–92</td><td>Robada a una facción o corporación</td></tr>
+          <tr><td class="range">93–100</td><td>Ganada como premio corporativo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     PECULIARIDAD DE LA NAVE
+     ══════════════════════════════════ -->
+<section id="peculiaridad-nave">
+  <div class="section-header">
+    <h2>PECULIARIDAD DE LA NAVE</h2>
+    <span class="section-badge">Campaña</span>
+  </div>
+  <div class="section-intro">¿Cuál es una característica extraña y única de tu nave estelar?</div>
+
+  <div class="oracle-group">
+    <div class="oracle-tabs">
+      <div class="oracle-tab active" onclick="switchTab(this,'tbl-sm1-quirk-1')">Tabla 1–2</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-quirk-2')">Tabla 3–4</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-quirk-3')">Tabla 5–6</div>
+    </div>
+
+    <div class="oracle-panel active" id="panel-tbl-sm1-quirk-1">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Peculiaridad de la Nave 1–2</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-quirk-1')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-quirk-1">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–5</td><td>La sala de máquinas está chamuscada con viejas marcas de quemaduras</td></tr>
+          <tr><td class="range">6–10</td><td>El exterior está deteriorado por óxido y mugre</td></tr>
+          <tr><td class="range">11–15</td><td>Una música tenue y fantasmal resuena a veces por los corredores</td></tr>
+          <tr><td class="range">16–20</td><td>El generador de gravedad es notoriamente caprichoso</td></tr>
+          <tr><td class="range">21–25</td><td>El casco está fusionado con crecimientos orgánicos</td></tr>
+          <tr><td class="range">26–30</td><td>El casco traquetea y cruje durante el vuelo atmosférico</td></tr>
+          <tr><td class="range">31–35</td><td>Los espacios interiores están abarrotados de cables y conductos expuestos</td></tr>
+          <tr><td class="range">36–40</td><td>Parece indefensa, pero los paneles exteriores se abren para revelar armamento</td></tr>
+          <tr><td class="range">41–45</td><td>Los registros de navegación contienen coordenadas de lugares que no existen —o no deberían existir—</td></tr>
+          <tr><td class="range">46–50</td><td>Una vieja mancha de sangre en la esclusa de aire reaparece aunque se pinte encima</td></tr>
+          <tr><td class="range">51–55</td><td>Fue una nave hermosa, ahora marcada por una batalla devastadora</td></tr>
+          <tr><td class="range">56–60</td><td>Parches en el casco cubren una brecha catastrófica reciente</td></tr>
+          <tr><td class="range">61–65</td><td>Las placas y etiquetas de control están en un idioma poco común</td></tr>
+          <tr><td class="range">66–70</td><td>Tablones desmontables dan acceso a almacenamiento oculto</td></tr>
+          <tr><td class="range">71–75</td><td>El tren de aterrizaje segmentado se despliega como largas patas de araña</td></tr>
+          <tr><td class="range">76–80</td><td>La nave está alimentada por un antiguo dispositivo precursor</td></tr>
+          <tr><td class="range">81–85</td><td>Alguien marcó el casco con grafiti durante una escala reciente</td></tr>
+          <tr><td class="range">86–90</td><td>Hay símbolos extraños garabateados en el suelo y mamparas del corredor principal</td></tr>
+          <tr><td class="range">91–95</td><td>Las cosas tienden a desaparecer sin ninguna razón lógica</td></tr>
+          <tr><td class="range">96–100</td><td>Los temporizadores y relojes siempre van un poco retrasados</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-quirk-2">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Peculiaridad de la Nave 3–4</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-quirk-2')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-quirk-2">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–5</td><td>La armadura ablativa requiere reparaciones constantes</td></tr>
+          <tr><td class="range">6–10</td><td>Las puertas de mamparo a menudo se cierran despacio o se atascan al hacerlo</td></tr>
+          <tr><td class="range">11–15</td><td>Los ciclos de día y noche están constantemente mal calibrados en órbita planetaria</td></tr>
+          <tr><td class="range">16–20</td><td>La sala de máquinas reacciona mal a las herramientas fabricadas con cierta aleación</td></tr>
+          <tr><td class="range">21–25</td><td>El equipamiento solo funciona tras ser golpeado con un patrón concreto</td></tr>
+          <tr><td class="range">26–30</td><td>El exterior está pintado de manera estridente sin dejar espacio a la discreción</td></tr>
+          <tr><td class="range">31–35</td><td>El casco y las góndolas se reconfiguran para los saltos Eidolón</td></tr>
+          <tr><td class="range">36–40</td><td>El casco está marcado con un limerick, haiku o chiste</td></tr>
+          <tr><td class="range">41–45</td><td>Los intercomunicadores internos se activan solos, generalmente en los momentos más inoportunos</td></tr>
+          <tr><td class="range">46–50</td><td>El cableado interno funciona con paquetes de gel neural orgánico</td></tr>
+          <tr><td class="range">51–55</td><td>El tren de aterrizaje puede deslizarse como esquíes en pendientes sin previo aviso</td></tr>
+          <tr><td class="range">56–60</td><td>La iluminación apaga aleatoriamente un tramo a la vez en los pasillos largos antes de restablecerse</td></tr>
+          <tr><td class="range">61–65</td><td>El camarote principal tiene un acuario empotrado en la pared que es imposible de limpiar</td></tr>
+          <tr><td class="range">66–70</td><td>Las placas y etiquetas de control solo usan iconos en lugar de texto</td></tr>
+          <tr><td class="range">71–75</td><td>Los registros del capitán o la tripulación anterior se reproducen aleatoriamente pese a haber sido eliminados del sistema</td></tr>
+          <tr><td class="range">76–80</td><td>Planchas de pared desmontables dan acceso a conductos de mantenimiento</td></tr>
+          <tr><td class="range">81–85</td><td>La redistribución de energía debe hacerse manualmente con un gran cuadro de interruptores y enchufes</td></tr>
+          <tr><td class="range">86–90</td><td>Las habitaciones son ligeramente demasiado pequeñas porque el constructor intentó recortar costes</td></tr>
+          <tr><td class="range">91–95</td><td>Las habitaciones tienen sus propios generadores de gravedad, pero todos en orientaciones diferentes</td></tr>
+          <tr><td class="range">96–100</td><td>La nave está pintada y decorada para parecerse a una forma de vida</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-quirk-3">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Peculiaridad de la Nave 5–6</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-quirk-3')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-quirk-3">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–5</td><td>El reciclador de aire deja a menudo un olor inusual</td></tr>
+          <tr><td class="range">6–10</td><td>El ordenador tiene un acuse de recibo inusual al responder a las órdenes</td></tr>
+          <tr><td class="range">11–15</td><td>Un componente crítico requiere bombeo manual para reiniciarse</td></tr>
+          <tr><td class="range">16–20</td><td>El programa de diagnóstico devuelve datos del sistema equivocado</td></tr>
+          <tr><td class="range">21–25</td><td>Cada pieza de equipo importante lleva un nombre ostentoso</td></tr>
+          <tr><td class="range">26–30</td><td>El exterior está marcado con hoyos o abolladuras de micro-impactos durante un fallo de escudos</td></tr>
+          <tr><td class="range">31–35</td><td>Los sensores exteriores carecen de datos visuales o de la capacidad de hacer zoom visual</td></tr>
+          <tr><td class="range">36–40</td><td>El casco traquetea y cruje durante los saltos Eidolón</td></tr>
+          <tr><td class="range">41–45</td><td>Los propulsores de maniobra pueden dar sacudidas antes de encenderse del todo</td></tr>
+          <tr><td class="range">46–50</td><td>El modo de vuelo manual requiere llevar un casco y un par de voluminosos guantes tecnológicos</td></tr>
+          <tr><td class="range">51–55</td><td>El baño solo es accesible por un largo pozo vertical con una escalera de mano</td></tr>
+          <tr><td class="range">56–60</td><td>Un programa de IA rudimentario intenta añadir emojis apropiados a los registros y fracasa</td></tr>
+          <tr><td class="range">61–65</td><td>La holocubierta rudimentaria suele averiarse desactivando los protocolos de seguridad</td></tr>
+          <tr><td class="range">66–70</td><td>Las alertas del sistema o de la nave tienen patrones de pitidos o melodías innecesariamente largos</td></tr>
+          <tr><td class="range">71–75</td><td>Los nidos de roedores espaciales aparecen aleatoriamente pese a las fumigaciones</td></tr>
+          <tr><td class="range">76–80</td><td>El asiento del piloto es la silla más incómoda de la nave</td></tr>
+          <tr><td class="range">81–85</td><td>Las comunicaciones por vídeo suelen averiarse añadiendo filtros visuales</td></tr>
+          <tr><td class="range">86–90</td><td>Los comandos de voz del ordenador central solo responden a un nombre absurdo</td></tr>
+          <tr><td class="range">91–95</td><td>Las opciones de voz del sistema informático tienen todos acentos estrafalarios</td></tr>
+          <tr><td class="range">96–100</td><td>El reciclador de agua deja el agua con un color desagradable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     PROBLEMA DEL SECTOR
+     ══════════════════════════════════ -->
+<section id="problema-sector">
+  <div class="section-header">
+    <h2>PROBLEMA DEL SECTOR</h2>
+    <span class="section-badge">Campaña</span>
+  </div>
+  <div class="section-intro">En tu sector inicial, ¿qué problemas están ocurriendo que podrían darte un gancho para involucrarte? Puede que sean solo sucesos de fondo mientras te ocupas de tu incidente desencadenante.</div>
+
+  <div class="oracle-group">
+    <div class="oracle-tabs">
+      <div class="oracle-tab active" onclick="switchTab(this,'tbl-sm1-sector-1')">Tabla 1–2</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-sector-2')">Tabla 3–4</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-sector-3')">Tabla 5–6</div>
+    </div>
+
+    <div class="oracle-panel active" id="panel-tbl-sm1-sector-1">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Problema del Sector 1–2</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-sector-1')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-sector-1">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–5</td><td>Un bloqueo impide el comercio con otros sectores</td></tr>
+          <tr><td class="range">6–10</td><td>Cazarrecompensas buscan a un fugitivo infame</td></tr>
+          <tr><td class="range">11–15</td><td>Brechas caóticas en el espacio-tiempo se propagan como incendio</td></tr>
+          <tr><td class="range">16–20</td><td>Una facción criminal corrompe a las autoridades locales</td></tr>
+          <tr><td class="range">21–25</td><td>Un devastador arma superpoderosa ha caído en las manos equivocadas</td></tr>
+          <tr><td class="range">26–30</td><td>Las tormentas de energía son rampantes</td></tr>
+          <tr><td class="range">31–35</td><td>Perturbaciones magnéticas interrumpen las comunicaciones</td></tr>
+          <tr><td class="range">36–40</td><td>Un recurso recién descubierto atrae a codiciosos buscadores de fortuna al sector</td></tr>
+          <tr><td class="range">41–45</td><td>Un notorio clan pirata acecha las naves estelares</td></tr>
+          <tr><td class="range">46–50</td><td>Formas de vida parasitarias se propagan como una plaga</td></tr>
+          <tr><td class="range">51–55</td><td>Los emplazamientos precursores del sector emiten señales extrañas</td></tr>
+          <tr><td class="range">56–60</td><td>Profecías presagian el inminente despertar de un poder terrible</td></tr>
+          <tr><td class="range">61–65</td><td>Un clan de incursores emerge como amenaza dominante bajo un nuevo líder</td></tr>
+          <tr><td class="range">66–70</td><td>Fanáticos religiosos invaden el sector</td></tr>
+          <tr><td class="range">71–75</td><td>Una IA deshonesta se infiltra en los sistemas de todo el sector</td></tr>
+          <tr><td class="range">76–80</td><td>Asentamientos o facciones están al borde de la guerra</td></tr>
+          <tr><td class="range">81–85</td><td>Las naves desaparecen regularmente</td></tr>
+          <tr><td class="range">86–90</td><td>Una enfermedad se extiende entre naves y asentamientos</td></tr>
+          <tr><td class="range">91–95</td><td>Una supernova es inminente</td></tr>
+          <tr><td class="range">96–100</td><td>Una titánica forma de vida espacial acecha las rutas interestelares</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-sector-2">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Problema del Sector 3–4</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-sector-2')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-sector-2">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–5</td><td>La tecnología avanzada está siendo armada</td></tr>
+          <tr><td class="range">6–10</td><td>Una red de defensa automática ha sido hackeada</td></tr>
+          <tr><td class="range">11–15</td><td>Naves de carga con suministros desesperadamente necesarios han desaparecido</td></tr>
+          <tr><td class="range">16–20</td><td>Una guerra fría entre asentamientos o facciones hace mella</td></tr>
+          <tr><td class="range">21–25</td><td>Formas de vida peligrosas han escapado de un lugar de experimentación ilegal</td></tr>
+          <tr><td class="range">26–30</td><td>La desinformación está fomentando la insurrección</td></tr>
+          <tr><td class="range">31–35</td><td>Una mayor presencia militar genera tensiones con los ciudadanos locales</td></tr>
+          <tr><td class="range">36–40</td><td>Corporaciones codiciosas cobran peajes astronómicos por el tránsito</td></tr>
+          <tr><td class="range">41–45</td><td>El liderazgo ha subido los impuestos para enriquecimiento personal</td></tr>
+          <tr><td class="range">46–50</td><td>El gobierno local puede colapsar por falta de financiación</td></tr>
+          <tr><td class="range">51–55</td><td>Una estrella cambiante provoca estragos en los sistemas de energía</td></tr>
+          <tr><td class="range">56–60</td><td>Las negociaciones comerciales indispensables están al borde del fracaso</td></tr>
+          <tr><td class="range">61–65</td><td>Una facción opresiva toma el dominio sobre el sector</td></tr>
+          <tr><td class="range">66–70</td><td>Los piratas retienen como rehén a un líder querido</td></tr>
+          <tr><td class="range">71–75</td><td>Los disidentes políticos están desapareciendo</td></tr>
+          <tr><td class="range">76–80</td><td>Fanáticos religiosos logran una escasa mayoría en el liderazgo y promulgan cambios drásticos</td></tr>
+          <tr><td class="range">81–85</td><td>Rumores y avistamientos de una nave capitaneada por los muertos causan pánico</td></tr>
+          <tr><td class="range">86–90</td><td>La escasez de recursos conduce al abuso de precios</td></tr>
+          <tr><td class="range">91–95</td><td>El sabotaje de naves es rampante en el mayor puerto espacial</td></tr>
+          <tr><td class="range">96–100</td><td>Un extraño campo de energía suprime los propulsores Eidolón</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-sector-3">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Problema del Sector 5–6</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-sector-3')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-sector-3">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–5</td><td>El acceso a recursos y medicación vital es racionado de repente sin explicación</td></tr>
+          <tr><td class="range">6–10</td><td>Una armada de naves no identificadas se dirige al sector con las armas calientes</td></tr>
+          <tr><td class="range">11–15</td><td>El hub espacial central está en cuarentena en el peor momento posible</td></tr>
+          <tr><td class="range">16–20</td><td>Reina el caos tras el asesinato de un líder querido</td></tr>
+          <tr><td class="range">21–25</td><td>Las corporaciones priorizan los beneficios sobre las personas y lanzan tecnología sin probar</td></tr>
+          <tr><td class="range">26–30</td><td>Un suministro eléctrico dañado deja enormes segmentos de la población sin energía</td></tr>
+          <tr><td class="range">31–35</td><td>Una economía basada en la explotación laboral oprime a los ciudadanos</td></tr>
+          <tr><td class="range">36–40</td><td>Una nueva y altamente adictiva droga con peligrosos efectos secundarios arrasa el sistema</td></tr>
+          <tr><td class="range">41–45</td><td>Artefactos culturales icónicos son destruidos o robados en una guerra</td></tr>
+          <tr><td class="range">46–50</td><td>La falta de inversión en infraestructuras pone a las comunidades al borde del colapso</td></tr>
+          <tr><td class="range">51–55</td><td>Un desastre natural es inminente</td></tr>
+          <tr><td class="range">56–60</td><td>La población experimenta visiones masivas de fuente desconocida</td></tr>
+          <tr><td class="range">61–65</td><td>Las protestas ganan fuerza contra una ley impopular</td></tr>
+          <tr><td class="range">66–70</td><td>Los castigos por delitos aumentan de forma salvaje e injusta</td></tr>
+          <tr><td class="range">71–75</td><td>La inflación rampante lleva a una pobreza abrumadora</td></tr>
+          <tr><td class="range">76–80</td><td>Los recursos extraídos del cinturón de asteroides se han agotado</td></tr>
+          <tr><td class="range">81–85</td><td>La agitación social y los disturbios se vuelven comunes bajo la brutalidad de la autoridad</td></tr>
+          <tr><td class="range">86–90</td><td>La clase de los super-ricos alardea de su poder e inmunidad ante la autoridad</td></tr>
+          <tr><td class="range">91–95</td><td>Vastas secciones de la población deben reubicarse tras un desastre</td></tr>
+          <tr><td class="range">96–100</td><td>La violación de un tratado de paz desata nuevas tensiones</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     INCIDENTE DESENCADENANTE
+     ══════════════════════════════════ -->
+<section id="incidente">
+  <div class="section-header">
+    <h2>INCIDENTE DESENCADENANTE</h2>
+    <span class="section-badge">Campaña</span>
+  </div>
+  <div class="section-intro">¿Qué evento específico está ocurriendo ahora mismo que debes atender? Es probable que sea tu primer voto, aparte de tu voto de trasfondo general.</div>
+
+  <div class="oracle-group">
+    <div class="oracle-tabs">
+      <div class="oracle-tab active" onclick="switchTab(this,'tbl-sm1-inciting-1')">Tabla 1–2</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-inciting-2')">Tabla 3–4</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-inciting-3')">Tabla 5–6</div>
+    </div>
+
+    <div class="oracle-panel active" id="panel-tbl-sm1-inciting-1">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Incidente Desencadenante 1–2</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-inciting-1')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-inciting-1">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–5</td><td>Auxiliar a una nave estelar atrapada en una fractura espacio-temporal</td></tr>
+          <tr><td class="range">6–10</td><td>Mediar en la paz entre dos asentamientos enfrentados</td></tr>
+          <tr><td class="range">11–15</td><td>Cartografiar un nuevo pasaje entre asentamientos aislados</td></tr>
+          <tr><td class="range">16–20</td><td>Defender a la gente de un asentamiento asediado contra incursores</td></tr>
+          <tr><td class="range">21–25</td><td>Descubrir quién saboteó los procesadores de aire de un asentamiento</td></tr>
+          <tr><td class="range">26–30</td><td>Escoltar una nave mercante con carga de gran valor</td></tr>
+          <tr><td class="range">31–35</td><td>Transportar un equipo de rescate a un peligroso lugar de desastre</td></tr>
+          <tr><td class="range">36–40</td><td>Infiltrarse en una base fortificada para robar datos cruciales</td></tr>
+          <tr><td class="range">41–45</td><td>Investigar manifestaciones aterradoras en un asentamiento remoto</td></tr>
+          <tr><td class="range">46–50</td><td>Liberar prisioneros de un cruel campo de trabajos forzados</td></tr>
+          <tr><td class="range">51–55</td><td>Localizar a un piloto accidentado en un planeta deshabitado</td></tr>
+          <tr><td class="range">56–60</td><td>Proteger a un fugitivo de un implacable cazarrecompensas</td></tr>
+          <tr><td class="range">61–65</td><td>Recuperar un preciado artefacto pre-éxodo de manos enemigas</td></tr>
+          <tr><td class="range">66–70</td><td>Rescatar a la tripulación de una nave estelar retenida por amotinados</td></tr>
+          <tr><td class="range">71–75</td><td>Recuperar un alijo de armas robadas de un barco pirata</td></tr>
+          <tr><td class="range">76–80</td><td>Sabotear una instalación enemiga</td></tr>
+          <tr><td class="range">81–85</td><td>Buscar una expedición desaparecida en las profundidades de una bóveda precursora</td></tr>
+          <tr><td class="range">86–90</td><td>Proteger a una maravillosa forma de vida de quienes buscan destruirla</td></tr>
+          <tr><td class="range">91–95</td><td>Rastrear y abatir a una bestia merodeadora</td></tr>
+          <tr><td class="range">96–100</td><td>Transportar a un pueblo desplazado a su nuevo hogar</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-inciting-2">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Incidente Desencadenante 3–4</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-inciting-2')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-inciting-2">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–5</td><td>Ayudar a una nave estelar a escapar de los piratas</td></tr>
+          <tr><td class="range">6–10</td><td>Apresar a criminales fugados</td></tr>
+          <tr><td class="range">11–15</td><td>Sacar a un inocente de prisión</td></tr>
+          <tr><td class="range">16–20</td><td>Romper el bloqueo para entregar suministros urgentes</td></tr>
+          <tr><td class="range">21–25</td><td>Descubrir a un asesino antes de que vuelva a actuar</td></tr>
+          <tr><td class="range">26–30</td><td>Escoltar a un diplomático en una importante misión de paz</td></tr>
+          <tr><td class="range">31–35</td><td>Evacuar a la población antes de que golpee el desastre</td></tr>
+          <tr><td class="range">36–40</td><td>Descubrir al topo antes de que cause más daño</td></tr>
+          <tr><td class="range">41–45</td><td>Encontrar a un agente deshonesto antes de que venda sus secretos</td></tr>
+          <tr><td class="range">46–50</td><td>Infiltrarse en una sede corporativa segura para robar un prototipo</td></tr>
+          <tr><td class="range">51–55</td><td>Ejecutar un golpe para ayudar a alguien a pagar su aplastante deuda</td></tr>
+          <tr><td class="range">56–60</td><td>Recuperar mercancía de un lugar de accidente</td></tr>
+          <tr><td class="range">61–65</td><td>Rescatar a un rehén político</td></tr>
+          <tr><td class="range">66–70</td><td>Recuperar tecnología robada de un barco pirata</td></tr>
+          <tr><td class="range">71–75</td><td>Borrar las pruebas de una operación clandestina</td></tr>
+          <tr><td class="range">76–80</td><td>Entregar en secreto un chip de datos cifrado</td></tr>
+          <tr><td class="range">81–85</td><td>Poner a un fugitivo a salvo de contrabando</td></tr>
+          <tr><td class="range">86–90</td><td>Robar un artefacto simbólico a un enemigo</td></tr>
+          <tr><td class="range">91–95</td><td>Explorar un planeta desolado para evaluar su potencial como asentamiento</td></tr>
+          <tr><td class="range">96–100</td><td>Transportar tecnología experimental a un lugar peligroso para su prueba</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-inciting-3">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Incidente Desencadenante 5–6</span>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-sm1-inciting-3')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-sm1-inciting-3">
+        <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td class="range">1–5</td><td>Proporcionar seguridad mientras se transporta a criminales endurecidos</td></tr>
+          <tr><td class="range">6–10</td><td>Descubrir una casa franca criminal</td></tr>
+          <tr><td class="range">11–15</td><td>Tomar a un rehén político como palanca</td></tr>
+          <tr><td class="range">16–20</td><td>Rastrear a una persona para cobrar la recompensa</td></tr>
+          <tr><td class="range">21–25</td><td>Ayudar a un equipo de ingeniería a realizar reparaciones de emergencia en un lugar peligroso</td></tr>
+          <tr><td class="range">26–30</td><td>Desmantelar una pequeña red de criminales</td></tr>
+          <tr><td class="range">31–35</td><td>Rescatar a los mineros atrapados</td></tr>
+          <tr><td class="range">36–40</td><td>Encontrar pruebas de inocencia para alguien injustamente acusado</td></tr>
+          <tr><td class="range">41–45</td><td>Poner en marcha de nuevo una instalación procesadora de recursos tras un motín</td></tr>
+          <tr><td class="range">46–50</td><td>Reunir pruebas incriminatorias contra una autoridad corrupta</td></tr>
+          <tr><td class="range">51–55</td><td>Transportar a un equipo médico a un foco de enfermedad</td></tr>
+          <tr><td class="range">56–60</td><td>Acceder a servidores de datos físicos para subir un virus</td></tr>
+          <tr><td class="range">61–65</td><td>Seguir los pasos de un contrabandista conocido para encontrar su guarida</td></tr>
+          <tr><td class="range">66–70</td><td>Entregar un rescate</td></tr>
+          <tr><td class="range">71–75</td><td>Espiar a una organización paramilitar</td></tr>
+          <tr><td class="range">76–80</td><td>Devolver a un niño fugado a su padre o madre VIP</td></tr>
+          <tr><td class="range">81–85</td><td>Recopilar datos sobre un conjunto de peligrosos fenómenos estelares</td></tr>
+          <tr><td class="range">86–90</td><td>Convencer a un acosador de que hay mejores usos del tiempo que hostigar a una celebridad local</td></tr>
+          <tr><td class="range">91–95</td><td>Ayudar a alguien a fingir su muerte</td></tr>
+          <tr><td class="range">96–100</td><td>Interceptar un envío crítico para redirigirlo a donde más se necesita</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CORE — INTRO
+     ══════════════════════════════════ -->
+<section id="core-intro">
+  <div class="section-header">
+    <h2>ORÁCULOS DE NÚCLEO</h2>
+    <span class="section-badge core">Núcleo</span>
+  </div>
+  <div class="section-intro">
+    <p>Los oráculos de Núcleo son los motores de tu campaña. Cuando necesites detalles más específicos que otros oráculos no pueden proporcionar, tira en uno de estos dos pares.</p>
+    <ul>
+      <li><strong>Acción / Tema</strong> — Úsalos cuando necesites saber algo de naturaleza no física: ¿Por qué traicionaría este personaje a su patrón? ¿Qué propósito tiene esta máquina infernal? ¿Qué secreto se está guardando?</li>
+      <li><strong>Descriptor / Foco</strong> — Úsalos cuando necesites saber algo de naturaleza física: ¿Qué hay en el edificio abandonado? ¿Qué transporta la nave incursora? ¿Cuál es la naturaleza de este templo?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ACCIÓN
+     ══════════════════════════════════ -->
+<section id="accion">
+  <div class="section-header">
+    <h2>ACCIÓN</h2>
+    <span class="section-badge core">Núcleo</span>
+  </div>
+  <div class="section-intro">Combínalo siempre con <strong>Tema</strong>. Úsalo cuando necesites saber algo de naturaleza no física.</div>
+
+  <div class="oracle-group">
+    <div class="oracle-tabs">
+      <div class="oracle-tab active" onclick="switchTab(this,'tbl-sm1-action-1')">Tabla 1–2</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-action-2')">Tabla 3–4</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-action-3')">Tabla 5–6</div>
+    </div>
+
+    <!-- Acción 1-2 -->
+    <div class="oracle-panel active" id="panel-tbl-sm1-action-1">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Acción 1–2 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-action-1')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-action-1">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Abandonar</td><td class="num">26</td><td class="word">Coordinar</td><td class="num">51</td><td class="word">Guardar</td><td class="num">76</td><td class="word">Liberar</td></tr>
+          <tr><td class="num">2</td><td class="word">Adquirir</td><td class="num">27</td><td class="word">Crear</td><td class="num">52</td><td class="word">Ocultar</td><td class="num">77</td><td class="word">Eliminar</td></tr>
+          <tr><td class="num">3</td><td class="word">Avanzar</td><td class="num">28</td><td class="word">Debatir</td><td class="num">53</td><td class="word">Mantener</td><td class="num">78</td><td class="word">Investigar</td></tr>
+          <tr><td class="num">4</td><td class="word">Afectar</td><td class="num">29</td><td class="word">Derrotar</td><td class="num">54</td><td class="word">Cazar</td><td class="num">79</td><td class="word">Resistir</td></tr>
+          <tr><td class="num">5</td><td class="word">Ayudar</td><td class="num">30</td><td class="word">Defender</td><td class="num">55</td><td class="word">Impresionar</td><td class="num">80</td><td class="word">Restaurar</td></tr>
+          <tr><td class="num">6</td><td class="word">Llegar</td><td class="num">31</td><td class="word">Desertar</td><td class="num">56</td><td class="word">Iniciar</td><td class="num">81</td><td class="word">Revelar</td></tr>
+          <tr><td class="num">7</td><td class="word">Asaltar</td><td class="num">32</td><td class="word">Desafiar</td><td class="num">57</td><td class="word">Inspeccionar</td><td class="num">82</td><td class="word">Arriesgar</td></tr>
+          <tr><td class="num">8</td><td class="word">Atacar</td><td class="num">33</td><td class="word">Entregar</td><td class="num">58</td><td class="word">Investigar</td><td class="num">83</td><td class="word">Tramar</td></tr>
+          <tr><td class="num">9</td><td class="word">Vengar</td><td class="num">34</td><td class="word">Exigir</td><td class="num">59</td><td class="word">Viajar</td><td class="num">84</td><td class="word">Buscar</td></tr>
+          <tr><td class="num">10</td><td class="word">Evitar</td><td class="num">35</td><td class="word">Partir</td><td class="num">60</td><td class="word">Aprender</td><td class="num">85</td><td class="word">Asegurar</td></tr>
+          <tr><td class="num">11</td><td class="word">Aguardar</td><td class="num">36</td><td class="word">Destruir</td><td class="num">61</td><td class="word">Marcharse</td><td class="num">86</td><td class="word">Tomar</td></tr>
+          <tr><td class="num">12</td><td class="word">Comenzar</td><td class="num">37</td><td class="word">Distraer</td><td class="num">62</td><td class="word">Localizar</td><td class="num">87</td><td class="word">Servir</td></tr>
+          <tr><td class="num">13</td><td class="word">Traicionar</td><td class="num">38</td><td class="word">Eliminar</td><td class="num">63</td><td class="word">Perder</td><td class="num">88</td><td class="word">Compartir</td></tr>
+          <tr><td class="num">14</td><td class="word">Reforzar</td><td class="num">39</td><td class="word">Resistir</td><td class="num">64</td><td class="word">Manipular</td><td class="num">89</td><td class="word">Fortalecer</td></tr>
+          <tr><td class="num">15</td><td class="word">Irrumpir</td><td class="num">40</td><td class="word">Escalar</td><td class="num">65</td><td class="word">Llorar</td><td class="num">90</td><td class="word">Convocar</td></tr>
+          <tr><td class="num">16</td><td class="word">Romper</td><td class="num">41</td><td class="word">Escoltar</td><td class="num">66</td><td class="word">Mover</td><td class="num">91</td><td class="word">Apoyar</td></tr>
+          <tr><td class="num">17</td><td class="word">Capturar</td><td class="num">42</td><td class="word">Evadir</td><td class="num">67</td><td class="word">Oponerse</td><td class="num">92</td><td class="word">Suprimir</td></tr>
+          <tr><td class="num">18</td><td class="word">Desafiar</td><td class="num">43</td><td class="word">Explorar</td><td class="num">68</td><td class="word">Abrumar</td><td class="num">93</td><td class="word">Rendirse</td></tr>
+          <tr><td class="num">19</td><td class="word">Cambiar</td><td class="num">44</td><td class="word">Flaquear</td><td class="num">69</td><td class="word">Perseverar</td><td class="num">94</td><td class="word">Jurar</td></tr>
+          <tr><td class="num">20</td><td class="word">Cargar</td><td class="num">45</td><td class="word">Encontrar</td><td class="num">70</td><td class="word">Preservar</td><td class="num">95</td><td class="word">Amenazar</td></tr>
+          <tr><td class="num">21</td><td class="word">Chocar</td><td class="num">46</td><td class="word">Terminar</td><td class="num">71</td><td class="word">Proteger</td><td class="num">96</td><td class="word">Transformar</td></tr>
+          <tr><td class="num">22</td><td class="word">Mandar</td><td class="num">47</td><td class="word">Enfocar</td><td class="num">72</td><td class="word">Invadir</td><td class="num">97</td><td class="word">Descubrir</td></tr>
+          <tr><td class="num">23</td><td class="word">Comunicar</td><td class="num">48</td><td class="word">Seguir</td><td class="num">73</td><td class="word">Reducir</td><td class="num">98</td><td class="word">Defender</td></tr>
+          <tr><td class="num">24</td><td class="word">Construir</td><td class="num">49</td><td class="word">Fortificar</td><td class="num">74</td><td class="word">Rechazar</td><td class="num">99</td><td class="word">Debilitar</td></tr>
+          <tr><td class="num">25</td><td class="word">Controlar</td><td class="num">50</td><td class="word">Reunir</td><td class="num">75</td><td class="word">Rechazar</td><td class="num">100</td><td class="word">Retirarse</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Acción 3-4 -->
+    <div class="oracle-panel" id="panel-tbl-sm1-action-2">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Acción 3–4 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-action-2')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-action-2">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Agitar</td><td class="num">26</td><td class="word">Deteriorar</td><td class="num">51</td><td class="word">Cosechar</td><td class="num">76</td><td class="word">Repeler</td></tr>
+          <tr><td class="num">2</td><td class="word">Alterar</td><td class="num">27</td><td class="word">Diluir</td><td class="num">52</td><td class="word">Sanar</td><td class="num">77</td><td class="word">Repulsar</td></tr>
+          <tr><td class="num">3</td><td class="word">Acumular</td><td class="num">28</td><td class="word">Discernir</td><td class="num">53</td><td class="word">Obstaculizar</td><td class="num">78</td><td class="word">Restringir</td></tr>
+          <tr><td class="num">4</td><td class="word">Emboscar</td><td class="num">29</td><td class="word">Disfrazar</td><td class="num">54</td><td class="word">Encender</td><td class="num">79</td><td class="word">Revocar</td></tr>
+          <tr><td class="num">5</td><td class="word">Despertar</td><td class="num">30</td><td class="word">Interrumpir</td><td class="num">55</td><td class="word">Iluminar</td><td class="num">80</td><td class="word">Sabotear</td></tr>
+          <tr><td class="num">6</td><td class="word">Atacar</td><td class="num">31</td><td class="word">Diseccionar</td><td class="num">56</td><td class="word">Imbuir</td><td class="num">81</td><td class="word">Salvar</td></tr>
+          <tr><td class="num">7</td><td class="word">Expiar</td><td class="num">32</td><td class="word">Distorsionar</td><td class="num">57</td><td class="word">Sumergir</td><td class="num">82</td><td class="word">Salvar</td></tr>
+          <tr><td class="num">8</td><td class="word">Aumentar</td><td class="num">33</td><td class="word">Eludir</td><td class="num">58</td><td class="word">Incitar</td><td class="num">83</td><td class="word">Dispersar</td></tr>
+          <tr><td class="num">9</td><td class="word">Despertar</td><td class="num">34</td><td class="word">Abrazar</td><td class="num">59</td><td class="word">Incrementar</td><td class="num">84</td><td class="word">Buscar</td></tr>
+          <tr><td class="num">10</td><td class="word">Enterrar</td><td class="num">35</td><td class="word">Emitir</td><td class="num">60</td><td class="word">Inducir</td><td class="num">85</td><td class="word">Separar</td></tr>
+          <tr><td class="num">11</td><td class="word">Ocultar</td><td class="num">36</td><td class="word">Empoderar</td><td class="num">61</td><td class="word">Inflamar</td><td class="num">86</td><td class="word">Suavizar</td></tr>
+          <tr><td class="num">12</td><td class="word">Condenar</td><td class="num">37</td><td class="word">Engendrar</td><td class="num">62</td><td class="word">Insular</td><td class="num">87</td><td class="word">Solidificar</td></tr>
+          <tr><td class="num">13</td><td class="word">Condensar</td><td class="num">38</td><td class="word">Tentar</td><td class="num">63</td><td class="word">Intensificar</td><td class="num">88</td><td class="word">Engendrar</td></tr>
+          <tr><td class="num">14</td><td class="word">Conquistar</td><td class="num">39</td><td class="word">Erosionar</td><td class="num">64</td><td class="word">Irrumpir</td><td class="num">89</td><td class="word">Golpear</td></tr>
+          <tr><td class="num">15</td><td class="word">Consagrar</td><td class="num">40</td><td class="word">Evocar</td><td class="num">65</td><td class="word">Aislar</td><td class="num">90</td><td class="word">Someter</td></tr>
+          <tr><td class="num">16</td><td class="word">Contaminar</td><td class="num">41</td><td class="word">Exacerbar</td><td class="num">66</td><td class="word">Unir</td><td class="num">91</td><td class="word">Asfixiar</td></tr>
+          <tr><td class="num">17</td><td class="word">Corromper</td><td class="num">42</td><td class="word">Excitar</td><td class="num">67</td><td class="word">Encender</td><td class="num">92</td><td class="word">Partir</td></tr>
+          <tr><td class="num">18</td><td class="word">Aplastar</td><td class="num">43</td><td class="word">Extinguir</td><td class="num">68</td><td class="word">Fusionar</td><td class="num">93</td><td class="word">Sostener</td></tr>
+          <tr><td class="num">19</td><td class="word">Engañar</td><td class="num">44</td><td class="word">Forjar</td><td class="num">69</td><td class="word">Mezclar</td><td class="num">94</td><td class="word">Enredar</td></tr>
+          <tr><td class="num">20</td><td class="word">Declinar</td><td class="num">45</td><td class="word">Fracturar</td><td class="num">70</td><td class="word">Oscurecer</td><td class="num">95</td><td class="word">Minar</td></tr>
+          <tr><td class="num">21</td><td class="word">Disminuir</td><td class="num">46</td><td class="word">Fusionar</td><td class="num">71</td><td class="word">Oprimir</td><td class="num">96</td><td class="word">Desenredar</td></tr>
+          <tr><td class="num">22</td><td class="word">Desactivar</td><td class="num">47</td><td class="word">Forcejear</td><td class="num">72</td><td class="word">Saquear</td><td class="num">97</td><td class="word">Usurpar</td></tr>
+          <tr><td class="num">23</td><td class="word">Profanar</td><td class="num">48</td><td class="word">Aferrar</td><td class="num">73</td><td class="word">Provocar</td><td class="num">98</td><td class="word">Vencer</td></tr>
+          <tr><td class="num">24</td><td class="word">Desear</td><td class="num">49</td><td class="word">Llorar</td><td class="num">74</td><td class="word">Purgar</td><td class="num">99</td><td class="word">Deformar</td></tr>
+          <tr><td class="num">25</td><td class="word">Disuadir</td><td class="num">50</td><td class="word">Endurecer</td><td class="num">75</td><td class="word">Perseguir</td><td class="num">100</td><td class="word">Cribar</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Acción 5-6 -->
+    <div class="oracle-panel" id="panel-tbl-sm1-action-3">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Acción 5–6 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-action-3')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-action-3">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Absorber</td><td class="num">26</td><td class="word">Dejar caer</td><td class="num">51</td><td class="word">Juzgar</td><td class="num">76</td><td class="word">Renunciar</td></tr>
+          <tr><td class="num">2</td><td class="word">Aconsejar</td><td class="num">27</td><td class="word">Dar ánimos</td><td class="num">52</td><td class="word">Liderar</td><td class="num">77</td><td class="word">Renovar</td></tr>
+          <tr><td class="num">3</td><td class="word">Afirmar</td><td class="num">28</td><td class="word">Mejorar</td><td class="num">53</td><td class="word">Liberar</td><td class="num">78</td><td class="word">Informar</td></tr>
+          <tr><td class="num">4</td><td class="word">Enmendar</td><td class="num">29</td><td class="word">Enredar</td><td class="num">54</td><td class="word">Magnificar</td><td class="num">79</td><td class="word">Rescatar</td></tr>
+          <tr><td class="num">5</td><td class="word">Amplificar</td><td class="num">30</td><td class="word">Erradicar</td><td class="num">55</td><td class="word">Maniobrar</td><td class="num">80</td><td class="word">Resucitar</td></tr>
+          <tr><td class="num">6</td><td class="word">Afirmar</td><td class="num">31</td><td class="word">Borrar</td><td class="num">56</td><td class="word">Mediar</td><td class="num">81</td><td class="word">Retirarse</td></tr>
+          <tr><td class="num">7</td><td class="word">Seducir</td><td class="num">32</td><td class="word">Expandir</td><td class="num">57</td><td class="word">Imitar</td><td class="num">82</td><td class="word">Revitalizar</td></tr>
+          <tr><td class="num">8</td><td class="word">Bendecir</td><td class="num">33</td><td class="word">Exponer</td><td class="num">58</td><td class="word">Mutar</td><td class="num">83</td><td class="word">Revivir</td></tr>
+          <tr><td class="num">9</td><td class="word">Impulsar</td><td class="num">34</td><td class="word">Extender</td><td class="num">59</td><td class="word">Notificar</td><td class="num">84</td><td class="word">Revolucionar</td></tr>
+          <tr><td class="num">10</td><td class="word">Transmitir</td><td class="num">35</td><td class="word">Extraer</td><td class="num">60</td><td class="word">Nutrir</td><td class="num">85</td><td class="word">Arruinar</td></tr>
+          <tr><td class="num">11</td><td class="word">Atrapar</td><td class="num">36</td><td class="word">Inundar</td><td class="num">61</td><td class="word">Obtener</td><td class="num">86</td><td class="word">Escanear</td></tr>
+          <tr><td class="num">12</td><td class="word">Terminar</td><td class="num">37</td><td class="word">Forzar</td><td class="num">62</td><td class="word">Ordenar</td><td class="num">87</td><td class="word">Quemar</td></tr>
+          <tr><td class="num">13</td><td class="word">Comulgar</td><td class="num">38</td><td class="word">Perdonar</td><td class="num">63</td><td class="word">Superar</td><td class="num">88</td><td class="word">Afilar</td></tr>
+          <tr><td class="num">14</td><td class="word">Compeler</td><td class="num">39</td><td class="word">Generar</td><td class="num">64</td><td class="word">Derrocar</td><td class="num">89</td><td class="word">Guiar</td></tr>
+          <tr><td class="num">15</td><td class="word">Conspirar</td><td class="num">40</td><td class="word">Gobernar</td><td class="num">65</td><td class="word">Perforar</td><td class="num">90</td><td class="word">Golpear</td></tr>
+          <tr><td class="num">16</td><td class="word">Contratar</td><td class="num">41</td><td class="word">Guiar</td><td class="num">66</td><td class="word">Plantar</td><td class="num">91</td><td class="word">Espiar</td></tr>
+          <tr><td class="num">17</td><td class="word">Codiciar</td><td class="num">42</td><td class="word">Hackear</td><td class="num">67</td><td class="word">Preparar</td><td class="num">92</td><td class="word">Robar</td></tr>
+          <tr><td class="num">18</td><td class="word">Demoler</td><td class="num">43</td><td class="word">Acosar</td><td class="num">68</td><td class="word">Sondear</td><td class="num">93</td><td class="word">Dirigir</td></tr>
+          <tr><td class="num">19</td><td class="word">Denunciar</td><td class="num">44</td><td class="word">Entorpecer</td><td class="num">69</td><td class="word">Propulsar</td><td class="num">94</td><td class="word">Luchar</td></tr>
+          <tr><td class="num">20</td><td class="word">Detonar</td><td class="num">45</td><td class="word">Impartir</td><td class="num">70</td><td class="word">Sofocar</td><td class="num">95</td><td class="word">Explorar</td></tr>
+          <tr><td class="num">21</td><td class="word">Devastar</td><td class="num">46</td><td class="word">Inyectar</td><td class="num">71</td><td class="word">Correr</td><td class="num">96</td><td class="word">Viajar</td></tr>
+          <tr><td class="num">22</td><td class="word">Desviarse</td><td class="num">47</td><td class="word">Inspirar</td><td class="num">72</td><td class="word">Movilizar</td><td class="num">97</td><td class="word">Activar</td></tr>
+          <tr><td class="num">23</td><td class="word">Dirigir</td><td class="num">48</td><td class="word">Instruir</td><td class="num">73</td><td class="word">Reprender</td><td class="num">98</td><td class="word">Podar</td></tr>
+          <tr><td class="num">24</td><td class="word">Desarmar</td><td class="num">49</td><td class="word">Entrelazar</td><td class="num">74</td><td class="word">Redimir</td><td class="num">99</td><td class="word">Jurar</td></tr>
+          <tr><td class="num">25</td><td class="word">Descubrir</td><td class="num">50</td><td class="word">Vigorizar</td><td class="num">75</td><td class="word">Refinar</td><td class="num">100</td><td class="word">Empuñar</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     TEMA
+     ══════════════════════════════════ -->
+<section id="tema">
+  <div class="section-header">
+    <h2>TEMA</h2>
+    <span class="section-badge core">Núcleo</span>
+  </div>
+  <div class="section-intro">Combínalo siempre con <strong>Acción</strong>. Úsalo cuando necesites saber algo de naturaleza no física.</div>
+
+  <div class="oracle-group">
+    <div class="oracle-tabs">
+      <div class="oracle-tab active" onclick="switchTab(this,'tbl-sm1-theme-1')">Tabla 1–2</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-theme-2')">Tabla 3–4</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-theme-3')">Tabla 5–6</div>
+    </div>
+
+    <div class="oracle-panel active" id="panel-tbl-sm1-theme-1">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Tema 1–2 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-theme-1')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-theme-1">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Habilidad</td><td class="num">26</td><td class="word">Descubrimiento</td><td class="num">51</td><td class="word">Lenguaje</td><td class="num">76</td><td class="word">Rumor</td></tr>
+          <tr><td class="num">2</td><td class="word">Ventaja</td><td class="num">27</td><td class="word">Enfermedad</td><td class="num">52</td><td class="word">Ley</td><td class="num">77</td><td class="word">Seguridad</td></tr>
+          <tr><td class="num">3</td><td class="word">Alianza</td><td class="num">28</td><td class="word">Dominio</td><td class="num">53</td><td class="word">Legado</td><td class="num">78</td><td class="word">Santuario</td></tr>
+          <tr><td class="num">4</td><td class="word">Autoridad</td><td class="num">29</td><td class="word">Sueño</td><td class="num">54</td><td class="word">Vida</td><td class="num">79</td><td class="word">Secreto</td></tr>
+          <tr><td class="num">5</td><td class="word">Equilibrio</td><td class="num">30</td><td class="word">Deber</td><td class="num">55</td><td class="word">Amor</td><td class="num">80</td><td class="word">Solución</td></tr>
+          <tr><td class="num">6</td><td class="word">Barrera</td><td class="num">31</td><td class="word">Enemigo</td><td class="num">56</td><td class="word">Memoria</td><td class="num">81</td><td class="word">Espíritu</td></tr>
+          <tr><td class="num">7</td><td class="word">Creencia</td><td class="num">32</td><td class="word">Expedición</td><td class="num">57</td><td class="word">Naturaleza</td><td class="num">82</td><td class="word">Desconocido</td></tr>
+          <tr><td class="num">8</td><td class="word">Sangre</td><td class="num">33</td><td class="word">Facción</td><td class="num">58</td><td class="word">Oportunidad</td><td class="num">83</td><td class="word">Estrategia</td></tr>
+          <tr><td class="num">9</td><td class="word">Vínculo</td><td class="num">34</td><td class="word">Fama</td><td class="num">59</td><td class="word">Paso</td><td class="num">84</td><td class="word">Fuerza</td></tr>
+          <tr><td class="num">10</td><td class="word">Carga</td><td class="num">35</td><td class="word">Familia</td><td class="num">60</td><td class="word">Paz</td><td class="num">85</td><td class="word">Superstición</td></tr>
+          <tr><td class="num">11</td><td class="word">Comercio</td><td class="num">36</td><td class="word">Miedo</td><td class="num">61</td><td class="word">Fenómeno</td><td class="num">86</td><td class="word">Suministro</td></tr>
+          <tr><td class="num">12</td><td class="word">Comunidad</td><td class="num">37</td><td class="word">Hermandad</td><td class="num">62</td><td class="word">Posesión</td><td class="num">87</td><td class="word">Supervivencia</td></tr>
+          <tr><td class="num">13</td><td class="word">Corrupción</td><td class="num">38</td><td class="word">Libertad</td><td class="num">63</td><td class="word">Poder</td><td class="num">88</td><td class="word">Tecnología</td></tr>
+          <tr><td class="num">14</td><td class="word">Creación</td><td class="num">39</td><td class="word">Codicia</td><td class="num">64</td><td class="word">Precio</td><td class="num">89</td><td class="word">Tiempo</td></tr>
+          <tr><td class="num">15</td><td class="word">Crimen</td><td class="num">40</td><td class="word">Adversidad</td><td class="num">65</td><td class="word">Orgullo</td><td class="num">90</td><td class="word">Herramienta</td></tr>
+          <tr><td class="num">16</td><td class="word">Cultura</td><td class="num">41</td><td class="word">Odio</td><td class="num">66</td><td class="word">Premio</td><td class="num">91</td><td class="word">Comercio</td></tr>
+          <tr><td class="num">17</td><td class="word">Cura</td><td class="num">42</td><td class="word">Salud</td><td class="num">67</td><td class="word">Profecía</td><td class="num">92</td><td class="word">Verdad</td></tr>
+          <tr><td class="num">18</td><td class="word">Peligro</td><td class="num">43</td><td class="word">Historia</td><td class="num">68</td><td class="word">Protección</td><td class="num">93</td><td class="word">Venganza</td></tr>
+          <tr><td class="num">19</td><td class="word">Muerte</td><td class="num">44</td><td class="word">Hogar</td><td class="num">69</td><td class="word">Búsqueda</td><td class="num">94</td><td class="word">Voto</td></tr>
+          <tr><td class="num">20</td><td class="word">Deuda</td><td class="num">45</td><td class="word">Honor</td><td class="num">70</td><td class="word">Relación</td><td class="num">95</td><td class="word">Guerra</td></tr>
+          <tr><td class="num">21</td><td class="word">Decadencia</td><td class="num">46</td><td class="word">Esperanza</td><td class="num">71</td><td class="word">Religión</td><td class="num">96</td><td class="word">Advertencia</td></tr>
+          <tr><td class="num">22</td><td class="word">Engaño</td><td class="num">47</td><td class="word">Humanidad</td><td class="num">72</td><td class="word">Reputación</td><td class="num">97</td><td class="word">Debilidad</td></tr>
+          <tr><td class="num">23</td><td class="word">Defensa</td><td class="num">48</td><td class="word">Inocencia</td><td class="num">73</td><td class="word">Recurso</td><td class="num">98</td><td class="word">Riqueza</td></tr>
+          <tr><td class="num">24</td><td class="word">Destino</td><td class="num">49</td><td class="word">Conocimiento</td><td class="num">74</td><td class="word">Venganza</td><td class="num">99</td><td class="word">Arma</td></tr>
+          <tr><td class="num">25</td><td class="word">Desastre</td><td class="num">50</td><td class="word">Trabajo</td><td class="num">75</td><td class="word">Rival</td><td class="num">100</td><td class="word">Mundo</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-theme-2">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Tema 3–4 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-theme-2')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-theme-2">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Abundancia</td><td class="num">26</td><td class="word">Desesperación</td><td class="num">51</td><td class="word">Mejora</td><td class="num">76</td><td class="word">Alivio</td></tr>
+          <tr><td class="num">2</td><td class="word">Aventura</td><td class="num">27</td><td class="word">Desventaja</td><td class="num">52</td><td class="word">Información</td><td class="num">77</td><td class="word">Grieta</td></tr>
+          <tr><td class="num">3</td><td class="word">Ira</td><td class="num">28</td><td class="word">Incredulidad</td><td class="num">53</td><td class="word">Integridad</td><td class="num">78</td><td class="word">Derechos</td></tr>
+          <tr><td class="num">4</td><td class="word">Discusión</td><td class="num">29</td><td class="word">Educación</td><td class="num">54</td><td class="word">Justicia</td><td class="num">79</td><td class="word">Rivalidad</td></tr>
+          <tr><td class="num">5</td><td class="word">Consciencia</td><td class="num">30</td><td class="word">Ego</td><td class="num">55</td><td class="word">Liderazgo</td><td class="num">80</td><td class="word">Sacrificio</td></tr>
+          <tr><td class="num">6</td><td class="word">Asombro</td><td class="num">31</td><td class="word">Energía</td><td class="num">56</td><td class="word">Libertad</td><td class="num">81</td><td class="word">Servicio</td></tr>
+          <tr><td class="num">7</td><td class="word">Maldición</td><td class="num">32</td><td class="word">Envidia</td><td class="num">57</td><td class="word">Pérdida</td><td class="num">82</td><td class="word">Habilidad</td></tr>
+          <tr><td class="num">8</td><td class="word">Belleza</td><td class="num">33</td><td class="word">Fracaso</td><td class="num">58</td><td class="word">Lealtad</td><td class="num">83</td><td class="word">Sociedad</td></tr>
+          <tr><td class="num">9</td><td class="word">Bendición</td><td class="num">34</td><td class="word">Fe</td><td class="num">59</td><td class="word">Suerte</td><td class="num">84</td><td class="word">Soledad</td></tr>
+          <tr><td class="num">10</td><td class="word">Valentía</td><td class="num">35</td><td class="word">Falsedad</td><td class="num">60</td><td class="word">Lujo</td><td class="num">85</td><td class="word">Pena</td></tr>
+          <tr><td class="num">11</td><td class="word">Brutalidad</td><td class="num">36</td><td class="word">Favoritismo</td><td class="num">61</td><td class="word">Misericordia</td><td class="num">86</td><td class="word">Velocidad</td></tr>
+          <tr><td class="num">12</td><td class="word">Negocio</td><td class="num">37</td><td class="word">Fragilidad</td><td class="num">62</td><td class="word">Militar</td><td class="num">87</td><td class="word">Excedente</td></tr>
+          <tr><td class="num">13</td><td class="word">Cuidado</td><td class="num">38</td><td class="word">Amistad</td><td class="num">63</td><td class="word">Miseria</td><td class="num">88</td><td class="word">Sorpresa</td></tr>
+          <tr><td class="num">14</td><td class="word">Carrera</td><td class="num">39</td><td class="word">Futuro</td><td class="num">64</td><td class="word">Desinformación</td><td class="num">89</td><td class="word">Talento</td></tr>
+          <tr><td class="num">15</td><td class="word">Caos</td><td class="num">40</td><td class="word">Ganancia</td><td class="num">65</td><td class="word">Motivación</td><td class="num">90</td><td class="word">Momento</td></tr>
+          <tr><td class="num">16</td><td class="word">Caridad</td><td class="num">41</td><td class="word">Generosidad</td><td class="num">66</td><td class="word">Necesidad</td><td class="num">91</td><td class="word">Tolerancia</td></tr>
+          <tr><td class="num">17</td><td class="word">Claridad</td><td class="num">42</td><td class="word">Gracia</td><td class="num">67</td><td class="word">Dolor</td><td class="num">92</td><td class="word">Viaje</td></tr>
+          <tr><td class="num">18</td><td class="word">Confort</td><td class="num">43</td><td class="word">Crecimiento</td><td class="num">68</td><td class="word">Pasado</td><td class="num">93</td><td class="word">Tendencia</td></tr>
+          <tr><td class="num">19</td><td class="word">Comunicación</td><td class="num">44</td><td class="word">Odio</td><td class="num">69</td><td class="word">Filosofía</td><td class="num">94</td><td class="word">Confianza</td></tr>
+          <tr><td class="num">20</td><td class="word">Compañía</td><td class="num">45</td><td class="word">Obstáculo</td><td class="num">70</td><td class="word">Placer</td><td class="num">95</td><td class="word">Incertidumbre</td></tr>
+          <tr><td class="num">21</td><td class="word">Compasión</td><td class="num">46</td><td class="word">Honestidad</td><td class="num">71</td><td class="word">Pobreza</td><td class="num">96</td><td class="word">Unión</td></tr>
+          <tr><td class="num">22</td><td class="word">Confianza</td><td class="num">47</td><td class="word">Horror</td><td class="num">72</td><td class="word">Presente</td><td class="num">97</td><td class="word">Unidad</td></tr>
+          <tr><td class="num">23</td><td class="word">Confusión</td><td class="num">48</td><td class="word">Humildad</td><td class="num">73</td><td class="word">Principio</td><td class="num">98</td><td class="word">Victoria</td></tr>
+          <tr><td class="num">24</td><td class="word">Dedicación</td><td class="num">49</td><td class="word">Idea</td><td class="num">74</td><td class="word">Privilegio</td><td class="num">99</td><td class="word">Vulnerabilidad</td></tr>
+          <tr><td class="num">25</td><td class="word">Retraso</td><td class="num">50</td><td class="word">Desequilibrio</td><td class="num">75</td><td class="word">Provisión</td><td class="num">100</td><td class="word">Sabiduría</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-theme-3">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Tema 5–6 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-theme-3')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-theme-3">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Acuerdo</td><td class="num">26</td><td class="word">Cobardía</td><td class="num">51</td><td class="word">Locura</td><td class="num">76</td><td class="word">Obligación</td></tr>
+          <tr><td class="num">2</td><td class="word">Logro</td><td class="num">27</td><td class="word">Crédito</td><td class="num">52</td><td class="word">Fortuna</td><td class="num">77</td><td class="word">Ofensa</td></tr>
+          <tr><td class="num">3</td><td class="word">Aflicción</td><td class="num">28</td><td class="word">Crueldad</td><td class="num">53</td><td class="word">Amigo</td><td class="num">78</td><td class="word">Opinión</td></tr>
+          <tr><td class="num">4</td><td class="word">Agonía</td><td class="num">29</td><td class="word">Costumbre</td><td class="num">54</td><td class="word">Melancolía</td><td class="num">79</td><td class="word">Propiedad</td></tr>
+          <tr><td class="num">5</td><td class="word">Aliado</td><td class="num">30</td><td class="word">Desafío</td><td class="num">55</td><td class="word">Objetivo</td><td class="num">80</td><td class="word">Paradoja</td></tr>
+          <tr><td class="num">6</td><td class="word">Ambición</td><td class="num">31</td><td class="word">Déficit</td><td class="num">56</td><td class="word">Culpa</td><td class="num">81</td><td class="word">Asociación</td></tr>
+          <tr><td class="num">7</td><td class="word">Amnistía</td><td class="num">32</td><td class="word">Delusión</td><td class="num">57</td><td class="word">Hábito</td><td class="num">82</td><td class="word">Pasión</td></tr>
+          <tr><td class="num">8</td><td class="word">Asistencia</td><td class="num">33</td><td class="word">Negación</td><td class="num">58</td><td class="word">Peligro</td><td class="num">83</td><td class="word">Paciencia</td></tr>
+          <tr><td class="num">9</td><td class="word">Axioma</td><td class="num">34</td><td class="word">Dependencia</td><td class="num">59</td><td class="word">Hospitalidad</td><td class="num">84</td><td class="word">Percepción</td></tr>
+          <tr><td class="num">10</td><td class="word">Pertenencia</td><td class="num">35</td><td class="word">Devoción</td><td class="num">60</td><td class="word">Hostilidad</td><td class="num">85</td><td class="word">Perseverancia</td></tr>
+          <tr><td class="num">11</td><td class="word">Traición</td><td class="num">36</td><td class="word">Diferencia</td><td class="num">61</td><td class="word">Ignorancia</td><td class="num">86</td><td class="word">Competencia</td></tr>
+          <tr><td class="num">12</td><td class="word">Amargura</td><td class="num">37</td><td class="word">Dignidad</td><td class="num">62</td><td class="word">Ilusión</td><td class="num">87</td><td class="word">Progreso</td></tr>
+          <tr><td class="num">13</td><td class="word">Esclavitud</td><td class="num">38</td><td class="word">Decepción</td><td class="num">63</td><td class="word">Impresión</td><td class="num">88</td><td class="word">Promesa</td></tr>
+          <tr><td class="num">14</td><td class="word">Camaradería</td><td class="num">39</td><td class="word">Desorden</td><td class="num">64</td><td class="word">Incapacidad</td><td class="num">89</td><td class="word">Redención</td></tr>
+          <tr><td class="num">15</td><td class="word">Candor</td><td class="num">40</td><td class="word">Deshonor</td><td class="num">65</td><td class="word">Independencia</td><td class="num">90</td><td class="word">Arrepentimiento</td></tr>
+          <tr><td class="num">16</td><td class="word">Capacidad</td><td class="num">41</td><td class="word">Desorden</td><td class="num">66</td><td class="word">Injusticia</td><td class="num">91</td><td class="word">Restauración</td></tr>
+          <tr><td class="num">17</td><td class="word">Capacidad</td><td class="num">42</td><td class="word">Descuido</td><td class="num">67</td><td class="word">Perspicacia</td><td class="num">92</td><td class="word">Rutina</td></tr>
+          <tr><td class="num">18</td><td class="word">Catástrofe</td><td class="num">43</td><td class="word">Perturbación</td><td class="num">68</td><td class="word">Insulto</td><td class="num">93</td><td class="word">Éxito</td></tr>
+          <tr><td class="num">19</td><td class="word">Competencia</td><td class="num">44</td><td class="word">Dogma</td><td class="num">69</td><td class="word">Inteligencia</td><td class="num">94</td><td class="word">Simpatía</td></tr>
+          <tr><td class="num">20</td><td class="word">Conflicto</td><td class="num">45</td><td class="word">Dominación</td><td class="num">70</td><td class="word">Dolencia</td><td class="num">95</td><td class="word">Sistema</td></tr>
+          <tr><td class="num">21</td><td class="word">Conexión</td><td class="num">46</td><td class="word">Desventaja</td><td class="num">71</td><td class="word">Maestría</td><td class="num">96</td><td class="word">Pensamiento</td></tr>
+          <tr><td class="num">22</td><td class="word">Control</td><td class="num">47</td><td class="word">Emoción</td><td class="num">72</td><td class="word">Madurez</td><td class="num">97</td><td class="word">Tragedia</td></tr>
+          <tr><td class="num">23</td><td class="word">Controversia</td><td class="num">48</td><td class="word">Resistencia</td><td class="num">73</td><td class="word">Membresía</td><td class="num">98</td><td class="word">Visión</td></tr>
+          <tr><td class="num">24</td><td class="word">Convicción</td><td class="num">49</td><td class="word">Hecho</td><td class="num">74</td><td class="word">Mérito</td><td class="num">99</td><td class="word">Golpe de suerte</td></tr>
+          <tr><td class="num">25</td><td class="word">Cooperación</td><td class="num">50</td><td class="word">Destino</td><td class="num">75</td><td class="word">Necesidad</td><td class="num">100</td><td class="word">Cólera</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     DESCRIPTOR
+     ══════════════════════════════════ -->
+<section id="descriptor">
+  <div class="section-header">
+    <h2>DESCRIPTOR</h2>
+    <span class="section-badge core">Núcleo</span>
+  </div>
+  <div class="section-intro">Combínalo siempre con <strong>Foco</strong>. Úsalo cuando necesites saber algo de naturaleza física.</div>
+
+  <div class="oracle-group">
+    <div class="oracle-tabs">
+      <div class="oracle-tab active" onclick="switchTab(this,'tbl-sm1-descriptor-1')">Tabla 1–2</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-descriptor-2')">Tabla 3–4</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-descriptor-3')">Tabla 5–6</div>
+    </div>
+
+    <div class="oracle-panel active" id="panel-tbl-sm1-descriptor-1">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Descriptor 1–2 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-descriptor-1')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-descriptor-1">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Abandonado</td><td class="num">26</td><td class="word">Dañado</td><td class="num">51</td><td class="word">Encantado</td><td class="num">76</td><td class="word">Preservado</td></tr>
+          <tr><td class="num">2</td><td class="word">Abundante</td><td class="num">27</td><td class="word">Muerto</td><td class="num">52</td><td class="word">Oculto</td><td class="num">77</td><td class="word">Prominente</td></tr>
+          <tr><td class="num">3</td><td class="word">Activo</td><td class="num">28</td><td class="word">Mortal</td><td class="num">53</td><td class="word">Acaparado</td><td class="num">78</td><td class="word">Protegido</td></tr>
+          <tr><td class="num">4</td><td class="word">Avanzado</td><td class="num">29</td><td class="word">En decadencia</td><td class="num">54</td><td class="word">Hostil</td><td class="num">79</td><td class="word">Radiante</td></tr>
+          <tr><td class="num">5</td><td class="word">Alienígena</td><td class="num">30</td><td class="word">Defendido</td><td class="num">55</td><td class="word">Sumergido</td><td class="num">80</td><td class="word">Raro</td></tr>
+          <tr><td class="num">6</td><td class="word">Antiguo</td><td class="num">31</td><td class="word">Agotado</td><td class="num">56</td><td class="word">Inaccesible</td><td class="num">81</td><td class="word">Remoto</td></tr>
+          <tr><td class="num">7</td><td class="word">Arcaico</td><td class="num">32</td><td class="word">Desolado</td><td class="num">57</td><td class="word">Infestado</td><td class="num">82</td><td class="word">Rico</td></tr>
+          <tr><td class="num">8</td><td class="word">Automatizado</td><td class="num">33</td><td class="word">Destruido</td><td class="num">58</td><td class="word">Habitado</td><td class="num">83</td><td class="word">En ruinas</td></tr>
+          <tr><td class="num">9</td><td class="word">Yermo</td><td class="num">34</td><td class="word">Diverso</td><td class="num">59</td><td class="word">Aislado</td><td class="num">84</td><td class="word">Sagrado</td></tr>
+          <tr><td class="num">10</td><td class="word">Biológico</td><td class="num">35</td><td class="word">Vacío</td><td class="num">60</td><td class="word">Vivo</td><td class="num">85</td><td class="word">Seguro</td></tr>
+          <tr><td class="num">11</td><td class="word">Devastado</td><td class="num">36</td><td class="word">Envuelto</td><td class="num">61</td><td class="word">Perdido</td><td class="num">86</td><td class="word">Sellado</td></tr>
+          <tr><td class="num">12</td><td class="word">Bloqueado</td><td class="num">37</td><td class="word">Enredador</td><td class="num">62</td><td class="word">Frondoso</td><td class="num">87</td><td class="word">Secreto</td></tr>
+          <tr><td class="num">13</td><td class="word">Irrumpido</td><td class="num">38</td><td class="word">Expansivo</td><td class="num">63</td><td class="word">Improvisado</td><td class="num">88</td><td class="word">Asentado</td></tr>
+          <tr><td class="num">14</td><td class="word">Roto</td><td class="num">39</td><td class="word">Expuesto</td><td class="num">64</td><td class="word">Mecánico</td><td class="num">89</td><td class="word">Envuelto en sombras</td></tr>
+          <tr><td class="num">15</td><td class="word">Capturado</td><td class="num">40</td><td class="word">Ígneo</td><td class="num">65</td><td class="word">Engañoso</td><td class="num">90</td><td class="word">Robado</td></tr>
+          <tr><td class="num">16</td><td class="word">Caótico</td><td class="num">41</td><td class="word">De mal agüero</td><td class="num">66</td><td class="word">En movimiento</td><td class="num">91</td><td class="word">Extraño</td></tr>
+          <tr><td class="num">17</td><td class="word">Civilizado</td><td class="num">42</td><td class="word">Olvidado</td><td class="num">67</td><td class="word">Misterioso</td><td class="num">92</td><td class="word">Subterráneo</td></tr>
+          <tr><td class="num">18</td><td class="word">Derrumbado</td><td class="num">43</td><td class="word">Abandonado</td><td class="num">68</td><td class="word">Natural</td><td class="num">93</td><td class="word">Tóxico</td></tr>
+          <tr><td class="num">19</td><td class="word">Colosal</td><td class="num">44</td><td class="word">Fortificado</td><td class="num">69</td><td class="word">Nuevo</td><td class="num">94</td><td class="word">Atrapado</td></tr>
+          <tr><td class="num">20</td><td class="word">Confinado</td><td class="num">45</td><td class="word">Repugnante</td><td class="num">70</td><td class="word">Oscurecido</td><td class="num">95</td><td class="word">Sin descubrir</td></tr>
+          <tr><td class="num">21</td><td class="word">Conspicuo</td><td class="num">46</td><td class="word">Frágil</td><td class="num">71</td><td class="word">Abierto</td><td class="num">96</td><td class="word">Antinatural</td></tr>
+          <tr><td class="num">22</td><td class="word">Construido</td><td class="num">47</td><td class="word">Helado</td><td class="num">72</td><td class="word">Pacífico</td><td class="num">97</td><td class="word">Inestable</td></tr>
+          <tr><td class="num">23</td><td class="word">En disputa</td><td class="num">48</td><td class="word">Funcional</td><td class="num">73</td><td class="word">Peligroso</td><td class="num">98</td><td class="word">Indómito</td></tr>
+          <tr><td class="num">24</td><td class="word">Corrompido</td><td class="num">49</td><td class="word">Siniestro</td><td class="num">74</td><td class="word">Saqueado</td><td class="num">99</td><td class="word">Valioso</td></tr>
+          <tr><td class="num">25</td><td class="word">Creado</td><td class="num">50</td><td class="word">Vigilado</td><td class="num">75</td><td class="word">Poderoso</td><td class="num">100</td><td class="word">Violento</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-descriptor-2">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Descriptor 3–4 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-descriptor-2')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-descriptor-2">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Anormal</td><td class="num">26</td><td class="word">Distante</td><td class="num">51</td><td class="word">Empobrecido</td><td class="num">76</td><td class="word">Primitivo</td></tr>
+          <tr><td class="num">2</td><td class="word">Blindado</td><td class="num">27</td><td class="word">Divergente</td><td class="num">52</td><td class="word">Inactivo</td><td class="num">77</td><td class="word">Primordial</td></tr>
+          <tr><td class="num">3</td><td class="word">Artificial</td><td class="num">28</td><td class="word">Dominante</td><td class="num">53</td><td class="word">Incompleto</td><td class="num">78</td><td class="word">Reforzado</td></tr>
+          <tr><td class="num">4</td><td class="word">Barricado</td><td class="num">29</td><td class="word">Enigmático</td><td class="num">54</td><td class="word">Ineficaz</td><td class="num">79</td><td class="word">Restringido</td></tr>
+          <tr><td class="num">5</td><td class="word">Sombrío</td><td class="num">30</td><td class="word">Evasivo</td><td class="num">55</td><td class="word">Infinitesimal</td><td class="num">80</td><td class="word">Restringido</td></tr>
+          <tr><td class="num">6</td><td class="word">Brutal</td><td class="num">31</td><td class="word">Exótico</td><td class="num">56</td><td class="word">Lesionado</td><td class="num">81</td><td class="word">Retirado</td></tr>
+          <tr><td class="num">7</td><td class="word">Enjaulado</td><td class="num">32</td><td class="word">Extenso</td><td class="num">57</td><td class="word">Intenso</td><td class="num">82</td><td class="word">Arriesgado</td></tr>
+          <tr><td class="num">8</td><td class="word">Encadenado</td><td class="num">33</td><td class="word">Extinto</td><td class="num">58</td><td class="word">Letal</td><td class="num">83</td><td class="word">Salvaje</td></tr>
+          <tr><td class="num">9</td><td class="word">Desafiante</td><td class="num">34</td><td class="word">Extravagante</td><td class="num">59</td><td class="word">Sin vida</td><td class="num">84</td><td class="word">Escaso</td></tr>
+          <tr><td class="num">10</td><td class="word">Clandestino</td><td class="num">35</td><td class="word">Fabricado</td><td class="num">60</td><td class="word">Limitado</td><td class="num">85</td><td class="word">Disperso</td></tr>
+          <tr><td class="num">11</td><td class="word">Cerrado</td><td class="num">36</td><td class="word">Caído</td><td class="num">61</td><td class="word">Solitario</td><td class="num">86</td><td class="word">Recluido</td></tr>
+          <tr><td class="num">12</td><td class="word">Oculto</td><td class="num">37</td><td class="word">Débil</td><td class="num">62</td><td class="word">Varado</td><td class="num">87</td><td class="word">Asegurado</td></tr>
+          <tr><td class="num">13</td><td class="word">Contaminado</td><td class="num">38</td><td class="word">Fétido</td><td class="num">63</td><td class="word">Obliterado</td><td class="num">88</td><td class="word">Blindado</td></tr>
+          <tr><td class="num">14</td><td class="word">Desmoronado</td><td class="num">39</td><td class="word">Feroz</td><td class="num">64</td><td class="word">Oscuro</td><td class="num">89</td><td class="word">Impactante</td></tr>
+          <tr><td class="num">15</td><td class="word">Críptico</td><td class="num">40</td><td class="word">Defectuoso</td><td class="num">65</td><td class="word">Obsoleto</td><td class="num">90</td><td class="word">Envuelto en sombras</td></tr>
+          <tr><td class="num">16</td><td class="word">Maldito</td><td class="num">41</td><td class="word">Inundado</td><td class="num">66</td><td class="word">Obstruido</td><td class="num">91</td><td class="word">Sospechoso</td></tr>
+          <tr><td class="num">17</td><td class="word">Peligroso</td><td class="num">42</td><td class="word">Prohibido</td><td class="num">67</td><td class="word">Ocupado</td><td class="num">92</td><td class="word">Sintético</td></tr>
+          <tr><td class="num">18</td><td class="word">Deficiente</td><td class="num">43</td><td class="word">Forjado</td><td class="num">68</td><td class="word">Viejo</td><td class="num">93</td><td class="word">Contaminado</td></tr>
+          <tr><td class="num">19</td><td class="word">Delicado</td><td class="num">44</td><td class="word">Fracturado</td><td class="num">69</td><td class="word">Opulento</td><td class="num">94</td><td class="word">Traicionero</td></tr>
+          <tr><td class="num">20</td><td class="word">Denso</td><td class="num">45</td><td class="word">Fragmentado</td><td class="num">70</td><td class="word">Insólito</td><td class="num">95</td><td class="word">Desorganizado</td></tr>
+          <tr><td class="num">21</td><td class="word">Depravado</td><td class="num">46</td><td class="word">Aterrador</td><td class="num">71</td><td class="word">Invadido</td><td class="num">96</td><td class="word">Inseguro</td></tr>
+          <tr><td class="num">22</td><td class="word">Desierto</td><td class="num">47</td><td class="word">Espantoso</td><td class="num">72</td><td class="word">Abrumado</td><td class="num">97</td><td class="word">Virulento</td></tr>
+          <tr><td class="num">23</td><td class="word">Destructivo</td><td class="num">48</td><td class="word">Peligroso</td><td class="num">73</td><td class="word">Envenenado</td><td class="num">98</td><td class="word">Vulnerable</td></tr>
+          <tr><td class="num">24</td><td class="word">Devastado</td><td class="num">49</td><td class="word">Helado</td><td class="num">74</td><td class="word">Pobre</td><td class="num">99</td><td class="word">Malgastado</td></tr>
+          <tr><td class="num">25</td><td class="word">Enfermo</td><td class="num">50</td><td class="word">Dañado</td><td class="num">75</td><td class="word">Potente</td><td class="num">100</td><td class="word">Débil</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-descriptor-3">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Descriptor 5–6 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-descriptor-3')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-descriptor-3">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Abrasivo</td><td class="num">26</td><td class="word">Deforme</td><td class="num">51</td><td class="word">Fanático</td><td class="num">76</td><td class="word">Mutable</td></tr>
+          <tr><td class="num">2</td><td class="word">Accidental</td><td class="num">27</td><td class="word">Degenerativo</td><td class="num">52</td><td class="word">Fatal</td><td class="num">77</td><td class="word">Descuidado</td></tr>
+          <tr><td class="num">3</td><td class="word">Adversarial</td><td class="num">28</td><td class="word">Degradado</td><td class="num">53</td><td class="word">Defectuoso</td><td class="num">78</td><td class="word">No violento</td></tr>
+          <tr><td class="num">4</td><td class="word">Agresivo</td><td class="num">29</td><td class="word">Deprimido</td><td class="num">54</td><td class="word">Temible</td><td class="num">79</td><td class="word">Ofensivo</td></tr>
+          <tr><td class="num">5</td><td class="word">Anticuado</td><td class="num">30</td><td class="word">Desesperado</td><td class="num">55</td><td class="word">Fracturado</td><td class="num">80</td><td class="word">Opresivo</td></tr>
+          <tr><td class="num">6</td><td class="word">Deteriorado</td><td class="num">31</td><td class="word">Desapegado</td><td class="num">56</td><td class="word">Fraudulento</td><td class="num">81</td><td class="word">Parasitario</td></tr>
+          <tr><td class="num">7</td><td class="word">Calculador</td><td class="num">32</td><td class="word">Tortuoso</td><td class="num">57</td><td class="word">Deshilachado</td><td class="num">82</td><td class="word">Silencioso</td></tr>
+          <tr><td class="num">8</td><td class="word">Cautivo</td><td class="num">33</td><td class="word">Desechado</td><td class="num">58</td><td class="word">Agotado</td><td class="num">83</td><td class="word">Reactivo</td></tr>
+          <tr><td class="num">9</td><td class="word">Cáustico</td><td class="num">34</td><td class="word">Desconectado</td><td class="num">59</td><td class="word">Descuidado</td><td class="num">84</td><td class="word">Rígido</td></tr>
+          <tr><td class="num">10</td><td class="word">Barato</td><td class="num">35</td><td class="word">Desalentador</td><td class="num">60</td><td class="word">Dañino</td><td class="num">85</td><td class="word">Tosco</td></tr>
+          <tr><td class="num">11</td><td class="word">Frío</td><td class="num">36</td><td class="word">Deshonroso</td><td class="num">61</td><td class="word">Duro</td><td class="num">86</td><td class="word">Intrigante</td></tr>
+          <tr><td class="num">12</td><td class="word">Combativo</td><td class="num">37</td><td class="word">Lúgubre</td><td class="num">62</td><td class="word">Frenético</td><td class="num">87</td><td class="word">Reservado</td></tr>
+          <tr><td class="num">13</td><td class="word">Condenado</td><td class="num">38</td><td class="word">En disputa</td><td class="num">63</td><td class="word">Ilegal</td><td class="num">88</td><td class="word">Sórdido</td></tr>
+          <tr><td class="num">14</td><td class="word">Constrictivo</td><td class="num">39</td><td class="word">Dividido</td><td class="num">64</td><td class="word">Ilógico</td><td class="num">89</td><td class="word">Con dificultades</td></tr>
+          <tr><td class="num">15</td><td class="word">Corrosivo</td><td class="num">40</td><td class="word">Divisivo</td><td class="num">65</td><td class="word">Inadecuado</td><td class="num">90</td><td class="word">Cuidado</td></tr>
+          <tr><td class="num">16</td><td class="word">Criminal</td><td class="num">41</td><td class="word">Drástico</td><td class="num">66</td><td class="word">Incompetente</td><td class="num">91</td><td class="word">Turbulento</td></tr>
+          <tr><td class="num">17</td><td class="word">Torcido</td><td class="num">42</td><td class="word">Disfuncional</td><td class="num">67</td><td class="word">Inferior</td><td class="num">92</td><td class="word">Incivilizado</td></tr>
+          <tr><td class="num">18</td><td class="word">Crudo</td><td class="num">43</td><td class="word">Inquietante</td><td class="num">68</td><td class="word">Inseguro</td><td class="num">93</td><td class="word">Sin restricciones</td></tr>
+          <tr><td class="num">19</td><td class="word">Cruel</td><td class="num">44</td><td class="word">Errático</td><td class="num">69</td><td class="word">Insuficiente</td><td class="num">94</td><td class="word">Vengativo</td></tr>
+          <tr><td class="num">20</td><td class="word">Engorroso</td><td class="num">45</td><td class="word">Excesivo</td><td class="num">70</td><td class="word">Intacto</td><td class="num">95</td><td class="word">Volátil</td></tr>
+          <tr><td class="num">21</td><td class="word">Diezmado</td><td class="num">46</td><td class="word">Agotado</td><td class="num">71</td><td class="word">De baja tecnología</td><td class="num">96</td><td class="word">Derrochador</td></tr>
+          <tr><td class="num">22</td><td class="word">Decrépito</td><td class="num">47</td><td class="word">Experimental</td><td class="num">72</td><td class="word">Malicioso</td><td class="num">97</td><td class="word">Vacilante</td></tr>
+          <tr><td class="num">23</td><td class="word">Defectuoso</td><td class="num">48</td><td class="word">Explosivo</td><td class="num">73</td><td class="word">Manipulador</td><td class="num">98</td><td class="word">Adinerado</td></tr>
+          <tr><td class="num">24</td><td class="word">Defensivo</td><td class="num">49</td><td class="word">Fallido</td><td class="num">74</td><td class="word">Masivo</td><td class="num">99</td><td class="word">Salvaje</td></tr>
+          <tr><td class="num">25</td><td class="word">Desafiante</td><td class="num">50</td><td class="word">Falso</td><td class="num">75</td><td class="word">Mutable</td><td class="num">100</td><td class="word">Desgastado</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FOCO
+     ══════════════════════════════════ -->
+<section id="foco">
+  <div class="section-header">
+    <h2>FOCO</h2>
+    <span class="section-badge core">Núcleo</span>
+  </div>
+  <div class="section-intro">Combínalo siempre con <strong>Descriptor</strong>. Úsalo cuando necesites saber algo de naturaleza física.</div>
+
+  <div class="oracle-group">
+    <div class="oracle-tabs">
+      <div class="oracle-tab active" onclick="switchTab(this,'tbl-sm1-focus-1')">Tabla 1–2</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-focus-2')">Tabla 3–4</div>
+      <div class="oracle-tab" onclick="switchTab(this,'tbl-sm1-focus-3')">Tabla 5–6</div>
+    </div>
+
+    <div class="oracle-panel active" id="panel-tbl-sm1-focus-1">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Foco 1–2 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-focus-1')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-focus-1">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Alarma</td><td class="num">26</td><td class="word">Descubrimiento</td><td class="num">51</td><td class="word">Material</td><td class="num">76</td><td class="word">Refugio</td></tr>
+          <tr><td class="num">2</td><td class="word">Anomalía</td><td class="num">27</td><td class="word">Ecosistema</td><td class="num">52</td><td class="word">Mecanismo</td><td class="num">77</td><td class="word">Nave</td></tr>
+          <tr><td class="num">3</td><td class="word">Aparición</td><td class="num">28</td><td class="word">Recinto</td><td class="num">53</td><td class="word">Mensaje</td><td class="num">78</td><td class="word">Atajo</td></tr>
+          <tr><td class="num">4</td><td class="word">Archivo</td><td class="num">29</td><td class="word">Energía</td><td class="num">54</td><td class="word">Mineral</td><td class="num">79</td><td class="word">Señal</td></tr>
+          <tr><td class="num">5</td><td class="word">Arte</td><td class="num">30</td><td class="word">Entorno</td><td class="num">55</td><td class="word">Monumento</td><td class="num">80</td><td class="word">Sonido</td></tr>
+          <tr><td class="num">6</td><td class="word">Artefacto</td><td class="num">31</td><td class="word">Equipamiento</td><td class="num">56</td><td class="word">Obstáculo</td><td class="num">81</td><td class="word">Almacenamiento</td></tr>
+          <tr><td class="num">7</td><td class="word">Atmósfera</td><td class="num">32</td><td class="word">Experimento</td><td class="num">57</td><td class="word">Organismo</td><td class="num">82</td><td class="word">Tormenta</td></tr>
+          <tr><td class="num">8</td><td class="word">Campo de batalla</td><td class="num">33</td><td class="word">Instalación</td><td class="num">58</td><td class="word">Brote</td><td class="num">83</td><td class="word">Estructura</td></tr>
+          <tr><td class="num">9</td><td class="word">Balizón</td><td class="num">34</td><td class="word">Facción</td><td class="num">59</td><td class="word">Puesto avanzado</td><td class="num">84</td><td class="word">Suministro</td></tr>
+          <tr><td class="num">10</td><td class="word">Ser</td><td class="num">35</td><td class="word">Flota</td><td class="num">60</td><td class="word">Camino</td><td class="num">85</td><td class="word">Símbolo</td></tr>
+          <tr><td class="num">11</td><td class="word">Bloqueo</td><td class="num">36</td><td class="word">Fuerza</td><td class="num">61</td><td class="word">Gente</td><td class="num">86</td><td class="word">Sistema</td></tr>
+          <tr><td class="num">12</td><td class="word">Frontera</td><td class="num">37</td><td class="word">Fortificación</td><td class="num">62</td><td class="word">Persona</td><td class="num">87</td><td class="word">Tecnología</td></tr>
+          <tr><td class="num">13</td><td class="word">Caché</td><td class="num">38</td><td class="word">Gas</td><td class="num">63</td><td class="word">Planta</td><td class="num">88</td><td class="word">Terreno</td></tr>
+          <tr><td class="num">14</td><td class="word">Carga</td><td class="num">39</td><td class="word">Tumba</td><td class="num">64</td><td class="word">Portal</td><td class="num">89</td><td class="word">Territorio</td></tr>
+          <tr><td class="num">15</td><td class="word">Mercancía</td><td class="num">40</td><td class="word">Hábitat</td><td class="num">65</td><td class="word">Realidad</td><td class="num">90</td><td class="word">Umbral</td></tr>
+          <tr><td class="num">16</td><td class="word">Confinamiento</td><td class="num">41</td><td class="word">Peligro</td><td class="num">66</td><td class="word">Refugio</td><td class="num">91</td><td class="word">Tiempo</td></tr>
+          <tr><td class="num">17</td><td class="word">Conexión</td><td class="num">42</td><td class="word">Escondrijo</td><td class="num">67</td><td class="word">Reliquia</td><td class="num">92</td><td class="word">Transporte</td></tr>
+          <tr><td class="num">18</td><td class="word">Contenedor</td><td class="num">43</td><td class="word">Hogar</td><td class="num">68</td><td class="word">Restos</td><td class="num">93</td><td class="word">Trampa</td></tr>
+          <tr><td class="num">19</td><td class="word">Creación</td><td class="num">44</td><td class="word">Ilusión</td><td class="num">69</td><td class="word">Punto de encuentro</td><td class="num">94</td><td class="word">Tesoro</td></tr>
+          <tr><td class="num">20</td><td class="word">Criatura</td><td class="num">45</td><td class="word">Industria</td><td class="num">70</td><td class="word">Recurso</td><td class="num">95</td><td class="word">Bóveda</td></tr>
+          <tr><td class="num">21</td><td class="word">Cruce</td><td class="num">46</td><td class="word">Inteligencia</td><td class="num">71</td><td class="word">Ruta</td><td class="num">96</td><td class="word">Vehículo</td></tr>
+          <tr><td class="num">22</td><td class="word">Datos</td><td class="num">47</td><td class="word">Guarida</td><td class="num">72</td><td class="word">Ruinas</td><td class="num">97</td><td class="word">Punto de vista</td></tr>
+          <tr><td class="num">23</td><td class="word">Escombros</td><td class="num">48</td><td class="word">Forma de vida</td><td class="num">73</td><td class="word">Salvamento</td><td class="num">98</td><td class="word">Vacío</td></tr>
+          <tr><td class="num">24</td><td class="word">Dispositivo</td><td class="num">49</td><td class="word">Líquido</td><td class="num">74</td><td class="word">Asentamiento</td><td class="num">99</td><td class="word">Arma</td></tr>
+          <tr><td class="num">25</td><td class="word">Dimensión</td><td class="num">50</td><td class="word">Máquina</td><td class="num">75</td><td class="word">Refugio</td><td class="num">100</td><td class="word">Naufragio</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-focus-2">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Foco 3–4 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-focus-2')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-focus-2">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Agente</td><td class="num">26</td><td class="word">Crédito</td><td class="num">51</td><td class="word">Holograma</td><td class="num">76</td><td class="word">Radioactividad</td></tr>
+          <tr><td class="num">2</td><td class="word">Androide</td><td class="num">27</td><td class="word">Criogenia</td><td class="num">52</td><td class="word">Humanoide</td><td class="num">77</td><td class="word">Ramscoop</td></tr>
+          <tr><td class="num">3</td><td class="word">Antigravedad</td><td class="num">28</td><td class="word">Culto</td><td class="num">53</td><td class="word">Hidroponía</td><td class="num">78</td><td class="word">Rayos</td></tr>
+          <tr><td class="num">4</td><td class="word">Antimateria</td><td class="num">29</td><td class="word">Cultura</td><td class="num">54</td><td class="word">Icono</td><td class="num">79</td><td class="word">Fisura</td></tr>
+          <tr><td class="num">5</td><td class="word">Armadura</td><td class="num">30</td><td class="word">Cibernética</td><td class="num">55</td><td class="word">Isótopo</td><td class="num">80</td><td class="word">Mundo Anillo</td></tr>
+          <tr><td class="num">6</td><td class="word">Asteroide</td><td class="num">31</td><td class="word">Derelicto</td><td class="num">56</td><td class="word">Llave</td><td class="num">81</td><td class="word">Robot</td></tr>
+          <tr><td class="num">7</td><td class="word">Cinturón de asteroides</td><td class="num">32</td><td class="word">Desarrollo</td><td class="num">57</td><td class="word">Vela solar</td><td class="num">82</td><td class="word">Cohete</td></tr>
+          <tr><td class="num">8</td><td class="word">Aumento</td><td class="num">33</td><td class="word">Propulsor</td><td class="num">58</td><td class="word">Ubicación</td><td class="num">83</td><td class="word">Satélite</td></tr>
+          <tr><td class="num">9</td><td class="word">Avatar</td><td class="num">34</td><td class="word">Esfera de Dyson</td><td class="num">59</td><td class="word">Magnetismo</td><td class="num">84</td><td class="word">Esquemas</td></tr>
+          <tr><td class="num">10</td><td class="word">Rayo</td><td class="num">35</td><td class="word">Elemento</td><td class="num">60</td><td class="word">Mapa</td><td class="num">85</td><td class="word">Escudo</td></tr>
+          <tr><td class="num">11</td><td class="word">Agujero negro</td><td class="num">36</td><td class="word">Motor</td><td class="num">61</td><td class="word">Memorial</td><td class="num">86</td><td class="word">Envío</td></tr>
+          <tr><td class="num">12</td><td class="word">Brecha</td><td class="num">37</td><td class="word">Mejora</td><td class="num">62</td><td class="word">Microbio</td><td class="num">87</td><td class="word">Lanzadera</td></tr>
+          <tr><td class="num">13</td><td class="word">Avance</td><td class="num">38</td><td class="word">Enredo</td><td class="num">63</td><td class="word">Luna</td><td class="num">88</td><td class="word">Sigilo</td></tr>
+          <tr><td class="num">14</td><td class="word">Intermediario</td><td class="num">39</td><td class="word">Entropía</td><td class="num">64</td><td class="word">Movimiento</td><td class="num">89</td><td class="word">Singularidad</td></tr>
+          <tr><td class="num">15</td><td class="word">Cambio</td><td class="num">40</td><td class="word">Exotraje</td><td class="num">65</td><td class="word">Multiverso</td><td class="num">90</td><td class="word">Espacio</td></tr>
+          <tr><td class="num">16</td><td class="word">Circuito</td><td class="num">41</td><td class="word">Experimento</td><td class="num">66</td><td class="word">Mutación</td><td class="num">91</td><td class="word">Estrella</td></tr>
+          <tr><td class="num">17</td><td class="word">Clon</td><td class="num">42</td><td class="word">Exploración</td><td class="num">67</td><td class="word">Nanobots</td><td class="num">92</td><td class="word">Estatua</td></tr>
+          <tr><td class="num">18</td><td class="word">Cúmulo</td><td class="num">43</td><td class="word">Explosión</td><td class="num">68</td><td class="word">Nebulosa</td><td class="num">93</td><td class="word">Subespacio</td></tr>
+          <tr><td class="num">19</td><td class="word">Colonia</td><td class="num">44</td><td class="word">Exposición</td><td class="num">69</td><td class="word">Nova</td><td class="num">94</td><td class="word">Proveedor</td></tr>
+          <tr><td class="num">20</td><td class="word">Cometa</td><td class="num">45</td><td class="word">Facción</td><td class="num">70</td><td class="word">Organización</td><td class="num">95</td><td class="word">Terraformador</td></tr>
+          <tr><td class="num">21</td><td class="word">Comunicador</td><td class="num">46</td><td class="word">Campo</td><td class="num">71</td><td class="word">Paradoja</td><td class="num">96</td><td class="word">Tiempo</td></tr>
+          <tr><td class="num">22</td><td class="word">Conjunción</td><td class="num">47</td><td class="word">Caza</td><td class="num">72</td><td class="word">Planeta</td><td class="num">97</td><td class="word">Transporte</td></tr>
+          <tr><td class="num">23</td><td class="word">Conexión</td><td class="num">48</td><td class="word">Fisión</td><td class="num">73</td><td class="word">Planetoide</td><td class="num">98</td><td class="word">Vector</td></tr>
+          <tr><td class="num">24</td><td class="word">Coordenadas</td><td class="num">49</td><td class="word">Fusión</td><td class="num">74</td><td class="word">Planos</td><td class="num">99</td><td class="word">Agua</td></tr>
+          <tr><td class="num">25</td><td class="word">Corona</td><td class="num">50</td><td class="word">Holograma</td><td class="num">75</td><td class="word">Poder</td><td class="num">100</td><td class="word">Agujero de gusano</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-panel" id="panel-tbl-sm1-focus-3">
+      <div class="oracle-panel-header">
+        <span class="oracle-panel-title">Foco 5–6 · d100</span>
+        <button class="roll-btn" onclick="rollWordGrid(this,'tbl-sm1-focus-3')">⚄ Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="word-grid" id="tbl-sm1-focus-3">
+        <tbody>
+          <tr><td class="num">1</td><td class="word">Acuerdo</td><td class="num">26</td><td class="word">Cúpula</td><td class="num">51</td><td class="word">Manifiesto</td><td class="num">76</td><td class="word">Revolución</td></tr>
+          <tr><td class="num">2</td><td class="word">Emboscada</td><td class="num">27</td><td class="word">Droga</td><td class="num">52</td><td class="word">Manuscrito</td><td class="num">77</td><td class="word">Chivo expiatorio</td></tr>
+          <tr><td class="num">3</td><td class="word">Ansible</td><td class="num">28</td><td class="word">Economía</td><td class="num">53</td><td class="word">Masa</td><td class="num">78</td><td class="word">Sensor</td></tr>
+          <tr><td class="num">4</td><td class="word">Astrónomo</td><td class="num">29</td><td class="word">Empatía</td><td class="num">54</td><td class="word">Materia</td><td class="num">79</td><td class="word">Astillero</td></tr>
+          <tr><td class="num">5</td><td class="word">Autómata</td><td class="num">30</td><td class="word">Epidemia</td><td class="num">55</td><td class="word">Medios</td><td class="num">80</td><td class="word">Escaramuza</td></tr>
+          <tr><td class="num">6</td><td class="word">Barrera</td><td class="num">31</td><td class="word">Éster</td><td class="num">56</td><td class="word">Militar</td><td class="num">81</td><td class="word">Corriente</td></tr>
+          <tr><td class="num">7</td><td class="word">Base</td><td class="num">32</td><td class="word">Nave insignia</td><td class="num">57</td><td class="word">Mutante</td><td class="num">82</td><td class="word">Software</td></tr>
+          <tr><td class="num">8</td><td class="word">Batalla</td><td class="num">33</td><td class="word">Fortaleza</td><td class="num">58</td><td class="word">Mito</td><td class="num">83</td><td class="word">Espíritu</td></tr>
+          <tr><td class="num">9</td><td class="word">Campo de batalla</td><td class="num">34</td><td class="word">Fondo</td><td class="num">59</td><td class="word">Orden</td><td class="num">84</td><td class="word">Reserva</td></tr>
+          <tr><td class="num">10</td><td class="word">Biotecnología</td><td class="num">35</td><td class="word">Cementerio</td><td class="num">60</td><td class="word">Órgano</td><td class="num">85</td><td class="word">Bastión</td></tr>
+          <tr><td class="num">11</td><td class="word">Impulso</td><td class="num">36</td><td class="word">Hardware</td><td class="num">61</td><td class="word">Mundo paralelo</td><td class="num">86</td><td class="word">Simbionte</td></tr>
+          <tr><td class="num">12</td><td class="word">Campamento</td><td class="num">37</td><td class="word">Obstáculo</td><td class="num">62</td><td class="word">Parásito</td><td class="num">87</td><td class="word">Simpatizante</td></tr>
+          <tr><td class="num">13</td><td class="word">Alto el fuego</td><td class="num">38</td><td class="word">Mente colmena</td><td class="num">63</td><td class="word">Partícula</td><td class="num">88</td><td class="word">Teoría</td></tr>
+          <tr><td class="num">14</td><td class="word">Quimera</td><td class="num">39</td><td class="word">Hiperespacio</td><td class="num">64</td><td class="word">Pasaje</td><td class="num">89</td><td class="word">Amenaza</td></tr>
+          <tr><td class="num">15</td><td class="word">Clima</td><td class="num">40</td><td class="word">Hipospray</td><td class="num">65</td><td class="word">Patógeno</td><td class="num">90</td><td class="word">Universo</td></tr>
+          <tr><td class="num">16</td><td class="word">Camuflaje</td><td class="num">41</td><td class="word">Imagen</td><td class="num">66</td><td class="word">Fantasma</td><td class="num">91</td><td class="word">Utopía</td></tr>
+          <tr><td class="num">17</td><td class="word">Nube</td><td class="num">42</td><td class="word">Impacto</td><td class="num">67</td><td class="word">Prisión</td><td class="num">92</td><td class="word">Vestigios</td></tr>
+          <tr><td class="num">18</td><td class="word">Compañía</td><td class="num">43</td><td class="word">Información</td><td class="num">68</td><td class="word">Procesador</td><td class="num">93</td><td class="word">Víctima</td></tr>
+          <tr><td class="num">19</td><td class="word">Componente</td><td class="num">44</td><td class="word">Interfaz</td><td class="num">69</td><td class="word">Camisa roja</td><td class="num">94</td><td class="word">Virus</td></tr>
+          <tr><td class="num">20</td><td class="word">Ordenador</td><td class="num">45</td><td class="word">Invasión</td><td class="num">70</td><td class="word">Regeneración</td><td class="num">95</td><td class="word">Viaje</td></tr>
+          <tr><td class="num">21</td><td class="word">Consorcio</td><td class="num">46</td><td class="word">Invención</td><td class="num">71</td><td class="word">Replicante</td><td class="num">96</td><td class="word">Guerra</td></tr>
+          <tr><td class="num">22</td><td class="word">Contrato</td><td class="num">47</td><td class="word">Inventario</td><td class="num">72</td><td class="word">Repositorio</td><td class="num">97</td><td class="word">Deformación</td></tr>
+          <tr><td class="num">23</td><td class="word">Convertidor</td><td class="num">48</td><td class="word">Conocimiento</td><td class="num">73</td><td class="word">Depósito</td><td class="num">98</td><td class="word">Xenobot</td></tr>
+          <tr><td class="num">24</td><td class="word">Ciborg</td><td class="num">49</td><td class="word">Líder</td><td class="num">74</td><td class="word">Revuelta</td><td class="num">99</td><td class="word">Gravedad cero</td></tr>
+          <tr><td class="num">25</td><td class="word">Documentos</td><td class="num">50</td><td class="word">Manifiesto</td><td class="num">75</td><td class="word">Revolución</td><td class="num">100</td><td class="word">Zona</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+/* ══════════════════════════════════
+   TAB SWITCHING
+   ══════════════════════════════════ */
+function switchTab(tabEl, tableId) {
+  const group = tabEl.closest('.oracle-group');
+  // Deactivate all tabs and panels
+  group.querySelectorAll('.oracle-tab').forEach(t => t.classList.remove('active'));
+  group.querySelectorAll('.oracle-panel').forEach(p => p.classList.remove('active'));
+  // Activate selected
+  tabEl.classList.add('active');
+  const panel = document.getElementById('panel-' + tableId);
+  if (panel) panel.classList.add('active');
+}
+
+/* ══════════════════════════════════
+   ROLL — NARRATIVE TABLES (range rows)
+   ══════════════════════════════════ */
+function rollOracle(btnEl, tableId) {
+  const panel = btnEl.closest('.oracle-panel');
+  const tbl = document.getElementById(tableId);
+  if (!tbl) return;
+  const rows = tbl.querySelectorAll('tbody tr');
+  const roll = Math.floor(Math.random() * 100) + 1;
+
+  rows.forEach(r => r.classList.remove('highlighted'));
+
+  let found = null;
+  rows.forEach(row => {
+    const cell = row.querySelector('td.range');
+    if (!cell) return;
+    const txt = cell.textContent.trim().replace(/\s/g, '');
+    const m = txt.match(/^(\d+)[–\-](\d+)$/);
+    if (m && roll >= parseInt(m[1]) && roll <= parseInt(m[2]) && !found) {
+      found = row;
+    }
+  });
+
+  const resultEl = panel ? panel.querySelector('.roll-result') : null;
+  if (found && resultEl) {
+    found.classList.add('highlighted');
+    const cells = found.querySelectorAll('td');
+    let text = '';
+    cells.forEach(c => {
+      if (!c.classList.contains('range')) text = c.textContent.trim();
+    });
+    resultEl.textContent = `⚄ ${roll} → ${text}`;
+    resultEl.classList.add('visible');
+    found.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+/* ══════════════════════════════════
+   ROLL — WORD GRID (4-col numbered)
+   ══════════════════════════════════ */
+function rollWordGrid(btnEl, tableId) {
+  const panel = btnEl.closest('.oracle-panel');
+  const tbl = document.getElementById(tableId);
+  if (!tbl) return;
+  const roll = Math.floor(Math.random() * 100) + 1;
+
+  // Clear previous
+  tbl.querySelectorAll('tr').forEach(r => r.classList.remove('highlighted'));
+
+  // Find the row containing the number
+  let foundRow = null;
+  let foundWord = '';
+  tbl.querySelectorAll('tbody tr').forEach(row => {
+    const nums = row.querySelectorAll('td.num');
+    const words = row.querySelectorAll('td.word');
+    nums.forEach((n, i) => {
+      if (parseInt(n.textContent.trim()) === roll) {
+        foundRow = row;
+        foundWord = words[i] ? words[i].textContent.trim() : '';
+      }
+    });
+  });
+
+  const resultEl = panel ? panel.querySelector('.roll-result') : null;
+  if (foundRow && resultEl) {
+    foundRow.classList.add('highlighted');
+    resultEl.textContent = `⚄ ${roll} → ${foundWord}`;
+    resultEl.classList.add('visible');
+    foundRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+</script>
+
+</body>
+</html>

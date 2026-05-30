@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ancient Wonders ES — Cap. 5 & 6: Megaciudades y Moradores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0d14;
+  --bg2: #0f1420;
+  --bg3: #141926;
+  --border: #2a3050;
+  --gold: #d4a857;
+  --gold2: #b8902a;
+  --gold-dim: rgba(212,168,87,0.15);
+  --text: #c8cfe0;
+  --text-dim: #7a8399;
+  --tag-aw: #c47a3a;
+  --red-curse: #8b2020;
+  --red-curse-dim: rgba(139,32,32,0.15);
+  --mono: 'JetBrains Mono', monospace;
+  --serif: 'Cormorant Garamond', serif;
+  --nav-w: 280px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* NAV */
+nav {
+  width: var(--nav-w);
+  min-width: var(--nav-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1.2rem 0 2rem;
+  flex-shrink: 0;
+}
+nav::-webkit-scrollbar { width: 4px; }
+nav::-webkit-scrollbar-track { background: var(--bg2); }
+nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.nav-brand {
+  padding: 0 1.2rem 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.8rem;
+}
+.nav-brand .title {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--tag-aw);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.nav-brand .subtitle {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--gold);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+.nav-group { margin-bottom: 0.3rem; }
+.nav-group-title {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem 0.3rem;
+}
+nav a {
+  display: block;
+  padding: 0.28rem 1.2rem 0.28rem 1.5rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 0.88rem;
+  transition: color 0.15s, background 0.15s;
+}
+nav a:hover { color: var(--gold); background: var(--gold-dim); }
+nav a.sub { padding-left: 2rem; font-size: 0.82rem; }
+
+/* MAIN */
+main {
+  flex: 1;
+  max-width: 900px;
+  padding: 2rem 2.5rem;
+  overflow-x: hidden;
+}
+.page-header {
+  border-bottom: 2px solid var(--gold2);
+  padding-bottom: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+.page-header h1 {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+}
+.page-header p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+  font-family: var(--mono);
+}
+
+/* SECTIONS */
+section { margin-bottom: 3rem; scroll-margin-top: 1rem; }
+.section-header {
+  border-left: 3px solid var(--tag-aw);
+  padding-left: 1rem;
+  margin-bottom: 1.2rem;
+}
+.section-header h2 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--tag-aw);
+  border: 1px solid var(--tag-aw);
+  padding: 0.1rem 0.4rem;
+  vertical-align: middle;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+}
+.tag.curse { color: var(--red-curse); border-color: var(--red-curse); }
+
+.subsection { margin: 1.5rem 0; }
+.subsection h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
+}
+.subsection h4 {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 0.4rem;
+}
+.prose { margin-bottom: 0.8rem; line-height: 1.65; }
+ul.rules-list { margin: 0.5rem 0 0.8rem 1.5rem; }
+ul.rules-list li { margin-bottom: 0.3rem; }
+ul.rules-list li strong { color: var(--gold); }
+
+/* TABLES */
+.oracle-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+.oracle-card.curse {
+  border-color: var(--red-curse);
+}
+.oracle-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+.oracle-card.curse .oracle-card-header {
+  border-bottom-color: var(--red-curse);
+  background: rgba(139,32,32,0.1);
+}
+.oracle-card-header h4 {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.oracle-card.curse .oracle-card-header h4 { color: #c45050; }
+.roll-indicator {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.35rem;
+  border-radius: 2px;
+}
+.roll-btn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--bg);
+  background: var(--gold2);
+  border: none;
+  padding: 0.25rem 0.7rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.roll-btn:hover { background: var(--gold); }
+.oracle-card.curse .roll-btn { background: #8b2020; color: #f0c8c8; }
+.oracle-card.curse .roll-btn:hover { background: #a03030; }
+.roll-result {
+  display: none;
+  padding: 0.4rem 1rem;
+  background: var(--gold-dim);
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  color: var(--gold);
+  border-bottom: 1px solid var(--border);
+}
+.roll-result.visible { display: block; }
+.oracle-card.curse .roll-result {
+  background: var(--red-curse-dim);
+  color: #c45050;
+  border-bottom-color: var(--red-curse);
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+table.oracle th {
+  background: var(--bg3);
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.7rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+table.oracle td {
+  padding: 0.35rem 0.7rem;
+  border-bottom: 1px solid rgba(42,48,80,0.5);
+  vertical-align: top;
+}
+table.oracle tbody tr:nth-child(even) td { background: rgba(15,20,32,0.6); }
+table.oracle tbody tr.highlighted td { background: var(--gold-dim) !important; }
+table.oracle td:first-child {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  width: 5rem;
+}
+
+table.status th {
+  background: var(--bg3);
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.7rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+table.status td {
+  padding: 0.35rem 0.7rem;
+  border-bottom: 1px solid rgba(42,48,80,0.5);
+  vertical-align: top;
+}
+table.status tbody tr:nth-child(even) td { background: rgba(15,20,32,0.6); }
+table.status td.name-col { color: var(--gold); font-weight: 600; }
+
+table.compact td { padding: 0.25rem 0.6rem; font-size: 0.85rem; }
+
+/* SPECIAL BLOCKS */
+.quest {
+  border-left: 3px solid var(--tag-aw);
+  background: rgba(196,122,58,0.08);
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 3px 3px 0;
+}
+.quest .quest-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--tag-aw);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.discovery {
+  border-left: 3px solid var(--border);
+  background: var(--bg3);
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 3px 3px 0;
+}
+.discovery .disc-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.truth-block {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+.truth-option {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.truth-option:last-child { border-bottom: none; }
+.truth-option .range {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--gold);
+  font-weight: 700;
+}
+.truth-option p { margin-top: 0.3rem; }
+.truth-option em { color: var(--text-dim); }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.info-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+}
+.info-card .label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--tag-aw);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.info-card h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+
+.type-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  background: var(--tag-aw);
+  color: var(--bg);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+.type-badge.blue { background: #2a5080; color: var(--text); }
+
+.array-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.array-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+}
+.array-card h4 {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--tag-aw);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
+}
+.array-card ul { list-style: none; padding: 0; }
+.array-card li {
+  font-size: 0.85rem;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid rgba(42,48,80,0.4);
+  display: flex;
+  gap: 0.5rem;
+}
+.array-card li:last-child { border-bottom: none; }
+.array-card li .roll-ref {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  min-width: 2rem;
+}
+
+.city-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+}
+.city-card h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.8rem 0; }
+
+.gen-steps {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+}
+.gen-steps h4 {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--tag-aw);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.gen-steps ul { list-style: none; padding: 0; }
+.gen-steps li {
+  padding: 0.25rem 0;
+  padding-left: 1.2rem;
+  position: relative;
+  font-size: 0.9rem;
+}
+.gen-steps li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--tag-aw);
+}
+.gen-steps li strong { color: var(--gold); }
+
+.rank-grid {
+  display: grid;
+  grid-template-columns: auto repeat(5,1fr);
+  gap: 2px;
+  margin: 0.8rem 0;
+  font-size: 0.82rem;
+}
+.rank-grid .rg-header {
+  background: var(--bg3);
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+}
+.rank-grid .rg-rowhead {
+  background: var(--bg3);
+  color: var(--gold2);
+  font-family: var(--serif);
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  display: flex;
+  align-items: center;
+}
+.rank-grid .rg-cell {
+  background: var(--bg2);
+  padding: 0.35rem 0.4rem;
+  text-align: center;
+  color: var(--text-dim);
+}
+.rank-grid .rg-cell.troublesome { color: #6aaa6a; }
+.rank-grid .rg-cell.dangerous { color: #d4a857; }
+.rank-grid .rg-cell.formidable { color: #c47a3a; }
+.rank-grid .rg-cell.extreme { color: #c45050; }
+.rank-grid .rg-cell.epic { color: #9050c4; }
+
+/* Encounter rank progress bar */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0.8rem 0;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-bar .seg {
+  flex: 1;
+  padding: 0.5rem 0.2rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  border-right: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.progress-bar .seg:last-child { border-right: none; }
+.progress-bar .seg.rank-m1 { background: rgba(106,170,106,0.15); color: #6aaa6a; }
+.progress-bar .seg.rank-n  { background: rgba(212,168,87,0.15); color: var(--gold); }
+.progress-bar .seg.rank-p1 { background: rgba(196,80,80,0.2); color: #c45050; }
+.progress-bar-label {
+  display: flex;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  gap: 0;
+  margin-top: 2px;
+}
+.progress-bar-label span { flex: 1; text-align: center; }
+.progress-bar-label .lbl-m1 { color: #6aaa6a; }
+.progress-bar-label .lbl-n  { color: var(--gold); }
+.progress-bar-label .lbl-p1 { color: #c45050; }
+
+/* Bio-mech generation layout */
+.biomech-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+.biomech-col {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem;
+}
+.biomech-col h4 {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--tag-aw);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.biomech-col .biomech-type {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 0.7rem;
+}
+.step-list { list-style: none; padding: 0; }
+.step-list li {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(42,48,80,0.4);
+  font-size: 0.85rem;
+}
+.step-list li:last-child { border-bottom: none; }
+.step-num {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--tag-aw);
+  font-weight: 700;
+  min-width: 1.5rem;
+}
+.step-note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-top: 0.1rem;
+}
+
+/* Zones diagram */
+.anomaly-zones {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.zone-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 120px;
+}
+.zone-outer {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px dashed #6040a0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.zone-inner {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #a03030;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(160,48,48,0.1);
+}
+.zone-core {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.8;
+}
+.zone-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  text-align: center;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.anomaly-zones-text { flex: 1; font-size: 0.9rem; }
+
+/* Tension clocks */
+.clocks-row {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+.clock-item { text-align: center; }
+.clock-svg { display: block; margin-bottom: 0.3rem; }
+.clock-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+@media (max-width: 1000px) {
+  nav { display: none; }
+  main { max-width: 100%; padding: 1.2rem; }
+  .card-grid, .two-col, .array-grid, .biomech-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  nav { display: none; }
+  section { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<style id="sf-topbar-style">
+#sf-topbar{position:fixed;top:0;left:0;right:0;height:40px;background:#080b10;border-bottom:1px solid #1a2030;z-index:9999;display:flex;align-items:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;}
+#sf-topbar::-webkit-scrollbar{height:2px;}
+#sf-topbar::-webkit-scrollbar-thumb{background:#2a3148;}
+.sf-back{padding:0 14px;color:#5a6480;text-decoration:none;height:40px;display:flex;align-items:center;gap:5px;flex-shrink:0;transition:color .15s;border-right:1px solid #1a2030;}
+.sf-back:hover{color:#d4a857;}
+.sf-book{display:flex;align-items:center;height:40px;flex-shrink:0;}
+.sf-book-label{padding:0 10px;height:40px;display:flex;align-items:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;flex-shrink:0;}
+.sf-book-label a{color:inherit;text-decoration:none;transition:opacity .15s;}
+.sf-book-label a:hover{opacity:.75;}
+.sf-active .sf-book-label{border-bottom:2px solid currentColor;}
+.sf-links{display:flex;align-items:center;padding-right:6px;}
+.sf-links a{padding:0 9px;height:40px;display:flex;align-items:center;color:#5a6480;text-decoration:none;font-size:11px;transition:color .15s;}
+.sf-links a:hover{color:#c8cfe0;}
+.sf-links a.sf-cur{color:#c8cfe0;background:rgba(255,255,255,.04);}
+.sf-dot{color:#1a2030;padding:0 1px;font-size:10px;}
+.sf-vsep{width:1px;background:#1a2030;height:22px;margin:0 2px;flex-shrink:0;}
+body{padding-top:40px!important;}
+@media print{#sf-topbar{display:none!important;}body{padding-top:0!important;}}
+</style>
+<style id="sf-nav-fix">
+nav{top:40px!important;height:calc(100vh - 40px)!important;}
+</style>
+<div id="sf-topbar">
+<a class="sf-back" href="index.html">&#8592; Índice</a>
+<div class="sf-book"><a class="sf-book-label" href="oraculos_core_es.html" style="color:#d4a857">Core</a></div>
+<div class="sf-vsep"></div>
+<div class="sf-book sf-active"><span class="sf-book-label" style="color:#7eb8a4">Ancient Wonders</span><div class="sf-links"><a href="ancient_wonders_cap4_es.html" class="">Megaestructuras</a><span class="sf-dot">·</span><a href="ancient_wonders_es.html" class="">Oráculos</a><span class="sf-dot">·</span><a href="megaciudades_moradores_es.html" class="sf-cur">Megaciudades</a></div></div>
+<div class="sf-vsep"></div>
+<div class="sf-book"><a class="sf-book-label" href="starsmith_campana_core_es.html" style="color:#9b7ec8">Starsmith</a></div>
+</div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="title">Ancient Wonders ES</div>
+    <div class="subtitle">Caps. 5 &amp; 6</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Cap. 5 — Megaciudades</div>
+    <a href="#ciudades-perdidas">Ciudades de Civilizaciones Perdidas</a>
+    <a href="#megaciudades-campana">En tu Campaña</a>
+    <a href="#megaciudades-aventuras">En tus Aventuras</a>
+    <a href="#megaciudades">Megaciudades</a>
+    <a href="#explorar-megaciudad" class="sub">Explorar una Megaciudad</a>
+    <a href="#amenazas-megaciudad" class="sub">Amenazas</a>
+    <a href="#arrays-oracles" class="sub">Arrays de Oráculos</a>
+    <a href="#ciudad-techo">Ciudad Techo</a>
+    <a href="#ciudad-nube">Ciudad Nube</a>
+    <a href="#ciudad-domo">Ciudad Domo</a>
+    <a href="#ciudad-megaalta">Ciudad Megaalta</a>
+    <a href="#ciudad-movil">Ciudad Móvil</a>
+    <a href="#ciudad-marina">Ciudad Marina</a>
+    <a href="#ciudad-subterranea">Ciudad Subterránea</a>
+    <a href="#ciudad-submarina">Ciudad Submarina</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Cap. 6 — Moradores</div>
+    <a href="#encuentros-profundidad">Encuentros en las Profundidades</a>
+    <a href="#constructos">Constructos</a>
+    <a href="#generacion-constructo" class="sub">Generación</a>
+    <a href="#oracles-constructo" class="sub">Oráculos</a>
+    <a href="#bio-mechs">Bio-mechs</a>
+    <a href="#generacion-biomech" class="sub">Generación</a>
+    <a href="#anomalias">Anomalías</a>
+    <a href="#oracles-anomalia" class="sub">Oráculos</a>
+  </div>
+</nav>
+
+<main>
+
+<div class="page-header">
+  <h1>Ancient Wonders — Caps. 5 &amp; 6</h1>
+  <p>Megaciudades Alienígenas · Constructos · Bio-mechs · Anomalías | Localización ES</p>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CAP. 5 — MEGACIUDADES
+     ═══════════════════════════════════════════ -->
+
+<section id="ciudades-perdidas">
+  <div class="section-header">
+    <h2>Ciudades de Civilizaciones Perdidas <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Las megaciudades son lugares antiguos que fueron en su día los asentamientos de civilizaciones alienígenas. Estos vastos emplazamientos emplean una tecnología incomprensible y varían en su ubicación, tamaño, complejidad e incluso en el material del que están fabricados principalmente. Estas maravillas son una rica fuente de tradición, aventura y potencial narrativo. A continuación se exponen las directrices para integrarlas en tus sesiones.</p>
+</section>
+
+<section id="megaciudades-campana">
+  <div class="section-header">
+    <h2>Megaciudades en tu Campaña <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Esta sección establece las bases para incorporar megaciudades en tu campaña. Los <strong>Supuestos por Defecto</strong> fijan las reglas fundamentales al definir los rasgos clave de estas maravillas, mientras que la <strong>Verdad</strong> ofrece una opción para adaptarlas a tu ambientación.</p>
+
+  <div class="two-col">
+    <div>
+      <div class="subsection">
+        <h3>Supuestos por Defecto</h3>
+        <p class="prose">Los siguientes supuestos rigen las megaciudades en la ambientación. Son generalmente válidos y constituyen los pilares sobre los que imaginar una galaxia que contiene estas maravillas.</p>
+
+        <div class="info-card" style="margin:0.6rem 0;">
+          <div class="label">Su Gente</div>
+          <h4>Los habitantes originales de las ciudades llevan mucho tiempo desaparecidos.</h4>
+          <p style="font-size:0.88rem;">Los precursores —las especies alienígenas que habitaron originalmente estos emplazamientos— desaparecieron de la galaxia hace mucho tiempo.</p>
+        </div>
+        <div class="info-card" style="margin:0.6rem 0;">
+          <div class="label">Su Estado</div>
+          <h4>Las megalópolis se encuentran en estado de ruina.</h4>
+          <p style="font-size:0.88rem;">Las estructuras se deterioran, la infraestructura se pudre, la tecnología tiende a fallar y los monumentos están en decadencia.</p>
+        </div>
+        <div class="info-card" style="margin:0.6rem 0;">
+          <div class="label">Su Tecnología</div>
+          <h4>No comprendemos la ciencia detrás de estas maravillas de ingeniería.</h4>
+          <p style="font-size:0.88rem;">La tecnología de estas metrópolis nos ha dejado perplejos y asombrados. Solo podemos adaptarla o hacer uso superficial de ella.</p>
+        </div>
+        <div class="info-card" style="margin:0.6rem 0;">
+          <div class="label">Su Valor</div>
+          <h4>Las megaciudades están entre las bóvedas precursoras más valiosas de la galaxia.</h4>
+          <p style="font-size:0.88rem;">Además de ofrecer tecnología avanzada y un caudal de conocimiento sobre las sociedades precursoras, estos asentamientos son muy valorados como posibles hogares para la humanidad.</p>
+        </div>
+        <div class="info-card" style="margin:0.6rem 0;">
+          <div class="label">Su Peligro</div>
+          <h4>Las megaciudades nunca serán hogares totalmente seguros para la humanidad.</h4>
+          <p style="font-size:0.88rem;">A pesar de haber adaptado muchas de estas bóvedas en hábitats adecuados, nunca estaremos del todo seguros en su interior. Su inmensidad y complejidad permiten que amenazas ocultas emerjan en cualquier momento.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="subsection">
+        <h3>Tu Verdad — Control de los Custodios</h3>
+        <p class="prose">Los <strong>custodios</strong> son constructos creados por los precursores para mantener y custodiar sus estructuras, asentamientos y maravillas. Esta verdad determina cuánto control ejercen los custodios sobre las megaciudades y la probabilidad de encontrar asentamientos humanos en su interior.</p>
+        <p class="prose">Puedes posponer esta decisión hasta que sea necesaria o relevante durante el juego.</p>
+
+        <div class="truth-block">
+          <div class="truth-option">
+            <div class="range">1–33</div>
+            <p><strong>Los custodios mantienen un control casi total de las megaciudades.</strong></p>
+            <p>Sus números inconmensurables y su naturaleza territorial han garantizado que la mayoría de los intentos de asentarse en las megaciudades hayan fracasado.</p>
+            <p><em>Hay solo una pequeña posibilidad de encontrar megaciudades habitadas por humanos.</em></p>
+          </div>
+          <div class="truth-option">
+            <div class="range">34–67</div>
+            <p><strong>Los custodios tienen un control parcial de las megaciudades.</strong></p>
+            <p>Aunque siguen siendo una amenaza, su número limitado ha permitido a la humanidad cierto éxito al asentarse en las megaciudades.</p>
+            <p><em>Es poco probable encontrar megaciudades habitadas por humanos.</em></p>
+          </div>
+          <div class="truth-option">
+            <div class="range">68–100</div>
+            <p><strong>Los custodios tienen un control menor sobre las megaciudades.</strong></p>
+            <p>Si bien las megaciudades aún albergan peligros y desafíos desconocidos, el número disminuido de custodios ha concedido a la humanidad cierto éxito al asentarse en ellas.</p>
+            <p><em>Hay una posibilidad de 50/50 de encontrar megaciudades habitadas por humanos.</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="megaciudades-aventuras">
+  <div class="section-header">
+    <h2>Megaciudades en tus Aventuras <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Estas maravillas de eras olvidadas pueden usarse en tus sesiones de múltiples formas. Aquí tienes algunos de los motivos por los que los exploradores podrían interactuar con megaciudades en tu campaña:</p>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <div class="label">Para conocer a los precursores</div>
+      <p style="font-size:0.88rem;">Los misterios en torno a las civilizaciones precursoras hacen de sus asentamientos originales lugares irresistibles para explorar. No hay mejor modo de aprender sobre sus sociedades que estudiar y experimentar los lugares que llamaban hogar.</p>
+    </div>
+    <div class="info-card">
+      <div class="label">Para encontrar un hogar</div>
+      <p style="font-size:0.88rem;">Algunos dan por sentado que es preferible asentarse donde antes vivieron otras formas de vida inteligente. Aunque conquistar estos emplazamientos no es fácil, quienes emprenden este esfuerzo consideran el riesgo inherente preferible a construir un hogar desde cero.</p>
+    </div>
+    <div class="info-card">
+      <div class="label">Para adquirir recursos</div>
+      <p style="font-size:0.88rem;">Sabemos que los precursores tenían una capacidad de creación inconmensurable, por lo que no es descabellado concluir que sus ciudades pudieron servir como almacén de algunos de sus recursos. Aunque no entendamos las propiedades de muchos de estos materiales, siempre serán valiosos.</p>
+    </div>
+    <div class="info-card">
+      <div class="label">Para encontrar rarezas</div>
+      <p style="font-size:0.88rem;">Muchos de los componentes de las megaciudades son un misterio en cuanto a su diseño y función. Esto los ha convertido en objeto de estudio de partes interesadas que desean obtener artefactos poderosos para uso o comercio.</p>
+    </div>
+    <div class="info-card">
+      <div class="label">Para conquistar</div>
+      <p style="font-size:0.88rem;">Muchos conocen el valor de las megaciudades y ofrecen su ayuda para tomar posesión de una de estas maravillas, reclamándola para la humanidad. Conquistar una megaciudad es un desafío, pero no uno vano.</p>
+    </div>
+  </div>
+</section>
+
+<section id="megaciudades">
+  <div class="section-header">
+    <h2>Megaciudades <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Para generar una megaciudad, utiliza primero la tabla de Clase de Megaciudad. Luego recorre cada oráculo de esta sección según sea apropiado para las circunstancias.</p>
+
+  <div class="subsection">
+    <h3>Clase de Megaciudad</h3>
+    <p class="prose">Usa este oráculo para identificar una megaciudad según el entorno circundante.</p>
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Clase de Megaciudad</h4>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          <span class="roll-indicator">Entorno</span>
+        </div>
+      </div>
+      <table class="oracle" id="tbl-mega5-clase">
+        <thead><tr>
+          <th>Cielo</th><th>Tierra</th><th>Mar abierto</th><th>Subterráneo</th><th>Submarino</th><th>Resultado</th><th>Pág.</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>1–35</td><td>—</td><td>—</td><td>1–15</td><td>—</td><td>Ciudad Techo</td><td>176</td></tr>
+          <tr><td>36–65</td><td>1–5</td><td>1–15</td><td>—</td><td>—</td><td>Ciudad Nube</td><td>176</td></tr>
+          <tr><td>66–75</td><td>6–35</td><td>—</td><td>16–20</td><td>1–10</td><td>Ciudad Domo</td><td>177</td></tr>
+          <tr><td>76–90</td><td>36–60</td><td>16–35</td><td>—</td><td>—</td><td>Ciudad Megaalta</td><td>177</td></tr>
+          <tr><td>91–95</td><td>61–100</td><td>36–100</td><td>—</td><td>—</td><td>Ciudad Móvil</td><td>178</td></tr>
+          <tr><td>96–100</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Ciudad Marina</td><td>178</td></tr>
+          <tr><td>—</td><td>—</td><td>—</td><td>21–90</td><td>11–20</td><td>Ciudad Subterránea</td><td>179</td></tr>
+          <tr><td>—</td><td>—</td><td>—</td><td>91–100</td><td>21–100</td><td>Ciudad Submarina</td><td>179</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Forma y Estructura de la Megaciudad</h3>
+    <p class="prose">Las megaciudades pueden tener una gran variedad de formas. Puedes determinarlas con los oráculos de Forma y Material (págs. 102–103 del manual base). Este oráculo es especialmente útil para identificar las estructuras interiores de estos emplazamientos: monumentos, aparatos u otros.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="subsection">
+      <h3>Tamaño de la Megaciudad</h3>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Tamaño de la Megaciudad</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-tamano')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-mega5-tamano">
+          <thead><tr><th>Tirada</th><th>Escala</th><th>Cap. Pob. Humana</th></tr></thead>
+          <tbody>
+            <tr><td>1–10</td><td>Enorme</td><td>Decenas de miles</td></tr>
+            <tr><td>11–25</td><td>Masiva</td><td>Cientos de miles</td></tr>
+            <tr><td>26–60</td><td>Gigántica</td><td>Un millón</td></tr>
+            <tr><td>61–85</td><td>Colosal</td><td>Decenas de millones</td></tr>
+            <tr><td>86–100</td><td>Megalítica</td><td>Cien millones</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Complejidad de la Megaciudad</h3>
+      <p class="prose">Usa este oráculo para identificar la intrincación del diseño interior de una megaciudad.</p>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Complejidad de la Megaciudad</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-complejidad')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-mega5-complejidad">
+          <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–5</td><td>Simple</td></tr>
+            <tr><td>6–20</td><td>Básica</td></tr>
+            <tr><td>21–45</td><td>Manejable</td></tr>
+            <tr><td>46–80</td><td>Complicada</td></tr>
+            <tr><td>81–100</td><td>Desconcertante</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Estado de la Megaciudad</h3>
+    <p class="prose">Las megaciudades se encuentran en estado ruinoso. Usa la tabla siguiente para identificar el estado actual de una megaciudad dentro de ese marco.</p>
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Estado de la Megaciudad</h4>
+        <span class="roll-indicator">Cruzar con Control de Custodios</span>
+      </div>
+      <table class="oracle" id="tbl-mega5-estado">
+        <thead><tr>
+          <th>Ctrl. Total</th><th>Ctrl. Parcial</th><th>Ctrl. Menor</th><th>Resultado</th><th>Resumen</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>1–10</td><td>1–10</td><td>1–10</td><td>Parcialmente construida</td><td>La megaciudad nunca alcanzó su finalización. La población que la originó jamás la habitó.</td></tr>
+          <tr><td>11–35</td><td>11–35</td><td>11–35</td><td>Devastada</td><td>La megaciudad fue destruida o sufrió daños significativos en algún momento, de forma natural o por otros medios.</td></tr>
+          <tr><td>36–90</td><td>36–75</td><td>36–50</td><td>Abandonada</td><td>La población de la megaciudad se marchó. El hábitat puede ser funcional, pero la falta de mantenimiento ha pasado factura.</td></tr>
+          <tr><td>91–100</td><td>76–100</td><td>51–100</td><td>Habitada</td><td>La megaciudad, pese a su estado de deterioro, se ha convertido en un asentamiento para la humanidad.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Primer Vistazo Exterior de la Megaciudad</h3>
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Primer Vistazo Exterior</h4>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          <span class="roll-indicator">&#9854;1–2</span>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-ext')">&#9860; Tirar d100</button>
+        </div>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-mega5-ext">
+        <thead><tr><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>1–2</td><td>Mensajes cifrados en alfabeto conocido</td><td>33–35</td><td>Entrada para vehículos grandes</td><td>65–67</td><td>Campo electromagnético</td></tr>
+          <tr><td>3–4</td><td>Apariencia o arquitectura idílica</td><td>36–37</td><td>A escala de seres de gran tamaño</td><td>68–69</td><td>Estructuras reflectantes</td></tr>
+          <tr><td>5–6</td><td>Rodeada de cenizas humeantes</td><td>38–40</td><td>Encapsulada en un campo de energía</td><td>70–72</td><td>Estructuras derrumbadas</td></tr>
+          <tr><td>7–8</td><td>Nave o embarcación enorme estrellada</td><td>41–43</td><td>Sin punto de acceso evidente</td><td>73–75</td><td>Reclamación natural</td></tr>
+          <tr><td>9–11</td><td>Adornos majestuosos y grandiosos</td><td>44–46</td><td>Infraestructura desmoronándose</td><td>76–78</td><td>Glifos o símbolos</td></tr>
+          <tr><td>12–13</td><td>Vibraciones ondulantes omnipresentes</td><td>47–49</td><td>Baluarte contra asaltos</td><td>79–81</td><td>Señal o mensaje</td></tr>
+          <tr><td>14–15</td><td>Vías aéreas o túneles de conexión</td><td>50–51</td><td>Entorno peligroso</td><td>82–84</td><td>Entrada gigantesca</td></tr>
+          <tr><td>16–17</td><td>Embellece todo lo que la rodea</td><td>52–54</td><td>Arcos eléctricos y chispas</td><td>85–86</td><td>Exterior traspasado</td></tr>
+          <tr><td>18–20</td><td>Infraestructura sombría e industrial</td><td>55–56</td><td>Núcleo o conducto de energía</td><td>87–88</td><td>Fuga de radiación</td></tr>
+          <tr><td>21–22</td><td>Evidencia de nuevos habitantes</td><td>57–59</td><td>Fuga de gases o vapor</td><td>89–91</td><td>Luces parpadeantes</td></tr>
+          <tr><td>23–25</td><td>Superficies conductoras de energía</td><td>60–61</td><td>Segmentación definida</td><td>92–93</td><td>Acceso bloqueado</td></tr>
+          <tr><td>26–27</td><td>Estatua o monolito gigantesco</td><td>62–64</td><td>Iluminada o encendida</td><td>94–95</td><td>Objeto en órbita</td></tr>
+          <tr><td>28–30</td><td>Flanqueada por enormes monolitos</td><td colspan="2"></td><td>96–100</td><td>Descriptor + Foco (pág. 13)</td></tr>
+          <tr><td>31–32</td><td>Signos de un conflicto anterior</td><td colspan="4"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-card curse" style="margin-top:0.8rem;">
+      <div class="oracle-card-header">
+        <h4>⚠ Primer Vistazo Exterior Maldita</h4>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-ext-maldita')">&#9860; Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-mega5-ext-maldita">
+        <thead><tr><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>1–4</td><td>Estructuras de temática perturbadora</td><td>35–37</td><td>Cadáveres desecados o putrefactos</td><td>69–72</td><td>Envuelta en niebla o bruma</td></tr>
+          <tr><td>5–8</td><td>Estructuras profanadas con glifos crípticos</td><td>38–40</td><td>Custodiada por una criatura monstruosa</td><td>73–75</td><td>Visiones o apariciones</td></tr>
+          <tr><td>9–12</td><td>Contaminada con grandes masas de excrementos</td><td>41–44</td><td>Hedor abrumador de descomposición</td><td>76–78</td><td>Susurros de los muertos</td></tr>
+          <tr><td>13–16</td><td>Formas ornamentadas y dramáticas que auguran mal</td><td>45–48</td><td>Marcada con arañazos bestiales</td><td>79–81</td><td>Iluminación sobrenatural</td></tr>
+          <tr><td>17–20</td><td>Ostentosa exhibición de materia orgánica</td><td>49–52</td><td>Estructuras mutadas o deformadas</td><td>82–85</td><td>Defensas automáticas</td></tr>
+          <tr><td>21–24</td><td>Flujo constante de materia orgánica líquida</td><td>53–56</td><td>Corrompe su entorno</td><td>86–89</td><td>Lecturas peligrosas</td></tr>
+          <tr><td>25–27</td><td>Los muertos muestran destellos de reanimación</td><td>57–60</td><td>Escritura esotérica o símbolos</td><td>90–93</td><td>Ecos misteriosos</td></tr>
+          <tr><td>28–30</td><td>Aullidos o rugidos espantosos desde el interior</td><td>61–64</td><td>Rodeada de destrucción</td><td>94–96</td><td>Fosas comunes</td></tr>
+          <tr><td>31–34</td><td>Sonidos reminiscentes del dolor humano</td><td>65–68</td><td>Distorsiones del tiempo o la realidad</td><td>97–100</td><td>Niebla nociva</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="explorar-megaciudad">
+  <div class="section-header">
+    <h2>Explorar una Megaciudad <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Incluso si los humanos habitan una megaciudad, infinidad de distritos, calles, caminos y rincones ocultos permanecen sin explorar, con una escala y complejidad que desafía cualquier mapa o memoria. Conquistar uno de estos emplazamientos exige mucho más que simplemente asentarse en uno de sus espacios: requiere persistencia, cautela y a menudo negociación con quienes ya moran en sus sombras.</p>
+
+  <div class="two-col">
+    <div class="subsection">
+      <h3>Investigar una Megaciudad</h3>
+      <p class="prose">La gran novedad de las megaciudades es el desvelamiento de un misterio relacionado con la sociedad alienígena que las habitó. El progreso de tu expedición representa no solo el espacio físico que recorres, sino también el avance de tu investigación sobre los precursores.</p>
+      <div class="gen-steps">
+        <h4>Procedimiento de Investigación</h4>
+        <ul>
+          <li>Cuando hagas progreso por primera vez en una expedición dentro de una megalópolis, elige un misterio de la tabla <strong>Misterio de Megaciudad</strong> o imagina uno basado en las circunstancias que te llevaron al lugar.</li>
+          <li>Al seguir avanzando y llegar a nuevos segmentos, usa la tabla de <strong>Cifrado de Megaciudad</strong> para obtener una característica, objeto o encuentro revelador que proporcione una pista a tu investigación.</li>
+          <li>Si el cifrado es demasiado complejo para interpretarlo, puedes dedicar tiempo a comprenderlo mejor, pero no te quedes atascado en el proceso. Deja espacio para preguntas sin respuesta.</li>
+          <li>Al finalizar la expedición, considera las preguntas planteadas por el misterio y las pistas descubiertas. Luego propón una conclusión.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="subsection">
+      <h3>Alcanzar el Sancta de la Megaciudad</h3>
+      <p class="prose">Cuando explores una megaciudad, tu objetivo probablemente se encuentre en el <em>sancta</em>: la parte más importante de tu viaje. El sancta no representa necesariamente un lugar literal, sino que indica el ritmo al que descubres un misterio, alcanzas un hito en tu misión o localizas tu objetivo dentro del emplazamiento.</p>
+      <div class="discovery">
+        <div class="disc-label">Llegas al Sancta cuando...</div>
+        <ul style="list-style:disc;padding-left:1.2rem;font-size:0.9rem;">
+          <li>Marcas siete progresos en tu expedición.</li>
+          <li>Así lo indica el resultado «Transición al sancta» en el oráculo de Característica de Bóveda. Cuando esto ocurra, imagina este atajo y cómo cambia el destino de tu expedición.</li>
+        </ul>
+      </div>
+      <h3 style="margin-top:1rem;">Uso de Arrays de Oráculos</h3>
+      <p class="prose">Las megaciudades son construcciones alienígenas que son fundamentalmente derelictos pero están profundamente impregnados de un tema y se experimentan como bóvedas. Explorarlas hace uso de <strong>arrays de oráculos</strong>: combinaciones de múltiples oráculos.</p>
+      <div class="discovery">
+        <div class="disc-label">Al aproximarte a una megaciudad, prepárate:</div>
+        <ul style="list-style:disc;padding-left:1.2rem;font-size:0.9rem;">
+          <li>Trata la megaestructura como un derelicto (manual SF pág. 350). Usa la columna de Asentamiento (GR pág. 82) para la zona de derelicto.</li>
+          <li>Elige un tema que mejor encaje con tu visión de la megalópolis (Oráculos de Tema, GR pág. 100).</li>
+          <li>Una megaciudad es un tipo de bóveda precursora; también usarás esos oráculos (GR pág. 94).</li>
+          <li>Puedes ser invitado a usar el oráculo de Complicación Narrativa (GR pág. 57).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primer Vistazo Interior -->
+  <div class="subsection">
+    <h3>Primer Vistazo Interior de la Megaciudad</h3>
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Primer Vistazo Interior</h4>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          <span class="roll-indicator">&#9854;1–2</span>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-int')">&#9860; Tirar d100</button>
+        </div>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-mega5-int">
+        <thead><tr><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>La estética no coincide con el exterior</td><td>22</td><td>Pasadizos o corredores conectivos</td><td>58–59</td><td>Charcos de líquidos sintéticos</td></tr>
+          <tr><td>2</td><td>Vibraciones ondulantes omnipresentes</td><td>23</td><td>El entorno reacciona a tu presencia</td><td>60–61</td><td>Infraestructura desmoronándose</td></tr>
+          <tr><td>3</td><td>Evidencia de nuevos habitantes</td><td>24–25</td><td>Entorno no apto para la biología humana</td><td>62–63</td><td>Fuertes ruidos mecánicos</td></tr>
+          <tr><td>4</td><td>Anuncios automáticos</td><td>26–27</td><td>Ornamentaciones majestuosas y grandiosas</td><td>64–65</td><td>Fuga de gases o vapor</td></tr>
+          <tr><td>5</td><td>Marcas u símbolos ornamentados</td><td>28–29</td><td>Inmensas vainas de carga o contenedores</td><td>66–67</td><td>Segmentación definida</td></tr>
+          <tr><td>6</td><td>Superficies conductoras de energía</td><td>30–31</td><td>Apariencia o arquitectura idílica</td><td>68–69</td><td>Frío o calor excesivos</td></tr>
+          <tr><td>7</td><td>Área llamativamente preservada</td><td>32–33</td><td>Repleta de escombros o cascotes</td><td>70–71</td><td>Iluminada o encendida</td></tr>
+          <tr><td>8</td><td>Señales de un conflicto anterior</td><td>34–35</td><td>Infraestructura sombría e industrial</td><td>72–73</td><td>Iluminación ambiental tenue</td></tr>
+          <tr><td>9</td><td>Atmósfera densa o fluida</td><td>36–37</td><td>Interferencia electromagnética</td><td>74–75</td><td>Polución que obstruye la visión</td></tr>
+          <tr><td>10</td><td>Evidencia de saqueo</td><td>38–39</td><td>Cenizas humeantes extendidas</td><td>76–77</td><td>Puntos calientes radiactivos</td></tr>
+          <tr><td>11</td><td>Área muy embellecida</td><td>40–41</td><td>Sonido palpitante o zumbante</td><td>78–79</td><td>Estructuras derrumbadas</td></tr>
+          <tr><td>12</td><td>Caminos excesivamente adornados</td><td>42–43</td><td>Ecos de maquinaria distante</td><td>80–81</td><td>Reclamación natural</td></tr>
+          <tr><td>13</td><td>Estructuras reflectantes</td><td>44–45</td><td>Diseños o patrones complejos</td><td>82–83</td><td>Señales de tráfico o camino</td></tr>
+          <tr><td>14</td><td>Espesa niebla o humo</td><td>46–47</td><td>Criaturas anidando o alimentándose</td><td>84–85</td><td>Sobrecarga de energía</td></tr>
+          <tr><td>15</td><td>Área bien conservada</td><td>48–49</td><td>Estatua o monolito gigantesco</td><td>86–87</td><td>Alimentación eléctrica fluctuante</td></tr>
+          <tr><td>16</td><td>Superficies magnéticas</td><td>50–51</td><td>Signos de formas de vida invasoras</td><td>88–89</td><td>Oleadas de energía</td></tr>
+          <tr><td>17</td><td>Interfaces crípticas</td><td>52–53</td><td>Temperaturas fluctuantes</td><td>90–91</td><td>Húmedo o mojado</td></tr>
+          <tr><td>18</td><td>Constructos activos</td><td>54–55</td><td>Arcos eléctricos y chispas</td><td>92–93</td><td>Olor intenso</td></tr>
+          <tr><td>19</td><td>Atmósfera tóxica</td><td>56–57</td><td>Vapor o humedad intensa</td><td>94–95</td><td>Residuos tóxicos</td></tr>
+          <tr><td>20</td><td>Inundación adversa</td><td colspan="2"></td><td>96–100</td><td>Descriptor + Foco (pág. 13)</td></tr>
+          <tr><td>21</td><td>Mensajes cifrados en alfabeto conocido</td><td colspan="4"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-card curse" style="margin-top:0.8rem;">
+      <div class="oracle-card-header">
+        <h4>⚠ Primer Vistazo Interior Maldita</h4>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          <span class="roll-indicator">&#9854;1–2</span>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-int-maldita')">&#9860; Tirar d100</button>
+        </div>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-mega5-int-maldita">
+        <thead><tr><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>1–2</td><td>Estructuras de temática perturbadora</td><td>32–34</td><td>Estructuras mutadas o deformadas</td><td>68–70</td><td>Aullidos o rugidos espantosos</td></tr>
+          <tr><td>3–5</td><td>Estructuras profanadas con glifos crípticos</td><td>35–36</td><td>La escala no coincide con el exterior</td><td>71–72</td><td>Oscuridad impenetrable</td></tr>
+          <tr><td>6–7</td><td>Ostentosa exhibición de materia orgánica</td><td>37–39</td><td>Sonidos inquietantes sin origen</td><td>73–74</td><td>Salpicaduras de sangre</td></tr>
+          <tr><td>8–9</td><td>Flujo constante de materia orgánica líquida</td><td>40–42</td><td>Visiones perturbadoras de los muertos</td><td>75–77</td><td>Visiones o apariciones</td></tr>
+          <tr><td>10–11</td><td>Marcada con enormes arañazos bestiales</td><td>43–44</td><td>Guarida de una criatura monstruosa</td><td>78–79</td><td>Susurros de los muertos</td></tr>
+          <tr><td>12–13</td><td>Los muertos muestran destellos de reanimación</td><td>45–47</td><td>Superficies pegajosas y viscosas</td><td>80–81</td><td>Iluminación sobrenatural</td></tr>
+          <tr><td>14–16</td><td>Monumentos presagiosos o esotéricos</td><td>48–50</td><td>Señales de evacuación apresurada</td><td>82–83</td><td>Infestación biológica</td></tr>
+          <tr><td>17–18</td><td>Sonidos reminiscentes del dolor humano</td><td>51–52</td><td>Escritura esotérica o símbolos</td><td>84–85</td><td>Lecturas peligrosas</td></tr>
+          <tr><td>19–20</td><td>Estructuras hechas de materia orgánica</td><td>53–55</td><td>Distorsiones del tiempo o la realidad</td><td>86–88</td><td>Flora o fauna moribunda</td></tr>
+          <tr><td>21–22</td><td>Inquietante sensación de estar vigilado</td><td>56–57</td><td>Masas repugnantes de secreciones</td><td>89–91</td><td>Gravedad anormal</td></tr>
+          <tr><td>23–24</td><td>Destellos de sombras en movimiento</td><td>58–60</td><td>Tonos o música disonantes</td><td>92–94</td><td>Huesos en descomposición</td></tr>
+          <tr><td>25–27</td><td>Formas de vida con mutaciones evidentes</td><td>61–63</td><td>Envuelta en niebla o bruma</td><td>95–96</td><td>Fosas comunes</td></tr>
+          <tr><td>28–29</td><td>Cadáveres desecados o putrefactos</td><td>64–65</td><td>La tecnología portada es perturbada</td><td>97–98</td><td>Niebla nociva</td></tr>
+          <tr><td>30–31</td><td>Calma o silencio absolutos y abrumadores</td><td>66–67</td><td>Ecos de voces distantes</td><td>99–100</td><td>IA vigilante</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Misterio y Cifrado -->
+  <div class="two-col">
+    <div class="subsection">
+      <h3>Misterio de Megaciudad</h3>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Misterio de Megaciudad</h4>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="roll-indicator">&#9854;1–2</span>
+            <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-misterio')">&#9860; Tirar d100</button>
+          </div>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-mega5-misterio">
+          <thead><tr><th>Tirada</th><th>Resultado</th><th>Pregunta</th></tr></thead>
+          <tbody>
+            <tr><td>1–8</td><td>Reliquia antigua</td><td>¿Qué artefacto o tesoro alienígena puede encontrarse aquí?</td></tr>
+            <tr><td>9–17</td><td>Constitución biológica</td><td>¿Qué especies habitaron este lugar?</td></tr>
+            <tr><td>18–26</td><td>Propósito civilizacional</td><td>¿Cuál era la función global de esta ciudad para su especie?</td></tr>
+            <tr><td>27–34</td><td>Guía críptico</td><td>¿A qué lugar o hallazgo mayor conduce este emplazamiento?</td></tr>
+            <tr><td>35–42</td><td>Plan del enemigo</td><td>¿Qué objetivo persigue un rival en este emplazamiento?</td></tr>
+            <tr><td>43–50</td><td>Habitante perdido</td><td>¿Cuál fue el destino de quienes vivieron aquí originalmente?</td></tr>
+            <tr><td>51–58</td><td>Sistema político</td><td>¿Cuál era la forma de gobierno que regía este asentamiento?</td></tr>
+            <tr><td>59–66</td><td>Fe popular</td><td>¿Cuál era la creencia más extendida en este lugar?</td></tr>
+            <tr><td>67–74</td><td>Estructura social</td><td>¿Cuál era la organización colectiva de quienes vivían aquí?</td></tr>
+            <tr><td>75–82</td><td>Prácticas tradicionales</td><td>¿Qué costumbres culturales importantes se practicaban aquí?</td></tr>
+            <tr><td>83–91</td><td>Proyecto inconcluso</td><td>¿Qué programa abandonado dejó su huella en este emplazamiento?</td></tr>
+            <tr><td>92–100</td><td>Recurso valioso</td><td>¿Qué reserva de bienes o materiales puede encontrarse aquí?</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="oracle-card curse" style="margin-top:0.8rem;">
+        <div class="oracle-card-header">
+          <h4>⚠ Misterio de Megaciudad Maldita</h4>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="roll-indicator">&#9854;1–2</span>
+            <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-misterio-maldita')">&#9860; Tirar d100</button>
+          </div>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-mega5-misterio-maldita">
+          <thead><tr><th>Tirada</th><th>Resultado</th><th>Pregunta</th></tr></thead>
+          <tbody>
+            <tr><td>1–10</td><td>Custodio dominante</td><td>¿Cuál es la naturaleza del constructo supervisor que custodia este lugar?</td></tr>
+            <tr><td>11–20</td><td>Ser confinado</td><td>¿Qué entidad o criatura está aprisionada en este lugar?</td></tr>
+            <tr><td>21–30</td><td>Reliquia maldita</td><td>¿Qué tesoro o fragmento del pasado se halla aquí?</td></tr>
+            <tr><td>31–40</td><td>Secta eldritch</td><td>¿Qué facción corrompida hizo de este lugar su base de operaciones?</td></tr>
+            <tr><td>41–50</td><td>Portal enigmático</td><td>¿A qué dominio extraño conecta este emplazamiento?</td></tr>
+            <tr><td>51–60</td><td>Anomalía acechante</td><td>¿Qué aberración hace sentir su presencia en este lugar?</td></tr>
+            <tr><td>61–70</td><td>Presagio amenazante</td><td>¿Qué catástrofe inminente alberga este emplazamiento?</td></tr>
+            <tr><td>71–80</td><td>Consecuencias ruinosas</td><td>¿Qué calamidad dejó este lugar condenado a una decadencia eterna?</td></tr>
+            <tr><td>81–90</td><td>Mutación extraña</td><td>¿Qué alteración física o mental puede provocar este emplazamiento?</td></tr>
+            <tr><td>91–100</td><td>Tecnología execrable</td><td>¿Qué maquinaria o aparato anormal afecta a este lugar?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Cifrado de Megaciudad</h3>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Cifrado de Megaciudad</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-cifrado')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-mega5-cifrado">
+          <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–10</td><td>Creación estética o pieza artística</td></tr>
+            <tr><td>11–20</td><td>Carta o registro</td></tr>
+            <tr><td>21–30</td><td>Evidencia de otros aventureros</td></tr>
+            <tr><td>31–40</td><td>Mensaje hecho a mano</td></tr>
+            <tr><td>41–50</td><td>Zona o área oculta</td></tr>
+            <tr><td>51–60</td><td>Maquinaria o artilugio</td></tr>
+            <tr><td>61–70</td><td>Objeto personal</td></tr>
+            <tr><td>71–80</td><td>Restos de los muertos</td></tr>
+            <tr><td>81–90</td><td>Señales proyectadas en pantalla</td></tr>
+            <tr><td>91–100</td><td>Estructura inusual</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="oracle-card curse" style="margin-top:0.8rem;">
+        <div class="oracle-card-header">
+          <h4>⚠ Cifrado de Megaciudad Maldita</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-mega5-cifrado-maldita')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-mega5-cifrado-maldita">
+          <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–10</td><td>Aparato anómalo</td></tr>
+            <tr><td>11–20</td><td>Mensaje de advertencia de un explorador moribundo</td></tr>
+            <tr><td>21–30</td><td>Visita o advertencia característica</td></tr>
+            <tr><td>31–40</td><td>Sueños o visiones espantosos</td></tr>
+            <tr><td>41–50</td><td>Evidencia de muerte u violencia horrendas</td></tr>
+            <tr><td>51–60</td><td>Documentación aterradora</td></tr>
+            <tr><td>61–70</td><td>Recreación holográfica</td></tr>
+            <tr><td>71–80</td><td>Mecanismo letal o trampa</td></tr>
+            <tr><td>81–90</td><td>Custodios sobredimensionados o amenazantes</td></tr>
+            <tr><td>91–100</td><td>Mensaje improvisado de forma violenta</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="amenazas-megaciudad">
+  <div class="section-header">
+    <h2>Amenazas en las Megaciudades <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Permanecer períodos prolongados en zonas inexploradas de ruinas alienígenas conlleva el riesgo de peligros invisibles. Para representar las amenazas de una <em>amenaza acechante</em>, añade un reloj de tensión. Cuando sufras un coste por fracaso, demora o inacción, avanza el reloj para mostrar cómo la amenaza se acerca.</p>
+
+  <div class="subsection">
+    <h3>Rango de Expedición de Megaciudad</h3>
+    <p class="prose">El rango de tu expedición a una megaciudad se determina principalmente por su tamaño y complejidad. Usa los resultados de los oráculos de la página 168 para consultar la columna y fila correspondientes en la tabla siguiente.</p>
+
+    <div class="rank-grid">
+      <div class="rg-header">Tamaño \ Complejidad</div>
+      <div class="rg-header">Simple</div>
+      <div class="rg-header">Básica</div>
+      <div class="rg-header">Manejable</div>
+      <div class="rg-header">Complicada</div>
+      <div class="rg-header">Desconcertante</div>
+      <div class="rg-rowhead">Enorme</div>
+      <div class="rg-cell troublesome">Problemático</div>
+      <div class="rg-cell troublesome">Problemático</div>
+      <div class="rg-cell dangerous">Peligroso</div>
+      <div class="rg-cell dangerous">Peligroso</div>
+      <div class="rg-cell formidable">Formidable</div>
+      <div class="rg-rowhead">Masiva</div>
+      <div class="rg-cell troublesome">Problemático</div>
+      <div class="rg-cell dangerous">Peligroso</div>
+      <div class="rg-cell dangerous">Peligroso</div>
+      <div class="rg-cell formidable">Formidable</div>
+      <div class="rg-cell formidable">Formidable</div>
+      <div class="rg-rowhead">Gigántica</div>
+      <div class="rg-cell dangerous">Peligroso</div>
+      <div class="rg-cell dangerous">Peligroso</div>
+      <div class="rg-cell formidable">Formidable</div>
+      <div class="rg-cell formidable">Formidable</div>
+      <div class="rg-cell extreme">Extremo</div>
+      <div class="rg-rowhead">Colosal</div>
+      <div class="rg-cell dangerous">Peligroso</div>
+      <div class="rg-cell formidable">Formidable</div>
+      <div class="rg-cell formidable">Formidable</div>
+      <div class="rg-cell extreme">Extremo</div>
+      <div class="rg-cell epic">Épico</div>
+      <div class="rg-rowhead">Megalítica</div>
+      <div class="rg-cell formidable">Formidable</div>
+      <div class="rg-cell formidable">Formidable</div>
+      <div class="rg-cell extreme">Extremo</div>
+      <div class="rg-cell epic">Épico</div>
+      <div class="rg-cell epic">Épico</div>
+    </div>
+
+    <h4 style="color:var(--gold);margin:1.2rem 0 0.4rem;">Rango de Encuentros por Progreso</h4>
+    <p class="prose" style="font-size:0.88rem;">Las expediciones por megaciudad son peligrosas por naturaleza. Cuanto más avanzas hacia distritos sin domar y zonas inexploradas, más traicionero se vuelve el entorno. El rango del encuentro puede ser un grado inferior o superior según las circunstancias (máx. épico).</p>
+    <div class="progress-bar">
+      <div class="seg rank-m1">1</div><div class="seg rank-m1">2</div><div class="seg rank-m1">3</div>
+      <div class="seg rank-m1">4</div>
+      <div class="seg rank-n">5</div><div class="seg rank-n">6</div><div class="seg rank-n">7</div>
+      <div class="seg rank-p1">8</div><div class="seg rank-p1">9</div><div class="seg rank-p1">10</div>
+    </div>
+    <div class="progress-bar-label">
+      <span class="lbl-m1" style="flex:4">Rango Expedición −1</span>
+      <span class="lbl-n" style="flex:3">Rango Expedición</span>
+      <span class="lbl-p1" style="flex:3">Rango Expedición +1</span>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Amenaza Acechante</h3>
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Amenaza Acechante</h4>
+        <span class="roll-indicator">Cruzar con Control de Custodios</span>
+      </div>
+      <table class="oracle" id="tbl-mega5-amenaza">
+        <thead><tr>
+          <th>Ctrl. Total</th><th>Ctrl. Parcial</th><th>Ctrl. Menor</th>
+          <th>Amenaza</th><th>Al avanzar el reloj…</th><th>Al llenarse el reloj…</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>1–12</td><td>1–13</td><td>1–14</td><td>Cambios climáticos</td><td>Fluctuaciones de temperatura; reacciones corporales leves</td><td>¡Tu cuerpo sufre una aflicción grave!</td></tr>
+          <tr><td>13–17</td><td>14–20</td><td>15–22</td><td>Edificios desmoronándose</td><td>Crujidos y quejidos; escombros que caen</td><td>¡Los edificios colapsan!</td></tr>
+          <tr><td>18–34</td><td>21–29</td><td>23–27</td><td>Mecanismo defensivo</td><td>Señales de activación; preparativos del contraataque</td><td>¡Las máquinas atacan!</td></tr>
+          <tr><td>35–39</td><td>30–36</td><td>28–35</td><td>Sobrecarga de energía</td><td>Arcos de electricidad; fluctuaciones notables de potencia</td><td>¡La energía amenaza desde todos lados!</td></tr>
+          <tr><td>40–56</td><td>37–46</td><td>36–40</td><td>Custodios de guardia</td><td>Señales de vigilancia; sonidos de movilidad mecánica</td><td>¡Una fuerza de custodios defiende la ciudad!</td></tr>
+          <tr><td>57–68</td><td>47–59</td><td>41–54</td><td>Depredador acechante</td><td>Vislumbres de la criatura; restos de ataques anteriores</td><td>¡El depredador ataca!</td></tr>
+          <tr><td>69–80</td><td>60–72</td><td>55–68</td><td>Espacio desconcertante</td><td>Entorno indescifrable; la confusión se apodera de ti</td><td>¡El pánico o la angustia te dominan!</td></tr>
+          <tr><td>81–85</td><td>73–79</td><td>69–76</td><td>Exploradores rivales</td><td>Evidencia de actividad reciente; voces distantes</td><td>¡Tu rival da su movimiento!</td></tr>
+          <tr><td>86–90</td><td>80–86</td><td>77–84</td><td>Caminos cambiantes</td><td>El entorno se altera; rutas reconfiguradas</td><td>¡Te pierdes!</td></tr>
+          <tr><td>91–95</td><td>87–93</td><td>85–92</td><td>Incendio urbano</td><td>Calor intenso y abarcador; humo que obstruye la visión</td><td>¡El fuego causa destrucción!</td></tr>
+          <tr><td>96–100</td><td>94–100</td><td>93–100</td><td>Inundación urbana</td><td>Corrientes que surgen; espacios inundados</td><td>¡El camino queda anegado!</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oracle-card curse" style="margin-top:0.8rem;">
+      <div class="oracle-card-header">
+        <h4>⚠ Amenaza Acechante Maldita</h4>
+        <span class="roll-indicator">Cruzar con Control de Custodios</span>
+      </div>
+      <table class="oracle" id="tbl-mega5-amenaza-maldita">
+        <thead><tr>
+          <th>Ctrl. Total</th><th>Ctrl. Parcial</th><th>Ctrl. Menor</th>
+          <th>Amenaza</th><th>Al avanzar el reloj…</th><th>Al llenarse el reloj…</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>1–2</td><td>1–3</td><td>1–6</td><td>Sectarios corrompidos</td><td>Ideogramas de mal agüero; objetos rituales o restos</td><td>¡La secta da su movimiento!</td></tr>
+          <tr><td>3–10</td><td>4–17</td><td>7–23</td><td>Aberración devastadora</td><td>Efectos secundarios menores; efectos anómalos leves</td><td>¡Se forma una aberración poderosa!</td></tr>
+          <tr><td>11–44</td><td>18–37</td><td>24–33</td><td>Custodio de élite</td><td>Señales de activación; estructuras que se cierran</td><td>¡Aparece un constructo dominante!</td></tr>
+          <tr><td>45–59</td><td>38–47</td><td>34–38</td><td>Festival peligroso</td><td>Anuncios inquietantes; estructuras que se modifican</td><td>¡Aparece una procesión de custodios!</td></tr>
+          <tr><td>60–70</td><td>48–60</td><td>39–53</td><td>Organismos infestadores</td><td>Susurros o chirridos; nidos repugnantes</td><td>¡Grupos violentos de criaturas se extienden!</td></tr>
+          <tr><td>71–81</td><td>61–73</td><td>54–68</td><td>Criatura poderosa</td><td>Marcas territoriales; señales de una criatura de caza</td><td>¡La criatura ataca!</td></tr>
+          <tr><td>82–92</td><td>74–86</td><td>69–83</td><td>Tratamiento de saneamiento</td><td>Anuncios de protocolo; sustancias cáusticas extendidas</td><td>¡Tu cuerpo se desintegra!</td></tr>
+          <tr><td>93–100</td><td>87–100</td><td>84–100</td><td>Entidades liberadas</td><td>Ruidos espectrales; destellos de formas fantasmales</td><td>¡Un grupo de entidades emerge!</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="arrays-oracles">
+  <div class="section-header">
+    <h2>Arrays de Oráculos de Megaciudad <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Usa este conjunto de oráculos para detallar tu exploración en las profundidades de una megaciudad.</p>
+
+  <div class="array-grid">
+    <div class="array-card">
+      <h4>Explorar la Megaciudad</h4>
+      <ul>
+        <li><span class="roll-ref">1</span> Característica de Tema (GR, pág. 100)</li>
+        <li><span class="roll-ref">2–4</span> Característica de Derelicto (GR, pág. 82)</li>
+        <li><span class="roll-ref">5–6</span> Característica de Bóveda (GR, pág. 92)</li>
+      </ul>
+    </div>
+    <div class="array-card">
+      <h4>Problemas en la Megaciudad</h4>
+      <ul>
+        <li><span class="roll-ref">1</span> Tabla Paga el Precio (GR, pág. 25)</li>
+        <li><span class="roll-ref">2</span> Peligro de Tema (GR, pág. 100)</li>
+        <li><span class="roll-ref">3</span> Peligro de Derelicto (GR, pág. 82)</li>
+        <li><span class="roll-ref">4</span> Peligro de Bóveda (GR, pág. 92)</li>
+        <li><span class="roll-ref">5</span> Amenaza Acechante (pág. anterior)</li>
+        <li><span class="roll-ref">6</span> Complicación Narrativa (GR, pág. 110)</li>
+      </ul>
+    </div>
+    <div class="array-card">
+      <h4>Oportunidades en la Megaciudad</h4>
+      <ul>
+        <li><span class="roll-ref">1–2</span> Oportunidad de Tema (GR, pág. 100)</li>
+        <li><span class="roll-ref">3–4</span> Oportunidad de Derelicto (GR, pág. 82)</li>
+        <li><span class="roll-ref">5–6</span> Oportunidad de Bóveda (GR, pág. 92)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Tipos de Megaciudad -->
+<section id="ciudad-techo">
+  <div class="section-header"><h2>Ciudad Techo <span class="tag">Ancient Wonders</span></h2></div>
+  <div class="city-card">
+    <p class="prose">Una ciudad techo es un emplazamiento residencial diseñado para colgar de la superficie interior superior de una megaestructura, cueva u otra formación natural, aunque también es posible encontrarlas en un techo artificial construido en el cielo de un planeta. La forma general de la ciudad tiende a ser la de un candelabro o un racimo de estalactitas. La navegación entre las estructuras de esta maravilla y el acceso a su interior requieren un vehículo.</p>
+  </div>
+</section>
+
+<section id="ciudad-nube">
+  <div class="section-header"><h2>Ciudad Nube <span class="tag">Ancient Wonders</span></h2></div>
+  <div class="city-card">
+    <p class="prose">La ciudad nube es una megalópolis construida para flotar en el aire a gran altitud sobre la superficie de un mundo. La ciudad en sí se sustenta en una o varias islas que contienen la tecnología necesaria para la suspensión, que pueden ser enormes esferas rellenas de aire, rotores inmensos o algún tipo de motor gravitacional. Al mismo tiempo, esta megaciudad puede estar anclada, en flotación libre o ser móvil, lo que hace que la permanencia de su ubicación sea incierta a primera vista.</p>
+  </div>
+</section>
+
+<section id="ciudad-domo">
+  <div class="section-header"><h2>Ciudad Domo <span class="tag">Ancient Wonders</span></h2></div>
+  <div class="city-card">
+    <p class="prose">También conocida como arcología, este asentamiento alienígena parece haber sido diseñado para ser autosuficiente en todos los recursos necesarios para sostener la vida, al tiempo que tenía el menor impacto posible en el planeta. Así, la forma de la ciudad tiende a ser alta para evitar hacer uso de la superficie del mundo, y su interior fue construido con una variedad suficiente de zonas y áreas para que los habitantes pudieran prescindir de salir al exterior.</p>
+  </div>
+</section>
+
+<section id="ciudad-megaalta">
+  <div class="section-header"><h2>Ciudad Megaalta <span class="tag">Ancient Wonders</span></h2></div>
+  <div class="city-card">
+    <p class="prose">Una ciudad megaalta es una megaciudad diseñada para alcanzar el espacio. Un emplazamiento así habría sido utilizado para poner vehículos en órbita sin recurrir a logística externa. Los interiores de esta ciudad están acondicionados para que la presión atmosférica se mantenga homogénea en su totalidad, preservando la vida en su interior.</p>
+  </div>
+</section>
+
+<section id="ciudad-movil">
+  <div class="section-header"><h2>Ciudad Móvil <span class="tag">Ancient Wonders</span></h2></div>
+  <div class="city-card">
+    <p class="prose">También conocida como ciudad andante, esta grandiosa residencia habitable fue diseñada para adaptarse a la necesidad de movimiento constante. Su motilidad puede variar: desde ser remolcada o empujada por otros vehículos si es suficientemente pequeña, hasta propulsión, ruedas o patas si son más grandes.</p>
+  </div>
+</section>
+
+<section id="ciudad-marina">
+  <div class="section-header"><h2>Ciudad Marina <span class="tag">Ancient Wonders</span></h2></div>
+  <div class="city-card">
+    <p class="prose">La ciudad marina es una megalópolis construida sobre una isla artificial. La estructura podría ser una extensión de una ciudad en tierra, una ciudad aislada lejos de la costa o una ciudad móvil en la superficie de una masa de agua. La mayor parte de esta megaciudad se encuentra bajo el agua, como un iceberg. También es posible que esta estructura no exista como una unidad única, sino como un grupo de islas móviles interconectadas.</p>
+  </div>
+</section>
+
+<section id="ciudad-subterranea">
+  <div class="section-header"><h2>Ciudad Subterránea <span class="tag">Ancient Wonders</span></h2></div>
+  <div class="city-card">
+    <p class="prose">También conocida como ciudad subterránea o ciudad pozo, este emplazamiento residencial fue aparentemente construido para obtener protección y refugio bajo tierra a cambio de la luz solar. Las zonas clave de la ciudad suelen contar con torres de soporte que sostienen el peso de la superficie o funcionan como entradas a toda la estructura, conteniendo ascensores o pozos que se prolongan hacia abajo a medida que la megaciudad se expande más profundamente.</p>
+  </div>
+</section>
+
+<section id="ciudad-submarina">
+  <div class="section-header"><h2>Ciudad Submarina <span class="tag">Ancient Wonders</span></h2></div>
+  <div class="city-card">
+    <p class="prose">Una ciudad submarina es un emplazamiento residencial sumergido compuesto por numerosas estructuras que sirven como las zonas de la ciudad. Se asume que esta composición fue diseñada para aislar los posibles accidentes que pudieran ocurrir, de modo que si una zona se inundaba, las otras estructuras no se vieran afectadas. Asimismo, para mitigar la presión de las profundidades, estas estructuras se vuelven más gruesas a medida que la megaciudad desciende, y sus luces son artificiales ante la ausencia de luz solar.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CAP. 6 — MORADORES Y FENÓMENOS
+     ═══════════════════════════════════════════ -->
+
+<section id="encuentros-profundidad">
+  <div class="section-header">
+    <h2>Encuentros en las Profundidades <span class="tag">Cap. 6</span></h2>
+  </div>
+  <p class="prose">A medida que explores los rincones perdidos y olvidados de la galaxia donde las civilizaciones alienígenas dejaron su huella, encontrarás diversos peligros: constructos, bio-mechs y anomalías.</p>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <div class="label">Constructos</div>
+      <p style="font-size:0.88rem;">Los constructos son el resultado inevitable del desarrollo de una especie inteligente. Los <strong>custodios</strong> —los constructos que los precursores dejaron en los confines más remotos de la galaxia— son las pocas tecnologías restantes de sus civilizaciones. Son tan intrigantes como sus creadores. También pueden encontrarse en los parajes naturales de los planetas. Tienden a ser especialmente hostiles a la presencia humana en los emplazamientos precursores.</p>
+    </div>
+    <div class="info-card">
+      <div class="label">Bio-mechs</div>
+      <p style="font-size:0.88rem;">Los bio-mechs son fusiones grotescas o enigmáticas de carne viva y maquinaria inorgánica creadas por la humanidad o los precursores. Existen en dos formas: los <strong>ciborgs</strong> (seres que comenzaron como organismos vivos y fueron aumentados con partes mecánicas) y los <strong>orgmécanos</strong> (construidos en lugar de nacidos, con carne orgánica injertada en un chasis metálico).</p>
+    </div>
+    <div class="info-card">
+      <div class="label">Anomalías</div>
+      <p style="font-size:0.88rem;">Las anomalías son los efectos secundarios de la realidad y las leyes de la física fragmentadas o quebrantadas. Son el resultado de los numerosos experimentos de los precursores y parecen causadas por lo que los exploradores llaman <strong>fragmentos</strong>: objetos raros formados por estas condiciones inexplicables que poseen un poder inmenso. Existen dos tipos: <strong>entidades</strong> (concentradas en un área pequeña, formas móviles y hostiles) y <strong>aberraciones</strong> (efectos extendidos sobre un área localizada de terreno).</p>
+    </div>
+  </div>
+</section>
+
+<section id="constructos">
+  <div class="section-header">
+    <h2>Constructos <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Cuando llegue el momento de aventurarte en los vastos espacios interiores de una megaestructura o megaciudad, la mayoría de tus encuentros serán con los custodios. Sin embargo, en tus aventuras por la galaxia, también es posible encontrarte con constructos hostiles fabricados por humanos. Aunque en general son menos capaces que las creaciones de los precursores, siguen representando una amenaza real.</p>
+
+  <div class="subsection">
+    <h3>Enfrentarse a un Constructo</h3>
+    <p class="prose">Cuando te veas obligado a enfrentarte a un constructo en un conflicto de alto riesgo orientado a la acción y necesites determinar su rango, sigue estas pautas:</p>
+    <ul class="rules-list">
+      <li><strong>Si encuentras un constructo fuera de una megaestructura</strong>, tira o elige de la tabla siguiente.</li>
+      <li><strong>Si encuentras un constructo dentro de una megaestructura</strong>, sigue la pauta de Rango de Encuentros del Capítulo 5 (pág. 99).</li>
+    </ul>
+
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Rango del Constructo (fuera de megaestructura)</h4>
+        <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-rango')">&#9860; Tirar d100</button>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-den-constructo-rango">
+        <thead><tr><th>Tirada</th><th>Rango</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td>1–20</td><td>Problemático</td><td>Un constructo de capacidad mínima o potencial destructivo escaso</td></tr>
+          <tr><td>21–55</td><td>Peligroso</td><td>Un constructo de capacidad media o potencial destructivo limitado</td></tr>
+          <tr><td>56–80</td><td>Formidable</td><td>Un constructo de capacidad avanzada o gran potencial destructivo</td></tr>
+          <tr><td>81–95</td><td>Extremo</td><td>Un constructo de capacidad increíble o potencial destructivo inmenso</td></tr>
+          <tr><td>96–100</td><td>Épico</td><td>Un constructo de capacidad sin rival o potencial destructivo sin parangón</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="font-size:0.88rem;">Recuerda imaginar cómo el entorno y la naturaleza de tu objetivo pueden influir en el rango del objetivo de combate. Si estás superado, aumenta el rango. Si estás bien preparado o en posición de ventaja, redúcelo.</p>
+  </div>
+</section>
+
+<section id="generacion-constructo">
+  <div class="section-header">
+    <h2>Generación de Constructos <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Los siguientes pasos sirven para generar constructos. No están pensados para usarse todos a la vez, sino según lo demanden la narrativa y las circunstancias ficticias.</p>
+
+  <div class="gen-steps">
+    <h4>Fases de Generación</h4>
+    <ul>
+      <li><strong>Apariencia:</strong> Los oráculos de Entorno, Escala, Motilidad y Primer Vistazo darán forma a la apariencia del constructo.</li>
+      <li><strong>Encuentro:</strong> Los oráculos de Comportamiento al Encuentro, Propósito y Disposición Inicial enmarcan cómo comienza el encuentro. Si no sabes cómo combate el constructo, <em>Pregunta al Oráculo</em> (50/50) si ataca a distancia; si no, lo hace cuerpo a cuerpo.</li>
+      <li><strong>Revelación:</strong> A medida que interactúes con el constructo y lo comprendas mejor, usa los oráculos de Consciencia y Aspecto Revelado para obtener una imagen más clara de su naturaleza.</li>
+    </ul>
+  </div>
+
+  <div class="discovery">
+    <div class="disc-label">Si encuentras una contradicción, puedes…</div>
+    <ul style="list-style:disc;padding-left:1.2rem;font-size:0.9rem;">
+      <li>Ignorarla, volver a tirar o ajustarla.</li>
+      <li>Imaginar cómo añade una complejidad interesante al constructo.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="oracles-constructo">
+  <div class="section-header">
+    <h2>Oráculos de Constructo <span class="tag">Ancient Wonders</span></h2>
+  </div>
+
+  <div class="two-col">
+    <div class="subsection">
+      <h3>Entorno del Constructo</h3>
+      <p class="prose">Elige la opción más cercana a tu ubicación o tira para identificar el hábitat principal del constructo.</p>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Entorno del Constructo</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-env')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-constructo-env">
+          <thead><tr><th>Tirada</th><th>Entorno</th></tr></thead>
+          <tbody>
+            <tr><td>1–15</td><td>Espacio</td></tr>
+            <tr><td>16–35</td><td>Aire</td></tr>
+            <tr><td>36–45</td><td>Líquido</td></tr>
+            <tr><td>46–70</td><td>Tierra</td></tr>
+            <tr><td>71–100</td><td>Interior</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Escala del Constructo</h3>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Escala del Constructo</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-escala')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-constructo-escala">
+          <thead><tr><th>Tirada</th><th>Escala</th></tr></thead>
+          <tbody>
+            <tr><td>1–3</td><td>Minúscula</td></tr>
+            <tr><td>4–10</td><td>Diminuta</td></tr>
+            <tr><td>11–25</td><td>Pequeña</td></tr>
+            <tr><td>26–60</td><td>Media</td></tr>
+            <tr><td>61–90</td><td>Grande</td></tr>
+            <tr><td>91–99</td><td>Enorme</td></tr>
+            <tr><td>100</td><td>→ Ultraescala</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="subsection">
+        <h4>Ultraescala</h4>
+        <p class="prose" style="font-size:0.85rem;">Usa la columna «Sin Megaestructuras» si no empleas el contenido del Capítulo 4.</p>
+        <div class="oracle-card">
+          <div class="oracle-card-header">
+            <h4>Ultraescala</h4>
+            <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-ultra')">&#9860; Tirar d100</button>
+          </div>
+          <div class="roll-result"></div>
+          <table class="oracle" id="tbl-den-constructo-ultra">
+            <thead><tr><th>Sin Mega.</th><th>Escala T1</th><th>Escala T2</th><th>Escala T3</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>—</td><td>1</td><td>1–5</td><td>Vasta</td></tr>
+              <tr><td>2–11</td><td>1–5</td><td>2–11</td><td>6–20</td><td>Colosal</td></tr>
+              <tr><td>12–100</td><td>6–100</td><td>12–100</td><td>21–100</td><td>Titánica</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Motilidad -->
+  <div class="subsection">
+    <h3>Motilidad del Constructo</h3>
+    <p class="prose">Estos oráculos determinan la motilidad del constructo según su entorno previsto. Aun así, puede ser capaz de desplazarse por otros entornos. Imágínalo o tira de nuevo si es necesario. El entorno, la escala y la motilidad sugieren la forma del constructo; tenlos en cuenta para imaginarlo.</p>
+
+    <h4>Motilidad — Constructo Humano</h4>
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Motilidad del Constructo Humano</h4>
+        <span class="roll-indicator">Cruzar con Entorno</span>
+      </div>
+      <table class="oracle" id="tbl-den-mot-humano">
+        <thead><tr><th>Espacio</th><th>Aire</th><th>Líquido</th><th>Tierra</th><th>Interior</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>1–20</td><td>1–20</td><td>1–5</td><td>1–10</td><td>1–10</td><td>Antigravedad o propulsión exótica</td></tr>
+          <tr><td>—</td><td>21–50</td><td>6–55</td><td>—</td><td>—</td><td>Hélice o rotor</td></tr>
+          <tr><td>21–50</td><td>51–55</td><td>56–80</td><td>11–30</td><td>11–40</td><td>Estacionario</td></tr>
+          <tr><td>51–100</td><td>56–100</td><td>81–100</td><td>—</td><td>—</td><td>Propulsores</td></tr>
+          <tr><td>—</td><td>—</td><td>—</td><td>31–45</td><td>41–55</td><td>Orugas</td></tr>
+          <tr><td>—</td><td>—</td><td>—</td><td>46–80</td><td>56–94</td><td>→ Patas</td></tr>
+          <tr><td>—</td><td>—</td><td>—</td><td>81–100</td><td>95–100</td><td>→ Ruedas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 style="margin-top:1rem;">Motilidad — Constructo Precursor</h4>
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Motilidad del Constructo Precursor</h4>
+        <span class="roll-indicator">Cruzar con Entorno</span>
+      </div>
+      <table class="oracle" id="tbl-den-mot-precursor">
+        <thead><tr><th>Espacio</th><th>Aire</th><th>Líquido</th><th>Tierra</th><th>Interior</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>1–45</td><td>1–45</td><td>1–50</td><td>1–50</td><td>1–15</td><td>Antigravedad o propulsión exótica</td></tr>
+          <tr><td>46–60</td><td>46–60</td><td>51–65</td><td>51–65</td><td>16–45</td><td>Estacionario</td></tr>
+          <tr><td>61–100</td><td>61–100</td><td>66–100</td><td>—</td><td>—</td><td>Propulsores</td></tr>
+          <tr><td>—</td><td>—</td><td>—</td><td>66–100</td><td>46–100</td><td>→ Patas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col" style="margin-top:0.8rem;">
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Patas</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-patas')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-patas">
+          <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–45</td><td>Bípedo</td></tr>
+            <tr><td>46–75</td><td>Trípedo</td></tr>
+            <tr><td>76–90</td><td>Cuadrúpedo</td></tr>
+            <tr><td>91–97</td><td>Hexápedo</td></tr>
+            <tr><td>98–99</td><td>Octópedo</td></tr>
+            <tr><td>100</td><td>Más de ocho patas</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Ruedas</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-ruedas')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-ruedas">
+          <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–5</td><td>Monorueda</td></tr>
+            <tr><td>6–20</td><td>Dos ruedas</td></tr>
+            <tr><td>21–35</td><td>Tres ruedas</td></tr>
+            <tr><td>36–75</td><td>Cuatro ruedas</td></tr>
+            <tr><td>76–95</td><td>Seis ruedas</td></tr>
+            <tr><td>96–100</td><td>Más de seis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primer Vistazo, Comportamiento, Propósito, Disposición -->
+  <div class="subsection">
+    <h3>Primer Vistazo del Constructo</h3>
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Primer Vistazo del Constructo</h4>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          <span class="roll-indicator">&#9854;1–2</span>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-look')">&#9860; Tirar d100</button>
+        </div>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-den-constructo-look">
+        <thead><tr><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>1–2</td><td>Incluye telas o plásticos</td><td>35–36</td><td>Chispas o arcos eléctricos</td><td>69–70</td><td>Vandalizado</td></tr>
+          <tr><td>3–4</td><td>Dañado o disfuncional</td><td>37–38</td><td>Coloración vibrante</td><td>71–72</td><td>Cristalino</td></tr>
+          <tr><td>5–6</td><td>Primitivo o rudimentario</td><td>39–40</td><td>Sonido característico</td><td>73–74</td><td>Disimulado</td></tr>
+          <tr><td>7–8</td><td>Fuga de refrigerante o combustible</td><td>41–42</td><td>Múltiples segmentos</td><td>75–76</td><td>Corrompido</td></tr>
+          <tr><td>9–10</td><td>Fuente de energía expuesta</td><td>43–44</td><td>Emisiones de energía</td><td>77–78</td><td>Destruido</td></tr>
+          <tr><td>11–12</td><td>Movimiento tambaleante</td><td>45–46</td><td>Olor característico</td><td>79–80</td><td>Iridiscente</td></tr>
+          <tr><td>13–14</td><td>Extremidades o partes faltantes</td><td>47–48</td><td>Reparaciones anteriores</td><td>81–82</td><td>Utilitario</td></tr>
+          <tr><td>15–16</td><td>Extremidades desproporcionadas</td><td>49–50</td><td>Luz direccional</td><td>83–84</td><td>Corroído</td></tr>
+          <tr><td>17–18</td><td>Antenas prominentes</td><td>51–52</td><td>Partes dispares</td><td>85–86</td><td>Blindado</td></tr>
+          <tr><td>19–20</td><td>Marcas características</td><td>53–54</td><td>Sensores visibles</td><td>87–88</td><td>Acorazado</td></tr>
+          <tr><td>21–22</td><td>Inmóvil o atrapado</td><td>55–56</td><td>Salpicaduras de sangre</td><td>89–90</td><td>Hermoso</td></tr>
+          <tr><td>23–24</td><td>Llamativamente sucio</td><td>57–58</td><td>Articulaciones múltiples</td><td>91–92</td><td>Grácil</td></tr>
+          <tr><td>25–26</td><td>Mecanismos visibles</td><td>59–60</td><td>Luminiscente</td><td>93–94</td><td>Impoluto</td></tr>
+          <tr><td>27–28</td><td>Parte o partes dentadas</td><td>61–62</td><td>Crecimiento vegetal</td><td>95–96</td><td>Pintado</td></tr>
+          <tr><td>29–30</td><td>Tentáculos mecánicos</td><td>63–64</td><td>Ornamentado</td><td>97–98</td><td>Frágil</td></tr>
+          <tr><td>31–32</td><td>Carcasa transparente</td><td>65–66</td><td>Biomimetismo</td><td>99–100</td><td>Voluminoso</td></tr>
+          <tr><td>33–34</td><td>Antiguo o arcaico</td><td>67–68</td><td>Extremidades adicionales</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="subsection">
+      <h3>Comportamiento al Encuentro</h3>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Comportamiento del Constructo al Encuentro</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-comp')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-constructo-comp">
+          <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–30</td><td>Propósito principal</td></tr>
+            <tr><td>31–50</td><td>Propósito secundario</td></tr>
+            <tr><td>51–65</td><td>En movimiento</td></tr>
+            <tr><td>66–75</td><td>Recargando</td></tr>
+            <tr><td>76–85</td><td>Reiniciando</td></tr>
+            <tr><td>86–90</td><td>A la espera de órdenes</td></tr>
+            <tr><td>91–95</td><td>Caído durante una tarea</td></tr>
+            <tr><td>96–100</td><td>Fuera de línea</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Propósito del Constructo</h3>
+      <p class="prose" style="font-size:0.85rem;">Usa este oráculo si tienes dificultades para imaginar el propósito de un constructo dado su entorno, escala, motilidad y apariencia.</p>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Propósito del Constructo</h4>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="roll-indicator">&#9854;1–2</span>
+            <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-prop')">&#9860; Tirar d100</button>
+          </div>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-constructo-prop">
+          <thead><tr><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–4</td><td>Mensajero</td><td>29–32</td><td>Sanador</td><td>57–60</td><td>Investigador</td></tr>
+            <tr><td>5–8</td><td>Diplomático</td><td>33–36</td><td>Obrero</td><td>61–64</td><td>Carroñero</td></tr>
+            <tr><td>9–12</td><td>Ingeniero</td><td>37–40</td><td>Líder</td><td>65–68</td><td>Explorador</td></tr>
+            <tr><td>13–16</td><td>Artista</td><td>41–44</td><td>Mercader</td><td>69–72</td><td>Constructor de naves</td></tr>
+            <tr><td>17–20</td><td>Explorador</td><td>45–48</td><td>Procesador</td><td>73–76</td><td>Soldado</td></tr>
+            <tr><td>21–24</td><td>Guardia</td><td>49–52</td><td>Navegante</td><td>77–80</td><td>Técnico</td></tr>
+            <tr><td>25–28</td><td>Guía</td><td>53–56</td><td>Piloto</td><td>81–100</td><td>→ Acción + Tema (pág. 12)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Disposición Inicial del Constructo</h3>
+
+    <div class="two-col">
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Disposición Inicial</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-disp')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-constructo-disp">
+          <thead><tr><th>Humano</th><th>Precursor</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–6</td><td>—</td><td>Servicial</td></tr>
+            <tr><td>7–14</td><td>—</td><td>Amistoso</td></tr>
+            <tr><td>15–22</td><td>—</td><td>Cooperativo</td></tr>
+            <tr><td>23–30</td><td>1–3</td><td>Curioso</td></tr>
+            <tr><td>31–40</td><td>4–8</td><td>Indiferente</td></tr>
+            <tr><td>41–50</td><td>—</td><td>Suspicaz</td></tr>
+            <tr><td>51–60</td><td>—</td><td>Deseoso</td></tr>
+            <tr><td>61–70</td><td>—</td><td>Desesperado</td></tr>
+            <tr><td>71–78</td><td>—</td><td>Exigente</td></tr>
+            <tr><td>79–86</td><td>9–18</td><td>Hostil</td></tr>
+            <tr><td>87–94</td><td>19–38</td><td>Amenazante</td></tr>
+            <tr><td>95–100</td><td>39–100</td><td>Hostil</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="discovery">
+          <div class="disc-label">Disposición de constructos humanos</div>
+          <p style="font-size:0.88rem;">En lugar de tirar, puedes elegir el propósito o función del constructo. Algunos resultados pueden llevarte a preguntarte si el constructo encontrado tiene cierto nivel de consciencia. Si es así, tira en Consciencia del Constructo para determinarlo.</p>
+        </div>
+        <div class="discovery" style="margin-top:0.8rem;">
+          <div class="disc-label">Predisposición de los custodios</div>
+          <p style="font-size:0.88rem;">Aunque los constructos de los precursores son generalmente indiferentes a la humanidad fuera de las bóvedas y megaestructuras, son muy territoriales respecto a los interiores de esos lugares y a menudo los defenderán ferozmente de cualquier intrusión, humana o no.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="subsection">
+      <h3>Aspecto Revelado del Constructo</h3>
+      <p class="prose" style="font-size:0.85rem;">Tira en esta tabla al interactuar con el constructo para introducir nuevas características o comportamientos.</p>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Aspecto Revelado del Constructo</h4>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            <span class="roll-indicator">&#9854;1–3</span>
+            <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-asp')">&#9860; Tirar d100</button>
+          </div>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-constructo-asp">
+          <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–2</td><td>Interfaz accesible</td></tr>
+            <tr><td>3–4</td><td>Entorno alternativo</td></tr>
+            <tr><td>5–6</td><td>Movimiento alternativo</td></tr>
+            <tr><td>7–8</td><td>Propósito alternativo</td></tr>
+            <tr><td>9–10</td><td>Sentidos alternativos</td></tr>
+            <tr><td>11–12</td><td>Comunicaciones audibles</td></tr>
+            <tr><td>13–14</td><td>Camaleónico</td></tr>
+            <tr><td>15–16</td><td>Carga ataques</td></tr>
+            <tr><td>17–18</td><td>Calcula antes de actuar</td></tr>
+            <tr><td>19–20</td><td>Contiene una criatura o constructo</td></tr>
+            <tr><td>21–22</td><td>Controla otros constructos</td></tr>
+            <tr><td>23–24</td><td>Aplastador o constrictor</td></tr>
+            <tr><td>25–26</td><td>Fuente de energía mermando</td></tr>
+            <tr><td>27–28</td><td>Extremidades desmontables</td></tr>
+            <tr><td>29–30</td><td>Descargas eléctricas</td></tr>
+            <tr><td>31–32</td><td>Pulso electromagnético</td></tr>
+            <tr><td>33–34</td><td>Emite humo o vapor</td></tr>
+            <tr><td>35–36</td><td>Manipulación de energía</td></tr>
+            <tr><td>37–38</td><td>Sentidos amplificados</td></tr>
+            <tr><td>39–40</td><td>Armamento exótico</td></tr>
+            <tr><td>41–42</td><td>Expulsa residuos nocivos o tóxicos</td></tr>
+            <tr><td>43–44</td><td>Hackeado</td></tr>
+            <tr><td>45–46</td><td>Armamento oculto</td></tr>
+            <tr><td>47–48</td><td>Ineficiente</td></tr>
+            <tr><td>49–50</td><td>Sentidos limitados</td></tr>
+            <tr><td>51–52</td><td>Fabricado con metales exóticos</td></tr>
+            <tr><td>53–54</td><td>Fabricado con metales ferrosos</td></tr>
+            <tr><td>55–56</td><td>Fabricado con metales preciosos</td></tr>
+            <tr><td>57–58</td><td>Compuesto de múltiples constructos</td></tr>
+            <tr><td>59–60</td><td>Magnético</td></tr>
+            <tr><td>61–62</td><td>Averiado</td></tr>
+            <tr><td>63–64</td><td>El movimiento desmiente su tamaño</td></tr>
+            <tr><td>65–66</td><td>Omnipropósito</td></tr>
+            <tr><td>67–68</td><td>Optimizado para una tarea singular</td></tr>
+            <tr><td>69–70</td><td>Irradia calor intenso</td></tr>
+            <tr><td>71–72</td><td>Radiactivo</td></tr>
+            <tr><td>73–74</td><td>Temerario</td></tr>
+            <tr><td>75–76</td><td>Componentes de núcleo redundantes</td></tr>
+            <tr><td>77–78</td><td>Interior reforzado</td></tr>
+            <tr><td>79–80</td><td>Se replica</td></tr>
+            <tr><td>81–82</td><td>Se autodestruye</td></tr>
+            <tr><td>83–84</td><td>Autopreservación</td></tr>
+            <tr><td>85–86</td><td>Autoreparable o regenerativo</td></tr>
+            <tr><td>87–88</td><td>Tiende trampas</td></tr>
+            <tr><td>89–90</td><td>Vulnerabilidad significativa</td></tr>
+            <tr><td>91–92</td><td>Ondas sónicas</td></tr>
+            <tr><td>93–94</td><td>Se transforma</td></tr>
+            <tr><td>95–96</td><td>Usa minerales como combustible</td></tr>
+            <tr><td>97–98</td><td>Usa munición</td></tr>
+            <tr><td>99–100</td><td>Usa materia orgánica como combustible</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Consciencia del Constructo</h3>
+      <p class="prose" style="font-size:0.85rem;">Las columnas de Constructo Humano corresponden a la verdad de Inteligencia Artificial que establezcas para tu ambientación (manual SF, pág. 94). Si tu verdad es que «la humanidad ya no tiene acceso a sistemas informáticos avanzados», cualquier constructo fabricado por humanos es por defecto no sensiente.</p>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Consciencia del Constructo</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-constructo-consc')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-constructo-consc">
+          <thead><tr>
+            <th>Humano (máq. avanzadas)</th>
+            <th>Humano (IA consciente)</th>
+            <th>Precursor</th>
+            <th>Resultado</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>1–80</td><td>1–30</td><td>1–25</td><td>No sensiente</td></tr>
+            <tr><td>81–95</td><td>31–80</td><td>26–75</td><td>Autoconsciente</td></tr>
+            <tr><td>96–100</td><td>81–100</td><td>76–100</td><td>Verdaderamente consciente</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIO-MECHS -->
+<section id="bio-mechs">
+  <div class="section-header">
+    <h2>Bio-mechs <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">La generación de bio-mechs combina los oráculos de criaturas y constructos. <em>Ancient Wonders</em> no proporciona oráculos de criaturas propios; por defecto referencia los del manual de Starforged (pág. 336) o la Guía de Referencia (pág. 68).</p>
+  <p class="prose">En algunos oráculos de Starforged se tira hasta dos veces. Sin embargo, durante este proceso solo se tira una vez en cada tabla.</p>
+
+  <div class="subsection">
+    <h3>Enfrentarse a un Bio-mech</h3>
+    <p class="prose">Cuando encuentres un bio-mech, <em>Pregunta al Oráculo</em> (50/50) si es un ciborg; de lo contrario, es un orgmécano. Luego aplica los mismos principios del apartado Enfrentarse a un Constructo (pág. 184).</p>
+  </div>
+</section>
+
+<section id="generacion-biomech">
+  <div class="section-header">
+    <h2>Generación de Bio-mechs <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">Al generar un bio-mech, sigue los pasos correspondientes. Estos oráculos no están pensados para usarse todos a la vez, sino según lo demande la narrativa.</p>
+
+  <div class="biomech-grid">
+    <div class="biomech-col">
+      <h4>Ciborg</h4>
+      <div class="biomech-type">Una criatura biológica con características mecánicas añadidas a su cuerpo.</div>
+      <ul class="step-list">
+        <li><span class="step-num">1</span><span>Entorno de Criatura (GR, pág. 68)</span></li>
+        <li><span class="step-num">2</span><span>Escala de Criatura (GR, pág. 68)</span></li>
+        <li><span class="step-num">3</span><span>Forma Básica de Criatura (GR, pág. 69) <span class="step-note">— Opcionalmente, también tira: Motilidad de Constructo (pág. 187)</span></span></li>
+        <li><span class="step-num">4</span><span>Tira los dos: Primer Vistazo de Criatura (GR, pág. 70) + Primer Vistazo de Constructo (pág. 188)</span></li>
+        <li><span class="step-num">5</span><span>Comportamiento de Criatura al Encuentro (GR, pág. 70) <span class="step-note">— Si el ciborg tiene una función asignada, también tira: Propósito del Constructo (pág. 188)</span></span></li>
+        <li><span class="step-num">6</span><span>Propósito del Constructo (pág. 188) — si se ha alterado para cumplir una función</span></li>
+        <li><span class="step-num">7</span><span>Disposición Inicial del Constructo (pág. 188)</span></li>
+        <li><span class="step-num">8</span><span>Tira uno o los dos: Aspecto Revelado del Constructo (pág. 189) + Aspecto Revelado de Criatura (GR, pág. 71)</span></li>
+      </ul>
+    </div>
+
+    <div class="biomech-col">
+      <h4>Orgmécano</h4>
+      <div class="biomech-type">Un constructo con características o partes biológicas añadidas a su chasis.</div>
+      <ul class="step-list">
+        <li><span class="step-num">1</span><span>Entorno del Constructo (pág. 186)</span></li>
+        <li><span class="step-num">2</span><span>Escala del Constructo (pág. 186)</span></li>
+        <li><span class="step-num">3</span><span>Motilidad del Constructo (pág. 187) <span class="step-note">— Opcionalmente, también tira: Forma Básica de Criatura (GR, pág. 69)</span></span></li>
+        <li><span class="step-num">4</span><span>Tira los dos: Primer Vistazo del Constructo (pág. 186) + Primer Vistazo de Criatura (GR, pág. 70)</span></li>
+        <li><span class="step-num">5</span><span>Comportamiento del Constructo al Encuentro (pág. 186)</span></li>
+        <li><span class="step-num">6</span><span>Propósito del Constructo (pág. 188)</span></li>
+        <li><span class="step-num">7</span><span>Disposición Inicial del Constructo (pág. 188)</span></li>
+        <li><span class="step-num">8</span><span>Consciencia del Constructo (pág. 189)</span></li>
+        <li><span class="step-num">9</span><span>Tira uno o los dos: Aspecto Revelado de Criatura (GR, pág. 71) + Aspecto Revelado del Constructo (pág. 189)</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="discovery">
+    <div class="disc-label">Si encuentras una contradicción, puedes…</div>
+    <ul style="list-style:disc;padding-left:1.2rem;font-size:0.9rem;">
+      <li>Ignorarla, volver a tirar o ajustarla.</li>
+      <li>Imaginar cómo añade una complejidad interesante al bio-mech.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ANOMALÍAS -->
+<section id="anomalias">
+  <div class="section-header">
+    <h2>Anomalías <span class="tag">Ancient Wonders</span></h2>
+  </div>
+  <p class="prose">La magnitud de los experimentos de los precursores no solo llevó al límite su tecnología, sino que también pareció llevar al límite el universo mismo. Las anomalías están entre los horrores más terribles de la galaxia. Sabemos tan poco sobre ellas que son una de las amenazas más poderosas a las que puede enfrentarse la humanidad. Las implicaciones de su extrañeza y los efectos de su presencia hacen de estos fenómenos objetivos exóticos para quienes buscan desentrañar los misterios de las civilizaciones alienígenas.</p>
+  <p class="prose">Al incorporar anomalías a tu campaña, ten en cuenta cómo las verdades sobre religión, magia y horror de tu mundo interactúan con estas aberraciones y entidades.</p>
+
+  <div class="two-col">
+    <div class="subsection">
+      <h3>Encontrar una Anomalía</h3>
+      <h4>Detectar la Anomalía</h4>
+      <p class="prose">Cuando encuentres una anomalía por primera vez, estás en la <em>zona de detección</em>. Tira en Efecto Lateral de Anomalía (pág. 196) para determinar cómo experimentas su proximidad. Mantén este efecto lateral durante el resto del encuentro.</p>
+      <p class="prose">A continuación puedes hacer uno o varios movimientos para:</p>
+      <ul class="rules-list">
+        <li>Investigar la anomalía aproximándote a su zona central</li>
+        <li>Evitar la anomalía saliéndote de su zona de detección</li>
+      </ul>
+
+      <h4 style="margin-top:0.8rem;">Dar Forma a la Anomalía</h4>
+      <p class="prose">Si alcanzas la zona central, tira en Escala y Tipo de Anomalía y en Efecto de Anomalía. Si tienes dificultades para imaginar cómo el efecto puede causarte daño o estrés, tira de nuevo y añade un segundo efecto.</p>
+      <p class="prose">La escala determina el tipo. Si es una entidad, también tira en Forma de Entidad.</p>
+
+      <div class="discovery">
+        <div class="disc-label">Imaginar la apariencia de la anomalía según su efecto:</div>
+        <ul style="list-style:disc;padding-left:1.2rem;font-size:0.88rem;">
+          <li><strong>Ciega:</strong> La zona central emite luz.</li>
+          <li><strong>Quema:</strong> La zona central pone en movimiento llamas etéreas retorcidas y sin humo.</li>
+          <li><strong>Crea materia:</strong> La zona central genera partículas vibrantes.</li>
+          <li><strong>Disuelve materia:</strong> La zona central semeja vórtices arremolinados de líquido burbujeante.</li>
+          <li><strong>Electrifica:</strong> La zona central produce rayos ondulantes y chispeantes con arcos eléctricos.</li>
+          <li><strong>Congela:</strong> La zona central genera hielo en convulsión y emite vapores policromáticos.</li>
+          <li><strong>Genera sonido:</strong> La zona central es visible a través de ondas sonoras pulsantes.</li>
+          <li><strong>Irradia:</strong> La zona central exhibe una neblina brillante y cambiante.</li>
+          <li><strong>Transforma materia:</strong> La zona central manifiesta una niebla posesiva y alteradora del entorno.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Enfrentarse a la Anomalía</h3>
+      <p class="prose">El tipo de anomalía determina el tipo de encuentro.</p>
+      <div class="discovery">
+        <div class="disc-label">Entidad</div>
+        <p style="font-size:0.88rem;"><em>Entra en la Refriega</em> (GR SF, pág. 16) y establece tu objetivo. ¿Quieres huir de la entidad o atacarla y destruirla para obtener el fragmento que la conforma? Haz el encuentro formidable o superior.</p>
+      </div>
+      <div class="discovery" style="margin-top:0.6rem;">
+        <div class="disc-label">Aberración</div>
+        <p style="font-size:0.88rem;"><em>Comenzar la Escena</em> (GR SF, pág. 123) y establece tu objetivo. Si el objetivo es rodear la aberración, haz el encuentro peligroso o superior. Si el objetivo es aventurarte en su zona central para apoderarte del fragmento, hazlo un rango superior a si fueras a rodearlo.</p>
+      </div>
+
+      <h4 style="margin-top:0.8rem;">Reloj de Tensión</h4>
+      <p class="prose">Una vez determinado tu objetivo, establece un reloj de tensión con un número de segmentos según tu posicionamiento narrativo:</p>
+      <div class="clocks-row">
+        <div class="clock-item">
+          <svg class="clock-svg" width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="26" fill="none" stroke="#2a3050" stroke-width="3"/>
+            <line x1="30" y1="4" x2="30" y2="56" stroke="#d4a857" stroke-width="1.5"/>
+            <line x1="4" y1="30" x2="56" y2="30" stroke="#d4a857" stroke-width="1.5"/>
+            <text x="30" y="35" text-anchor="middle" fill="#d4a857" font-family="JetBrains Mono" font-size="14" font-weight="700">4</text>
+          </svg>
+          <div class="clock-label">Muy desventajado</div>
+        </div>
+        <div class="clock-item">
+          <svg class="clock-svg" width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="26" fill="none" stroke="#2a3050" stroke-width="3"/>
+            <line x1="30" y1="4" x2="30" y2="56" stroke="#d4a857" stroke-width="1.5"/>
+            <line x1="4" y1="30" x2="56" y2="30" stroke="#d4a857" stroke-width="1.5"/>
+            <line x1="11.9" y1="11.9" x2="48.1" y2="48.1" stroke="#d4a857" stroke-width="1.5"/>
+            <line x1="48.1" y1="11.9" x2="11.9" y2="48.1" stroke="#d4a857" stroke-width="1.5"/>
+            <text x="30" y="35" text-anchor="middle" fill="#d4a857" font-family="JetBrains Mono" font-size="14" font-weight="700">6</text>
+          </svg>
+          <div class="clock-label">En igualdad</div>
+        </div>
+        <div class="clock-item">
+          <svg class="clock-svg" width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="26" fill="none" stroke="#2a3050" stroke-width="3"/>
+            <line x1="30" y1="4" x2="30" y2="56" stroke="#d4a857" stroke-width="1.5"/>
+            <line x1="4" y1="30" x2="56" y2="30" stroke="#d4a857" stroke-width="1.5"/>
+            <line x1="11.9" y1="11.9" x2="48.1" y2="48.1" stroke="#d4a857" stroke-width="1.5"/>
+            <line x1="48.1" y1="11.9" x2="11.9" y2="48.1" stroke="#d4a857" stroke-width="1.5"/>
+            <line x1="30" y1="4" x2="30" y2="56" stroke="#d4a857" stroke-width="1.5" transform="rotate(22.5 30 30)"/>
+            <line x1="30" y1="4" x2="30" y2="56" stroke="#d4a857" stroke-width="1.5" transform="rotate(67.5 30 30)"/>
+            <text x="30" y="35" text-anchor="middle" fill="#d4a857" font-family="JetBrains Mono" font-size="14" font-weight="700">8</text>
+          </svg>
+          <div class="clock-label">Gran ventaja</div>
+        </div>
+      </div>
+
+      <h4>Completar el Reloj de Tensión</h4>
+      <p class="prose" style="font-size:0.88rem;">Cuando el reloj se llena durante una escena de desafío o combate, no lo concluyes ahí. En cambio, sufres un golpe importante causado por la fuerza o energía fluctuante en su núcleo: intensifica el efecto o elige otro. No es un efecto permanente, sino un solo golpe que sufre tu personaje. Alternativamente, consulta la columna de Contragolpe en la tabla de Efecto de Anomalía (pág. 97). Una vez hagas el movimiento apropiado para resolver el daño, reinicia el reloj manteniendo tu progreso actual y sigue rellenando segmentos cuando corresponda.</p>
+
+      <div class="anomaly-zones">
+        <div class="zone-diagram">
+          <div class="zone-outer">
+            <div class="zone-inner">
+              <div class="zone-core"></div>
+            </div>
+          </div>
+          <div style="margin-top:0.4rem;">
+            <div class="zone-label" style="color:#9060c0;">Zona Detección</div>
+            <div class="zone-label" style="color:#a03030;">(Efecto Lateral)</div>
+            <div class="zone-label" style="margin-top:0.2rem;">Zona Central</div>
+            <div class="zone-label">(Efecto)</div>
+            <div class="zone-label" style="color:var(--gold);margin-top:0.2rem;">Fragmento</div>
+          </div>
+        </div>
+        <div class="anomaly-zones-text">
+          <p style="font-size:0.88rem;margin-bottom:0.5rem;">Cuando se superan, las aberraciones y entidades dejan atrás sus <strong>fragmentos</strong>: objetos de increíble valor que vibran con energía esotérica.</p>
+          <p style="font-size:0.88rem;">Para saber más sobre cómo poseer uno de estos objetos de poder afecta a tu personaje y a tu historia, consulta la sección de Fragmentos en el Capítulo 8: Recursos de Objeto (pág. 218).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="oracles-anomalia">
+  <div class="section-header">
+    <h2>Oráculos de Anomalía <span class="tag">Ancient Wonders</span></h2>
+  </div>
+
+  <div class="two-col">
+    <div class="subsection">
+      <h3>Efecto Lateral de Anomalía</h3>
+      <p class="prose" style="font-size:0.85rem;">Los efectos laterales son lo que los personajes experimentan en la zona de detección. Usa la tabla para determinar qué efecto lateral sufres y mantenlo durante todo el encuentro. Otros personajes pueden experimentar la presencia de la anomalía de forma similar; si no es así, tira una vez por cada personaje presente.</p>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Efecto Lateral de Anomalía</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-anom-efecto-lat')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-anom-efecto-lat">
+          <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–5</td><td>Alucinación auditiva</td></tr>
+            <tr><td>6–20</td><td>Fallo de equipamiento</td></tr>
+            <tr><td>21–25</td><td>Alucinación gustativa</td></tr>
+            <tr><td>26–40</td><td>Intuición</td></tr>
+            <tr><td>41–55</td><td>Náuseas</td></tr>
+            <tr><td>56–60</td><td>Alucinación olfativa</td></tr>
+            <tr><td>61–75</td><td>Dolor</td></tr>
+            <tr><td>76–90</td><td>Piloerección</td></tr>
+            <tr><td>91–95</td><td>Alucinación táctil</td></tr>
+            <tr><td>96–100</td><td>Alucinación visual</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:1rem;">Escala y Tipo de Anomalía</h3>
+      <p class="prose" style="font-size:0.85rem;">Usa este oráculo para definir el tamaño de la anomalía y, con ello, su tipo.</p>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Escala y Tipo de Anomalía</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-anom-escala')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-anom-escala">
+          <thead><tr><th>Resultado</th><th>Escala</th><th>Tipo</th></tr></thead>
+          <tbody>
+            <tr><td>1–3</td><td>Pequeña (tamaño perro)</td><td>Entidad</td></tr>
+            <tr><td>4–20</td><td>Media (tamaño persona)</td><td>Entidad</td></tr>
+            <tr><td>21–50</td><td>Grande (tamaño vehículo)</td><td>Entidad</td></tr>
+            <tr><td>51–80</td><td>Enorme (tamaño ballena)</td><td>Aberración</td></tr>
+            <tr><td>81–97</td><td>Titánica (tamaño colina)</td><td>Aberración</td></tr>
+            <tr><td>98–100</td><td>Colosal (tamaño montaña)</td><td>Aberración</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Forma de la Entidad</h3>
+      <p class="prose" style="font-size:0.85rem;">Usa esta tabla para determinar la apariencia básica de una entidad. Luego detalla su aspecto con el oráculo de Efecto de Anomalía.</p>
+      <div class="oracle-card">
+        <div class="oracle-card-header">
+          <h4>Forma de la Entidad</h4>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-anom-forma-ent')">&#9860; Tirar d100</button>
+        </div>
+        <div class="roll-result"></div>
+        <table class="oracle" id="tbl-den-anom-forma-ent">
+          <thead><tr><th>Tirada</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>1–12</td><td>Forma geométrica compleja</td></tr>
+            <tr><td>13–24</td><td>Cubo</td></tr>
+            <tr><td>25–36</td><td>Obelisco</td></tr>
+            <tr><td>37–48</td><td>Plataforma o disco</td></tr>
+            <tr><td>49–60</td><td>Pirámide</td></tr>
+            <tr><td>61–72</td><td>Anillo o toroide</td></tr>
+            <tr><td>73–84</td><td>Esfera</td></tr>
+            <tr><td>85–95</td><td>Transformante</td></tr>
+            <tr><td>96–100</td><td>→ Forma Básica de Criatura (GR, pág. 69)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Efecto de Anomalía — tabla grande -->
+  <div class="subsection">
+    <h3>Efecto de Anomalía</h3>
+    <p class="prose">Usa esta tabla para determinar el efecto de la zona central de una aberración o entidad, o el contragolpe anómalo experimentado al manipular objetos alienígenas o magia prohibida. La columna de Contragolpe también puede usarse al determinar las capacidades poco frecuentes pero especialmente poderosas de aberraciones o entidades. <strong>Nota:</strong> Este oráculo reemplaza al de Efecto de Anomalía del manual base de Starforged.</p>
+    <div class="oracle-card">
+      <div class="oracle-card-header">
+        <h4>Efecto de Anomalía</h4>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          <span class="roll-indicator">&#9854;1–2</span>
+          <button class="roll-btn" onclick="rollOracle(this,'tbl-den-anom-efecto')">&#9860; Tirar d100</button>
+        </div>
+      </div>
+      <div class="roll-result"></div>
+      <table class="oracle" id="tbl-den-anom-efecto">
+        <thead><tr><th>Aberración</th><th>Entidad</th><th>Contragolpe</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>1–7</td><td>1–3</td><td>1–3</td><td>Altera o concentra la gravedad</td></tr>
+          <tr><td>8–14</td><td>4–6</td><td>4–6</td><td>Altera o remodela materia inanimada</td></tr>
+          <tr><td>15–21</td><td>7–9</td><td>7–9</td><td>Altera el aire o la atmósfera circundante</td></tr>
+          <tr><td>22–28</td><td>10–12</td><td>10–12</td><td>Altera los ecosistemas circundantes</td></tr>
+          <tr><td>—</td><td>—</td><td>13–14</td><td>Despierta a los muertos</td></tr>
+          <tr><td>—</td><td>—</td><td>15–17</td><td>Provoca visiones perturbadoras o pesadillas</td></tr>
+          <tr><td>29–35</td><td>13–15</td><td>18–20</td><td>Provoca crecimiento biológico acelerado</td></tr>
+          <tr><td>—</td><td>—</td><td>21–23</td><td>Provoca enfermedad o debilidad</td></tr>
+          <tr><td>36–42</td><td>16–18</td><td>24–26</td><td>Corrompe la materia viva</td></tr>
+          <tr><td>—</td><td>—</td><td>27–29</td><td>Corrompe o infecta dispositivos o computadoras</td></tr>
+          <tr><td>—</td><td>—</td><td>30–32</td><td>Crea manifestaciones o ilusiones</td></tr>
+          <tr><td>43–49</td><td>19–21</td><td>33–35</td><td>Degrada o debilita el terreno o las estructuras circundantes</td></tr>
+          <tr><td>—</td><td>—</td><td>36–38</td><td>Drena la energía de equipamiento o dispositivos</td></tr>
+          <tr><td>50–52</td><td>22–28</td><td>39–41</td><td>Emite energía forzosa o destructiva</td></tr>
+          <tr><td>53–59</td><td>29–31</td><td>42–44</td><td>Emite radiación</td></tr>
+          <tr><td>60–62</td><td>32–38</td><td>45–46</td><td>Genera una barrera o escudo</td></tr>
+          <tr><td>63–65</td><td>39–45</td><td>47–49</td><td>Genera variación extrema de temperatura</td></tr>
+          <tr><td>66–68</td><td>46–52</td><td>50–52</td><td>Genera luces o sonidos intensos</td></tr>
+          <tr><td>69–71</td><td>53–59</td><td>53–55</td><td>Genera tentáculos de energía que se deslizan o agarran</td></tr>
+          <tr><td>72–74</td><td>60–66</td><td>56–58</td><td>Cosecha o destruye materia viva</td></tr>
+          <tr><td>75–77</td><td>67–73</td><td>59–61</td><td>Cosecha o destruye materia inanimada</td></tr>
+          <tr><td>78–84</td><td>74–76</td><td>62–64</td><td>Anula o consume toda luz o sonido</td></tr>
+          <tr><td>—</td><td>—</td><td>65–67</td><td>Anula o destruye equipamiento o dispositivos</td></tr>
+          <tr><td>—</td><td>—</td><td>68–70</td><td>Abre un camino a otra ubicación</td></tr>
+          <tr><td>85–87</td><td>77–83</td><td>71–73</td><td>Replica o imita materia viva</td></tr>
+          <tr><td>88–90</td><td>84–90</td><td>74–76</td><td>Replica o imita materia inanimada</td></tr>
+          <tr><td>—</td><td>—</td><td>77–79</td><td>Revela destellos del pasado lejano</td></tr>
+          <tr><td>—</td><td>—</td><td>80–82</td><td>Revela destellos del futuro lejano</td></tr>
+          <tr><td>91–92</td><td>91–92</td><td>83–85</td><td>Invierte el tiempo unos momentos o minutos</td></tr>
+          <tr><td>93–94</td><td>93–94</td><td>86–88</td><td>Ralentiza o detiene el tiempo</td></tr>
+          <tr><td>—</td><td>—</td><td>89–91</td><td>Invoca o manifiesta un ser o inteligencia antigua</td></tr>
+          <tr><td>95–100</td><td>95–100</td><td>92–94</td><td>Invoca o manifiesta criaturas</td></tr>
+          <tr><td>—</td><td>—</td><td>95–97</td><td>Transporta a otra ubicación</td></tr>
+          <tr><td>—</td><td>—</td><td>98–100</td><td>Desencadena una explosión catastrófica inminente</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+function rollOracle(btnEl, tableId) {
+  const card = btnEl.closest('.oracle-card');
+  const tbl = document.getElementById(tableId);
+  if (!tbl) return;
+  const rows = tbl.querySelectorAll('tbody tr');
+  const roll = Math.floor(Math.random() * 100) + 1;
+
+  // Remove previous highlight
+  rows.forEach(r => r.classList.remove('highlighted'));
+
+  let found = null;
+  rows.forEach(row => {
+    const cell = row.cells[0];
+    if (!cell) return;
+    const txt = cell.textContent.trim().replace(/\s+/g, '');
+    // Handle ranges like "1–10", "1-10"
+    const rangeMatch = txt.match(/^(\d+)[–\-](\d+)$/);
+    if (rangeMatch) {
+      const lo = parseInt(rangeMatch[1]);
+      const hi = parseInt(rangeMatch[2]);
+      if (roll >= lo && roll <= hi && !found) {
+        found = row;
+      }
+    }
+    // Handle single values
+    const singleMatch = txt.match(/^(\d+)$/);
+    if (singleMatch) {
+      const val = parseInt(singleMatch[1]);
+      if (roll === val && !found) {
+        found = row;
+      }
+    }
+  });
+
+  const resultEl = card ? card.querySelector('.roll-result') : null;
+  if (found && resultEl) {
+    found.classList.add('highlighted');
+    // Get last non-empty cell text
+    let resultText = '';
+    for (let i = found.cells.length - 1; i >= 0; i--) {
+      const t = found.cells[i].textContent.trim();
+      if (t && t !== '—' && !t.match(/^\d+[–\-]\d+$/) && !t.match(/^\d+$/)) {
+        resultText = t;
+        break;
+      }
+    }
+    resultEl.textContent = `🎲 ${roll} → ${resultText}`;
+    resultEl.classList.add('visible');
+    found.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else if (resultEl) {
+    resultEl.textContent = `🎲 ${roll} → (sin resultado en rango)`;
+    resultEl.classList.add('visible');
+  }
+}
+</script>
+</body>
+</html>
